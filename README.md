@@ -11,7 +11,7 @@
 ## To do list
 - [x] ~~Documentação da instalação.~~
 - [ ] Descobrir como fazer o jupyter funcionar direito por ssh.
-- [ ] Intro Tutorial 1.
+- [x] ~~Intro Tutorial 1.~~
 - [ ] Descobrir aonde o .db criado após o processamento do corpus é criado.
 
 
