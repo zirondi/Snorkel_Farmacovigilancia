@@ -8,3 +8,9 @@
 
 
 ## Instalação 
+1 - Baixar o [Anaconda](https://www.anaconda.com/distribution/)
+  - O anaconda não possui um repositório para o apt-get, então o curl será necessário para baixar o .sh do site (PRECISA DE SUDO).
+  
+2 - ``` cd 'folder'```
+
+```sudo bash Anaconda3-201X.XX-Linux-x86_64.sh```
