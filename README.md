@@ -19,8 +19,8 @@
       Adicionar "./home/*user*/anaconda3/etc/profile.d/conda.sh" ao fim do arquivo de texto.
       
 4. Baixar o .zip do [Snorkel](https://github.com/HazyResearch/snorkel) pelo curl
-    -` ``unzip \*.zip```
+	- ```unzip \*.zip```
 
 5. cd para "/snorkel-master"
-  - ``` conda env -f environmnet.yml``` (Não precisa de sudo)
+	- ``` conda env -f environmnet.yml``` (Não precisa de sudo)
 
