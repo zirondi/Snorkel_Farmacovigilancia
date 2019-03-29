@@ -1,5 +1,7 @@
 # Snorkel
 
+## Sumário
+
 [**To do list**](https://github.com/zirondi/snorkel/blob/master/README.md#to-do-list)
 
 [**Instalação**](https://github.com/zirondi/snorkel/blob/master/README.md#instalação)
