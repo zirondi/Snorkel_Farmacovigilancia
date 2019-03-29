@@ -41,3 +41,6 @@
 ## Intro Tutorial 1
 O tutorial é bem explicativo, porém no item 7, na linha ```from util import number_of_people``` este ```util``` é um util.py que fica em "/snorkel-master/tutorials/intro".
 Há um "utils.py" no root do snorkel, verificar.
+
+**Problemas do jupyter console ao usar um .py para carregar o código**
+	A função %%time não funciona pois ela atua na célula toda, chamar ela no meio do código gera um erro
