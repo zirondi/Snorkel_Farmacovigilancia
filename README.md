@@ -1,5 +1,7 @@
 # snorkel
 
+[click here](https://github.com/zirondi/snorkel/blob/master/README.md#instalação)
+
 ## To do list
 - [x] ~~Documentação da instalação.~~
 - [ ] Descobrir como fazer o jupyter funcionar direito por ssh.
