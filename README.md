@@ -2,9 +2,9 @@
 
 ## To do list
 - [x] ~~Documentação da instalação.~~
+- [ ] Descobrir como fazer o jupyter funcionar direito por ssh.
 - [ ] Intro Tutorial 1.
-- [ ] Marcar o que é sudo.
-- [ ] Descobrir aonde o .db criado em cima do corpus é criado.
+- [ ] Descobrir aonde o .db criado após o processamento do corpus é criado.
 
 
 ## Instalação 
@@ -27,3 +27,8 @@
 6. Ative o environment usando:```conda activate snorkel```
 
 7. Instale o snorkel como dependência:``` pip install . ```
+
+8. (Temporário) Use ```jupyter console``` para abrir o console, ```%load file_name.py``` para carregar um .py direto no console.
+
+## Intro Tutorial 1
+O tutorial é bem explicativo, porém no item 7, na linha ```from util import number_of_people``` este ```util``` é um util.py que fica em "/snorkel-master/tutorials/intro"
