@@ -1,6 +1,6 @@
-# snorkel
+# Snorkel
 
-[click here](https://github.com/zirondi/snorkel/blob/master/README.md#instalação)
+[**To do list**](https://github.com/zirondi/snorkel/blob/master/README.md#todolist)
 
 ## To do list
 - [x] ~~Documentação da instalação.~~
