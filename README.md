@@ -8,11 +8,14 @@
 
 [**Intro Tutorial 1**](https://github.com/zirondi/snorkel/blob/master/README.md#intro-tutorial-1)
 
+[**Intro Tutorial 2**](https://github.com/zirondi/snorkel/blob/master/README.md#intro-tutorial-2)
+
 ## To do list
 - [x] ~~Documentação da instalação.~~
 - [ ] Descobrir como fazer o jupyter funcionar direito por ssh.
 - [x] ~~Intro Tutorial 1.~~
-- [ ] Descobrir aonde o .db criado após o processamento do corpus é criado.
+- [x] ~~Descobrir aonde o .db criado após o processamento do corpus é criado.~~
+- [ ] Intro tutorial 2
 
 
 ## Instalação 
@@ -44,3 +47,12 @@ Há um "utils.py" no root do snorkel, verificar.
 
 **Problemas do jupyter console ao usar um .py para carregar o código**
 	A função %%time não funciona pois ela atua na célula toda, chamar ela no meio do código gera um erro
+
+O snorkel.db é criado no folder que o console esta sendo usado. Não tenho como abrir ou investigar sem um sgbd.
+(baixar o arquivo ```scp your_username@remotehost:foobar.txt /local/dir``` e dar uma olhada com o sqlite na minha máquina)
+
+## Intro Tutorial 2
+
+Uma lida rápida e nenhuma menção ao snorkel.db
+Essa parte do tutorial monta um knowledge-database em cima de um arquivo no /data/ (cell 6)
+
