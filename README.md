@@ -9,16 +9,18 @@
 
 ## Instalação 
 1. Baixar o [Anaconda](https://www.anaconda.com/distribution/)
-  - O anaconda não possui um repositório para o apt-get, então o curl será necessário para baixar o .sh do site (```sudo apt-get update && sudo apt-get install curl```).
+    - O anaconda não possui um repositório para o apt-get, então o curl será necessário para baixar o .sh do site (```sudo apt-get update && sudo apt-get install curl```).
   
 2. cd para o folder onde o arquivo foi baixado.
-  ```sudo bash Anaconda3-201X.XX-Linux-x86_64.sh```
+    - ```sudo bash Anaconda3-201X.XX-Linux-x86_64.sh```
 
 3. Caso o comando ```conda``` não seja adicionado ao PATH:
-  - ```sudo nano .bashcr ```
+    - ```sudo nano .bashcr ```
       Adicionar "./home/*user*/anaconda3/etc/profile.d/conda.sh" ao fim do arquivo de texto.
       
 4. Baixar o .zip do [Snorkel](https://github.com/HazyResearch/snorkel) pelo curl
-  -```unzip \*.zip```
+    -` ``unzip \*.zip```
 
-5.
+5. cd para "/snorkel-master"
+  - ``` conda env -f environmnet.yml``` (Não precisa de sudo)
+
