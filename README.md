@@ -39,9 +39,9 @@
 
 7. Instale o snorkel como dependência:``` pip install . ```
 
-7.1 Instalar o treedlib (Módulo utilizado nas annotations das gold labels (not sure))
+8. Instalar o treedlib (Módulo utilizado nas annotations das gold labels (not sure))
 
-8. (Temporário) Use ```jupyter console``` para abrir o console, ```%load file_name.py``` para carregar um .py direto no console.
+9. (Temporário) Use ```jupyter console``` para abrir o console, ```%load file_name.py``` para carregar um .py direto no console.
 
 ## Intro Tutorial 1
 O tutorial é bem explicativo, porém no item 7, na linha ```from util import number_of_people``` este ```util``` é um util.py que fica em "/snorkel-master/tutorials/intro".
