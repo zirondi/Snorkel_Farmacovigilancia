@@ -72,3 +72,22 @@ cell 26 me da um erro de index out of range. Não consigo continuar a partir daq
 
 
 
+
+
+
+
+
+
+
+rdstuff
+
+print(session.__dict__) (me mostra aonde o .db esta localizado entre outras infos (sqlite etc etc)
+
+dit(session) retorna atributos e outras infos do session
+
+https://towardsdatascience.com/introducing-snorkel-27e4b0e6ecff
+
+https://docs.sqlalchemy.org/en/13/orm/session_basics.html (ler melhor, explica sessions)
+
+
+
