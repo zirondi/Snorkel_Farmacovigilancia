@@ -79,7 +79,9 @@ cell 26 me da um erro de index out of range. Não consigo continuar a partir daq
 
 
 
-rdstuff
+
+
+##rdstuff
 
 print(session.__dict__) (me mostra aonde o .db esta localizado entre outras infos (sqlite etc etc)
 
