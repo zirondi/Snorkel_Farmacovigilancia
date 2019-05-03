@@ -99,3 +99,10 @@ https://docs.sqlalchemy.org/en/13/orm/session_basics.html (ler melhor, explica s
 python use a cabeça 
 sql select * from candidate where split=2 and type='husband'
 
+in 1 -> inicializando a sessão e importando o necessário
+
+in 2 -> define candidato e NOME da relação
+
+in 3 -> ele usa gold labels criadas na ultima celula do tuto1, essas golds são criadas a partir do util.py. Nesse util.py existe o objeto load_external_labels onde é chamado na ultima celula do primeiro, entao o load_external_labels é um objeto generico para a criação dessas gold labels iniciais que procuram por candidato1 "relação"(Spouse = candidate_subclass('Spouse', ['person1', 'person2'])) candidato2
+
+
