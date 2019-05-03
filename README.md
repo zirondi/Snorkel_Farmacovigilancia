@@ -96,6 +96,6 @@ https://towardsdatascience.com/introducing-snorkel-27e4b0e6ecff
 https://docs.sqlalchemy.org/en/13/orm/session_basics.html (ler melhor, explica sessions)
 
 
-
+python use a cabeça 
 sql select * from candidate where split=2 and type='husband'
 
