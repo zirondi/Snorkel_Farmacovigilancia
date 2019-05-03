@@ -70,6 +70,10 @@ cell 20 ele cria um plot do matplotlib que não funciona via ssh no jupyter cons
 
 cell 26 me da um erro de index out of range. Não consigo continuar a partir daqui.
 
+02/04
+
+
+
 
 
 
@@ -92,4 +96,6 @@ https://towardsdatascience.com/introducing-snorkel-27e4b0e6ecff
 https://docs.sqlalchemy.org/en/13/orm/session_basics.html (ler melhor, explica sessions)
 
 
+
+sql select * from candidate where split=2 and type='husband'
 
