@@ -64,6 +64,9 @@ O tutorial cria um snorkel.db no folder que o console for executado. (Por algum 
 O snorkel.db é criado no folder que o console esta sendo usado. Não tenho como abrir ou investigar sem um sgbd.
 (baixar o arquivo ```scp your_username@remotehost:foobar.txt /local/dir``` e dar uma olhada com o sqlite na minha máquina)
 
+scp -P 49186 lzirondi@spica.eic.cefet-rj.br:/home/lzirondi/Documents/snorkelTutorials/snorkel.db ~/Desktop/
+
+
 ## Intro Tutorial 2
 
 Uma lida rápida e nenhuma menção ao snorkel.db
