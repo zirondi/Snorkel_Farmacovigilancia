@@ -12,7 +12,7 @@
 
 ## To do list
 - [x] ~~Documentação da instalação.~~
-- [ ] Descobrir como fazer o jupyter funcionar direito por ssh.
+- [x] Descobrir como fazer o jupyter funcionar direito por ssh.
 - [x] ~~Intro Tutorial 1.~~
 - [x] ~~Descobrir aonde o .db criado após o processamento do corpus é criado.~~
 - [ ] Intro tutorial 2
@@ -41,7 +41,14 @@
 
 8. Instalar o treedlib e o numbskull```pip install treedlib && pip install numbskull``` (Dois módulos dado como missing no tutorial 2). 
 
-9. (Temporário) Use ```jupyter console``` para abrir o console, ```%load file_name.py``` para carregar um .py direto no console.
+## Acessar o Jupyter Notebook
+
+| where  | using    | command                                          |
+| ------ | -------- | ------------------------------------------------ |
+| spica | terminal | `jupyter notebook --no-browser --port=8888`      |
+| local  | terminal | `ssh -p 49186 -v -NL 8888:localhost:8888 lzirondi@spica.eic.cefet-rj.br` |
+| local  | browser  | `localhost:8888`                                 |
+
 
 ## Intro Tutorial 1
 O tutorial é bem explicativo, porém no item 7, na linha ```from util import number_of_people``` este ```util``` é um util.py que fica em "/snorkel-master/tutorials/intro".
