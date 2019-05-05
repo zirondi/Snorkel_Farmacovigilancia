@@ -43,6 +43,8 @@
 
 ## Acessar o Jupyter Notebook
 
+FAÇA ISSO NO HOME, por algum motivo o session do os não gosta quando ele não esta no home.
+
 | where  | using    | command                                          |
 | ------ | -------- | ------------------------------------------------ |
 | spica | terminal | `jupyter notebook --no-browser --port=8888`      |
