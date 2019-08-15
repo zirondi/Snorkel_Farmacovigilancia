@@ -118,3 +118,18 @@ in 2 -> define candidato e NOME da relação
 in 3 -> ele usa gold labels criadas na ultima celula do tuto1, essas golds são criadas a partir do util.py. Nesse util.py existe o objeto load_external_labels onde é chamado na ultima celula do primeiro, entao o load_external_labels é um objeto generico para a criação dessas gold labels iniciais que procuram por candidato1 "relação"(Spouse = candidate_subclass('Spouse', ['person1', 'person2'])) candidato2
 
 
+OperationalError: (psycopg2.OperationalError) could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+(Background on this error at: http://sqlalche.me/e/e3q8)
+
+
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ snorkel   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
