@@ -133,3 +133,6 @@ OperationalError: (psycopg2.OperationalError) could not connect to server: No su
            |          |          |             |             | postgres=CTc/postgres
  template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
            |          |          |             |             | postgres=CTc/postgres
+
+
+ln -s /var/run/postgresql/.s.PGSQL.5432 /tmp/.s.PGSQL.5432
