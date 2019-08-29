@@ -40,7 +40,7 @@
 
 7. Instale o snorkel como dependência:``` pip install . ```
 
-8. Instalar o treedlib e o numbskull```pip install treedlib && pip install numbskull``` (Dois módulos dado como missing no tutorial 2). 
+~~8. Instalar o treedlib e o numbskull```pip install treedlib && pip install numbskull``` (Dois módulos dado como missing no tutorial 2). ~~ (Resolvido na última atualização)
 
 ## Acessar o Jupyter Notebook
 
