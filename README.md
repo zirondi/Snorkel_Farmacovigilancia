@@ -27,7 +27,8 @@
 
 3. Caso o comando ```conda``` não seja adicionado ao PATH:
     - ```sudo nano .bashcr ```
-      Adicionar "./home/*user*/anaconda3/etc/profile.d/conda.sh" ao fim do arquivo de texto. (**sudo**)
+      Adicionar "./home/*user*/anaconda3/etc/profile.d/conda.sh" ou "export PATH=~/anaconda3/bin:$PATH
+" ao fim do arquivo de texto. (**sudo**)
       
 4. Baixar o .zip do [Snorkel](https://github.com/HazyResearch/snorkel) pelo curl
 	- ```unzip \*.zip```
