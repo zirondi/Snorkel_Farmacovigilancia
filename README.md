@@ -136,3 +136,20 @@ OperationalError: (psycopg2.OperationalError) could not connect to server: No su
 
 
 ln -s /var/run/postgresql/.s.PGSQL.5432 /tmp/.s.PGSQL.5432
+
+
+## ERRO ALEATORIO DO .s.PGSQL.5432
+
+Por um possível erro de versão o snorkel procura por esse arquivo de conexão ao banco numa pasta errada. O primeiro passo pra resolver isso  criar um softlink de onde o arquivo realmente esta:
+```ln -s /var/run/postgresql/.s.PGSQL.5432 /tmp/.s.PGSQL.5432```
+
+Agora a conexão com o banco:
+Logue no post: sudo -i -u postgres
+
+O snorkel precisa que:
+1. Haja uma role com o nome do user executando o kernel.
+	```postgres=#CREATE ROLE nomeDoUser WITH LOGIN ENCRYPTED PASSWORD 'password1';```
+2.Um banco de dados que tenha o msm nome do usuario
+	```postgres=#CREATE DATABASE nomeDoUser```
+
+
