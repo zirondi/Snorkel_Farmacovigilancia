@@ -125,17 +125,6 @@ OperationalError: (psycopg2.OperationalError) could not connect to server: No su
 
 (Background on this error at: http://sqlalche.me/e/e3q8)
 
-
-   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
------------+----------+----------+-------------+-------------+-----------------------
- postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
- snorkel   | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
- template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
-           |          |          |             |             | postgres=CTc/postgres
- template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
-           |          |          |             |             | postgres=CTc/postgres
-
-
 ln -s /var/run/postgresql/.s.PGSQL.5432 /tmp/.s.PGSQL.5432
 
 erro para reportar -> no advanced/parallel processing a var n_docs nao eh declarada
