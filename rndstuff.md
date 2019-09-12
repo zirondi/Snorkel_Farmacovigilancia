@@ -28,3 +28,7 @@ OperationalError: (psycopg2.OperationalError) could not connect to server: No su
 ln -s /var/run/postgresql/.s.PGSQL.5432 /tmp/.s.PGSQL.5432
 
 erro para reportar -> no advanced/parallel processing a var n_docs nao eh declarada
+
+
+
+SÓ TEM 4 THREADS NA MAQUINA
