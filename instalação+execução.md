@@ -41,7 +41,7 @@ Por um possível erro de versão o snorkel procura por esse arquivo de conexão 
 ```ln -s /var/run/postgresql/.s.PGSQL.5432 /tmp/.s.PGSQL.5432```
 
 Agora a conexão com o banco:
-Logue no post: sudo -i -u postgres
+~Logue no post: sudo -i -u postgres~
 
 O snorkel precisa que:
 1. Haja uma role com o nome do user executando o kernel.
