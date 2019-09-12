@@ -12,3 +12,6 @@
   **Att**: O snorkel termina o processamento das sentenças e escreve no banco, mas por algum motivo nao finaliza a execução.
       
    - **Resolução temp**-> esperar o 100%, reiniciar o kernel, re-executar as 2 ultimas cells, continuar a execução pulando a cell do parser
+
+
+   - Descobri que a Spica só tem 4 threads.
