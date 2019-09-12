@@ -33,4 +33,25 @@ FAÇA ISSO NO HOME, por algum motivo o session do os não gosta quando ele não 
 | local  | terminal | `ssh -p 49186 -v -NL 8888:localhost:8888 lzirondi@spica.eic.cefet-rj.br` |
 | local  | browser  | `localhost:8888`                                 |
 
+## Multi processamento com postSQL
+
+### ERRO ALEATORIO DO .s.PGSQL.5432
+
+Por um possível erro de versão o snorkel procura por esse arquivo de conexão ao banco numa pasta errada. O primeiro passo pra resolver isso  criar um softlink de onde o arquivo realmente esta:
+```ln -s /var/run/postgresql/.s.PGSQL.5432 /tmp/.s.PGSQL.5432```
+
+Agora a conexão com o banco:
+Logue no post: sudo -i -u postgres
+
+O snorkel precisa que:
+1. Haja uma role com o nome do user executando o kernel.
+	```postgres=#CREATE ROLE nomeDoUser WITH LOGIN ENCRYPTED PASSWORD 'password1';```
+	
+~2.Um banco de dados que tenha o msm nome do usuario
+	```postgres=#CREATE DATABASE nomeDoUser```~
+
+	-Existe um bug em alguma parte do sistema (Jupyter ou Python ou Snorkel) onde o kernel nao atualiza o variavel do nome do banco de dados se vc já a definiu nessa sessão. Para resolver isso reinicie o kernel e redefina o nome do banco.
+	
+	
+
 
