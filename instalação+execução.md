@@ -23,6 +23,8 @@
 
 ~~8. Instalar o treedlib e o numbskull```pip install treedlib && pip install numbskull``` (Dois módulos dado como missing no tutorial 2). ~~ (Resolvido na última atualização)
 
+9. conda install psycopg2
+
 ## Acessar o Jupyter Notebook
 
 FAÇA ISSO NO HOME, por algum motivo o session do os não gosta quando ele não esta no home.
