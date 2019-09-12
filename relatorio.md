@@ -1,10 +1,9 @@
 # Semana ??/??/??
 -Resolvi os problemas do banco de dados (documentado)
   ## Novos problemas
-   Bug da variavel do nome do banco nao atualizando
-      Ao definir o nome do banco em `os.environ['SNORKELDB'] = 'postgres:///NOMEDOBANCO'` essa var não será atualizada até reiniciar o kernel.
+  * Bug da variavel do nome do banco nao atualizando.Ao definir o nome do banco em `os.environ['SNORKELDB'] = 'postgres:///NOMEDOBANCO'` pela primeira vez, essa var não será atualizada até reiniciar o kernel.
     
-   Erro estranho do snorkel nao terminando de executar no tuto 1, o CorpusParser fica executando ad infinitum.
+  * Erro estranho do snorkel nao terminando de executar no tuto 1, o CorpusParser fica executando ad infinitum.
 
 # Semana 12/09/2019
 
