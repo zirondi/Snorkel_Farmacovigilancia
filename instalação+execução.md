@@ -15,7 +15,7 @@
 	- ```unzip \*.zip```
 
 5. cd para "/snorkel-master"
-	- ``` conda env -f environment.yml``` (Não precisa de sudo)
+	- ``` conda env create -f environment.yml``` (Não precisa de sudo)
 
 6. Ative o environment usando:```conda activate snorkel```
 
