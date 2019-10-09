@@ -32,3 +32,14 @@ erro para reportar -> no advanced/parallel processing a var n_docs nao eh declar
 
 
 SÓ TEM 4 THREADS NA MAQUINA
+
+
+
+Run jupyter kernelspec list to get the paths of all your kernels.
+Then simply uninstall your unwanted-kernel
+
+jupyter kernelspec uninstall unwanted-kernel
+
+
+source activate myenv
+python -m ipykernel install --user --name myenv --display-name "Python (myenv)"
