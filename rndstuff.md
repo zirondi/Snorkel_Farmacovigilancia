@@ -47,19 +47,4 @@ python -m ipykernel install --user --name myenv --display-name "Python (myenv)"
 
 limpar o db
 
-drop table candidate cascade;
-drop table context cascade;
-drop table document cascade;
-drop table feature cascade;
-drop table feature_key cascade;
-drop table gold_label cascade;
-drop table gold_label_key cascade;
-drop table label cascade;
-drop table label_key cascade;
-drop table marginal cascade;
-drop table prediction cascade;
-drop table prediction_key cascade;
-drop table sentence cascade;
-drop table span cascade;
-drop table spouse cascade;
-drop table stable_label cascade;
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
