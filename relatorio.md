@@ -64,4 +64,18 @@ drop table stable_label cascade;
 ```
 
 
+# Semana 07/11/2019
 
+Terminei o All in one; Terminei o Fluxograma.
+
+## Datasets necessários:
+    1. O corpus
+    2. O dicionrário de sintomas
+    3. O dicionário de remédios
+    4. As relações explicitadas
+    5. As gold_labels
+    
+   
+
+
+Entender e documentar como a classe DictionaryMatch funciona!
