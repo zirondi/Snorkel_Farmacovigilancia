@@ -79,3 +79,5 @@ Terminei o All in one; Terminei o Fluxograma.
 
 
 Entender e documentar como a classe DictionaryMatch funciona!
+
+matchers.html#DictionaryMatch
