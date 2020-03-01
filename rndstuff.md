@@ -48,3 +48,7 @@ python -m ipykernel install --user --name myenv --display-name "Python (myenv)"
 limpar o db
 
 https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+
+
+o indice do snorkel nao bate com o indice do tsv por causa das sentenças
+pensar no momento de voltar do db pro tsv se isso vai interferir
