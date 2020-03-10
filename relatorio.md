@@ -81,3 +81,32 @@ Terminei o All in one; Terminei o Fluxograma.
 Entender e documentar como a classe DictionaryMatch funciona!
 
 matchers.html#DictionaryMatch
+
+# Férias e semana 02/03/2020
+
+
+Vamo lá que faz um tempo:
+
+Nas férias eu me preocupei em preparar os datasets do Alexandre para a execução do snorkel.
+
+A preparação dos Corpus foi a mais fácil, usei o arquivo "Tweets Anotados.txt", processei ele e exportei para um .tsv.
+
+Agora para definir nossos matchers a situação foi um pouco mais complicada:
+
+Primeiro defininos o uso do DictionaryMatcher do Snorkel como o método que vamos usar.
+
+Para isso precisamos também definir uma relação entre os matchers, no momento definimos a relação substância->causa.
+
+Pra cada matcher da relação é necessário definir um dicionário (conjunto de palavras NÃO estrutura de dados do python, a estrutura em si é uma lista).
+
+O dicionário de substâncias veio dos arquivos 'Remédios-br-gazette.txt', 'Substâncias-br-gazette.txt', 'Remédios2-br-gazette.txt', 'Substâncias2-br-gazette.txt'. Tratei esses txts, agrupei todos, ordenei e salvei como outro txt.
+
+O dicionário de eventos veio dos arquivos 'Eventos.txt', 'EventosAdversos-gazette.txt'. Tratei esses txts, agrupei todos, ordenei e salvei como outro txt.
+
+Com isso eu já consegui extrair os candidatos.
+
+Problema 1 -> Os dicionários estão meio poluidos, palavras com "e", "um", "anti" (?) e "sene" (?) foram marcadas como substâncias. Preciso limpar os dicionarios.
+
+Problema 2 -> Como os matcher me permitem ignorar caixa alta, eu não precisei normalizar texto algum. (Pra facilitar a minha vida no futuro, eu quis extrair esses candidatos para um TSV, o fato de eu ter chars com acento acabou com a formatação toda.). Preciso normalizar TODAS as linhas agora. (usar unidecode.unidecode(str))
+
+Futuro -> Normalizar o texto, discutir sobre as golden_labels, estrutura dos candidatos para as Labeling Functions e inverter a relação.
