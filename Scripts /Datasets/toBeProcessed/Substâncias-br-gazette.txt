@@ -1,0 +1,2667 @@
+DRUG	Abacavir
+DRUG	Abatacepte
+DRUG	Abciximabe
+DRUG	Acarbose
+DRUG	Acebrofilina
+DRUG	Aceclofenaco
+DRUG	Acetazolamida
+DRUG	Acetil	Aspartilglutamato	de	Sódio
+DRUG	Acetilcisteína
+DRUG	Aciclovir
+DRUG	Ácido	Acetilsalicílico
+DRUG	Ácido	Aminocapróico
+DRUG	Ácido	Azeláico
+DRUG	Ácido	Bórico
+DRUG	Ácido	Desidrocólico
+DRUG	Ácido	Fólico
+DRUG	Ácido	Fusídico
+DRUG	Ácido	Mefenâmico
+DRUG	Ácido	Mucopolissacárido-polissulfúrico
+DRUG	Ácido	Nalidíxico
+DRUG	Ácido	Pipemídico
+DRUG	Ácido	Poliacrílico
+DRUG	Ácido	Salicílico
+DRUG	Ácido	Zoledrônico
+DRUG	Ácidos	Graxos	Poli-insaturados
+DRUG	Acitretina
+DRUG	Adalimumabe
+DRUG	Adapaleno
+DRUG	Adefovir
+DRUG	Adenosina
+DRUG	Albendazol
+DRUG	Albumina	Humana
+DRUG	Alcatrão	de	Hulha
+DRUG	Álcool	Polivinílico
+DRUG	Alendronato
+DRUG	Alentuzumabe
+DRUG	Alfaestradiol
+DRUG	Alfentanila
+DRUG	Alfuzosina
+DRUG	Alizaprida
+DRUG	Almitrina
+DRUG	Alopurinol
+DRUG	Alprazolam
+DRUG	Alprostadil
+DRUG	Amantadina
+DRUG	Ambroxol
+DRUG	Amicacina
+DRUG	Aminofilina
+DRUG	Amiodarona
+DRUG	Amissulprida
+DRUG	Amitriptilina
+DRUG	Amorolfina
+DRUG	Amoxicilina
+DRUG	Amoxicilina	+	Ácido	Clavulânico	
+DRUG	Clavulanato	de	Potássio
+DRUG	Ampicilina
+DRUG	Ampicilina	+	Sulbactam
+DRUG	Amprenavir
+DRUG	Anastrozol
+DRUG	Anidulafungina
+DRUG	Anfotericina	B
+DRUG	Anlodipino
+DRUG	Anticoncepcionais	Hormonais
+DRUG	Antimoniato	de	Meglumina
+DRUG	Aprepitanto
+DRUG	Aprotinina
+DRUG	Asparaginase
+DRUG	Atazanavir
+DRUG	Atenolol
+DRUG	Atorvastatina
+DRUG	Atosibano
+DRUG	Atracúrio
+DRUG	Atropina	(injetável)
+DRUG	Azacitidina
+DRUG	Azatioprina
+DRUG	Azelastina
+DRUG	Atropina
+DRUG	Azitromicina
+DRUG	Aztreonam
+DRUG	Amifostina	
+DRUG	Bacitracina
+DRUG	Baclofeno
+DRUG	Bambuterol
+DRUG	Basiliximabe
+DRUG	Bamifilina
+DRUG	Beclometasona
+DRUG	Benazepril
+DRUG	Benciclano
+DRUG	Benzbromarona
+DRUG	Benzidamina
+DRUG	Benzoato	de	Benzila
+DRUG	Benzocaína
+DRUG	Benzoperóxido
+DRUG	Beractanto
+DRUG	Betaistina
+DRUG	Betametasona
+DRUG	Betaxolol
+DRUG	Bevacizumabe
+DRUG	Bezafibrato
+DRUG	Bicalutamida
+DRUG	Bicarbonato	de	Sódio
+DRUG	Bifonazol
+DRUG	Bimatoprosta
+DRUG	Biperideno
+DRUG	Bisacodil
+DRUG	Bismuto
+DRUG	Bisoprolol
+DRUG	Bleomicina
+DRUG	Bortezomibe
+DRUG	Bosentana
+DRUG	Brimonidina
+DRUG	Brinzolamida
+DRUG	Bromazepam
+DRUG	Bromexina
+DRUG	Bromocriptina
+DRUG	Bromoprida
+DRUG	Bronfeniramina
+DRUG	Buclizina
+DRUG	Budesonida
+DRUG	Buflomedil
+DRUG	Bumetanida
+DRUG	Bupivacaína
+DRUG	Bupropiona
+DRUG	Buspirona
+DRUG	Busserrelina
+DRUG	Bussulfano
+DRUG	Butoconazol	
+DRUG	Cabergolina
+DRUG	Cafeína
+DRUG	Calamina
+DRUG	Cálcio
+DRUG	Calcitonina
+DRUG	Cambendazol
+DRUG	Candesartana
+DRUG	Caolim	+	Pectina
+DRUG	Capecitabina
+DRUG	Capsaicina
+DRUG	Captopril
+DRUG	Carbacol
+DRUG	Carbamazepina
+DRUG	Carbinoxamina
+DRUG	Carbocisteína
+DRUG	Carbonato	de	Magnésio
+DRUG	Carboplatina
+DRUG	Carboximetilcelulose
+DRUG	Carisoprodol
+DRUG	Carmustina
+DRUG	Carvão	Ativado
+DRUG	Carvedilol
+DRUG	Cáscara	Sagrada
+DRUG	Caspofungina
+DRUG	Cefaclor
+DRUG	Cefadroxila
+DRUG	Cefalexina
+DRUG	Cefalotina
+DRUG	Cefazolina
+DRUG	Cefepima
+DRUG	Cefotaxima
+DRUG	Cefoxitina
+DRUG	Ceftazidima
+DRUG	Ceftriaxona
+DRUG	Cefuroxima
+DRUG	Cetorolaco
+DRUG	Celecoxibe
+DRUG	Cetamina
+DRUG	Cetilpiridínio
+DRUG	Cetirizina
+DRUG	Cetoconazol
+DRUG	Cetoprofeno
+DRUG	Cetorolaco
+DRUG	Cetotifeno
+DRUG	Cetuximabe
+DRUG	Ciclesonida
+DRUG	Ciclobenzaprina
+DRUG	Ciclofosfamida
+DRUG	Ciclopentolato
+DRUG	Ciclopirox
+DRUG	Ciclosporina
+DRUG	Cilazapril
+DRUG	Cilostazol
+DRUG	Cimetidina
+DRUG	Cinarizina
+DRUG	Cinchocaína
+DRUG	Ciproeptadina
+DRUG	Ciprofibrato
+DRUG	Ciprofloxacino
+DRUG	Ciproterona
+DRUG	Cisatracúrio
+DRUG	Cisplatina
+DRUG	Citalopram
+DRUG	Citarabina
+DRUG	Cladribina
+DRUG	Claritromicina
+DRUG	Clemastina
+DRUG	Clindamicina
+DRUG	Clobazam
+DRUG	Clobetasol
+DRUG	Clodronato
+DRUG	Clomifeno
+DRUG	Clomipramina
+DRUG	Clonazepam
+DRUG	Cloperastina
+DRUG	Clonidina
+DRUG	Clopidogrel
+DRUG	Clorambucila
+DRUG	Cloranfenicol
+DRUG	Clordiazepóxido
+DRUG	Cloreto	de	Amônio
+DRUG	Cloreto	de	Benzalcônio
+DRUG	Cloreto	de	Cálcio
+DRUG	Cloreto	de	Potássio
+DRUG	Cloreto	de	Sódio
+DRUG	Clorexidina
+DRUG	Clorfeniramina
+DRUG	Cloroquina
+DRUG	Clorpromazina
+DRUG	Clorpropamida
+DRUG	Clortalidona
+DRUG	Clortetraciclina
+DRUG	Clotrimazol
+DRUG	Cloxazolam
+DRUG	Clozapina
+DRUG	Codeína
+DRUG	Codergocrina
+DRUG	Colagenase
+DRUG	Colchicina
+DRUG	Colestiramina
+DRUG	Colistimetato
+DRUG	Cromoglicato	dissódico	
+DRUG	Dabigatrana
+DRUG	Dacarbazina
+DRUG	Dactinomicina
+DRUG	Daptomicina
+DRUG	Daunorrubicina
+DRUG	Darunavir
+DRUG	Dasatinibe
+DRUG	Dalteparina
+DRUG	Danazol
+DRUG	Darifenacina
+DRUG	Desvenlafaxina
+DRUG	Daunorrubicina
+DRUG	Deferasirox
+DRUG	Deferoxamina
+DRUG	Deflazacorte
+DRUG	Deltametrina
+DRUG	Deslanósido
+DRUG	Desloratadina
+DRUG	Desmopressina
+DRUG	Desogestrel
+DRUG	Desonida
+DRUG	Desoximetasona
+DRUG	Dexametasona
+DRUG	Dexmedetomidina
+DRUG	Dexpantenol
+DRUG	Dextrano
+DRUG	Dextrometorfano
+DRUG	Diacereína
+DRUG	Diazepam
+DRUG	Diazóxido
+DRUG	Dienogeste
+DRUG	Dicicloverina
+DRUG	Diclofenaco
+DRUG	Didanosina
+DRUG	Dietilestilbestrol
+DRUG	Difenidramina
+DRUG	Diflucortolona
+DRUG	Diidrogesterona
+DRUG	Digoxina
+DRUG	Diidroergocristina
+DRUG	Dimenidrinato
+DRUG	Diidroergotamina
+DRUG	Diltiazem
+DRUG	Dimercaprol
+DRUG	Dimeticona
+DRUG	Dinitrato	de	Isossorbida
+DRUG	Dipiridamol
+DRUG	Dipirona
+DRUG	Disopiramida
+DRUG	Dolasetrona
+DRUG	Dissulfiram
+DRUG	Dobutamina
+DRUG	Docetaxel
+DRUG	Domperidona
+DRUG	Donepezila
+DRUG	Dopamina
+DRUG	Doxiciclina
+DRUG	Dornase	Alfa
+DRUG	Dorzolamida
+DRUG	Doxazosina
+DRUG	Doxorrubicina
+DRUG	Dropropizina
+DRUG	Duloxetina
+DRUG	Dutasterida	
+DRUG	Enfuvirtida
+DRUG	Ebastina
+DRUG	Econazol
+DRUG	Efavirenz
+DRUG	Efedrina
+DRUG	Enalapril
+DRUG	Entecavir
+DRUG	Enflurano
+DRUG	Enoxaparina
+DRUG	Entacapona
+DRUG	Epinastina
+DRUG	Epinefrina
+DRUG	Epirrubicina
+DRUG	Ergometrina
+DRUG	Ergotamina
+DRUG	Eritromicina
+DRUG	Eritropoetina	Humana	Recombinant
+DRUG	Erlonitibe
+DRUG	Ertapenem
+DRUG	Escitalopram
+DRUG	Escopolamina
+DRUG	Esomeprazol
+DRUG	Espiramicina
+DRUG	Espironolactona
+DRUG	Estavudina
+DRUG	Estazolam
+DRUG	Estradiol
+DRUG	Estreptoquinase
+DRUG	Estriol
+DRUG	Estrogênios	Conjugados
+DRUG	Etarnecepte
+DRUG	Etansilato
+DRUG	Etilefrina
+DRUG	Etinilestradiol
+DRUG	Etodolaco
+DRUG	Etofamida
+DRUG	Etomidato
+DRUG	Etoposídeo
+DRUG	Etoricoxibe
+DRUG	Etravirina
+DRUG	Everolimo
+DRUG	Exemestano
+DRUG	Exenatida
+DRUG	Ezetimiba
+DRUG	Ezetimiba	+	Sinvastatina	
+DRUG	Famotidina
+DRUG	Fanciclovir
+DRUG	Fator	Anti-hemofílico
+DRUG	Fator	VII
+DRUG	Fator	IX
+DRUG	Felodipino
+DRUG	Femprocumona
+DRUG	Fenazopiridina
+DRUG	Fenilbutazona
+DRUG	Fenilefrina
+DRUG	Fenitoína
+DRUG	Fenobarbital
+DRUG	Fenofibrato
+DRUG	Fenoterol
+DRUG	Fenoxazolina
+DRUG	Fentanila
+DRUG	Fentanila	Transdérmica
+DRUG	Fenticonazol
+DRUG	Fentolamina
+DRUG	Ferro
+DRUG	Fexofenadina
+DRUG	Fibrinolisina	+	Desoxirribonuclease
+DRUG	Filgrastrima
+DRUG	Finasterida
+DRUG	Fitomenadiona
+DRUG	Fluconazol
+DRUG	Fludrocortisona
+DRUG	Fludarabina
+DRUG	Fludroxicortida
+DRUG	Flumazenil
+DRUG	Flumetasona
+DRUG	Flunarizina
+DRUG	Flunitrazepam
+DRUG	Fluocinolona
+DRUG	Fluocortolona
+DRUG	Fluormetolona
+DRUG	Fluorouracila
+DRUG	Fluoxetina
+DRUG	Flurazepam
+DRUG	Flurbiprofeno
+DRUG	Flutamida
+DRUG	Fluticasona
+DRUG	Flutrimazol
+DRUG	Fluvastatina
+DRUG	Fluvoxamina
+DRUG	Fondaparinux
+DRUG	Formoterol
+DRUG	Fosamprenavir
+DRUG	Fosfato	de	Sódio
+DRUG	Fosfomicina
+DRUG	Fulvestranto
+DRUG	Furazolidona
+DRUG	Furosemida	
+DRUG	Gabapentina
+DRUG	Galantamina
+DRUG	Ganciclovir
+DRUG	Ganirelix
+DRUG	Gatifloxacino
+DRUG	Gemifloxacino
+DRUG	Gencitabina
+DRUG	Genfibrozila
+DRUG	Gentamicina
+DRUG	Gestrinona
+DRUG	Glatirâmer
+DRUG	Glibenclamida
+DRUG	Glicerina
+DRUG	Gliclazida
+DRUG	Glicose
+DRUG	Glimepirida
+DRUG	Glipizida
+DRUG	Glucagon
+DRUG	Gonadotrofina	Coriônica	Humana
+DRUG	Goserrelina
+DRUG	Granisetrona
+DRUG	Griseofulvina
+DRUG	Guaifenesina	
+DRUG	Halcinonida
+DRUG	Haloperidol
+DRUG	Heparina
+DRUG	Hetastarch
+DRUG	Hexamidina	+	Tetracaína
+DRUG	Hialuronidase
+DRUG	Hidralazina
+DRUG	Hidroclorotiazida
+DRUG	Hidromorfona
+DRUG	Hidrocortisona
+DRUG	Hidroquinona
+DRUG	Hidroxicloroquina
+DRUG	Hidróxido	de	Alumínio
+DRUG	Hidróxido	de	Magnésio
+DRUG	Hidroxiureia
+DRUG	Hidroxizina
+DRUG	Hiosciamina
+DRUG	Hipromelose
+DRUG	Homatropina	
+DRUG	Ibandronato
+DRUG	Ibuprofeno
+DRUG	Idarrubicina
+DRUG	Idoxuridina
+DRUG	Ifosfamida
+DRUG	Imatinibe
+DRUG	Imipenem	+	Cilastatina
+DRUG	Imipramina
+DRUG	Imiquimode
+DRUG	Imunoglobulina	Humana
+DRUG	Imunoglobulina	G	Humana	Antitetânica
+DRUG	Imunoglobulina	G	Humana
+DRUG	Indacaterol
+DRUG	Imunoglobulina	Rho
+DRUG	Indapamida
+DRUG	Indinavir
+DRUG	Indometacina
+DRUG	Infliximabe
+DRUG	Interferon	alfa-2a
+DRUG	Insulinas
+DRUG	Interferon	beta-1a
+DRUG	Interferon	beta-1b
+DRUG	Interleucina-2	Recombinante
+DRUG	Iodeto	de	Potássio
+DRUG	Iodopovidona
+DRUG	Ipratrópio
+DRUG	Ipriflavona
+DRUG	Irbesartana
+DRUG	Irinotecano
+DRUG	Isoconazol
+DRUG	Isoflurano
+DRUG	Isometepteno
+DRUG	Isotretinoína
+DRUG	Isoxsuprina
+DRUG	Itraconazol
+DRUG	Ivermectina	
+DRUG	Lacidipino
+DRUG	Lactulose
+DRUG	Lamivudina
+DRUG	Lamotrigina
+DRUG	Lansoprazol
+DRUG	Latanoprosta
+DRUG	Leflunomida
+DRUG	Lercanidipino
+DRUG	Letrozol
+DRUG	Leucovorina
+DRUG	Leuprolida
+DRUG	Levamisol
+DRUG	Levobunolol
+DRUG	Levodopa	+	Carbidopa
+DRUG	Levodropropizina
+DRUG	Levofloxacino
+DRUG	Levomepromazina
+DRUG	Levosimendana
+DRUG	Linagliptina
+DRUG	Levotiroxina
+DRUG	Lidocaína
+DRUG	Limeciclina
+DRUG	Lincomicina
+DRUG	Linezolida
+DRUG	Lítio
+DRUG	Lisinopril
+DRUG	Lomefloxacino
+DRUG	Lomustina
+DRUG	Linagliptina
+DRUG	Liraglutida
+DRUG	Loperamida
+DRUG	Loratadina
+DRUG	Lorazepam
+DRUG	Lisdexanfetamina
+DRUG	Losartana
+DRUG	Lovastatina	
+DRUG	Macrogol
+DRUG	Maraviroque
+DRUG	Magaldrato
+DRUG	Manitol
+DRUG	Maprotilina
+DRUG	Mebendazol
+DRUG	Mebeverina
+DRUG	Medroxiprogesterona
+DRUG	Megestrol
+DRUG	Melfalano
+DRUG	Meloxicam
+DRUG	Memantina
+DRUG	Menotrofina
+DRUG	Mepartricina	+	Tetraciclina
+DRUG	Mercaptopurina
+DRUG	Meropenem
+DRUG	Mesalazina
+DRUG	Mesna
+DRUG	Mesterolona
+DRUG	Metadona
+DRUG	Metaraminol
+DRUG	Metenamina
+DRUG	Metformina
+DRUG	Metilcelulose
+DRUG	Metildopa
+DRUG	Metilfenidato
+DRUG	Metilergonovina
+DRUG	Metilprednisolona
+DRUG	Metimazol
+DRUG	Metionina
+DRUG	Metisergida
+DRUG	Metoclopramida
+DRUG	Metoprolol
+DRUG	Metronidazol
+DRUG	Mianserina
+DRUG	Micofenolato
+DRUG	Miconazol
+DRUG	Midazolam
+DRUG	Milrinona
+DRUG	Minociclina
+DRUG	Minoxidil
+DRUG	Mirtazapina
+DRUG	Mitomicina
+DRUG	Mitotano
+DRUG	Mitoxantrona
+DRUG	Moclobemida
+DRUG	Mometasona
+DRUG	Mononitrato	de	Isossorbida
+DRUG	Monossulfiram
+DRUG	Montelucaste
+DRUG	Morfina
+DRUG	Moxifloxacino
+DRUG	Mupirocina	
+DRUG	Nadroparina
+DRUG	Nafarrelina
+DRUG	Nafazolina
+DRUG	Nalbufina
+DRUG	Naloxona
+DRUG	Naltrexona
+DRUG	Nandrolona
+DRUG	Naproxeno
+DRUG	Naratriptana
+DRUG	Nateglinida
+DRUG	Nelfinavir
+DRUG	Neomicina
+DRUG	Neostigmina
+DRUG	Nevirapina
+DRUG	Nepafenaco
+DRUG	Nicergolina
+DRUG	Niclosamida
+DRUG	Nicotina
+DRUG	Nifedipino
+DRUG	Nimesulida
+DRUG	Nimodipino
+DRUG	Nimorazol
+DRUG	Nistatina
+DRUG	Nitrato	de	Prata
+DRUG	Nitrazepam
+DRUG	Nitrendipino
+DRUG	Nitrofural
+DRUG	Nitrofurantoína
+DRUG	Nitrofurazona
+DRUG	Nitroglicerina
+DRUG	Nitroprusseto
+DRUG	Nizatidina
+DRUG	Nomegestrol
+DRUG	Norepinefrina
+DRUG	Noretisterona
+DRUG	Norfloxacino
+DRUG	Nortriptilina	
+DRUG	Octreotida
+DRUG	Ofloxacino
+DRUG	Olanzapina
+DRUG	Óleo	de	Rícino
+DRUG	Óleo	Mineral
+DRUG	Olmesartana
+DRUG	Olopatadina
+DRUG	Omalizumabe
+DRUG	Omeprazol
+DRUG	Ondansetrona
+DRUG	Oprelvecina
+DRUG	Orfenadrina
+DRUG	Orlistate
+DRUG	Oseltamivir
+DRUG	Oxacilina
+DRUG	Oxaliplatina
+DRUG	Oxamniquina
+DRUG	Oxcarbazepina
+DRUG	Oxibutinina
+DRUG	Oxicodona
+DRUG	Oxiconazol
+DRUG	Óxido	de	Zinco
+DRUG	Oximetazolina
+DRUG	Oximetolona
+DRUG	Oxitetraciclina
+DRUG	Oxitocina	
+DRUG	Paclitaxel
+DRUG	Palonosetrona
+DRUG	Pamidronato
+DRUG	Pancreatina
+DRUG	Pancurônio
+DRUG	Pantoprazol
+DRUG	Paracetamol
+DRUG	Paroxetina
+DRUG	PEG-filgrastima
+DRUG	PEG-interferon	alfa-2b
+DRUG	Pemetrexede
+DRUG	Penciclovir
+DRUG	Penicilamina
+DRUG	Penicilina	G	Benzatina
+DRUG	Penicilina	G	Potássica
+DRUG	Penicilina	G	Procaína
+DRUG	Penicilina	V
+DRUG	Pentoxifilina
+DRUG	Petidina
+DRUG	Periciazina
+DRUG	Perindopril
+DRUG	Permanganato	de	Potássio
+DRUG	Permetrina
+DRUG	Peróxido	de	Hidrogênio
+DRUG	Picossulfato	Sódico
+DRUG	Picrato	de	Butambeno
+DRUG	Pilocarpina
+DRUG	Pimecrolimo
+DRUG	Pimetixeno
+DRUG	Pimozida
+DRUG	Pinavério
+DRUG	Pindolol
+DRUG	Pioglitazona
+DRUG	Piperacilina	+	Tazobactam
+DRUG	Pipotiazina
+DRUG	Piracetam
+DRUG	Piretanida
+DRUG	Piridostigmina
+DRUG	Pirimetamina
+DRUG	Pirvínio
+DRUG	Pitavastatina
+DRUG	Piroxicam
+DRUG	Policarbofila
+DRUG	Pizotifeno
+DRUG	Podofilotoxina
+DRUG	Policresuleno
+DRUG	Polimixina	B
+DRUG	Prasugrel
+DRUG	Pramipexol
+DRUG	Pravastatina
+DRUG	Praziquantel
+DRUG	Prazosina
+DRUG	Prednicarbato
+DRUG	Prednisolona
+DRUG	Prednisona
+DRUG	Pregabalina
+DRUG	Primidona
+DRUG	Procaína
+DRUG	Progesterona
+DRUG	Promestrieno
+DRUG	Prometazina
+DRUG	Propafenona
+DRUG	Propatilnitrato
+DRUG	Propatiouracila
+DRUG	Propofol
+DRUG	Propranolol
+DRUG	Protamina
+DRUG	Proximetacaína
+DRUG	Pseudoefedrina
+DRUG	Psyllium	
+DRUG	Quetiapina
+DRUG	Quinapril
+DRUG	Quinidina	
+DRUG	Rabeprazol
+DRUG	Racecadotrila
+DRUG	Raloxifeno
+DRUG	Raltegravir
+DRUG	Raltitrexede
+DRUG	Ramipril
+DRUG	Ranitidina
+DRUG	Reboxetina
+DRUG	Remifentanila
+DRUG	Repaglinida
+DRUG	Revulsivos
+DRUG	Ribavirina
+DRUG	Rifamicina
+DRUG	Rifampicina
+DRUG	Rilmenidina
+DRUG	Riluzol
+DRUG	Ringer	Lactato
+DRUG	Ringer
+DRUG	Risedronato
+DRUG	Risperidona
+DRUG	Ritonavir
+DRUG	Rituximabe
+DRUG	Rivastigmina
+DRUG	Rizatriptano
+DRUG	Rocurônio
+DRUG	Ropivacaína
+DRUG	Rosuvastatina
+DRUG	Roxitromicina
+DRUG	Rutosídio	
+DRUG	Salbutamol
+DRUG	Salmeterol
+DRUG	Saquinavir
+DRUG	Saxagliptina
+DRUG	Secnidazol
+DRUG	Selegilina
+DRUG	Sene
+DRUG	Sertralina
+DRUG	Sevelamer
+DRUG	Sevoflurano
+DRUG	Sibutramina
+DRUG	Sildenafila
+DRUG	Sinvastatina
+DRUG	Solifenacina
+DRUG	Sirolimo
+DRUG	Sitagliptina
+DRUG	Soluções	Hidratantes	Orais
+DRUG	Somatropina
+DRUG	Soro	Antidiftérico
+DRUG	Soro	Antipeçonhentos
+DRUG	Soro	Antirrábico
+DRUG	Soro	Antitetânico
+DRUG	Sotalol
+DRUG	Sucralfato
+DRUG	Sulbutiamina
+DRUG	Sufentanila
+DRUG	Sulfadiazina	de	Prata
+DRUG	Sulfadiazina
+DRUG	Sulfametoxazol	+	Trimetoprima
+DRUG	Sulfasalazina
+DRUG	Sulfato	de	Zinco
+DRUG	Sulpirida
+DRUG	Sultamicilina
+DRUG	Sumatriptano
+DRUG	Sunitinibe
+DRUG	Suxametônio	
+DRUG	Tacrolimo
+DRUG	Tacrolimo
+DRUG	Tamoxifeno
+DRUG	Tadalafila
+DRUG	Tansulosina
+DRUG	Teclozana
+DRUG	Tegaserode
+DRUG	Teicoplanina
+DRUG	Telbivudina
+DRUG	Telmisartana
+DRUG	Temozolomida
+DRUG	Teniposídeo
+DRUG	Tenoxicam
+DRUG	Teofilina
+DRUG	Terazosina
+DRUG	Terbinafina
+DRUG	Terbutalina
+DRUG	Terconazol
+DRUG	Teriparatida
+DRUG	Testosterona
+DRUG	Tetracaína
+DRUG	Tetraciclina	(oftálmico)
+DRUG	Tetraciclina	(oral)
+DRUG	Tetraidrozolina
+DRUG	Tiabendazol
+DRUG	Tianeptina
+DRUG	Tianfenicol
+DRUG	Tibolona
+DRUG	Ticarcilina	+	Ácido	Clavulânico
+DRUG	Ticlopidina
+DRUG	Tigeciclina
+DRUG	Timolol
+DRUG	Tinidazol
+DRUG	Tiocolchicosídeo
+DRUG	Tioconazol
+DRUG	Tioguanina
+DRUG	Tiopental
+DRUG	Tioridazina
+DRUG	Tipranavir
+DRUG	Tiotrópio
+DRUG	Tirofibana
+DRUG	Tirotricina
+DRUG	Tizanidina
+DRUG	Tobramicina	(injetável)
+DRUG	Tobramicina	(oftálmico)
+DRUG	Tocilizumabe
+DRUG	Tolcapona
+DRUG	Tolnaftato
+DRUG	Tolterodina
+DRUG	Topiramato
+DRUG	Topotecano
+DRUG	Toxina	Botulínica	Tipo	A
+DRUG	Tramadol
+DRUG	Tenofovir
+DRUG	Tranilcipromina
+DRUG	Trapidil
+DRUG	Trastuzumabe
+DRUG	Travoprosta
+DRUG	Trazodona
+DRUG	Tretinoína	(oral)
+DRUG	Tretinoína	(tópico)
+DRUG	Trimetazidina
+DRUG	Trimetoprima	
+DRUG	Ureia
+DRUG	Ursodiol	
+DRUG	Vacina	Contra	Caxumba
+DRUG	Vacina	Contra	Caxumba,	Rubéola	e	Sarampo
+DRUG	Vacina	Contra	Difteria	e	Tétano
+DRUG	Vacina	Contra	Difteria,	Tétano	e	Coqueluche
+DRUG	Vacina	Contra	Doença	Pneumocócica
+DRUG	Vacina	Contra	Febre	Amarela
+DRUG	Vacina	Contra	Gripe
+DRUG	Vacina	Contra	Haemophilus	influenzae	B
+DRUG	Vacina	Contra	Hepatite	A
+DRUG	Vacina	Contra	Hepatite	B
+DRUG	Vacina	Contra	Poliomielite	(injetável)
+DRUG	Vacina	Contra	Poliomielite	(oral)
+DRUG	Vacina	Contra	Raiva
+DRUG	Vacina	Contra	Rubéola
+DRUG	Vacina	Contra	Sarampo
+DRUG	Vacina	contra	Tétano
+DRUG	Vacina	Contra	Varicela
+DRUG	Valaciclovir
+DRUG	Valganciclovir
+DRUG	Valproato
+DRUG	Valsartana
+DRUG	Vancomicina
+DRUG	Vardenafila
+DRUG	Vareniclina
+DRUG	Varfarina
+DRUG	Vecurônio
+DRUG	Venlafaxina
+DRUG	Verapamil
+DRUG	Vigabatrina
+DRUG	Vimblastina
+DRUG	Viminol
+DRUG	Vincristina
+DRUG	Vitamina	B1	(Oral)	(DRUGância	ativa)
+DRUG	Vinorelbina
+DRUG	Violeta	de	Genciana
+DRUG	Vitamina	A
+DRUG	Vitamina	B12
+DRUG	Vitamina	D	(Oral;	Tópico)	(DRUGância	ativa)
+DRUG	Vitamina	C
+DRUG	Vitamina	E
+DRUG	Vitaminas	associadas
+DRUG	Vitaminas	associadas	de	uso	geral	(adultos)
+DRUG	Vitaminas	associadas	de	uso	geral	(crianças)
+DRUG	Vitaminas	associadas	antianêmicas	(adultos)
+DRUG	Vitaminas	associadas	antianêmicas	(crianças)
+DRUG	Vitaminas	do	Complexo	B
+DRUG	Vitamina	associadas	antirraquitismo
+DRUG	Vitaminas	associadas	A	+	D	(vitaminas	lipossolúveis)
+DRUG	Vitaminas	associadas	A	+	D	+	E	(vitaminas	lipossolúveis)
+DRUG	Vitaminas	associadas	para	gravidez	e	lactação
+DRUG	Vitaminas	associadas	geriátricas
+DRUG	Vitaminas	associadas	antioxidantes
+DRUG	Vitaminas	associadas	anti-stress
+DRUG	Vitelinato	de	Prata
+DRUG	Voriconazol	
+DRUG	Xilometazolina	
+DRUG	Zafirlucaste
+DRUG	Zanamivir
+DRUG	Zidovudina
+DRUG	Zinco
+DRUG	Ziprasidona
+DRUG	Zolmitriptano
+DRUG	Zolpidem
+DRUG	Zopiclona
+DRUG	Zuclopentixol
+DRUG	abacavir
+DRUG	abatacepte
+DRUG	abciximabe
+DRUG	acarbose
+DRUG	acebrofilina
+DRUG	aceclofenaco
+DRUG	acetazolamida
+DRUG	acetil	aspartilglutamato	de	sódio
+DRUG	acetilcisteína
+DRUG	aciclovir
+DRUG	ácido	acetilsalicílico
+DRUG	ácido	aminocapróico
+DRUG	ácido	azeláico
+DRUG	ácido	bórico
+DRUG	ácido	desidrocólico
+DRUG	ácido	fólico
+DRUG	ácido	fusídico
+DRUG	ácido	mefenâmico
+DRUG	ácido	mucopolissacárido-polissulfúrico
+DRUG	ácido	nalidíxico
+DRUG	ácido	pipemídico
+DRUG	ácido	poliacrílico
+DRUG	ácido	salicílico
+DRUG	ácido	zoledrônico
+DRUG	ácidos	graxos	poli-insaturados
+DRUG	acitretina
+DRUG	adalimumabe
+DRUG	adapaleno
+DRUG	adefovir
+DRUG	adenosina
+DRUG	albendazol
+DRUG	albumina	humana
+DRUG	alcatrão	de	hulha
+DRUG	álcool	polivinílico
+DRUG	alendronato
+DRUG	alentuzumabe
+DRUG	alfaestradiol
+DRUG	alfentanila
+DRUG	alfuzosina
+DRUG	alizaprida
+DRUG	almitrina
+DRUG	alopurinol
+DRUG	alprazolam
+DRUG	alprostadil
+DRUG	amantadina
+DRUG	ambroxol
+DRUG	amicacina
+DRUG	aminofilina
+DRUG	amiodarona
+DRUG	amissulprida
+DRUG	amitriptilina
+DRUG	amorolfina
+DRUG	amoxicilina
+DRUG	amoxicilina	+	ácido	clavulânico	
+DRUG	clavulanato	de	potássio
+DRUG	ampicilina
+DRUG	ampicilina	+	sulbactam
+DRUG	amprenavir
+DRUG	anastrozol
+DRUG	anidulafungina
+DRUG	anfotericina	b
+DRUG	anlodipino
+DRUG	anticoncepcionais	hormonais
+DRUG	antimoniato	de	meglumina
+DRUG	aprepitanto
+DRUG	aprotinina
+DRUG	asparaginase
+DRUG	atazanavir
+DRUG	atenolol
+DRUG	atorvastatina
+DRUG	atosibano
+DRUG	atracúrio
+DRUG	atropina	(injetável)
+DRUG	azacitidina
+DRUG	azatioprina
+DRUG	azelastina
+DRUG	atropina
+DRUG	azitromicina
+DRUG	aztreonam
+DRUG	amifostina	
+DRUG	bacitracina
+DRUG	baclofeno
+DRUG	bambuterol
+DRUG	basiliximabe
+DRUG	bamifilina
+DRUG	beclometasona
+DRUG	benazepril
+DRUG	benciclano
+DRUG	benzbromarona
+DRUG	benzidamina
+DRUG	benzoato	de	benzila
+DRUG	benzocaína
+DRUG	benzoperóxido
+DRUG	beractanto
+DRUG	betaistina
+DRUG	betametasona
+DRUG	betaxolol
+DRUG	bevacizumabe
+DRUG	bezafibrato
+DRUG	bicalutamida
+DRUG	bicarbonato	de	sódio
+DRUG	bifonazol
+DRUG	bimatoprosta
+DRUG	biperideno
+DRUG	bisacodil
+DRUG	bismuto
+DRUG	bisoprolol
+DRUG	bleomicina
+DRUG	bortezomibe
+DRUG	bosentana
+DRUG	brimonidina
+DRUG	brinzolamida
+DRUG	bromazepam
+DRUG	bromexina
+DRUG	bromocriptina
+DRUG	bromoprida
+DRUG	bronfeniramina
+DRUG	buclizina
+DRUG	budesonida
+DRUG	buflomedil
+DRUG	bumetanida
+DRUG	bupivacaína
+DRUG	bupropiona
+DRUG	buspirona
+DRUG	busserrelina
+DRUG	bussulfano
+DRUG	butoconazol	
+DRUG	cabergolina
+DRUG	cafeína
+DRUG	calamina
+DRUG	cálcio
+DRUG	calcitonina
+DRUG	cambendazol
+DRUG	candesartana
+DRUG	caolim	+	pectina
+DRUG	capecitabina
+DRUG	capsaicina
+DRUG	captopril
+DRUG	carbacol
+DRUG	carbamazepina
+DRUG	carbinoxamina
+DRUG	carbocisteína
+DRUG	carbonato	de	magnésio
+DRUG	carboplatina
+DRUG	carboximetilcelulose
+DRUG	carisoprodol
+DRUG	carmustina
+DRUG	carvão	ativado
+DRUG	carvedilol
+DRUG	cáscara	sagrada
+DRUG	caspofungina
+DRUG	cefaclor
+DRUG	cefadroxila
+DRUG	cefalexina
+DRUG	cefalotina
+DRUG	cefazolina
+DRUG	cefepima
+DRUG	cefotaxima
+DRUG	cefoxitina
+DRUG	ceftazidima
+DRUG	ceftriaxona
+DRUG	cefuroxima
+DRUG	cetorolaco
+DRUG	celecoxibe
+DRUG	cetamina
+DRUG	cetilpiridínio
+DRUG	cetirizina
+DRUG	cetoconazol
+DRUG	cetoprofeno
+DRUG	cetorolaco
+DRUG	cetotifeno
+DRUG	cetuximabe
+DRUG	ciclesonida
+DRUG	ciclobenzaprina
+DRUG	ciclofosfamida
+DRUG	ciclopentolato
+DRUG	ciclopirox
+DRUG	ciclosporina
+DRUG	cilazapril
+DRUG	cilostazol
+DRUG	cimetidina
+DRUG	cinarizina
+DRUG	cinchocaína
+DRUG	ciproeptadina
+DRUG	ciprofibrato
+DRUG	ciprofloxacino
+DRUG	ciproterona
+DRUG	cisatracúrio
+DRUG	cisplatina
+DRUG	citalopram
+DRUG	citarabina
+DRUG	cladribina
+DRUG	claritromicina
+DRUG	clemastina
+DRUG	clindamicina
+DRUG	clobazam
+DRUG	clobetasol
+DRUG	clodronato
+DRUG	clomifeno
+DRUG	clomipramina
+DRUG	clonazepam
+DRUG	cloperastina
+DRUG	clonidina
+DRUG	clopidogrel
+DRUG	clorambucila
+DRUG	cloranfenicol
+DRUG	clordiazepóxido
+DRUG	cloreto	de	amônio
+DRUG	cloreto	de	benzalcônio
+DRUG	cloreto	de	cálcio
+DRUG	cloreto	de	potássio
+DRUG	cloreto	de	sódio
+DRUG	clorexidina
+DRUG	clorfeniramina
+DRUG	cloroquina
+DRUG	clorpromazina
+DRUG	clorpropamida
+DRUG	clortalidona
+DRUG	clortetraciclina
+DRUG	clotrimazol
+DRUG	cloxazolam
+DRUG	clozapina
+DRUG	codeína
+DRUG	codergocrina
+DRUG	colagenase
+DRUG	colchicina
+DRUG	colestiramina
+DRUG	colistimetato
+DRUG	cromoglicato	dissódico	
+DRUG	dabigatrana
+DRUG	dacarbazina
+DRUG	dactinomicina
+DRUG	daptomicina
+DRUG	daunorrubicina
+DRUG	darunavir
+DRUG	dasatinibe
+DRUG	dalteparina
+DRUG	danazol
+DRUG	darifenacina
+DRUG	desvenlafaxina
+DRUG	daunorrubicina
+DRUG	deferasirox
+DRUG	deferoxamina
+DRUG	deflazacorte
+DRUG	deltametrina
+DRUG	deslanósido
+DRUG	desloratadina
+DRUG	desmopressina
+DRUG	desogestrel
+DRUG	desonida
+DRUG	desoximetasona
+DRUG	dexametasona
+DRUG	dexmedetomidina
+DRUG	dexpantenol
+DRUG	dextrano
+DRUG	dextrometorfano
+DRUG	diacereína
+DRUG	diazepam
+DRUG	diazóxido
+DRUG	dienogeste
+DRUG	dicicloverina
+DRUG	diclofenaco
+DRUG	didanosina
+DRUG	dietilestilbestrol
+DRUG	difenidramina
+DRUG	diflucortolona
+DRUG	diidrogesterona
+DRUG	digoxina
+DRUG	diidroergocristina
+DRUG	dimenidrinato
+DRUG	diidroergotamina
+DRUG	diltiazem
+DRUG	dimercaprol
+DRUG	dimeticona
+DRUG	dinitrato	de	isossorbida
+DRUG	dipiridamol
+DRUG	dipirona
+DRUG	disopiramida
+DRUG	dolasetrona
+DRUG	dissulfiram
+DRUG	dobutamina
+DRUG	docetaxel
+DRUG	domperidona
+DRUG	donepezila
+DRUG	dopamina
+DRUG	doxiciclina
+DRUG	dornase	alfa
+DRUG	dorzolamida
+DRUG	doxazosina
+DRUG	doxorrubicina
+DRUG	dropropizina
+DRUG	duloxetina
+DRUG	dutasterida	
+DRUG	enfuvirtida
+DRUG	ebastina
+DRUG	econazol
+DRUG	efavirenz
+DRUG	efedrina
+DRUG	enalapril
+DRUG	entecavir
+DRUG	enflurano
+DRUG	enoxaparina
+DRUG	entacapona
+DRUG	epinastina
+DRUG	epinefrina
+DRUG	epirrubicina
+DRUG	ergometrina
+DRUG	ergotamina
+DRUG	eritromicina
+DRUG	eritropoetina	humana	recombinant
+DRUG	erlonitibe
+DRUG	ertapenem
+DRUG	escitalopram
+DRUG	escopolamina
+DRUG	esomeprazol
+DRUG	espiramicina
+DRUG	espironolactona
+DRUG	estavudina
+DRUG	estazolam
+DRUG	estradiol
+DRUG	estreptoquinase
+DRUG	estriol
+DRUG	estrogênios	conjugados
+DRUG	etarnecepte
+DRUG	etansilato
+DRUG	etilefrina
+DRUG	etinilestradiol
+DRUG	etodolaco
+DRUG	etofamida
+DRUG	etomidato
+DRUG	etoposídeo
+DRUG	etoricoxibe
+DRUG	etravirina
+DRUG	everolimo
+DRUG	exemestano
+DRUG	exenatida
+DRUG	ezetimiba
+DRUG	ezetimiba	+	sinvastatina	
+DRUG	famotidina
+DRUG	fanciclovir
+DRUG	fator	anti-hemofílico
+DRUG	fator	vii
+DRUG	fator	ix
+DRUG	felodipino
+DRUG	femprocumona
+DRUG	fenazopiridina
+DRUG	fenilbutazona
+DRUG	fenilefrina
+DRUG	fenitoína
+DRUG	fenobarbital
+DRUG	fenofibrato
+DRUG	fenoterol
+DRUG	fenoxazolina
+DRUG	fentanila
+DRUG	fentanila	transdérmica
+DRUG	fenticonazol
+DRUG	fentolamina
+DRUG	ferro
+DRUG	fexofenadina
+DRUG	fibrinolisina	+	desoxirribonuclease
+DRUG	filgrastrima
+DRUG	finasterida
+DRUG	fitomenadiona
+DRUG	fluconazol
+DRUG	fludrocortisona
+DRUG	fludarabina
+DRUG	fludroxicortida
+DRUG	flumazenil
+DRUG	flumetasona
+DRUG	flunarizina
+DRUG	flunitrazepam
+DRUG	fluocinolona
+DRUG	fluocortolona
+DRUG	fluormetolona
+DRUG	fluorouracila
+DRUG	fluoxetina
+DRUG	flurazepam
+DRUG	flurbiprofeno
+DRUG	flutamida
+DRUG	fluticasona
+DRUG	flutrimazol
+DRUG	fluvastatina
+DRUG	fluvoxamina
+DRUG	fondaparinux
+DRUG	formoterol
+DRUG	fosamprenavir
+DRUG	fosfato	de	sódio
+DRUG	fosfomicina
+DRUG	fulvestranto
+DRUG	furazolidona
+DRUG	furosemida	
+DRUG	gabapentina
+DRUG	galantamina
+DRUG	ganciclovir
+DRUG	ganirelix
+DRUG	gatifloxacino
+DRUG	gemifloxacino
+DRUG	gencitabina
+DRUG	genfibrozila
+DRUG	gentamicina
+DRUG	gestrinona
+DRUG	glatirâmer
+DRUG	glibenclamida
+DRUG	glicerina
+DRUG	gliclazida
+DRUG	glicose
+DRUG	glimepirida
+DRUG	glipizida
+DRUG	glucagon
+DRUG	gonadotrofina	coriônica	humana
+DRUG	goserrelina
+DRUG	granisetrona
+DRUG	griseofulvina
+DRUG	guaifenesina	
+DRUG	halcinonida
+DRUG	haloperidol
+DRUG	heparina
+DRUG	hetastarch
+DRUG	hexamidina	+	tetracaína
+DRUG	hialuronidase
+DRUG	hidralazina
+DRUG	hidroclorotiazida
+DRUG	hidromorfona
+DRUG	hidrocortisona
+DRUG	hidroquinona
+DRUG	hidroxicloroquina
+DRUG	hidróxido	de	alumínio
+DRUG	hidróxido	de	magnésio
+DRUG	hidroxiureia
+DRUG	hidroxizina
+DRUG	hiosciamina
+DRUG	hipromelose
+DRUG	homatropina	
+DRUG	ibandronato
+DRUG	ibuprofeno
+DRUG	idarrubicina
+DRUG	idoxuridina
+DRUG	ifosfamida
+DRUG	imatinibe
+DRUG	imipenem	+	cilastatina
+DRUG	imipramina
+DRUG	imiquimode
+DRUG	imunoglobulina	humana
+DRUG	imunoglobulina	g	humana	antitetânica
+DRUG	imunoglobulina	g	humana
+DRUG	indacaterol
+DRUG	imunoglobulina	rho
+DRUG	indapamida
+DRUG	indinavir
+DRUG	indometacina
+DRUG	infliximabe
+DRUG	interferon	alfa-2a
+DRUG	insulinas
+DRUG	interferon	beta-1a
+DRUG	interferon	beta-1b
+DRUG	interleucina-2	recombinante
+DRUG	iodeto	de	potássio
+DRUG	iodopovidona
+DRUG	ipratrópio
+DRUG	ipriflavona
+DRUG	irbesartana
+DRUG	irinotecano
+DRUG	isoconazol
+DRUG	isoflurano
+DRUG	isometepteno
+DRUG	isotretinoína
+DRUG	isoxsuprina
+DRUG	itraconazol
+DRUG	ivermectina	
+DRUG	lacidipino
+DRUG	lactulose
+DRUG	lamivudina
+DRUG	lamotrigina
+DRUG	lansoprazol
+DRUG	latanoprosta
+DRUG	leflunomida
+DRUG	lercanidipino
+DRUG	letrozol
+DRUG	leucovorina
+DRUG	leuprolida
+DRUG	levamisol
+DRUG	levobunolol
+DRUG	levodopa	+	carbidopa
+DRUG	levodropropizina
+DRUG	levofloxacino
+DRUG	levomepromazina
+DRUG	levosimendana
+DRUG	linagliptina
+DRUG	levotiroxina
+DRUG	lidocaína
+DRUG	limeciclina
+DRUG	lincomicina
+DRUG	linezolida
+DRUG	lítio
+DRUG	lisinopril
+DRUG	lomefloxacino
+DRUG	lomustina
+DRUG	linagliptina
+DRUG	liraglutida
+DRUG	loperamida
+DRUG	loratadina
+DRUG	lorazepam
+DRUG	lisdexanfetamina
+DRUG	losartana
+DRUG	lovastatina	
+DRUG	macrogol
+DRUG	maraviroque
+DRUG	magaldrato
+DRUG	manitol
+DRUG	maprotilina
+DRUG	mebendazol
+DRUG	mebeverina
+DRUG	medroxiprogesterona
+DRUG	megestrol
+DRUG	melfalano
+DRUG	meloxicam
+DRUG	memantina
+DRUG	menotrofina
+DRUG	mepartricina	+	tetraciclina
+DRUG	mercaptopurina
+DRUG	meropenem
+DRUG	mesalazina
+DRUG	mesna
+DRUG	mesterolona
+DRUG	metadona
+DRUG	metaraminol
+DRUG	metenamina
+DRUG	metformina
+DRUG	metilcelulose
+DRUG	metildopa
+DRUG	metilfenidato
+DRUG	metilergonovina
+DRUG	metilprednisolona
+DRUG	metimazol
+DRUG	metionina
+DRUG	metisergida
+DRUG	metoclopramida
+DRUG	metoprolol
+DRUG	metronidazol
+DRUG	mianserina
+DRUG	micofenolato
+DRUG	miconazol
+DRUG	midazolam
+DRUG	milrinona
+DRUG	minociclina
+DRUG	minoxidil
+DRUG	mirtazapina
+DRUG	mitomicina
+DRUG	mitotano
+DRUG	mitoxantrona
+DRUG	moclobemida
+DRUG	mometasona
+DRUG	mononitrato	de	isossorbida
+DRUG	monossulfiram
+DRUG	montelucaste
+DRUG	morfina
+DRUG	moxifloxacino
+DRUG	mupirocina	
+DRUG	nadroparina
+DRUG	nafarrelina
+DRUG	nafazolina
+DRUG	nalbufina
+DRUG	naloxona
+DRUG	naltrexona
+DRUG	nandrolona
+DRUG	naproxeno
+DRUG	naratriptana
+DRUG	nateglinida
+DRUG	nelfinavir
+DRUG	neomicina
+DRUG	neostigmina
+DRUG	nevirapina
+DRUG	nepafenaco
+DRUG	nicergolina
+DRUG	niclosamida
+DRUG	nicotina
+DRUG	nifedipino
+DRUG	nimesulida
+DRUG	nimodipino
+DRUG	nimorazol
+DRUG	nistatina
+DRUG	nitrato	de	prata
+DRUG	nitrazepam
+DRUG	nitrendipino
+DRUG	nitrofural
+DRUG	nitrofurantoína
+DRUG	nitrofurazona
+DRUG	nitroglicerina
+DRUG	nitroprusseto
+DRUG	nizatidina
+DRUG	nomegestrol
+DRUG	norepinefrina
+DRUG	noretisterona
+DRUG	norfloxacino
+DRUG	nortriptilina	
+DRUG	octreotida
+DRUG	ofloxacino
+DRUG	olanzapina
+DRUG	óleo	de	rícino
+DRUG	óleo	mineral
+DRUG	olmesartana
+DRUG	olopatadina
+DRUG	omalizumabe
+DRUG	omeprazol
+DRUG	ondansetrona
+DRUG	oprelvecina
+DRUG	orfenadrina
+DRUG	orlistate
+DRUG	oseltamivir
+DRUG	oxacilina
+DRUG	oxaliplatina
+DRUG	oxamniquina
+DRUG	oxcarbazepina
+DRUG	oxibutinina
+DRUG	oxicodona
+DRUG	oxiconazol
+DRUG	óxido	de	zinco
+DRUG	oximetazolina
+DRUG	oximetolona
+DRUG	oxitetraciclina
+DRUG	oxitocina	
+DRUG	paclitaxel
+DRUG	palonosetrona
+DRUG	pamidronato
+DRUG	pancreatina
+DRUG	pancurônio
+DRUG	pantoprazol
+DRUG	paracetamol
+DRUG	paroxetina
+DRUG	peg-filgrastima
+DRUG	peg-interferon	alfa-2b
+DRUG	pemetrexede
+DRUG	penciclovir
+DRUG	penicilamina
+DRUG	penicilina	g	benzatina
+DRUG	penicilina	g	potássica
+DRUG	penicilina	g	procaína
+DRUG	penicilina	v
+DRUG	pentoxifilina
+DRUG	petidina
+DRUG	periciazina
+DRUG	perindopril
+DRUG	permanganato	de	potássio
+DRUG	permetrina
+DRUG	peróxido	de	hidrogênio
+DRUG	picossulfato	sódico
+DRUG	picrato	de	butambeno
+DRUG	pilocarpina
+DRUG	pimecrolimo
+DRUG	pimetixeno
+DRUG	pimozida
+DRUG	pinavério
+DRUG	pindolol
+DRUG	pioglitazona
+DRUG	piperacilina	+	tazobactam
+DRUG	pipotiazina
+DRUG	piracetam
+DRUG	piretanida
+DRUG	piridostigmina
+DRUG	pirimetamina
+DRUG	pirvínio
+DRUG	pitavastatina
+DRUG	piroxicam
+DRUG	policarbofila
+DRUG	pizotifeno
+DRUG	podofilotoxina
+DRUG	policresuleno
+DRUG	polimixina	b
+DRUG	prasugrel
+DRUG	pramipexol
+DRUG	pravastatina
+DRUG	praziquantel
+DRUG	prazosina
+DRUG	prednicarbato
+DRUG	prednisolona
+DRUG	prednisona
+DRUG	pregabalina
+DRUG	primidona
+DRUG	procaína
+DRUG	progesterona
+DRUG	promestrieno
+DRUG	prometazina
+DRUG	propafenona
+DRUG	propatilnitrato
+DRUG	propatiouracila
+DRUG	propofol
+DRUG	propranolol
+DRUG	protamina
+DRUG	proximetacaína
+DRUG	pseudoefedrina
+DRUG	psyllium	
+DRUG	quetiapina
+DRUG	quinapril
+DRUG	quinidina	
+DRUG	rabeprazol
+DRUG	racecadotrila
+DRUG	raloxifeno
+DRUG	raltegravir
+DRUG	raltitrexede
+DRUG	ramipril
+DRUG	ranitidina
+DRUG	reboxetina
+DRUG	remifentanila
+DRUG	repaglinida
+DRUG	revulsivos
+DRUG	ribavirina
+DRUG	rifamicina
+DRUG	rifampicina
+DRUG	rilmenidina
+DRUG	riluzol
+DRUG	ringer	lactato
+DRUG	ringer
+DRUG	risedronato
+DRUG	risperidona
+DRUG	ritonavir
+DRUG	rituximabe
+DRUG	rivastigmina
+DRUG	rizatriptano
+DRUG	rocurônio
+DRUG	ropivacaína
+DRUG	rosuvastatina
+DRUG	roxitromicina
+DRUG	rutosídio	
+DRUG	salbutamol
+DRUG	salmeterol
+DRUG	saquinavir
+DRUG	saxagliptina
+DRUG	secnidazol
+DRUG	selegilina
+DRUG	sene
+DRUG	sertralina
+DRUG	sevelamer
+DRUG	sevoflurano
+DRUG	sibutramina
+DRUG	sildenafila
+DRUG	sinvastatina
+DRUG	solifenacina
+DRUG	sirolimo
+DRUG	sitagliptina
+DRUG	soluções	hidratantes	orais
+DRUG	somatropina
+DRUG	soro	antidiftérico
+DRUG	soro	antipeçonhentos
+DRUG	soro	antirrábico
+DRUG	soro	antitetânico
+DRUG	sotalol
+DRUG	sucralfato
+DRUG	sulbutiamina
+DRUG	sufentanila
+DRUG	sulfadiazina	de	prata
+DRUG	sulfadiazina
+DRUG	sulfametoxazol	+	trimetoprima
+DRUG	sulfasalazina
+DRUG	sulfato	de	zinco
+DRUG	sulpirida
+DRUG	sultamicilina
+DRUG	sumatriptano
+DRUG	sunitinibe
+DRUG	suxametônio	
+DRUG	tacrolimo
+DRUG	tacrolimo
+DRUG	tamoxifeno
+DRUG	tadalafila
+DRUG	tansulosina
+DRUG	teclozana
+DRUG	tegaserode
+DRUG	teicoplanina
+DRUG	telbivudina
+DRUG	telmisartana
+DRUG	temozolomida
+DRUG	teniposídeo
+DRUG	tenoxicam
+DRUG	teofilina
+DRUG	terazosina
+DRUG	terbinafina
+DRUG	terbutalina
+DRUG	terconazol
+DRUG	teriparatida
+DRUG	testosterona
+DRUG	tetracaína
+DRUG	tetraciclina	(oftálmico)
+DRUG	tetraciclina	(oral)
+DRUG	tetraidrozolina
+DRUG	tiabendazol
+DRUG	tianeptina
+DRUG	tianfenicol
+DRUG	tibolona
+DRUG	ticarcilina	+	ácido	clavulânico
+DRUG	ticlopidina
+DRUG	tigeciclina
+DRUG	timolol
+DRUG	tinidazol
+DRUG	tiocolchicosídeo
+DRUG	tioconazol
+DRUG	tioguanina
+DRUG	tiopental
+DRUG	tioridazina
+DRUG	tipranavir
+DRUG	tiotrópio
+DRUG	tirofibana
+DRUG	tirotricina
+DRUG	tizanidina
+DRUG	tobramicina	(injetável)
+DRUG	tobramicina	(oftálmico)
+DRUG	tocilizumabe
+DRUG	tolcapona
+DRUG	tolnaftato
+DRUG	tolterodina
+DRUG	topiramato
+DRUG	topotecano
+DRUG	toxina	botulínica	tipo	a
+DRUG	tramadol
+DRUG	tenofovir
+DRUG	tranilcipromina
+DRUG	trapidil
+DRUG	trastuzumabe
+DRUG	travoprosta
+DRUG	trazodona
+DRUG	tretinoína	(oral)
+DRUG	tretinoína	(tópico)
+DRUG	trimetazidina
+DRUG	trimetoprima	
+DRUG	ureia
+DRUG	ursodiol	
+DRUG	vacina	contra	caxumba
+DRUG	vacina	contra	caxumba,	rubéola	e	sarampo
+DRUG	vacina	contra	difteria	e	tétano
+DRUG	vacina	contra	difteria,	tétano	e	coqueluche
+DRUG	vacina	contra	doença	pneumocócica
+DRUG	vacina	contra	febre	amarela
+DRUG	vacina	contra	gripe
+DRUG	vacina	contra	haemophilus	influenzae	b
+DRUG	vacina	contra	hepatite	a
+DRUG	vacina	contra	hepatite	b
+DRUG	vacina	contra	poliomielite	(injetável)
+DRUG	vacina	contra	poliomielite	(oral)
+DRUG	vacina	contra	raiva
+DRUG	vacina	contra	rubéola
+DRUG	vacina	contra	sarampo
+DRUG	vacina	contra	tétano
+DRUG	vacina	contra	varicela
+DRUG	valaciclovir
+DRUG	valganciclovir
+DRUG	valproato
+DRUG	valsartana
+DRUG	vancomicina
+DRUG	vardenafila
+DRUG	vareniclina
+DRUG	varfarina
+DRUG	vecurônio
+DRUG	venlafaxina
+DRUG	verapamil
+DRUG	vigabatrina
+DRUG	vimblastina
+DRUG	viminol
+DRUG	vincristina
+DRUG	vitamina	b1	(oral)	(DRUGância	ativa)
+DRUG	vinorelbina
+DRUG	violeta	de	genciana
+DRUG	vitamina	a
+DRUG	vitamina	b12
+DRUG	vitamina	d	(oral;	tópico)	(DRUGância	ativa)
+DRUG	vitamina	c
+DRUG	vitamina	e
+DRUG	vitaminas	associadas
+DRUG	vitaminas	associadas	de	uso	geral	(adultos)
+DRUG	vitaminas	associadas	de	uso	geral	(crianças)
+DRUG	vitaminas	associadas	antianêmicas	(adultos)
+DRUG	vitaminas	associadas	antianêmicas	(crianças)
+DRUG	vitaminas	do	complexo	b
+DRUG	vitamina	associadas	antirraquitismo
+DRUG	vitaminas	associadas	a	+	d	(vitaminas	lipossolúveis)
+DRUG	vitaminas	associadas	a	+	d	+	e	(vitaminas	lipossolúveis)
+DRUG	vitaminas	associadas	para	gravidez	e	lactação
+DRUG	vitaminas	associadas	geriátricas
+DRUG	vitaminas	associadas	antioxidantes
+DRUG	vitaminas	associadas	anti-stress
+DRUG	vitelinato	de	prata
+DRUG	voriconazol	
+DRUG	xilometazolina	
+DRUG	zafirlucaste
+DRUG	zanamivir
+DRUG	zidovudina
+DRUG	zinco
+DRUG	ziprasidona
+DRUG	zolmitriptano
+DRUG	zolpidem
+DRUG	zopiclona
+DRUG	zuclopentixol
+DRUG	ABACAVIR
+DRUG	ABATACEPTE
+DRUG	ABCIXIMABE
+DRUG	ACARBOSE
+DRUG	ACEBROFILINA
+DRUG	ACECLOFENACO
+DRUG	ACETAZOLAMIDA
+DRUG	ACETIL	ASPARTILGLUTAMATO	DE	SÓDIO
+DRUG	ACETILCISTEÍNA
+DRUG	ACICLOVIR
+DRUG	ÁCIDO	ACETILSALICÍLICO
+DRUG	ÁCIDO	AMINOCAPRÓICO
+DRUG	ÁCIDO	AZELÁICO
+DRUG	ÁCIDO	BÓRICO
+DRUG	ÁCIDO	DESIDROCÓLICO
+DRUG	ÁCIDO	FÓLICO
+DRUG	ÁCIDO	FUSÍDICO
+DRUG	ÁCIDO	MEFENÂMICO
+DRUG	ÁCIDO	MUCOPOLISSACÁRIDO-POLISSULFÚRICO
+DRUG	ÁCIDO	NALIDÍXICO
+DRUG	ÁCIDO	PIPEMÍDICO
+DRUG	ÁCIDO	POLIACRÍLICO
+DRUG	ÁCIDO	SALICÍLICO
+DRUG	ÁCIDO	ZOLEDRÔNICO
+DRUG	ÁCIDOS	GRAXOS	POLI-INSATURADOS
+DRUG	ACITRETINA
+DRUG	ADALIMUMABE
+DRUG	ADAPALENO
+DRUG	ADEFOVIR
+DRUG	ADENOSINA
+DRUG	ALBENDAZOL
+DRUG	ALBUMINA	HUMANA
+DRUG	ALCATRÃO	DE	HULHA
+DRUG	ÁLCOOL	POLIVINÍLICO
+DRUG	ALENDRONATO
+DRUG	ALENTUZUMABE
+DRUG	ALFAESTRADIOL
+DRUG	ALFENTANILA
+DRUG	ALFUZOSINA
+DRUG	ALIZAPRIDA
+DRUG	ALMITRINA
+DRUG	ALOPURINOL
+DRUG	ALPRAZOLAM
+DRUG	ALPROSTADIL
+DRUG	AMANTADINA
+DRUG	AMBROXOL
+DRUG	AMICACINA
+DRUG	AMINOFILINA
+DRUG	AMIODARONA
+DRUG	AMISSULPRIDA
+DRUG	AMITRIPTILINA
+DRUG	AMOROLFINA
+DRUG	AMOXICILINA
+DRUG	AMOXICILINA	+	ÁCIDO	CLAVULÂNICO	
+DRUG	CLAVULANATO	DE	POTÁSSIO
+DRUG	AMPICILINA
+DRUG	AMPICILINA	+	SULBACTAM
+DRUG	AMPRENAVIR
+DRUG	ANASTROZOL
+DRUG	ANIDULAFUNGINA
+DRUG	ANFOTERICINA	B
+DRUG	ANLODIPINO
+DRUG	ANTICONCEPCIONAIS	HORMONAIS
+DRUG	ANTIMONIATO	DE	MEGLUMINA
+DRUG	APREPITANTO
+DRUG	APROTININA
+DRUG	ASPARAGINASE
+DRUG	ATAZANAVIR
+DRUG	ATENOLOL
+DRUG	ATORVASTATINA
+DRUG	ATOSIBANO
+DRUG	ATRACÚRIO
+DRUG	ATROPINA	(INJETÁVEL)
+DRUG	AZACITIDINA
+DRUG	AZATIOPRINA
+DRUG	AZELASTINA
+DRUG	ATROPINA
+DRUG	AZITROMICINA
+DRUG	AZTREONAM
+DRUG	AMIFOSTINA	
+DRUG	BACITRACINA
+DRUG	BACLOFENO
+DRUG	BAMBUTEROL
+DRUG	BASILIXIMABE
+DRUG	BAMIFILINA
+DRUG	BECLOMETASONA
+DRUG	BENAZEPRIL
+DRUG	BENCICLANO
+DRUG	BENZBROMARONA
+DRUG	BENZIDAMINA
+DRUG	BENZOATO	DE	BENZILA
+DRUG	BENZOCAÍNA
+DRUG	BENZOPERÓXIDO
+DRUG	BERACTANTO
+DRUG	BETAISTINA
+DRUG	BETAMETASONA
+DRUG	BETAXOLOL
+DRUG	BEVACIZUMABE
+DRUG	BEZAFIBRATO
+DRUG	BICALUTAMIDA
+DRUG	BICARBONATO	DE	SÓDIO
+DRUG	BIFONAZOL
+DRUG	BIMATOPROSTA
+DRUG	BIPERIDENO
+DRUG	BISACODIL
+DRUG	BISMUTO
+DRUG	BISOPROLOL
+DRUG	BLEOMICINA
+DRUG	BORTEZOMIBE
+DRUG	BOSENTANA
+DRUG	BRIMONIDINA
+DRUG	BRINZOLAMIDA
+DRUG	BROMAZEPAM
+DRUG	BROMEXINA
+DRUG	BROMOCRIPTINA
+DRUG	BROMOPRIDA
+DRUG	BRONFENIRAMINA
+DRUG	BUCLIZINA
+DRUG	BUDESONIDA
+DRUG	BUFLOMEDIL
+DRUG	BUMETANIDA
+DRUG	BUPIVACAÍNA
+DRUG	BUPROPIONA
+DRUG	BUSPIRONA
+DRUG	BUSSERRELINA
+DRUG	BUSSULFANO
+DRUG	BUTOCONAZOL	
+DRUG	CABERGOLINA
+DRUG	CAFEÍNA
+DRUG	CALAMINA
+DRUG	CÁLCIO
+DRUG	CALCITONINA
+DRUG	CAMBENDAZOL
+DRUG	CANDESARTANA
+DRUG	CAOLIM	+	PECTINA
+DRUG	CAPECITABINA
+DRUG	CAPSAICINA
+DRUG	CAPTOPRIL
+DRUG	CARBACOL
+DRUG	CARBAMAZEPINA
+DRUG	CARBINOXAMINA
+DRUG	CARBOCISTEÍNA
+DRUG	CARBONATO	DE	MAGNÉSIO
+DRUG	CARBOPLATINA
+DRUG	CARBOXIMETILCELULOSE
+DRUG	CARISOPRODOL
+DRUG	CARMUSTINA
+DRUG	CARVÃO	ATIVADO
+DRUG	CARVEDILOL
+DRUG	CÁSCARA	SAGRADA
+DRUG	CASPOFUNGINA
+DRUG	CEFACLOR
+DRUG	CEFADROXILA
+DRUG	CEFALEXINA
+DRUG	CEFALOTINA
+DRUG	CEFAZOLINA
+DRUG	CEFEPIMA
+DRUG	CEFOTAXIMA
+DRUG	CEFOXITINA
+DRUG	CEFTAZIDIMA
+DRUG	CEFTRIAXONA
+DRUG	CEFUROXIMA
+DRUG	CETOROLACO
+DRUG	CELECOXIBE
+DRUG	CETAMINA
+DRUG	CETILPIRIDÍNIO
+DRUG	CETIRIZINA
+DRUG	CETOCONAZOL
+DRUG	CETOPROFENO
+DRUG	CETOROLACO
+DRUG	CETOTIFENO
+DRUG	CETUXIMABE
+DRUG	CICLESONIDA
+DRUG	CICLOBENZAPRINA
+DRUG	CICLOFOSFAMIDA
+DRUG	CICLOPENTOLATO
+DRUG	CICLOPIROX
+DRUG	CICLOSPORINA
+DRUG	CILAZAPRIL
+DRUG	CILOSTAZOL
+DRUG	CIMETIDINA
+DRUG	CINARIZINA
+DRUG	CINCHOCAÍNA
+DRUG	CIPROEPTADINA
+DRUG	CIPROFIBRATO
+DRUG	CIPROFLOXACINO
+DRUG	CIPROTERONA
+DRUG	CISATRACÚRIO
+DRUG	CISPLATINA
+DRUG	CITALOPRAM
+DRUG	CITARABINA
+DRUG	CLADRIBINA
+DRUG	CLARITROMICINA
+DRUG	CLEMASTINA
+DRUG	CLINDAMICINA
+DRUG	CLOBAZAM
+DRUG	CLOBETASOL
+DRUG	CLODRONATO
+DRUG	CLOMIFENO
+DRUG	CLOMIPRAMINA
+DRUG	CLONAZEPAM
+DRUG	CLOPERASTINA
+DRUG	CLONIDINA
+DRUG	CLOPIDOGREL
+DRUG	CLORAMBUCILA
+DRUG	CLORANFENICOL
+DRUG	CLORDIAZEPÓXIDO
+DRUG	CLORETO	DE	AMÔNIO
+DRUG	CLORETO	DE	BENZALCÔNIO
+DRUG	CLORETO	DE	CÁLCIO
+DRUG	CLORETO	DE	POTÁSSIO
+DRUG	CLORETO	DE	SÓDIO
+DRUG	CLOREXIDINA
+DRUG	CLORFENIRAMINA
+DRUG	CLOROQUINA
+DRUG	CLORPROMAZINA
+DRUG	CLORPROPAMIDA
+DRUG	CLORTALIDONA
+DRUG	CLORTETRACICLINA
+DRUG	CLOTRIMAZOL
+DRUG	CLOXAZOLAM
+DRUG	CLOZAPINA
+DRUG	CODEÍNA
+DRUG	CODERGOCRINA
+DRUG	COLAGENASE
+DRUG	COLCHICINA
+DRUG	COLESTIRAMINA
+DRUG	COLISTIMETATO
+DRUG	CROMOGLICATO	DISSÓDICO	
+DRUG	DABIGATRANA
+DRUG	DACARBAZINA
+DRUG	DACTINOMICINA
+DRUG	DAPTOMICINA
+DRUG	DAUNORRUBICINA
+DRUG	DARUNAVIR
+DRUG	DASATINIBE
+DRUG	DALTEPARINA
+DRUG	DANAZOL
+DRUG	DARIFENACINA
+DRUG	DESVENLAFAXINA
+DRUG	DAUNORRUBICINA
+DRUG	DEFERASIROX
+DRUG	DEFEROXAMINA
+DRUG	DEFLAZACORTE
+DRUG	DELTAMETRINA
+DRUG	DESLANÓSIDO
+DRUG	DESLORATADINA
+DRUG	DESMOPRESSINA
+DRUG	DESOGESTREL
+DRUG	DESONIDA
+DRUG	DESOXIMETASONA
+DRUG	DEXAMETASONA
+DRUG	DEXMEDETOMIDINA
+DRUG	DEXPANTENOL
+DRUG	DEXTRANO
+DRUG	DEXTROMETORFANO
+DRUG	DIACEREÍNA
+DRUG	DIAZEPAM
+DRUG	DIAZÓXIDO
+DRUG	DIENOGESTE
+DRUG	DICICLOVERINA
+DRUG	DICLOFENACO
+DRUG	DIDANOSINA
+DRUG	DIETILESTILBESTROL
+DRUG	DIFENIDRAMINA
+DRUG	DIFLUCORTOLONA
+DRUG	DIIDROGESTERONA
+DRUG	DIGOXINA
+DRUG	DIIDROERGOCRISTINA
+DRUG	DIMENIDRINATO
+DRUG	DIIDROERGOTAMINA
+DRUG	DILTIAZEM
+DRUG	DIMERCAPROL
+DRUG	DIMETICONA
+DRUG	DINITRATO	DE	ISOSSORBIDA
+DRUG	DIPIRIDAMOL
+DRUG	DIPIRONA
+DRUG	DISOPIRAMIDA
+DRUG	DOLASETRONA
+DRUG	DISSULFIRAM
+DRUG	DOBUTAMINA
+DRUG	DOCETAXEL
+DRUG	DOMPERIDONA
+DRUG	DONEPEZILA
+DRUG	DOPAMINA
+DRUG	DOXICICLINA
+DRUG	DORNASE	ALFA
+DRUG	DORZOLAMIDA
+DRUG	DOXAZOSINA
+DRUG	DOXORRUBICINA
+DRUG	DROPROPIZINA
+DRUG	DULOXETINA
+DRUG	DUTASTERIDA	
+DRUG	ENFUVIRTIDA
+DRUG	EBASTINA
+DRUG	ECONAZOL
+DRUG	EFAVIRENZ
+DRUG	EFEDRINA
+DRUG	ENALAPRIL
+DRUG	ENTECAVIR
+DRUG	ENFLURANO
+DRUG	ENOXAPARINA
+DRUG	ENTACAPONA
+DRUG	EPINASTINA
+DRUG	EPINEFRINA
+DRUG	EPIRRUBICINA
+DRUG	ERGOMETRINA
+DRUG	ERGOTAMINA
+DRUG	ERITROMICINA
+DRUG	ERITROPOETINA	HUMANA	RECOMBINANT
+DRUG	ERLONITIBE
+DRUG	ERTAPENEM
+DRUG	ESCITALOPRAM
+DRUG	ESCOPOLAMINA
+DRUG	ESOMEPRAZOL
+DRUG	ESPIRAMICINA
+DRUG	ESPIRONOLACTONA
+DRUG	ESTAVUDINA
+DRUG	ESTAZOLAM
+DRUG	ESTRADIOL
+DRUG	ESTREPTOQUINASE
+DRUG	ESTRIOL
+DRUG	ESTROGÊNIOS	CONJUGADOS
+DRUG	ETARNECEPTE
+DRUG	ETANSILATO
+DRUG	ETILEFRINA
+DRUG	ETINILESTRADIOL
+DRUG	ETODOLACO
+DRUG	ETOFAMIDA
+DRUG	ETOMIDATO
+DRUG	ETOPOSÍDEO
+DRUG	ETORICOXIBE
+DRUG	ETRAVIRINA
+DRUG	EVEROLIMO
+DRUG	EXEMESTANO
+DRUG	EXENATIDA
+DRUG	EZETIMIBA
+DRUG	EZETIMIBA	+	SINVASTATINA	
+DRUG	FAMOTIDINA
+DRUG	FANCICLOVIR
+DRUG	FATOR	ANTI-HEMOFÍLICO
+DRUG	FATOR	VII
+DRUG	FATOR	IX
+DRUG	FELODIPINO
+DRUG	FEMPROCUMONA
+DRUG	FENAZOPIRIDINA
+DRUG	FENILBUTAZONA
+DRUG	FENILEFRINA
+DRUG	FENITOÍNA
+DRUG	FENOBARBITAL
+DRUG	FENOFIBRATO
+DRUG	FENOTEROL
+DRUG	FENOXAZOLINA
+DRUG	FENTANILA
+DRUG	FENTANILA	TRANSDÉRMICA
+DRUG	FENTICONAZOL
+DRUG	FENTOLAMINA
+DRUG	FERRO
+DRUG	FEXOFENADINA
+DRUG	FIBRINOLISINA	+	DESOXIRRIBONUCLEASE
+DRUG	FILGRASTRIMA
+DRUG	FINASTERIDA
+DRUG	FITOMENADIONA
+DRUG	FLUCONAZOL
+DRUG	FLUDROCORTISONA
+DRUG	FLUDARABINA
+DRUG	FLUDROXICORTIDA
+DRUG	FLUMAZENIL
+DRUG	FLUMETASONA
+DRUG	FLUNARIZINA
+DRUG	FLUNITRAZEPAM
+DRUG	FLUOCINOLONA
+DRUG	FLUOCORTOLONA
+DRUG	FLUORMETOLONA
+DRUG	FLUOROURACILA
+DRUG	FLUOXETINA
+DRUG	FLURAZEPAM
+DRUG	FLURBIPROFENO
+DRUG	FLUTAMIDA
+DRUG	FLUTICASONA
+DRUG	FLUTRIMAZOL
+DRUG	FLUVASTATINA
+DRUG	FLUVOXAMINA
+DRUG	FONDAPARINUX
+DRUG	FORMOTEROL
+DRUG	FOSAMPRENAVIR
+DRUG	FOSFATO	DE	SÓDIO
+DRUG	FOSFOMICINA
+DRUG	FULVESTRANTO
+DRUG	FURAZOLIDONA
+DRUG	FUROSEMIDA	
+DRUG	GABAPENTINA
+DRUG	GALANTAMINA
+DRUG	GANCICLOVIR
+DRUG	GANIRELIX
+DRUG	GATIFLOXACINO
+DRUG	GEMIFLOXACINO
+DRUG	GENCITABINA
+DRUG	GENFIBROZILA
+DRUG	GENTAMICINA
+DRUG	GESTRINONA
+DRUG	GLATIRÂMER
+DRUG	GLIBENCLAMIDA
+DRUG	GLICERINA
+DRUG	GLICLAZIDA
+DRUG	GLICOSE
+DRUG	GLIMEPIRIDA
+DRUG	GLIPIZIDA
+DRUG	GLUCAGON
+DRUG	GONADOTROFINA	CORIÔNICA	HUMANA
+DRUG	GOSERRELINA
+DRUG	GRANISETRONA
+DRUG	GRISEOFULVINA
+DRUG	GUAIFENESINA	
+DRUG	HALCINONIDA
+DRUG	HALOPERIDOL
+DRUG	HEPARINA
+DRUG	HETASTARCH
+DRUG	HEXAMIDINA	+	TETRACAÍNA
+DRUG	HIALURONIDASE
+DRUG	HIDRALAZINA
+DRUG	HIDROCLOROTIAZIDA
+DRUG	HIDROMORFONA
+DRUG	HIDROCORTISONA
+DRUG	HIDROQUINONA
+DRUG	HIDROXICLOROQUINA
+DRUG	HIDRÓXIDO	DE	ALUMÍNIO
+DRUG	HIDRÓXIDO	DE	MAGNÉSIO
+DRUG	HIDROXIUREIA
+DRUG	HIDROXIZINA
+DRUG	HIOSCIAMINA
+DRUG	HIPROMELOSE
+DRUG	HOMATROPINA	
+DRUG	IBANDRONATO
+DRUG	IBUPROFENO
+DRUG	IDARRUBICINA
+DRUG	IDOXURIDINA
+DRUG	IFOSFAMIDA
+DRUG	IMATINIBE
+DRUG	IMIPENEM	+	CILASTATINA
+DRUG	IMIPRAMINA
+DRUG	IMIQUIMODE
+DRUG	IMUNOGLOBULINA	HUMANA
+DRUG	IMUNOGLOBULINA	G	HUMANA	ANTITETÂNICA
+DRUG	IMUNOGLOBULINA	G	HUMANA
+DRUG	INDACATEROL
+DRUG	IMUNOGLOBULINA	RHO
+DRUG	INDAPAMIDA
+DRUG	INDINAVIR
+DRUG	INDOMETACINA
+DRUG	INFLIXIMABE
+DRUG	INTERFERON	ALFA-2A
+DRUG	INSULINAS
+DRUG	INTERFERON	BETA-1A
+DRUG	INTERFERON	BETA-1B
+DRUG	INTERLEUCINA-2	RECOMBINANTE
+DRUG	IODETO	DE	POTÁSSIO
+DRUG	IODOPOVIDONA
+DRUG	IPRATRÓPIO
+DRUG	IPRIFLAVONA
+DRUG	IRBESARTANA
+DRUG	IRINOTECANO
+DRUG	ISOCONAZOL
+DRUG	ISOFLURANO
+DRUG	ISOMETEPTENO
+DRUG	ISOTRETINOÍNA
+DRUG	ISOXSUPRINA
+DRUG	ITRACONAZOL
+DRUG	IVERMECTINA	
+DRUG	LACIDIPINO
+DRUG	LACTULOSE
+DRUG	LAMIVUDINA
+DRUG	LAMOTRIGINA
+DRUG	LANSOPRAZOL
+DRUG	LATANOPROSTA
+DRUG	LEFLUNOMIDA
+DRUG	LERCANIDIPINO
+DRUG	LETROZOL
+DRUG	LEUCOVORINA
+DRUG	LEUPROLIDA
+DRUG	LEVAMISOL
+DRUG	LEVOBUNOLOL
+DRUG	LEVODOPA	+	CARBIDOPA
+DRUG	LEVODROPROPIZINA
+DRUG	LEVOFLOXACINO
+DRUG	LEVOMEPROMAZINA
+DRUG	LEVOSIMENDANA
+DRUG	LINAGLIPTINA
+DRUG	LEVOTIROXINA
+DRUG	LIDOCAÍNA
+DRUG	LIMECICLINA
+DRUG	LINCOMICINA
+DRUG	LINEZOLIDA
+DRUG	LÍTIO
+DRUG	LISINOPRIL
+DRUG	LOMEFLOXACINO
+DRUG	LOMUSTINA
+DRUG	LINAGLIPTINA
+DRUG	LIRAGLUTIDA
+DRUG	LOPERAMIDA
+DRUG	LORATADINA
+DRUG	LORAZEPAM
+DRUG	LISDEXANFETAMINA
+DRUG	LOSARTANA
+DRUG	LOVASTATINA	
+DRUG	MACROGOL
+DRUG	MARAVIROQUE
+DRUG	MAGALDRATO
+DRUG	MANITOL
+DRUG	MAPROTILINA
+DRUG	MEBENDAZOL
+DRUG	MEBEVERINA
+DRUG	MEDROXIPROGESTERONA
+DRUG	MEGESTROL
+DRUG	MELFALANO
+DRUG	MELOXICAM
+DRUG	MEMANTINA
+DRUG	MENOTROFINA
+DRUG	MEPARTRICINA	+	TETRACICLINA
+DRUG	MERCAPTOPURINA
+DRUG	MEROPENEM
+DRUG	MESALAZINA
+DRUG	MESNA
+DRUG	MESTEROLONA
+DRUG	METADONA
+DRUG	METARAMINOL
+DRUG	METENAMINA
+DRUG	METFORMINA
+DRUG	METILCELULOSE
+DRUG	METILDOPA
+DRUG	METILFENIDATO
+DRUG	METILERGONOVINA
+DRUG	METILPREDNISOLONA
+DRUG	METIMAZOL
+DRUG	METIONINA
+DRUG	METISERGIDA
+DRUG	METOCLOPRAMIDA
+DRUG	METOPROLOL
+DRUG	METRONIDAZOL
+DRUG	MIANSERINA
+DRUG	MICOFENOLATO
+DRUG	MICONAZOL
+DRUG	MIDAZOLAM
+DRUG	MILRINONA
+DRUG	MINOCICLINA
+DRUG	MINOXIDIL
+DRUG	MIRTAZAPINA
+DRUG	MITOMICINA
+DRUG	MITOTANO
+DRUG	MITOXANTRONA
+DRUG	MOCLOBEMIDA
+DRUG	MOMETASONA
+DRUG	MONONITRATO	DE	ISOSSORBIDA
+DRUG	MONOSSULFIRAM
+DRUG	MONTELUCASTE
+DRUG	MORFINA
+DRUG	MOXIFLOXACINO
+DRUG	MUPIROCINA	
+DRUG	NADROPARINA
+DRUG	NAFARRELINA
+DRUG	NAFAZOLINA
+DRUG	NALBUFINA
+DRUG	NALOXONA
+DRUG	NALTREXONA
+DRUG	NANDROLONA
+DRUG	NAPROXENO
+DRUG	NARATRIPTANA
+DRUG	NATEGLINIDA
+DRUG	NELFINAVIR
+DRUG	NEOMICINA
+DRUG	NEOSTIGMINA
+DRUG	NEVIRAPINA
+DRUG	NEPAFENACO
+DRUG	NICERGOLINA
+DRUG	NICLOSAMIDA
+DRUG	NICOTINA
+DRUG	NIFEDIPINO
+DRUG	NIMESULIDA
+DRUG	NIMODIPINO
+DRUG	NIMORAZOL
+DRUG	NISTATINA
+DRUG	NITRATO	DE	PRATA
+DRUG	NITRAZEPAM
+DRUG	NITRENDIPINO
+DRUG	NITROFURAL
+DRUG	NITROFURANTOÍNA
+DRUG	NITROFURAZONA
+DRUG	NITROGLICERINA
+DRUG	NITROPRUSSETO
+DRUG	NIZATIDINA
+DRUG	NOMEGESTROL
+DRUG	NOREPINEFRINA
+DRUG	NORETISTERONA
+DRUG	NORFLOXACINO
+DRUG	NORTRIPTILINA	
+DRUG	OCTREOTIDA
+DRUG	OFLOXACINO
+DRUG	OLANZAPINA
+DRUG	ÓLEO	DE	RÍCINO
+DRUG	ÓLEO	MINERAL
+DRUG	OLMESARTANA
+DRUG	OLOPATADINA
+DRUG	OMALIZUMABE
+DRUG	OMEPRAZOL
+DRUG	ONDANSETRONA
+DRUG	OPRELVECINA
+DRUG	ORFENADRINA
+DRUG	ORLISTATE
+DRUG	OSELTAMIVIR
+DRUG	OXACILINA
+DRUG	OXALIPLATINA
+DRUG	OXAMNIQUINA
+DRUG	OXCARBAZEPINA
+DRUG	OXIBUTININA
+DRUG	OXICODONA
+DRUG	OXICONAZOL
+DRUG	ÓXIDO	DE	ZINCO
+DRUG	OXIMETAZOLINA
+DRUG	OXIMETOLONA
+DRUG	OXITETRACICLINA
+DRUG	OXITOCINA	
+DRUG	PACLITAXEL
+DRUG	PALONOSETRONA
+DRUG	PAMIDRONATO
+DRUG	PANCREATINA
+DRUG	PANCURÔNIO
+DRUG	PANTOPRAZOL
+DRUG	PARACETAMOL
+DRUG	PAROXETINA
+DRUG	PEG-FILGRASTIMA
+DRUG	PEG-INTERFERON	ALFA-2B
+DRUG	PEMETREXEDE
+DRUG	PENCICLOVIR
+DRUG	PENICILAMINA
+DRUG	PENICILINA	G	BENZATINA
+DRUG	PENICILINA	G	POTÁSSICA
+DRUG	PENICILINA	G	PROCAÍNA
+DRUG	PENICILINA	V
+DRUG	PENTOXIFILINA
+DRUG	PETIDINA
+DRUG	PERICIAZINA
+DRUG	PERINDOPRIL
+DRUG	PERMANGANATO	DE	POTÁSSIO
+DRUG	PERMETRINA
+DRUG	PERÓXIDO	DE	HIDROGÊNIO
+DRUG	PICOSSULFATO	SÓDICO
+DRUG	PICRATO	DE	BUTAMBENO
+DRUG	PILOCARPINA
+DRUG	PIMECROLIMO
+DRUG	PIMETIXENO
+DRUG	PIMOZIDA
+DRUG	PINAVÉRIO
+DRUG	PINDOLOL
+DRUG	PIOGLITAZONA
+DRUG	PIPERACILINA	+	TAZOBACTAM
+DRUG	PIPOTIAZINA
+DRUG	PIRACETAM
+DRUG	PIRETANIDA
+DRUG	PIRIDOSTIGMINA
+DRUG	PIRIMETAMINA
+DRUG	PIRVÍNIO
+DRUG	PITAVASTATINA
+DRUG	PIROXICAM
+DRUG	POLICARBOFILA
+DRUG	PIZOTIFENO
+DRUG	PODOFILOTOXINA
+DRUG	POLICRESULENO
+DRUG	POLIMIXINA	B
+DRUG	PRASUGREL
+DRUG	PRAMIPEXOL
+DRUG	PRAVASTATINA
+DRUG	PRAZIQUANTEL
+DRUG	PRAZOSINA
+DRUG	PREDNICARBATO
+DRUG	PREDNISOLONA
+DRUG	PREDNISONA
+DRUG	PREGABALINA
+DRUG	PRIMIDONA
+DRUG	PROCAÍNA
+DRUG	PROGESTERONA
+DRUG	PROMESTRIENO
+DRUG	PROMETAZINA
+DRUG	PROPAFENONA
+DRUG	PROPATILNITRATO
+DRUG	PROPATIOURACILA
+DRUG	PROPOFOL
+DRUG	PROPRANOLOL
+DRUG	PROTAMINA
+DRUG	PROXIMETACAÍNA
+DRUG	PSEUDOEFEDRINA
+DRUG	PSYLLIUM	
+DRUG	QUETIAPINA
+DRUG	QUINAPRIL
+DRUG	QUINIDINA	
+DRUG	RABEPRAZOL
+DRUG	RACECADOTRILA
+DRUG	RALOXIFENO
+DRUG	RALTEGRAVIR
+DRUG	RALTITREXEDE
+DRUG	RAMIPRIL
+DRUG	RANITIDINA
+DRUG	REBOXETINA
+DRUG	REMIFENTANILA
+DRUG	REPAGLINIDA
+DRUG	REVULSIVOS
+DRUG	RIBAVIRINA
+DRUG	RIFAMICINA
+DRUG	RIFAMPICINA
+DRUG	RILMENIDINA
+DRUG	RILUZOL
+DRUG	RINGER	LACTATO
+DRUG	RINGER
+DRUG	RISEDRONATO
+DRUG	RISPERIDONA
+DRUG	RITONAVIR
+DRUG	RITUXIMABE
+DRUG	RIVASTIGMINA
+DRUG	RIZATRIPTANO
+DRUG	ROCURÔNIO
+DRUG	ROPIVACAÍNA
+DRUG	ROSUVASTATINA
+DRUG	ROXITROMICINA
+DRUG	RUTOSÍDIO	
+DRUG	SALBUTAMOL
+DRUG	SALMETEROL
+DRUG	SAQUINAVIR
+DRUG	SAXAGLIPTINA
+DRUG	SECNIDAZOL
+DRUG	SELEGILINA
+DRUG	SENE
+DRUG	SERTRALINA
+DRUG	SEVELAMER
+DRUG	SEVOFLURANO
+DRUG	SIBUTRAMINA
+DRUG	SILDENAFILA
+DRUG	SINVASTATINA
+DRUG	SOLIFENACINA
+DRUG	SIROLIMO
+DRUG	SITAGLIPTINA
+DRUG	SOLUÇÕES	HIDRATANTES	ORAIS
+DRUG	SOMATROPINA
+DRUG	SORO	ANTIDIFTÉRICO
+DRUG	SORO	ANTIPEÇONHENTOS
+DRUG	SORO	ANTIRRÁBICO
+DRUG	SORO	ANTITETÂNICO
+DRUG	SOTALOL
+DRUG	SUCRALFATO
+DRUG	SULBUTIAMINA
+DRUG	SUFENTANILA
+DRUG	SULFADIAZINA	DE	PRATA
+DRUG	SULFADIAZINA
+DRUG	SULFAMETOXAZOL	+	TRIMETOPRIMA
+DRUG	SULFASALAZINA
+DRUG	SULFATO	DE	ZINCO
+DRUG	SULPIRIDA
+DRUG	SULTAMICILINA
+DRUG	SUMATRIPTANO
+DRUG	SUNITINIBE
+DRUG	SUXAMETÔNIO	
+DRUG	TACROLIMO
+DRUG	TACROLIMO
+DRUG	TAMOXIFENO
+DRUG	TADALAFILA
+DRUG	TANSULOSINA
+DRUG	TECLOZANA
+DRUG	TEGASERODE
+DRUG	TEICOPLANINA
+DRUG	TELBIVUDINA
+DRUG	TELMISARTANA
+DRUG	TEMOZOLOMIDA
+DRUG	TENIPOSÍDEO
+DRUG	TENOXICAM
+DRUG	TEOFILINA
+DRUG	TERAZOSINA
+DRUG	TERBINAFINA
+DRUG	TERBUTALINA
+DRUG	TERCONAZOL
+DRUG	TERIPARATIDA
+DRUG	TESTOSTERONA
+DRUG	TETRACAÍNA
+DRUG	TETRACICLINA	(OFTÁLMICO)
+DRUG	TETRACICLINA	(ORAL)
+DRUG	TETRAIDROZOLINA
+DRUG	TIABENDAZOL
+DRUG	TIANEPTINA
+DRUG	TIANFENICOL
+DRUG	TIBOLONA
+DRUG	TICARCILINA	+	ÁCIDO	CLAVULÂNICO
+DRUG	TICLOPIDINA
+DRUG	TIGECICLINA
+DRUG	TIMOLOL
+DRUG	TINIDAZOL
+DRUG	TIOCOLCHICOSÍDEO
+DRUG	TIOCONAZOL
+DRUG	TIOGUANINA
+DRUG	TIOPENTAL
+DRUG	TIORIDAZINA
+DRUG	TIPRANAVIR
+DRUG	TIOTRÓPIO
+DRUG	TIROFIBANA
+DRUG	TIROTRICINA
+DRUG	TIZANIDINA
+DRUG	TOBRAMICINA	(INJETÁVEL)
+DRUG	TOBRAMICINA	(OFTÁLMICO)
+DRUG	TOCILIZUMABE
+DRUG	TOLCAPONA
+DRUG	TOLNAFTATO
+DRUG	TOLTERODINA
+DRUG	TOPIRAMATO
+DRUG	TOPOTECANO
+DRUG	TOXINA	BOTULÍNICA	TIPO	A
+DRUG	TRAMADOL
+DRUG	TENOFOVIR
+DRUG	TRANILCIPROMINA
+DRUG	TRAPIDIL
+DRUG	TRASTUZUMABE
+DRUG	TRAVOPROSTA
+DRUG	TRAZODONA
+DRUG	TRETINOÍNA	(ORAL)
+DRUG	TRETINOÍNA	(TÓPICO)
+DRUG	TRIMETAZIDINA
+DRUG	TRIMETOPRIMA	
+DRUG	UREIA
+DRUG	URSODIOL	
+DRUG	VACINA	CONTRA	CAXUMBA
+DRUG	VACINA	CONTRA	CAXUMBA,	RUBÉOLA	E	SARAMPO
+DRUG	VACINA	CONTRA	DIFTERIA	E	TÉTANO
+DRUG	VACINA	CONTRA	DIFTERIA,	TÉTANO	E	COQUELUCHE
+DRUG	VACINA	CONTRA	DOENÇA	PNEUMOCÓCICA
+DRUG	VACINA	CONTRA	FEBRE	AMARELA
+DRUG	VACINA	CONTRA	GRIPE
+DRUG	VACINA	CONTRA	HAEMOPHILUS	INFLUENZAE	B
+DRUG	VACINA	CONTRA	HEPATITE	A
+DRUG	VACINA	CONTRA	HEPATITE	B
+DRUG	VACINA	CONTRA	POLIOMIELITE	(INJETÁVEL)
+DRUG	VACINA	CONTRA	POLIOMIELITE	(ORAL)
+DRUG	VACINA	CONTRA	RAIVA
+DRUG	VACINA	CONTRA	RUBÉOLA
+DRUG	VACINA	CONTRA	SARAMPO
+DRUG	VACINA	CONTRA	TÉTANO
+DRUG	VACINA	CONTRA	VARICELA
+DRUG	VALACICLOVIR
+DRUG	VALGANCICLOVIR
+DRUG	VALPROATO
+DRUG	VALSARTANA
+DRUG	VANCOMICINA
+DRUG	VARDENAFILA
+DRUG	VARENICLINA
+DRUG	VARFARINA
+DRUG	VECURÔNIO
+DRUG	VENLAFAXINA
+DRUG	VERAPAMIL
+DRUG	VIGABATRINA
+DRUG	VIMBLASTINA
+DRUG	VIMINOL
+DRUG	VINCRISTINA
+DRUG	VITAMINA	B1	(ORAL)	(DRUGÂNCIA	ATIVA)
+DRUG	VINORELBINA
+DRUG	VIOLETA	DE	GENCIANA
+DRUG	VITAMINA	A
+DRUG	VITAMINA	B12
+DRUG	VITAMINA	D
+DRUG	VITAMINA	C
+DRUG	VITAMINA	E
+DRUG	VITAMINAS	ASSOCIADAS
+DRUG	VITAMINAS	ASSOCIADAS	DE	USO	GERAL	(ADULTOS)
+DRUG	VITAMINAS	ASSOCIADAS	DE	USO	GERAL	(CRIANÇAS)
+DRUG	VITAMINAS	ASSOCIADAS	ANTIANÊMICAS	(ADULTOS)
+DRUG	VITAMINAS	ASSOCIADAS	ANTIANÊMICAS	(CRIANÇAS)
+DRUG	VITAMINAS	DO	COMPLEXO	B
+DRUG	VITAMINA	ASSOCIADAS	ANTIRRAQUITISMO
+DRUG	VITAMINAS	ASSOCIADAS	A	+	D	(VITAMINAS	LIPOSSOLÚVEIS)
+DRUG	VITAMINAS	ASSOCIADAS	A	+	D	+	E	(VITAMINAS	LIPOSSOLÚVEIS)
+DRUG	VITAMINAS	ASSOCIADAS	PARA	GRAVIDEZ	E	LACTAÇÃO
+DRUG	VITAMINAS	ASSOCIADAS	GERIÁTRICAS
+DRUG	VITAMINAS	ASSOCIADAS	ANTIOXIDANTES
+DRUG	VITAMINAS	ASSOCIADAS	ANTI-STRESS
+DRUG	VITELINATO	DE	PRATA
+DRUG	VORICONAZOL	
+DRUG	XILOMETAZOLINA	
+DRUG	ZAFIRLUCASTE
+DRUG	ZANAMIVIR
+DRUG	ZIDOVUDINA
+DRUG	ZINCO
+DRUG	ZIPRASIDONA
+DRUG	ZOLMITRIPTANO
+DRUG	ZOLPIDEM
+DRUG	ZOPICLONA
+DRUG	ZUCLOPENTIXOL
