@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Learning &#8212; Snorkel 0.6.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Etc: Viewing and Annotating Data, Writing LFs" href="etc.html" />
+    <link rel="prev" title="Annotations" href="annotations.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="etc.html" title="Etc: Viewing and Annotating Data, Writing LFs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="annotations.html" title="Annotations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Snorkel 0.6.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="learning">
+<h1>Learning<a class="headerlink" href="#learning" title="Permalink to this headline">¶</a></h1>
+<p>In the Snorkel pipeline, the user writes labeling functions (LFs) and then uses
+the generative model to unify and denoise their labels. Then, the marginal
+predictions of this model are used as probabilistic training labels for the
+discriminative model. Currently we provide bindings for TensorFlow models, and
+two basic models: Logistic regression and an LSTM. See tutorials for a more
+in-depth explanation.</p>
+<div class="section" id="module-snorkel.learning.classifier">
+<span id="base-classifier-class"></span><h2>Base Classifier Class<a class="headerlink" href="#module-snorkel.learning.classifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="snorkel.learning.classifier.Classifier">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.classifier.</code><code class="sig-name descname">Classifier</code><span class="sig-paren">(</span><em class="sig-param">cardinality=2</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/classifier.html#Classifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.classifier.Classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple abstract base class for a probabilistic classifier.</p>
+<dl class="method">
+<dt id="snorkel.learning.classifier.Classifier.error_analysis">
+<code class="sig-name descname">error_analysis</code><span class="sig-paren">(</span><em class="sig-param">session</em>, <em class="sig-param">X_test</em>, <em class="sig-param">Y_test</em>, <em class="sig-param">gold_candidate_set=None</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">set_unlabeled_as_neg=True</em>, <em class="sig-param">display=True</em>, <em class="sig-param">scorer=&lt;class 'snorkel.learning.utils.MentionScorer'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/classifier.html#Classifier.error_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.classifier.Classifier.error_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints full score analysis using the Scorer class, and then returns the
+a tuple of sets containing the test candidates bucketed for error
+analysis, i.e.:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For binary: TP, FP, TN, FN</p></li>
+<li><p>For categorical: correct, incorrect</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_test</strong> – The input test candidates, as a list or annotation matrix</p></li>
+<li><p><strong>Y_test</strong> – The input test labels, as a list or annotation matrix</p></li>
+<li><p><strong>gold_candidate_set</strong> – Full set of TPs in the test set</p></li>
+<li><p><strong>b</strong> – Decision boundary <em>for binary setting only</em></p></li>
+<li><p><strong>set_unlabeled_as_neg</strong> – Whether to map 0 labels -&gt; -1, <em>binary setting</em></p></li>
+<li><p><strong>display</strong> – Print score report</p></li>
+<li><p><strong>scorer</strong> – The Scorer sub-class to use</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.classifier.Classifier.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/classifier.html#Classifier.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.classifier.Classifier.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.classifier.Classifier.marginals">
+<code class="sig-name descname">marginals</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/classifier.html#Classifier.marginals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.classifier.Classifier.marginals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.classifier.Classifier.predictions">
+<code class="sig-name descname">predictions</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/classifier.html#Classifier.predictions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.classifier.Classifier.predictions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return numpy array of elements in {-1,0,1}
+based on predicted marginal probabilities.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="snorkel.learning.classifier.Classifier.representation">
+<code class="sig-name descname">representation</code><em class="property"> = False</em><a class="headerlink" href="#snorkel.learning.classifier.Classifier.representation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.classifier.Classifier.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/classifier.html#Classifier.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.classifier.Classifier.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.classifier.Classifier.save_marginals">
+<code class="sig-name descname">save_marginals</code><span class="sig-paren">(</span><em class="sig-param">session</em>, <em class="sig-param">X</em>, <em class="sig-param">training=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/classifier.html#Classifier.save_marginals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.classifier.Classifier.save_marginals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the predicted marginal probabilities for the Candidates X.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.classifier.Classifier.score">
+<code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param">X_test</em>, <em class="sig-param">Y_test</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">set_unlabeled_as_neg=True</em>, <em class="sig-param">beta=1</em>, <em class="sig-param">batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/classifier.html#Classifier.score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.classifier.Classifier.score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Returns the summary scores:</dt><dd><ul class="simple">
+<li><p>For binary: precision, recall, F-beta score</p></li>
+<li><p>For categorical: accuracy</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_test</strong> – The input test candidates, as a list or annotation matrix</p></li>
+<li><p><strong>Y_test</strong> – The input test labels, as a list or annotation matrix</p></li>
+<li><p><strong>b</strong> – Decision boundary <em>for binary setting only</em></p></li>
+<li><p><strong>set_unlabeled_as_neg</strong> – Whether to map 0 labels -&gt; -1, 
+<em>binary setting.</em></p></li>
+<li><p><strong>beta</strong> – For F-beta score; by default beta = 1 =&gt; F-1 score.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note: Unlike in self.error_analysis, this method assumes X_test and
+Y_test are properly collated!</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-snorkel.learning.gen_learning">
+<span id="generative-model"></span><h2>Generative Model<a class="headerlink" href="#module-snorkel.learning.gen_learning" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="snorkel.learning.gen_learning.GenerativeModel">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.gen_learning.</code><code class="sig-name descname">GenerativeModel</code><span class="sig-paren">(</span><em class="sig-param">class_prior=False</em>, <em class="sig-param">lf_prior=False</em>, <em class="sig-param">lf_propensity=False</em>, <em class="sig-param">lf_class_propensity=False</em>, <em class="sig-param">seed=271828</em>, <em class="sig-param">name=None</em>, <em class="sig-param">cardinality=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/gen_learning.html#GenerativeModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>A generative model for data programming for binary classification.</p>
+<p>Supports dependencies among labeling functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>class_prior</strong> – whether to include class label prior factors</p></li>
+<li><p><strong>lf_prior</strong> – whether to include labeling function prior factors</p></li>
+<li><p><strong>lf_propensity</strong> – whether to include labeling function propensity
+factors</p></li>
+<li><p><strong>lf_class_propensity</strong> – whether to include class-specific labeling
+function propensity factors</p></li>
+<li><p><strong>seed</strong> – seed for initializing state of Numbskull variables</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.dep_names">
+<code class="sig-name descname">dep_names</code><em class="property"> = ('dep_similar', 'dep_fixing', 'dep_reinforcing', 'dep_exclusive')</em><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.dep_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.error_analysis">
+<code class="sig-name descname">error_analysis</code><span class="sig-paren">(</span><em class="sig-param">session</em>, <em class="sig-param">X_test</em>, <em class="sig-param">Y_test</em>, <em class="sig-param">gold_candidate_set=None</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">set_unlabeled_as_neg=True</em>, <em class="sig-param">display=True</em>, <em class="sig-param">scorer=&lt;class 'snorkel.learning.utils.MentionScorer'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.error_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints full score analysis using the Scorer class, and then returns the
+a tuple of sets containing the test candidates bucketed for error
+analysis, i.e.:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For binary: TP, FP, TN, FN</p></li>
+<li><p>For categorical: correct, incorrect</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_test</strong> – The input test candidates, as a list or annotation matrix</p></li>
+<li><p><strong>Y_test</strong> – The input test labels, as a list or annotation matrix</p></li>
+<li><p><strong>gold_candidate_set</strong> – Full set of TPs in the test set</p></li>
+<li><p><strong>b</strong> – Decision boundary <em>for binary setting only</em></p></li>
+<li><p><strong>set_unlabeled_as_neg</strong> – Whether to map 0 labels -&gt; -1, <em>binary setting</em></p></li>
+<li><p><strong>display</strong> – Print score report</p></li>
+<li><p><strong>scorer</strong> – The Scorer sub-class to use</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.learned_lf_stats">
+<code class="sig-name descname">learned_lf_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/gen_learning.html#GenerativeModel.learned_lf_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.learned_lf_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a summary of what the model has learned about the labeling
+functions. For each labeling function, estimates of the following
+are provided:</p>
+<blockquote>
+<div><p>Abstain
+Accuracy
+Coverage</p>
+<p>[Following are only available for binary tasks]
+True  Positive (TP)
+False Positive (FP)
+True  Negative (TN)
+False Negative (FN)</p>
+</div></blockquote>
+<p>For scoped categoricals, the information provided is for the maximum
+observed cardinality of any single data point.</p>
+<dl class="simple">
+<dt>WARNING: This uses Gibbs sampling to estimate these values. This will</dt><dd><p>tend to mix poorly when there are many very accurate labeling
+functions. In this case, this function will assume that the
+classes are approximately balanced.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">model_name=None</em>, <em class="sig-param">save_dir='checkpoints'</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/gen_learning.html#GenerativeModel.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load model.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.marginals">
+<code class="sig-name descname">marginals</code><span class="sig-paren">(</span><em class="sig-param">L</em>, <em class="sig-param">candidate_ranges=None</em>, <em class="sig-param">batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/gen_learning.html#GenerativeModel.marginals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.marginals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an M x N label matrix, returns marginal probabilities for each
+candidate, depending on classification setting:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Binary: Returns M-dim array representing the marginal probability</dt><dd><p>of each candidate being True</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Categorical (cardinality = K): Returns M x K dense matrix</dt><dd><p>representing the marginal probabilities of each candidate being
+each class.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Scoped Categorical (cardinality = K, cardinality_ranges not None):</dt><dd><p>Returns an M x K <em>sparse</em> matrix of marginals.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>In the categorical setting, the K values (columns in the marginals
+matrix) correspond to indices of the Candidate values defined.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.optional_names">
+<code class="sig-name descname">optional_names</code><em class="property"> = ('lf_prior', 'lf_propensity', 'lf_class_propensity')</em><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.optional_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.predictions">
+<code class="sig-name descname">predictions</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">batch_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.predictions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return numpy array of elements in {-1,0,1}
+based on predicted marginal probabilities.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.representation">
+<code class="sig-name descname">representation</code><em class="property"> = False</em><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.representation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">model_name=None</em>, <em class="sig-param">save_dir='checkpoints'</em>, <em class="sig-param">verbose=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/gen_learning.html#GenerativeModel.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save current model.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.save_marginals">
+<code class="sig-name descname">save_marginals</code><span class="sig-paren">(</span><em class="sig-param">session</em>, <em class="sig-param">X</em>, <em class="sig-param">training=False</em><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.save_marginals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the predicted marginal probabilities for the Candidates X.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.score">
+<code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param">X_test</em>, <em class="sig-param">Y_test</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">set_unlabeled_as_neg=True</em>, <em class="sig-param">beta=1</em>, <em class="sig-param">batch_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Returns the summary scores:</dt><dd><ul class="simple">
+<li><p>For binary: precision, recall, F-beta score</p></li>
+<li><p>For categorical: accuracy</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_test</strong> – The input test candidates, as a list or annotation matrix</p></li>
+<li><p><strong>Y_test</strong> – The input test labels, as a list or annotation matrix</p></li>
+<li><p><strong>b</strong> – Decision boundary <em>for binary setting only</em></p></li>
+<li><p><strong>set_unlabeled_as_neg</strong> – Whether to map 0 labels -&gt; -1, 
+<em>binary setting.</em></p></li>
+<li><p><strong>beta</strong> – For F-beta score; by default beta = 1 =&gt; F-1 score.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note: Unlike in self.error_analysis, this method assumes X_test and
+Y_test are properly collated!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModel.train">
+<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param">L</em>, <em class="sig-param">deps=()</em>, <em class="sig-param">LF_acc_prior_weights=None</em>, <em class="sig-param">LF_acc_prior_weight_default=1</em>, <em class="sig-param">labels=None</em>, <em class="sig-param">label_prior_weight=5</em>, <em class="sig-param">init_deps=0.0</em>, <em class="sig-param">init_class_prior=-1.0</em>, <em class="sig-param">epochs=30</em>, <em class="sig-param">step_size=None</em>, <em class="sig-param">decay=1.0</em>, <em class="sig-param">reg_param=0.1</em>, <em class="sig-param">reg_type=2</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">truncation=10</em>, <em class="sig-param">burn_in=5</em>, <em class="sig-param">cardinality=None</em>, <em class="sig-param">timer=None</em>, <em class="sig-param">candidate_ranges=None</em>, <em class="sig-param">threads=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/gen_learning.html#GenerativeModel.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModel.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits the parameters of the model to a data set. By default, learns a
+conditionally independent model. Additional unary dependencies can be
+set to be included in the constructor. Additional pairwise and
+higher-order dependencies can be included as an argument.</p>
+<p>Results are stored as a member named weights, instance of
+snorkel.learning.gen_learning.GenerativeModelWeights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>L</strong> – M x N csr_AnnotationMatrix-type label matrix, where there are 
+M candidates labeled by N labeling functions (LFs)</p></li>
+<li><p><strong>deps</strong> – collection of dependencies to include in the model, each 
+element is a tuple of the form 
+(LF 1 index, LF 2 index, dependency type),
+see snorkel.learning.constants</p></li>
+<li><p><strong>LF_acc_prior_weights</strong> – An N-element list of prior weights for the
+LF accuracies (log scale)</p></li>
+<li><p><strong>LF_acc_prior_weight_default</strong> – Default prior for the weight of each 
+LF accuracy; if LF_acc_prior_weights is unset, each LF will have 
+this accuracy prior weight (log scale)</p></li>
+<li><p><strong>labels</strong> – Optional ground truth labels</p></li>
+<li><p><strong>label_prior_weight</strong> – The prior probability that the ground truth 
+labels (if provided) are correct (log scale)</p></li>
+<li><p><strong>init_deps</strong> – initial weight for additional dependencies, except
+class prior (log scale)</p></li>
+<li><p><strong>init_class_prior</strong> – initial class prior (in log scale), note only
+used if class_prior=True in constructor</p></li>
+<li><p><strong>epochs</strong> – number of training epochs</p></li>
+<li><p><strong>step_size</strong> – gradient step size, default is 1 / L.shape[0]</p></li>
+<li><p><strong>decay</strong> – multiplicative decay of step size,
+step_size_(t+1) = step_size_(t) * decay</p></li>
+<li><p><strong>reg_param</strong> – regularization strength</p></li>
+<li><p><strong>reg_type</strong> – 1 = L1 regularization, 2 = L2 regularization</p></li>
+<li><p><strong>verbose</strong> – whether to write debugging info to stdout</p></li>
+<li><p><strong>truncation</strong> – number of iterations between truncation step for L1
+regularization</p></li>
+<li><p><strong>burn_in</strong> – number of burn-in samples to take before beginning
+learning</p></li>
+<li><p><strong>cardinality</strong> – number of possible classes; by default is inferred
+from the label matrix L</p></li>
+<li><p><strong>timer</strong> – stopwatch for profiling, must implement start() and end()</p></li>
+<li><p><strong>candidate_ranges</strong> – Optionally, a list of M sets of integer values,
+representing the possible categorical values that each of the M
+candidates can take. If a label is outside of this range throws an
+error. If None, then each candidate can take any value from 0 to
+cardinality.</p></li>
+<li><p><strong>threads</strong> – the number of threads to use for sampling. Default is 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="snorkel.learning.gen_learning.GenerativeModelWeights">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.gen_learning.</code><code class="sig-name descname">GenerativeModelWeights</code><span class="sig-paren">(</span><em class="sig-param">n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/gen_learning.html#GenerativeModelWeights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModelWeights" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="snorkel.learning.gen_learning.GenerativeModelWeights.is_sign_sparsistent">
+<code class="sig-name descname">is_sign_sparsistent</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">threshold=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/gen_learning.html#GenerativeModelWeights.is_sign_sparsistent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.gen_learning.GenerativeModelWeights.is_sign_sparsistent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="discriminative-models">
+<h2>Discriminative Models<a class="headerlink" href="#discriminative-models" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-snorkel.learning.utils">
+<span id="learning-utilities"></span><h2>Learning Utilities<a class="headerlink" href="#module-snorkel.learning.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="snorkel.learning.utils.GridSearch">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">GridSearch</code><span class="sig-paren">(</span><em class="sig-param">model_class</em>, <em class="sig-param">parameter_dict</em>, <em class="sig-param">X_train</em>, <em class="sig-param">Y_train=None</em>, <em class="sig-param">model_class_params={}</em>, <em class="sig-param">model_hyperparams={}</em>, <em class="sig-param">save_dir='checkpoints'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#GridSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.GridSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for running a hyperparameter grid search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_class</strong> – The model class being trained</p></li>
+<li><p><strong>parameter_dict</strong> – A dictionary of (hyperparameter name, list of values)
+pairs. Note that the hyperparameter name must correspond to a keyword
+argument in the <cite>model_class.train</cite> method.</p></li>
+<li><p><strong>X_train</strong> – The training datapoints</p></li>
+<li><p><strong>Y_train</strong> – If applicable, the training labels / marginals</p></li>
+<li><p><strong>model_class_params</strong> – Keyword arguments to pass into model_class
+construction. Note that a new model is constructed for each new 
+combination of hyperparameters.</p></li>
+<li><p><strong>model_hyperparams</strong> – Hyperparameters for the model- all must be
+keyword arguments to the <cite>model_class.train</cite> method. Any that are
+included in the grid search will be overwritten.</p></li>
+<li><p><strong>save_dir</strong> – Note that checkpoints will be saved in save_dir/grid_search</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="snorkel.learning.utils.GridSearch.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X_valid</em>, <em class="sig-param">Y_valid</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">beta=1</em>, <em class="sig-param">set_unlabeled_as_neg=True</em>, <em class="sig-param">n_threads=1</em>, <em class="sig-param">eval_batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#GridSearch.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.GridSearch.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs grid search, constructing a new instance of model_class for each
+hyperparameter combination, training on (self.X_train, self.Y_train),
+and validating on (X_valid, Y_valid). Selects the best model according
+to F1 score (binary) or accuracy (categorical).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>b</strong> – Scoring decision threshold (binary)</p></li>
+<li><p><strong>beta</strong> – F_beta score to select model by (binary)</p></li>
+<li><p><strong>set_unlabeled_as_neg</strong> – Set labels = 0 -&gt; -1 (binary)</p></li>
+<li><p><strong>n_threads</strong> – Parallelism to use for the grid search</p></li>
+<li><p><strong>eval_batch_size</strong> – The batch_size for model evaluation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.GridSearch.search_space">
+<code class="sig-name descname">search_space</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#GridSearch.search_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.GridSearch.search_space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.LF_accuracies">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">LF_accuracies</code><span class="sig-paren">(</span><em class="sig-param">L</em>, <em class="sig-param">labels</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#LF_accuracies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.LF_accuracies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an N x M matrix where L_{i,j} is the label given by the jth LF to the ith candidate, and labels {-1,1}
+Return the accuracy of each LF w.r.t. these labels</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.LF_conflicts">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">LF_conflicts</code><span class="sig-paren">(</span><em class="sig-param">L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#LF_conflicts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.LF_conflicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an N x M matrix where L_{i,j} is the label given by the jth LF to the ith candidate:
+Return the <strong>fraction of candidates that each LF _conflicts with other LFs on_.</strong></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.LF_coverage">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">LF_coverage</code><span class="sig-paren">(</span><em class="sig-param">L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#LF_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.LF_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an N x M matrix where L_{i,j} is the label given by the jth LF to the ith candidate:
+Return the <strong>fraction of candidates that each LF labels.</strong></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.LF_overlaps">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">LF_overlaps</code><span class="sig-paren">(</span><em class="sig-param">L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#LF_overlaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.LF_overlaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an N x M matrix where L_{i,j} is the label given by the jth LF to the ith candidate:
+Return the <strong>fraction of candidates that each LF _overlaps with other LFs on_.</strong></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="snorkel.learning.utils.LabelBalancer">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">LabelBalancer</code><span class="sig-paren">(</span><em class="sig-param">y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#LabelBalancer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.LabelBalancer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="snorkel.learning.utils.LabelBalancer.get_train_idxs">
+<code class="sig-name descname">get_train_idxs</code><span class="sig-paren">(</span><em class="sig-param">rebalance=False</em>, <em class="sig-param">split=0.5</em>, <em class="sig-param">rand_state=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#LabelBalancer.get_train_idxs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.LabelBalancer.get_train_idxs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get training indices based on &#64;y
+&#64;rebalance: bool or fraction of positive examples desired</p>
+<blockquote>
+<div><p>If True, default fraction is 0.5. If False no balancing.</p>
+</div></blockquote>
+<p>&#64;split: Split point for positive and negative classes</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="snorkel.learning.utils.MentionScorer">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">MentionScorer</code><span class="sig-paren">(</span><em class="sig-param">test_candidates</em>, <em class="sig-param">test_labels</em>, <em class="sig-param">gold_candidate_set=None</em>, <em class="sig-param">cardinality=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#MentionScorer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.MentionScorer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scorer for mention level assessment</p>
+<dl class="method">
+<dt id="snorkel.learning.utils.MentionScorer.score">
+<code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param">test_marginals</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.utils.MentionScorer.score" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.MentionScorer.summary_score">
+<code class="sig-name descname">summary_score</code><span class="sig-paren">(</span><em class="sig-param">test_marginals</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#MentionScorer.summary_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.MentionScorer.summary_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the F1 score (for binary) or accuracy (for categorical).
+Also return the label as second argument.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="snorkel.learning.utils.ModelTester">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">ModelTester</code><span class="sig-paren">(</span><em class="sig-param">model_class</em>, <em class="sig-param">model_class_params</em>, <em class="sig-param">params_queue</em>, <em class="sig-param">scores_queue</em>, <em class="sig-param">X_train</em>, <em class="sig-param">X_valid</em>, <em class="sig-param">Y_valid</em>, <em class="sig-param">Y_train=None</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">beta=1</em>, <em class="sig-param">set_unlabeled_as_neg=True</em>, <em class="sig-param">save_dir='checkpoints'</em>, <em class="sig-param">eval_batch_size=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#ModelTester"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.ModelTester" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.authkey">
+<em class="property">property </em><code class="sig-name descname">authkey</code><a class="headerlink" href="#snorkel.learning.utils.ModelTester.authkey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.daemon">
+<em class="property">property </em><code class="sig-name descname">daemon</code><a class="headerlink" href="#snorkel.learning.utils.ModelTester.daemon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether process is a daemon</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.exitcode">
+<em class="property">property </em><code class="sig-name descname">exitcode</code><a class="headerlink" href="#snorkel.learning.utils.ModelTester.exitcode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return exit code of process or <cite>None</cite> if it has yet to stop</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.ident">
+<em class="property">property </em><code class="sig-name descname">ident</code><a class="headerlink" href="#snorkel.learning.utils.ModelTester.ident" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return identifier (PID) of process or <cite>None</cite> if it has yet to start</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.is_alive">
+<code class="sig-name descname">is_alive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.utils.ModelTester.is_alive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether process is alive</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.join">
+<code class="sig-name descname">join</code><span class="sig-paren">(</span><em class="sig-param">timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.utils.ModelTester.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until child process terminates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#snorkel.learning.utils.ModelTester.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.pid">
+<em class="property">property </em><code class="sig-name descname">pid</code><a class="headerlink" href="#snorkel.learning.utils.ModelTester.pid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return identifier (PID) of process or <cite>None</cite> if it has yet to start</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#ModelTester.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.ModelTester.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to be run in sub-process; can be overridden in sub-class</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.sentinel">
+<em class="property">property </em><code class="sig-name descname">sentinel</code><a class="headerlink" href="#snorkel.learning.utils.ModelTester.sentinel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a file descriptor (Unix) or handle (Windows) suitable for
+waiting for process termination.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.utils.ModelTester.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start child process</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.ModelTester.terminate">
+<code class="sig-name descname">terminate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.utils.ModelTester.terminate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate process; sends SIGTERM signal or uses TerminateProcess()</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="snorkel.learning.utils.RandomSearch">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">RandomSearch</code><span class="sig-paren">(</span><em class="sig-param">model_class</em>, <em class="sig-param">parameter_dict</em>, <em class="sig-param">X_train</em>, <em class="sig-param">Y_train=None</em>, <em class="sig-param">n=10</em>, <em class="sig-param">model_class_params={}</em>, <em class="sig-param">model_hyperparams={}</em>, <em class="sig-param">seed=123</em>, <em class="sig-param">save_dir='checkpoints'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#RandomSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.RandomSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>A GridSearch over a random subsample of the hyperparameter search space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> – A seed for the GridSearch instance</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="snorkel.learning.utils.RandomSearch.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X_valid</em>, <em class="sig-param">Y_valid</em>, <em class="sig-param">b=0.5</em>, <em class="sig-param">beta=1</em>, <em class="sig-param">set_unlabeled_as_neg=True</em>, <em class="sig-param">n_threads=1</em>, <em class="sig-param">eval_batch_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#snorkel.learning.utils.RandomSearch.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs grid search, constructing a new instance of model_class for each
+hyperparameter combination, training on (self.X_train, self.Y_train),
+and validating on (X_valid, Y_valid). Selects the best model according
+to F1 score (binary) or accuracy (categorical).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>b</strong> – Scoring decision threshold (binary)</p></li>
+<li><p><strong>beta</strong> – F_beta score to select model by (binary)</p></li>
+<li><p><strong>set_unlabeled_as_neg</strong> – Set labels = 0 -&gt; -1 (binary)</p></li>
+<li><p><strong>n_threads</strong> – Parallelism to use for the grid search</p></li>
+<li><p><strong>eval_batch_size</strong> – The batch_size for model evaluation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.RandomSearch.search_space">
+<code class="sig-name descname">search_space</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#RandomSearch.search_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.RandomSearch.search_space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="snorkel.learning.utils.Scorer">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">Scorer</code><span class="sig-paren">(</span><em class="sig-param">test_candidates</em>, <em class="sig-param">test_labels</em>, <em class="sig-param">gold_candidate_set=None</em>, <em class="sig-param">cardinality=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#Scorer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.Scorer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract type for scorers</p>
+<dl class="method">
+<dt id="snorkel.learning.utils.Scorer.score">
+<code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param">test_marginals</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#Scorer.score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.Scorer.score" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="snorkel.learning.utils.Scorer.summary_score">
+<code class="sig-name descname">summary_score</code><span class="sig-paren">(</span><em class="sig-param">test_marginals</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#Scorer.summary_score"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.Scorer.summary_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the F1 score (for binary) or accuracy (for categorical).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.binary_scores_from_counts">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">binary_scores_from_counts</code><span class="sig-paren">(</span><em class="sig-param">ntp</em>, <em class="sig-param">nfp</em>, <em class="sig-param">ntn</em>, <em class="sig-param">nfn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#binary_scores_from_counts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.binary_scores_from_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Precision, recall, and F1 scores from counts of TP, FP, TN, FN.
+Example usage:</p>
+<blockquote>
+<div><p>p, r, f1 = binary_scores_from_counts(<a href="#id1"><span class="problematic" id="id2">*</span></a>map(len, error_sets))</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.candidate_conflict">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">candidate_conflict</code><span class="sig-paren">(</span><em class="sig-param">L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#candidate_conflict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.candidate_conflict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an N x M matrix where L_{i,j} is the label given by the jth LF to the ith candidate:
+Return the <strong>fraction of candidates which have &gt; 1 (non-zero) labels _which are not equal_.</strong></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.candidate_coverage">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">candidate_coverage</code><span class="sig-paren">(</span><em class="sig-param">L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#candidate_coverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.candidate_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an N x M matrix where L_{i,j} is the label given by the jth LF to the ith candidate:
+Return the <strong>fraction of candidates which have &gt; 0 (non-zero) labels.</strong></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.candidate_overlap">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">candidate_overlap</code><span class="sig-paren">(</span><em class="sig-param">L</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#candidate_overlap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.candidate_overlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an N x M matrix where L_{i,j} is the label given by the jth LF to the ith candidate:
+Return the <strong>fraction of candidates which have &gt; 1 (non-zero) labels.</strong></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.print_scores">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">print_scores</code><span class="sig-paren">(</span><em class="sig-param">ntp</em>, <em class="sig-param">nfp</em>, <em class="sig-param">ntn</em>, <em class="sig-param">nfn</em>, <em class="sig-param">title='Scores'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#print_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.print_scores" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.reshape_marginals">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">reshape_marginals</code><span class="sig-paren">(</span><em class="sig-param">marginals</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#reshape_marginals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.reshape_marginals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns correctly shaped marginals as np array</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.sparse_abs">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">sparse_abs</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#sparse_abs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.sparse_abs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Element-wise absolute value of sparse matrix- avoids casting to dense matrix!</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.learning.utils.training_set_summary_stats">
+<code class="sig-prename descclassname">snorkel.learning.utils.</code><code class="sig-name descname">training_set_summary_stats</code><span class="sig-paren">(</span><em class="sig-param">L</em>, <em class="sig-param">return_vals=True</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/learning/utils.html#training_set_summary_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.learning.utils.training_set_summary_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an N x M matrix where L_{i,j} is the label given by the jth LF to the ith candidate:
+Return simple summary statistics</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Learning</a><ul>
+<li><a class="reference internal" href="#module-snorkel.learning.classifier">Base Classifier Class</a></li>
+<li><a class="reference internal" href="#module-snorkel.learning.gen_learning">Generative Model</a></li>
+<li><a class="reference internal" href="#discriminative-models">Discriminative Models</a></li>
+<li><a class="reference internal" href="#module-snorkel.learning.utils">Learning Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="annotations.html"
+                        title="previous chapter">Annotations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="etc.html"
+                        title="next chapter">Etc: Viewing and Annotating Data, Writing LFs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/learning.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="etc.html" title="Etc: Viewing and Annotating Data, Writing LFs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="annotations.html" title="Annotations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Snorkel 0.6.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Alex Ratner, Stephen Bach, Henry Ehrenberg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Etc: Viewing and Annotating Data, Writing LFs &#8212; Snorkel 0.6.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Learning" href="learning.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="learning.html" title="Learning"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Snorkel 0.6.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="etc-viewing-and-annotating-data-writing-lfs">
+<h1>Etc: Viewing and Annotating Data, Writing LFs<a class="headerlink" href="#etc-viewing-and-annotating-data-writing-lfs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-snorkel.viewer">
+<span id="using-the-viewer-to-inspect-and-annotate-data"></span><h2>Using the Viewer to Inspect and Annotate Data<a class="headerlink" href="#module-snorkel.viewer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="snorkel.viewer.SentenceNgramViewer">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.viewer.</code><code class="sig-name descname">SentenceNgramViewer</code><span class="sig-paren">(</span><em class="sig-param">candidates</em>, <em class="sig-param">session</em>, <em class="sig-param">gold=[]</em>, <em class="sig-param">n_per_page=3</em>, <em class="sig-param">height=225</em>, <em class="sig-param">annotator_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/viewer.html#SentenceNgramViewer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.viewer.SentenceNgramViewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Viewer for Sentence objects and candidate Spans within them</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="snorkel.viewer.Viewer">
+<em class="property">class </em><code class="sig-prename descclassname">snorkel.viewer.</code><code class="sig-name descname">Viewer</code><span class="sig-paren">(</span><em class="sig-param">candidates</em>, <em class="sig-param">session</em>, <em class="sig-param">gold=[]</em>, <em class="sig-param">n_per_page=3</em>, <em class="sig-param">height=225</em>, <em class="sig-param">annotator_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/viewer.html#Viewer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.viewer.Viewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic object for viewing and labeling Candidate objects in their rendered Contexts.</p>
+<dl class="method">
+<dt id="snorkel.viewer.Viewer.handle_label_event">
+<code class="sig-name descname">handle_label_event</code><span class="sig-paren">(</span><em class="sig-param">_</em>, <em class="sig-param">content</em>, <em class="sig-param">buffers</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/viewer.html#Viewer.handle_label_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.viewer.Viewer.handle_label_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles label event by persisting new label</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="snorkel.viewer.Viewer.render">
+<code class="sig-name descname">render</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/viewer.html#Viewer.render"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.viewer.Viewer.render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders viewer pane</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-snorkel.lf_helpers">
+<span id="helpers-for-writing-labeling-functions"></span><h2>Helpers for Writing Labeling Functions<a class="headerlink" href="#module-snorkel.lf_helpers" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="snorkel.lf_helpers.contains_token">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">contains_token</code><span class="sig-paren">(</span><em class="sig-param">c</em>, <em class="sig-param">tok</em>, <em class="sig-param">attrib='words'</em>, <em class="sig-param">case_sensitive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#contains_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.contains_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if any of the contituent Spans contain a token
+:param attrib: The token attribute type (e.g. words, lemmas, poses)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_between_tokens">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_between_tokens</code><span class="sig-paren">(</span><em class="sig-param">c</em>, <em class="sig-param">attrib='words'</em>, <em class="sig-param">n_max=1</em>, <em class="sig-param">case_sensitive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_between_tokens"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_between_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>TODO: write doc_string</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_doc_candidate_spans">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_doc_candidate_spans</code><span class="sig-paren">(</span><em class="sig-param">c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_doc_candidate_spans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_doc_candidate_spans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Spans in the same document as Candidate c, where these Spans are
+arguments of Candidates.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_left_tokens">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_left_tokens</code><span class="sig-paren">(</span><em class="sig-param">c</em>, <em class="sig-param">window=3</em>, <em class="sig-param">attrib='words'</em>, <em class="sig-param">n_max=1</em>, <em class="sig-param">case_sensitive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_left_tokens"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_left_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the tokens within a window to the _left_ of the Candidate.
+For higher-arity Candidates, defaults to the _first_ argument.
+:param window: The number of tokens to the left of the first argument to</p>
+<blockquote>
+<div><p>return</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>attrib</strong> – The token attribute type (e.g. words, lemmas, poses)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_matches">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_matches</code><span class="sig-paren">(</span><em class="sig-param">lf, candidate_set, match_values=[1, -1]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_matches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple helper function to see how many matches (non-zero by default) an LF gets.
+Returns the matched set, which can then be directly put into the Viewer.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_right_tokens">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_right_tokens</code><span class="sig-paren">(</span><em class="sig-param">c</em>, <em class="sig-param">window=3</em>, <em class="sig-param">attrib='words'</em>, <em class="sig-param">n_max=1</em>, <em class="sig-param">case_sensitive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_right_tokens"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_right_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the tokens within a window to the _right_ of the Candidate.
+For higher-arity Candidates, defaults to the _last_ argument.
+:param window: The number of tokens to the right of the last argument to</p>
+<blockquote>
+<div><p>return</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>attrib</strong> – The token attribute type (e.g. words, lemmas, poses)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_sent_candidate_spans">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_sent_candidate_spans</code><span class="sig-paren">(</span><em class="sig-param">c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_sent_candidate_spans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_sent_candidate_spans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Spans in the same Sentence as Candidate c, where these Spans are
+arguments of Candidates.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_tagged_text">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_tagged_text</code><span class="sig-paren">(</span><em class="sig-param">c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_tagged_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_tagged_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the text of c’s parent context with c’s unary spans replaced with
+tags {{A}}, {{B}}, etc. A convenience method for writing LFs based on e.g.
+regexes.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_text_between">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_text_between</code><span class="sig-paren">(</span><em class="sig-param">c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_text_between"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_text_between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the text between the two unary Spans of a binary-Span Candidate,
+where both are in the same Sentence.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.get_text_splits">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">get_text_splits</code><span class="sig-paren">(</span><em class="sig-param">c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#get_text_splits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.get_text_splits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a k-arity Candidate defined over k Spans, return the chunked parent
+context (e.g. Sentence) split around the k constituent Spans.</p>
+<p>NOTE: Currently assumes that these Spans are in the same Context</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.is_inverted">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">is_inverted</code><span class="sig-paren">(</span><em class="sig-param">c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#is_inverted"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.is_inverted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the ordering of the candidates in the sentence is
+inverted.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="snorkel.lf_helpers.test_LF">
+<code class="sig-prename descclassname">snorkel.lf_helpers.</code><code class="sig-name descname">test_LF</code><span class="sig-paren">(</span><em class="sig-param">session</em>, <em class="sig-param">lf</em>, <em class="sig-param">split</em>, <em class="sig-param">annotator_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snorkel/lf_helpers.html#test_LF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#snorkel.lf_helpers.test_LF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the accuracy of a single LF on a split of the candidates, w.r.t. annotator labels,
+and also returns the error buckets of the candidates.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="helpers-for-loading-external-annotations">
+<h2>Helpers for Loading External Annotations<a class="headerlink" href="#helpers-for-loading-external-annotations" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Etc: Viewing and Annotating Data, Writing LFs</a><ul>
+<li><a class="reference internal" href="#module-snorkel.viewer">Using the Viewer to Inspect and Annotate Data</a></li>
+<li><a class="reference internal" href="#module-snorkel.lf_helpers">Helpers for Writing Labeling Functions</a></li>
+<li><a class="reference internal" href="#helpers-for-loading-external-annotations">Helpers for Loading External Annotations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="learning.html"
+                        title="previous chapter">Learning</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/etc.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="learning.html" title="Learning"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Snorkel 0.6.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Alex Ratner, Stephen Bach, Henry Ehrenberg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

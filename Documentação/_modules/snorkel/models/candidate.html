@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>snorkel.models.candidate &#8212; Snorkel 0.6.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Snorkel 0.6.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for snorkel.models.candidate</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">Column</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Float</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">,</span> <span class="n">UniqueConstraint</span><span class="p">,</span>
+    <span class="n">MetaData</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="k">import</span> <span class="n">relationship</span><span class="p">,</span> <span class="n">backref</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+
+<span class="kn">from</span> <span class="nn">snorkel.models.meta</span> <span class="k">import</span> <span class="n">SnorkelBase</span>
+<span class="kn">from</span> <span class="nn">snorkel.models</span> <span class="k">import</span> <span class="n">snorkel_engine</span>
+<span class="kn">from</span> <span class="nn">snorkel.utils</span> <span class="k">import</span> <span class="n">camel_to_under</span>
+
+
+<div class="viewcode-block" id="Candidate"><a class="viewcode-back" href="../../../candidates.html#snorkel.models.candidate.Candidate">[docs]</a><span class="k">class</span> <span class="nc">Candidate</span><span class="p">(</span><span class="n">SnorkelBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An abstract candidate relation.</span>
+
+<span class="sd">    New relation types should be defined by calling candidate_subclass(),</span>
+<span class="sd">    **not** subclassing this class directly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;candidate&#39;</span>
+    <span class="nb">id</span>          <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">type</span>        <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">split</span>       <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">__mapper_args__</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;polymorphic_identity&#39;</span><span class="p">:</span> <span class="s1">&#39;candidate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;polymorphic_on&#39;</span><span class="p">:</span> <span class="nb">type</span>
+    <span class="p">}</span>
+
+    <span class="c1"># __table_args__ = {&quot;extend_existing&quot; : True}</span>
+
+<div class="viewcode-block" id="Candidate.get_contexts"><a class="viewcode-back" href="../../../candidates.html#snorkel.models.candidate.Candidate.get_contexts">[docs]</a>    <span class="k">def</span> <span class="nf">get_contexts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a tuple of the consituent contexts making up this candidate&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__argnames__</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">get_parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Fails if both contexts don&#39;t have same parent</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">get_parent</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_contexts</span><span class="p">()]</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Contexts do not all have same parent&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Candidate.get_cids"><a class="viewcode-back" href="../../../candidates.html#snorkel.models.candidate.Candidate.get_cids">[docs]</a>    <span class="k">def</span> <span class="nf">get_cids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a tuple of the canonical IDs (CIDs) of the contexts making up</span>
+<span class="sd">        this candidate&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_cid&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__argnames__</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__argnames__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_contexts</span><span class="p">()[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_contexts</span><span class="p">()))</span>
+        <span class="p">)</span></div>
+
+<span class="c1"># This global dictionary contains all classes that have been declared in this Python environment, so</span>
+<span class="c1"># that candidate_subclass() can return a class if it already exists and is identical in specification</span>
+<span class="c1"># to the requested class</span>
+<span class="n">candidate_subclasses</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="candidate_subclass"><a class="viewcode-back" href="../../../candidates.html#snorkel.models.candidate.candidate_subclass">[docs]</a><span class="k">def</span> <span class="nf">candidate_subclass</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">table_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cardinality</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">values</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates and returns a Candidate subclass with provided argument names,</span>
+<span class="sd">    which are Context type. Creates the table in DB if does not exist yet.</span>
+
+<span class="sd">    Import using:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        from snorkel.models import candidate_subclass</span>
+
+<span class="sd">    :param class_name: The name of the class, should be &quot;camel case&quot; e.g.</span>
+<span class="sd">        NewCandidate</span>
+<span class="sd">    :param args: A list of names of consituent arguments, which refer to the</span>
+<span class="sd">        Contexts--representing mentions--that comprise the candidate</span>
+<span class="sd">    :param table_name: The name of the corresponding table in DB; if not</span>
+<span class="sd">        provided, is converted from camel case by default, e.g. new_candidate</span>
+<span class="sd">    :param cardinality: The cardinality of the variable corresponding to the</span>
+<span class="sd">        Candidate. By default is 2 i.e. is a binary value, e.g. is or is not</span>
+<span class="sd">        a true mention.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">table_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">table_name</span> <span class="o">=</span> <span class="n">camel_to_under</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span>
+
+    <span class="c1"># If cardinality and values are None, default to binary classification</span>
+    <span class="k">if</span> <span class="n">cardinality</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">values</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+        <span class="n">cardinality</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="c1"># Else use values if present, and validate proper input</span>
+    <span class="k">elif</span> <span class="n">values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cardinality</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">!=</span> <span class="n">cardinality</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of values must match cardinality.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`None` is a protected value.&quot;</span><span class="p">)</span>
+        <span class="c1"># Note that bools are instances of ints in Python...</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Default usage of values is consecutive integers. Leave values unset if attempting to define values as integers.&quot;</span><span class="p">)</span>
+        <span class="n">cardinality</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="c1"># If cardinality is specified but not values, fill in with ints</span>
+    <span class="k">elif</span> <span class="n">cardinality</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">cardinality</span><span class="p">))</span>
+
+    <span class="n">class_spec</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="n">candidate_subclasses</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">class_spec</span> <span class="o">==</span> <span class="n">candidate_subclasses</span><span class="p">[</span><span class="n">class_name</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">candidate_subclasses</span><span class="p">[</span><span class="n">class_name</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Candidate subclass &#39;</span> <span class="o">+</span> <span class="n">class_name</span> <span class="o">+</span> <span class="s1">&#39; already exists in memory with incompatible &#39;</span> <span class="o">+</span>
+                             <span class="s1">&#39;specification: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">candidate_subclasses</span><span class="p">[</span><span class="n">class_name</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Set the class attributes == the columns in the database</span>
+        <span class="n">class_attribs</span> <span class="o">=</span> <span class="p">{</span>
+
+            <span class="c1"># Declares name for storage table</span>
+            <span class="s1">&#39;__tablename__&#39;</span> <span class="p">:</span> <span class="n">table_name</span><span class="p">,</span>
+
+            <span class="c1"># Connects candidate_subclass records to generic Candidate records</span>
+            <span class="s1">&#39;id&#39;</span> <span class="p">:</span> <span class="n">Column</span><span class="p">(</span>
+                <span class="n">Integer</span><span class="p">,</span>
+                <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;candidate.id&#39;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s1">&#39;CASCADE&#39;</span><span class="p">),</span>
+                <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">),</span>
+
+            <span class="c1"># Store values &amp; cardinality information in the class only</span>
+            <span class="s1">&#39;values&#39;</span> <span class="p">:</span> <span class="n">values</span><span class="p">,</span>
+            <span class="s1">&#39;cardinality&#39;</span> <span class="p">:</span> <span class="n">cardinality</span><span class="p">,</span>
+
+            <span class="c1"># Polymorphism information for SQLAlchemy</span>
+            <span class="s1">&#39;__mapper_args__&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;polymorphic_identity&#39;</span><span class="p">:</span> <span class="n">table_name</span><span class="p">},</span>
+
+            <span class="c1"># Helper method to get argument names</span>
+            <span class="s1">&#39;__argnames__&#39;</span> <span class="p">:</span> <span class="n">args</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Create named arguments, i.e. the entity mentions comprising the relation</span>
+        <span class="c1"># mention</span>
+        <span class="c1"># For each entity mention: id, cid (&quot;canonical id&quot;), and pointer to Context</span>
+        <span class="n">unique_args</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+
+            <span class="c1"># Primary arguments are constituent Contexts, and their ids</span>
+            <span class="n">class_attribs</span><span class="p">[</span><span class="n">arg</span> <span class="o">+</span> <span class="s1">&#39;_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span>
+                <span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;context.id&#39;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s1">&#39;CASCADE&#39;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">class_attribs</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+                <span class="s1">&#39;Context&#39;</span><span class="p">,</span>
+                <span class="n">backref</span><span class="o">=</span><span class="n">backref</span><span class="p">(</span>
+                    <span class="n">table_name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">arg</span> <span class="o">+</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span>
+                    <span class="n">cascade_backrefs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">cascade</span><span class="o">=</span><span class="s1">&#39;all, delete-orphan&#39;</span>
+                <span class="p">),</span>
+                <span class="n">cascade_backrefs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">foreign_keys</span><span class="o">=</span><span class="n">class_attribs</span><span class="p">[</span><span class="n">arg</span> <span class="o">+</span> <span class="s1">&#39;_id&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">unique_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">class_attribs</span><span class="p">[</span><span class="n">arg</span> <span class="o">+</span> <span class="s1">&#39;_id&#39;</span><span class="p">])</span>
+
+            <span class="c1"># Canonical ids, to be set post-entity normalization stage</span>
+            <span class="n">class_attribs</span><span class="p">[</span><span class="n">arg</span> <span class="o">+</span> <span class="s1">&#39;_cid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+
+        <span class="c1"># Add unique constraints to the arguments</span>
+        <span class="n">class_attribs</span><span class="p">[</span><span class="s1">&#39;__table_args__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">UniqueConstraint</span><span class="p">(</span><span class="o">*</span><span class="n">unique_args</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Create class</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="p">(</span><span class="n">Candidate</span><span class="p">,),</span> <span class="n">class_attribs</span><span class="p">)</span>
+
+        <span class="c1"># Create table in DB</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">snorkel_engine</span><span class="o">.</span><span class="n">dialect</span><span class="o">.</span><span class="n">has_table</span><span class="p">(</span><span class="n">snorkel_engine</span><span class="p">,</span> <span class="n">table_name</span><span class="p">):</span>
+            <span class="n">C</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">snorkel_engine</span><span class="p">)</span>
+
+        <span class="n">candidate_subclasses</span><span class="p">[</span><span class="n">class_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">,</span> <span class="n">class_spec</span>
+
+        <span class="k">return</span> <span class="n">C</span></div>
+
+
+<div class="viewcode-block" id="Marginal"><a class="viewcode-back" href="../../../candidates.html#snorkel.models.candidate.Marginal">[docs]</a><span class="k">class</span> <span class="nc">Marginal</span><span class="p">(</span><span class="n">SnorkelBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A marginal probability corresponding to a (Candidate, value) pair.</span>
+
+<span class="sd">    Represents:</span>
+
+<span class="sd">        P(candidate = value) = probability</span>
+
+<span class="sd">    @training: If True, this is a training marginal; otherwise is end prediction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;marginal&#39;</span>
+    <span class="nb">id</span>           <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">candidate_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span>
+                        <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;candidate.id&#39;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s1">&#39;CASCADE&#39;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">training</span>     <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">value</span>        <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">probability</span>  <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Float</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">candidate</span>    <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Candidate&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="n">backref</span><span class="p">(</span><span class="s1">&#39;marginals&#39;</span><span class="p">,</span>
+                            <span class="n">cascade</span><span class="o">=</span><span class="s1">&#39;all, delete-orphan&#39;</span><span class="p">),</span>
+                        <span class="n">foreign_keys</span><span class="o">=</span><span class="n">candidate_id</span><span class="p">)</span>
+
+
+    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">UniqueConstraint</span><span class="p">(</span><span class="n">candidate_id</span><span class="p">,</span> <span class="n">training</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Training&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span> <span class="k">else</span> <span class="s2">&quot;Predicted&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2"> Marginal: P(</span><span class="si">%s</span><span class="s2"> == </span><span class="si">%s</span><span class="s2">) = </span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> \
+            <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">probability</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Snorkel 0.6.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Alex Ratner, Stephen Bach, Henry Ehrenberg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

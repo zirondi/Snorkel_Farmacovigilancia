@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>snorkel.viewer &#8212; Snorkel 0.6.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Snorkel 0.6.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for snorkel.viewer</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">snorkel.models</span> <span class="k">import</span> <span class="n">GoldLabel</span><span class="p">,</span> <span class="n">StableLabel</span><span class="p">,</span> <span class="n">GoldLabelKey</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Javascript</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;This module must be run in IPython.&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">traitlets</span> <span class="k">import</span> <span class="n">Unicode</span><span class="p">,</span> <span class="n">Int</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+<span class="n">directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+<span class="c1"># PAGE LAYOUT TEMPLATES</span>
+<span class="n">LI_HTML</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;li class=&quot;list-group-item&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; title=&quot;</span><span class="si">{context_id}</span><span class="s2">&quot;&gt;</span><span class="si">{data}</span><span class="s2">&lt;/li&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">PAGE_HTML</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;div class=&quot;viewer-page&quot; id=&quot;viewer-page-</span><span class="si">{pid}</span><span class="s2">&quot;</span><span class="si">{etc}</span><span class="s2">&gt;</span>
+<span class="s2">    &lt;ul class=&quot;list-group&quot;&gt;</span><span class="si">{data}</span><span class="s2">&lt;/ul&gt;</span>
+<span class="s2">&lt;/div&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="Viewer"><a class="viewcode-back" href="../../etc.html#snorkel.viewer.Viewer">[docs]</a><span class="k">class</span> <span class="nc">Viewer</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">DOMWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic object for viewing and labeling Candidate objects in their rendered Contexts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_view_name</span>         <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;ViewerView&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">_view_module</span>       <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;viewer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cids</span>               <span class="o">=</span> <span class="n">List</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">html</span>               <span class="o">=</span> <span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;&lt;h3&gt;Error!&lt;/h3&gt;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">_labels_serialized</span> <span class="o">=</span> <span class="n">Unicode</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">_selected_cid</span>      <span class="o">=</span> <span class="n">Int</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">sync</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">gold</span><span class="o">=</span><span class="p">[],</span> <span class="n">n_per_page</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">225</span><span class="p">,</span> <span class="n">annotator_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes a Viewer.</span>
+
+<span class="sd">        The Viewer uses the keyword argument annotator_name to define a AnnotatorLabelKey with that name.</span>
+
+<span class="sd">        :param candidates: A Python container of Candidates (e.g., not a CandidateSet, but candidate_set.candidates)</span>
+<span class="sd">        :param session: The SnorkelSession for the database backend</span>
+<span class="sd">        :param gold: Optional, Python container of Candidates that are know to have positive labels</span>
+<span class="sd">        :param n_per_page: Optional, number of Contexts to display per page</span>
+<span class="sd">        :param height: Optional, the height in pixels of the Viewer</span>
+<span class="sd">        :param annotator_name: Name of the human using the Viewer, for saving their work. Defaults to system username.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Viewer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
+
+        <span class="c1"># By default, use the username as annotator name</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">annotator_name</span> <span class="k">if</span> <span class="n">annotator_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+
+        <span class="c1"># Sets up the AnnotationKey to use</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">GoldLabelKey</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">GoldLabelKey</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotator</span> <span class="o">=</span> <span class="n">GoldLabelKey</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotator</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+        <span class="c1"># Viewer display configs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_per_page</span> <span class="o">=</span> <span class="n">n_per_page</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span>     <span class="o">=</span> <span class="n">height</span>
+
+        <span class="c1"># Note that the candidates are not necessarily commited to the DB, so they *may not have* non-null ids</span>
+        <span class="c1"># Hence, we index by their position in this list</span>
+        <span class="c1"># We get the sorted candidates and all contexts required, either from unary or binary candidates</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gold</span>       <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gold</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">candidates</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span> <span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">char_start</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contexts</span>   <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_parent</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gold</span><span class="p">))</span>
+
+        <span class="c1"># If committed, sort contexts by id</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contexts</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contexts</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span> <span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># Loads existing annotations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span>        <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotations_stable</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
+        <span class="n">init_labels_serialized</span>  <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">):</span>
+
+            <span class="c1"># First look for the annotation in the primary annotations table</span>
+            <span class="n">existing_annotation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">GoldLabel</span><span class="p">)</span> \
+                <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">GoldLabel</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotator</span><span class="p">)</span> \
+                <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">GoldLabel</span><span class="o">.</span><span class="n">candidate</span> <span class="o">==</span> <span class="n">candidate</span><span class="p">)</span> \
+                <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">existing_annotation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">existing_annotation</span>
+                <span class="k">if</span> <span class="n">existing_annotation</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">value_string</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+                <span class="k">elif</span> <span class="n">existing_annotation</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">value_string</span> <span class="o">=</span> <span class="s1">&#39;false&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">existing_annotation</span><span class="p">)</span> <span class="o">+</span>
+                                     <span class="s1">&#39; has value not in {1, -1}, which Viewer does not support.&#39;</span><span class="p">)</span>
+                <span class="n">init_labels_serialized</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;~~&#39;</span> <span class="o">+</span> <span class="n">value_string</span><span class="p">)</span>
+
+                <span class="c1"># If the annotator label is in the main table, also get its stable version</span>
+                <span class="n">context_stable_ids</span> <span class="o">=</span> <span class="s1">&#39;~~&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">stable_id</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidate</span><span class="o">.</span><span class="n">get_contexts</span><span class="p">()])</span>
+                <span class="n">existing_annotation_stable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">StableLabel</span><span class="p">)</span> \
+                                                 <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">StableLabel</span><span class="o">.</span><span class="n">context_stable_ids</span> <span class="o">==</span> <span class="n">context_stable_ids</span><span class="p">)</span>\
+                                                 <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">StableLabel</span><span class="o">.</span><span class="n">annotator_name</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">one_or_none</span><span class="p">()</span>
+
+                <span class="c1"># If stable version is not available, create it here</span>
+                <span class="c1"># NOTE: This is for versioning issues, should be removed?</span>
+                <span class="k">if</span> <span class="n">existing_annotation_stable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">context_stable_ids</span>         <span class="o">=</span> <span class="s1">&#39;~~&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">stable_id</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidate</span><span class="o">.</span><span class="n">get_contexts</span><span class="p">()])</span>
+                    <span class="n">existing_annotation_stable</span> <span class="o">=</span> <span class="n">StableLabel</span><span class="p">(</span><span class="n">context_stable_ids</span><span class="o">=</span><span class="n">context_stable_ids</span><span class="p">,</span>\
+                                                             <span class="n">annotator_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">annotator</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>\
+                                                             <span class="n">split</span><span class="o">=</span><span class="n">candidate</span><span class="o">.</span><span class="n">split</span><span class="p">,</span>\
+                                                             <span class="n">value</span><span class="o">=</span><span class="n">existing_annotation</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">existing_annotation_stable</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">annotations_stable</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">existing_annotation_stable</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_labels_serialized</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">init_labels_serialized</span><span class="p">)</span>
+
+        <span class="c1"># Configures message handler</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_msg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_label_event</span><span class="p">)</span>
+
+        <span class="c1"># display js, construct html and pass on to widget model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_tag_span</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">cids</span><span class="p">,</span> <span class="n">gold</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create the span around a segment of the context associated with one or more candidates / gold annotations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">classes</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;candidate&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="n">classes</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;gold-annotation&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">gold</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="n">classes</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">cids</span><span class="p">))</span>
+
+        <span class="c1"># Scrub for non-ascii characters; replace with ?</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;&lt;span class=&quot;</span><span class="si">{classes}</span><span class="s1">&quot;&gt;</span><span class="si">{html}</span><span class="s1">&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">html</span><span class="o">=</span><span class="n">html</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_tag_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">gold</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Given the raw context, tag the spans using the generic _tag_span method&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Viewer.render"><a class="viewcode-back" href="../../etc.html#snorkel.viewer.Viewer.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Renders viewer pane&quot;&quot;&quot;</span>
+        <span class="n">cids</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Iterate over pages of contexts</span>
+        <span class="n">pid</span>   <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pages</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">N</span>     <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contexts</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_per_page</span><span class="p">):</span>
+            <span class="n">page_cids</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">lis</span>       <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_per_page</span><span class="p">)):</span>
+                <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contexts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+                <span class="c1"># Get the candidates in this context</span>
+                <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_parent</span><span class="p">()</span> <span class="o">==</span> <span class="n">context</span><span class="p">]</span>
+                <span class="n">gold</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gold</span> <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">get_parent</span><span class="p">()</span> <span class="o">==</span> <span class="n">context</span><span class="p">]</span>
+
+                <span class="c1"># Construct the &lt;li&gt; and page view elements</span>
+                <span class="n">li_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tag_context</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">gold</span><span class="p">)</span>
+                <span class="n">lis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LI_HTML</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">li_data</span><span class="p">,</span> <span class="n">context_id</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="n">page_cids</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">])</span>
+
+            <span class="c1"># Assemble the page...</span>
+            <span class="n">pages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PAGE_HTML</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">pid</span><span class="o">=</span><span class="n">pid</span><span class="p">,</span>
+                <span class="n">data</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lis</span><span class="p">),</span>
+                <span class="n">etc</span><span class="o">=</span><span class="s1">&#39; style=&quot;display: block;&quot;&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+            <span class="p">))</span>
+            <span class="n">cids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">page_cids</span><span class="p">)</span>
+            <span class="n">pid</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Render in primary Viewer template</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cids</span> <span class="o">=</span> <span class="n">cids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;viewer.html&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pages</span><span class="p">))</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">Javascript</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;viewer.js&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        De-serialize labels from Javascript widget, map to internal candidate id, and return as list of tuples</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">LABEL_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;true&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;false&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+        <span class="n">labels</span>    <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;~~&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_labels_serialized</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">vals</span>      <span class="o">=</span> <span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">cid</span><span class="p">),</span> <span class="n">LABEL_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">for</span> <span class="n">cid</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">vals</span>
+
+<div class="viewcode-block" id="Viewer.handle_label_event"><a class="viewcode-back" href="../../etc.html#snorkel.viewer.Viewer.handle_label_event">[docs]</a>    <span class="k">def</span> <span class="nf">handle_label_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">buffers</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles label event by persisting new label</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;set_label&#39;</span><span class="p">:</span>
+            <span class="n">cid</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cid&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unexpected label returned from widget: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span>
+                                 <span class="s1">&#39;. Expected values are True and False.&#39;</span><span class="p">)</span>
+
+            <span class="c1"># If label already exists, just update value (in both AnnotatorLabel and StableLabel)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>        <span class="o">=</span> <span class="n">value</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">annotations_stable</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+            <span class="c1"># Otherwise, create a AnnotatorLabel *and a StableLabel*</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">candidate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span>
+
+                <span class="c1"># Create AnnotatorLabel</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span> <span class="o">=</span> <span class="n">GoldLabel</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">annotator</span><span class="p">,</span> <span class="n">candidate</span><span class="o">=</span><span class="n">candidate</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="n">cid</span><span class="p">])</span>
+
+                <span class="c1"># Create StableLabel</span>
+                <span class="n">context_stable_ids</span>           <span class="o">=</span> <span class="s1">&#39;~~&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">stable_id</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidate</span><span class="o">.</span><span class="n">get_contexts</span><span class="p">()])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">annotations_stable</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span> <span class="o">=</span> <span class="n">StableLabel</span><span class="p">(</span><span class="n">context_stable_ids</span><span class="o">=</span><span class="n">context_stable_ids</span><span class="p">,</span>\
+                                                           <span class="n">annotator_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">annotator</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>\
+                                                           <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span>\
+                                                           <span class="n">split</span><span class="o">=</span><span class="n">candidate</span><span class="o">.</span><span class="n">split</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotations_stable</span><span class="p">[</span><span class="n">cid</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;delete_label&#39;</span><span class="p">:</span>
+            <span class="n">cid</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cid&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="n">cid</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotations_stable</span><span class="p">[</span><span class="n">cid</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">annotations_stable</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">get_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_selected_cid</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="SentenceNgramViewer"><a class="viewcode-back" href="../../etc.html#snorkel.viewer.SentenceNgramViewer">[docs]</a><span class="k">class</span> <span class="nc">SentenceNgramViewer</span><span class="p">(</span><span class="n">Viewer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Viewer for Sentence objects and candidate Spans within them&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">gold</span><span class="o">=</span><span class="p">[],</span> <span class="n">n_per_page</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">225</span><span class="p">,</span> <span class="n">annotator_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SentenceNgramViewer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">gold</span><span class="o">=</span><span class="n">gold</span><span class="p">,</span> <span class="n">n_per_page</span><span class="o">=</span><span class="n">n_per_page</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">annotator_name</span><span class="o">=</span><span class="n">annotator_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_is_subspan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="n">c</span><span class="o">.</span><span class="n">char_start</span> <span class="ow">and</span> <span class="n">e</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="o">.</span><span class="n">char_end</span>
+
+    <span class="k">def</span> <span class="nf">_tag_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">gold</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tag **potentially overlapping** spans of text, at the character-level&quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="c1"># First, split the sentence into the *smallest* single-candidate chunks</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">both</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">]</span> \
+                        <span class="o">+</span> <span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gold</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gold</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">both</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gold</span><span class="p">]</span>
+        <span class="n">splits</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">b</span><span class="o">.</span><span class="n">char_start</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">both</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">b</span><span class="o">.</span><span class="n">char_end</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">both</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)])))</span>
+
+        <span class="c1"># For each chunk, add cid if subset of candidate span, tag if gold, and produce span</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splits</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">start</span>  <span class="o">=</span> <span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">end</span>    <span class="o">=</span> <span class="n">splits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="c1"># Handle both unary and binary candidates</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># For binary candidates, add classes for both the candidate ID and unary span identifiers</span>
+                <span class="n">cids0</span>  <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_subspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+                <span class="n">cids0</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-0&#39;</span> <span class="o">%</span> <span class="n">cid</span> <span class="k">for</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">cids0</span><span class="p">]</span>
+                <span class="n">cids1</span>  <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_subspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+                <span class="n">cids1</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-1&#39;</span> <span class="o">%</span> <span class="n">cid</span> <span class="k">for</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">cids1</span><span class="p">]</span>
+                <span class="n">cids</span>   <span class="o">=</span> <span class="n">cids0</span> <span class="o">+</span> <span class="n">cids1</span>
+
+                <span class="c1"># Handle gold...</span>
+                <span class="n">gcids</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">gold</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gold</span> <span class="k">if</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">_is_subspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_subspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">cids</span>  <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_subspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+                <span class="n">gcids</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">gold</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gold</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_subspan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+
+            <span class="n">html</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tag_span</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">cids</span><span class="p">,</span> <span class="n">gold</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">gcids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">html</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Snorkel 0.6.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Alex Ratner, Stephen Bach, Henry Ehrenberg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

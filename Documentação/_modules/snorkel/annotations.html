@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>snorkel.annotations &#8212; Snorkel 0.6.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Snorkel 0.6.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for snorkel.annotations</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">future.utils</span> <span class="k">import</span> <span class="n">iteritems</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Series</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sparse</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.sql</span> <span class="k">import</span> <span class="n">bindparam</span><span class="p">,</span> <span class="n">select</span>
+
+<span class="kn">from</span> <span class="nn">snorkel.features</span> <span class="k">import</span> <span class="n">get_span_feats</span>
+<span class="kn">from</span> <span class="nn">snorkel.models</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">GoldLabel</span><span class="p">,</span> <span class="n">GoldLabelKey</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">LabelKey</span><span class="p">,</span> <span class="n">Feature</span><span class="p">,</span> <span class="n">FeatureKey</span><span class="p">,</span> <span class="n">Candidate</span><span class="p">,</span>
+    <span class="n">Marginal</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">snorkel.models.meta</span> <span class="k">import</span> <span class="n">new_sessionmaker</span>
+<span class="kn">from</span> <span class="nn">snorkel.udf</span> <span class="k">import</span> <span class="n">UDF</span><span class="p">,</span> <span class="n">UDFRunner</span>
+<span class="kn">from</span> <span class="nn">snorkel.utils</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">matrix_conflicts</span><span class="p">,</span>
+    <span class="n">matrix_coverage</span><span class="p">,</span>
+    <span class="n">matrix_overlaps</span><span class="p">,</span>
+    <span class="n">matrix_tp</span><span class="p">,</span>
+    <span class="n">matrix_fp</span><span class="p">,</span>
+    <span class="n">matrix_fn</span><span class="p">,</span>
+    <span class="n">matrix_tn</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">csr_AnnotationMatrix</span><span class="p">(</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An extension of the scipy.sparse.csr_matrix class for holding sparse annotation matrices</span>
+<span class="sd">    and related helper methods.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Note: Currently these need to return None if unset, otherwise matrix copy operations break...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">candidate_index</span>    <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;candidate_index&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_index</span>          <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;row_index&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_cls</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;annotation_key_cls&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_index</span>          <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;key_index&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_index</span>          <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;col_index&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Note that scipy relies on the first three letters of the class to define matrix type...</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">csr_AnnotationMatrix</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_candidate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the Candidate object corresponding to row i&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Candidate</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_index</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_row_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the row index of the Candidate&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_index</span><span class="p">[</span><span class="n">candidate</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the AnnotationKey object corresponding to column j&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_cls</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_cls</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">col_index</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_col_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the cow index of the AnnotationKey&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_index</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_get_sliced_indexes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">inv_index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remaps the indexes between matrix rows/cols and candidates/keys.</span>
+<span class="sd">        Note: This becomes a massive performance bottleneck if not implemented</span>
+<span class="sd">        properly, so be careful of changing!</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+            <span class="c1"># Check for empty slice</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">stop</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">index</span><span class="p">,</span> <span class="n">inv_index</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">])[</span><span class="n">s</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">s</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># s is an array of ints</span>
+            <span class="n">idxs</span> <span class="o">=</span> <span class="n">s</span>
+            <span class="c1"># If s is the entire slice, skip the remapping step</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">idxs</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">idxs</span><span class="p">)))):</span>
+                <span class="k">return</span> <span class="n">index</span><span class="p">,</span> <span class="n">inv_index</span>
+
+        <span class="n">index_new</span><span class="p">,</span> <span class="n">inv_index_new</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i_new</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">idxs</span><span class="p">):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">index_new</span><span class="p">[</span><span class="n">i_new</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+            <span class="n">inv_index_new</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">i_new</span>
+        <span class="k">return</span> <span class="n">index_new</span><span class="p">,</span> <span class="n">inv_index_new</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">csr_AnnotationMatrix</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="c1"># If X is an integer or float value, just return it</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">)</span>\
+            <span class="ow">or</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">X</span>
+        <span class="c1"># If X is a matrix, make sure it stays a csr_AnnotationMatrix</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">csr_AnnotationMatrix</span><span class="p">):</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">csr_AnnotationMatrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="c1"># X must be a matrix, so update appropriate csr_AnnotationMatrix fields</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">annotation_key_cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_cls</span>
+        <span class="n">row_slice</span><span class="p">,</span> <span class="n">col_slice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unpack_index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">row_index</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">candidate_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sliced_indexes</span><span class="p">(</span>
+            <span class="n">row_slice</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_index</span><span class="p">)</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">col_index</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">key_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_sliced_indexes</span><span class="p">(</span>
+            <span class="n">col_slice</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">X</span>
+
+    <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return summary stats about the annotations&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">csr_LabelMatrix</span><span class="p">(</span><span class="n">csr_AnnotationMatrix</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">lf_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">est_accs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Returns a pandas DataFrame with the LFs and various per-LF statistics&quot;&quot;&quot;</span>
+            <span class="n">lf_names</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_key</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+            <span class="c1"># Default LF stats</span>
+            <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;Coverage&#39;</span><span class="p">,</span> <span class="s1">&#39;Overlaps&#39;</span><span class="p">,</span> <span class="s1">&#39;Conflicts&#39;</span><span class="p">]</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;j&#39;</span>         <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span>
+                <span class="s1">&#39;Coverage&#39;</span>  <span class="p">:</span> <span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">matrix_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">),</span>
+                <span class="s1">&#39;Overlaps&#39;</span>  <span class="p">:</span> <span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">matrix_overlaps</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">),</span>
+                <span class="s1">&#39;Conflicts&#39;</span> <span class="p">:</span> <span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">matrix_conflicts</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">col_names</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;TP&#39;</span><span class="p">,</span> <span class="s1">&#39;FP&#39;</span><span class="p">,</span> <span class="s1">&#39;FN&#39;</span><span class="p">,</span> <span class="s1">&#39;TN&#39;</span><span class="p">,</span> <span class="s1">&#39;Empirical Acc.&#39;</span><span class="p">])</span>
+                <span class="n">ls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span> <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="k">else</span> <span class="n">labels</span><span class="p">)</span>
+                <span class="n">tp</span> <span class="o">=</span> <span class="n">matrix_tp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ls</span><span class="p">)</span>
+                <span class="n">fp</span> <span class="o">=</span> <span class="n">matrix_fp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ls</span><span class="p">)</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="n">matrix_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ls</span><span class="p">)</span>
+                <span class="n">tn</span> <span class="o">=</span> <span class="n">matrix_tn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ls</span><span class="p">)</span>
+                <span class="n">ac</span> <span class="o">=</span> <span class="p">(</span><span class="n">tp</span><span class="o">+</span><span class="n">tn</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span><span class="o">+</span><span class="n">tn</span><span class="o">+</span><span class="n">fp</span><span class="o">+</span><span class="n">fn</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;Empirical Acc.&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">ac</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;TP&#39;</span><span class="p">]</span>             <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tp</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;FP&#39;</span><span class="p">]</span>             <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fp</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;FN&#39;</span><span class="p">]</span>             <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;TN&#39;</span><span class="p">]</span>             <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">est_accs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">col_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Learned Acc.&#39;</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;Learned Acc.&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">est_accs</span>
+                <span class="n">d</span><span class="p">[</span><span class="s1">&#39;Learned Acc.&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">lf_names</span>
+            <span class="k">return</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">lf_names</span><span class="p">)[</span><span class="n">col_names</span><span class="p">]</span>
+
+<span class="c1"># This is a hack for getting the documentation to build...</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">csr_LabelMatrix</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">lf_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">est_accs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="Annotator"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.Annotator">[docs]</a><span class="k">class</span> <span class="nc">Annotator</span><span class="p">(</span><span class="n">UDFRunner</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Abstract class for annotating candidates and persisting these annotations to DB&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotation_class</span><span class="p">,</span> <span class="n">annotation_key_class</span><span class="p">,</span> <span class="n">f_gen</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotation_class</span>     <span class="o">=</span> <span class="n">annotation_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_class</span> <span class="o">=</span> <span class="n">annotation_key_class</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Annotator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">AnnotatorUDF</span><span class="p">,</span>
+                                        <span class="n">annotation_class</span><span class="o">=</span><span class="n">annotation_class</span><span class="p">,</span>
+                                        <span class="n">annotation_key_class</span><span class="o">=</span><span class="n">annotation_key_class</span><span class="p">,</span>
+                                        <span class="n">f_gen</span><span class="o">=</span><span class="n">f_gen</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Annotator.apply"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.Annotator.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">key_group</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">replace_key_set</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cids_query</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># If we are replacing the key set, make sure the reducer key id cache is cleared!</span>
+        <span class="k">if</span> <span class="n">replace_key_set</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reducer</span><span class="o">.</span><span class="n">key_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Get the cids based on the split, and also the count</span>
+        <span class="n">SnorkelSession</span> <span class="o">=</span> <span class="n">new_sessionmaker</span><span class="p">()</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">SnorkelSession</span><span class="p">()</span>
+        <span class="n">cids_query</span> <span class="o">=</span> <span class="n">cids_query</span> <span class="ow">or</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>\
+                                          <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">split</span> <span class="o">==</span> <span class="n">split</span><span class="p">)</span>
+
+        <span class="c1"># Note: In the current UDFRunner implementation, we load all these into memory and fill a</span>
+        <span class="c1"># multiprocessing JoinableQueue with them before starting... so might as well load them here and pass in.</span>
+        <span class="c1"># Also, if we try to pass in a query iterator instead, with AUTOCOMMIT on, we get a TXN error...</span>
+        <span class="n">cids</span>       <span class="o">=</span> <span class="n">cids_query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">cids_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cids</span><span class="p">)</span>
+
+        <span class="c1"># Run the Annotator</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Annotator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cids</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">,</span> <span class="n">key_group</span><span class="o">=</span><span class="n">key_group</span><span class="p">,</span>
+            <span class="n">replace_key_set</span><span class="o">=</span><span class="n">replace_key_set</span><span class="p">,</span> <span class="n">cids_query</span><span class="o">=</span><span class="n">cids_query</span><span class="p">,</span>
+            <span class="n">count</span><span class="o">=</span><span class="n">cids_count</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Load the matrix</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_matrix</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">,</span> <span class="n">cids_query</span><span class="o">=</span><span class="n">cids_query</span><span class="p">,</span>
+            <span class="n">key_group</span><span class="o">=</span><span class="n">key_group</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Annotator.clear"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.Annotator.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">key_group</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">replace_key_set</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">cids_query</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes the Annotations for the Candidates in the given split.</span>
+<span class="sd">        If replace_key_set=True, deletes *all* Annotations (of this Annotation sub-class)</span>
+<span class="sd">        and also deletes all AnnotationKeys (of this sub-class)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_class</span><span class="p">)</span>
+
+        <span class="c1"># If replace_key_set=False, then we just delete the annotations for candidates in our split</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">replace_key_set</span><span class="p">:</span>
+            <span class="n">sub_query</span> <span class="o">=</span> <span class="n">cids_query</span> <span class="ow">or</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>\
+                                             <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">split</span> <span class="o">==</span> <span class="n">split</span><span class="p">)</span>
+            <span class="n">sub_query</span> <span class="o">=</span> <span class="n">sub_query</span><span class="o">.</span><span class="n">subquery</span><span class="p">()</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_class</span><span class="o">.</span><span class="n">candidate_id</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">sub_query</span><span class="p">))</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">synchronize_session</span><span class="o">=</span><span class="s1">&#39;fetch&#39;</span><span class="p">)</span>
+
+        <span class="c1"># If we are creating a new key set, delete all old annotation keys</span>
+        <span class="k">if</span> <span class="n">replace_key_set</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_class</span><span class="p">)</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">group</span> <span class="o">==</span> <span class="n">key_group</span><span class="p">)</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">synchronize_session</span><span class="o">=</span><span class="s1">&#39;fetch&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Annotator.apply_existing"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.Annotator.apply_existing">[docs]</a>    <span class="k">def</span> <span class="nf">apply_existing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">key_group</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cids_query</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Alias for apply that emphasizes we are using an existing AnnotatorKey set.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">,</span> <span class="n">key_group</span><span class="o">=</span><span class="n">key_group</span><span class="p">,</span>
+            <span class="n">replace_key_set</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cids_query</span><span class="o">=</span><span class="n">cids_query</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">load_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">key_group</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cids_query</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="AnnotatorUDF"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.AnnotatorUDF">[docs]</a><span class="k">class</span> <span class="nc">AnnotatorUDF</span><span class="p">(</span><span class="n">UDF</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotation_class</span><span class="p">,</span> <span class="n">annotation_key_class</span><span class="p">,</span> <span class="n">f_gen</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotation_class</span>     <span class="o">=</span> <span class="n">annotation_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_class</span> <span class="o">=</span> <span class="n">annotation_key_class</span>
+
+        <span class="c1"># AnnotatorUDF relies on a *generator function* which yields annotations</span>
+        <span class="c1"># given a candidate input</span>
+        <span class="c1"># NB: inspect.isgeneratorfunction is not sufficient to check if f_ger</span>
+        <span class="c1"># is a generator (does not work with fns that wrap gen, e.g. partial)</span>
+        <span class="c1"># So no check here at the moment...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anno_generator</span> <span class="o">=</span> <span class="n">f_gen</span>
+
+        <span class="c1"># For caching key ids during the reduce step</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">AnnotatorUDF</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AnnotatorUDF.apply"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.AnnotatorUDF.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cid</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies a given function to a Candidate, yielding a set of Annotations as key_name, value pairs</span>
+
+<span class="sd">        Note: Accepts a candidate _id_ as argument, because of issues with putting Candidate subclasses</span>
+<span class="sd">        into Queues (can&#39;t pickle...)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">cid</span> <span class="o">=</span> <span class="n">cid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">c</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Candidate</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">cid</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">anno_generator</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+
+            <span class="c1"># Note: Make sure no duplicates emitted here!</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cid</span><span class="p">,</span> <span class="n">key_name</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">cid</span><span class="p">,</span> <span class="n">key_name</span><span class="p">))</span>
+                <span class="k">yield</span> <span class="n">cid</span><span class="p">,</span> <span class="n">key_name</span><span class="p">,</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="AnnotatorUDF.reduce"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.AnnotatorUDF.reduce">[docs]</a>    <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clear</span><span class="p">,</span> <span class="n">key_group</span><span class="p">,</span> <span class="n">replace_key_set</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inserts Annotations into the database.</span>
+<span class="sd">        For Annotations with unseen AnnotationKeys (in key_group, if not None), either adds these</span>
+<span class="sd">        AnnotationKeys if create_new_keyset is True, else skips these Annotations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cid</span><span class="p">,</span> <span class="n">key_name</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">y</span>
+
+        <span class="c1"># Prepares queries</span>
+        <span class="c1"># Annoation updating only needs to be done if clear=False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">clear</span><span class="p">:</span>
+            <span class="n">anno_update_query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotation_class</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+            <span class="n">anno_update_query</span> <span class="o">=</span> <span class="n">anno_update_query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_class</span><span class="o">.</span><span class="n">candidate_id</span> <span class="o">==</span> <span class="n">bindparam</span><span class="p">(</span><span class="s1">&#39;cid&#39;</span><span class="p">))</span>
+            <span class="n">anno_update_query</span> <span class="o">=</span> <span class="n">anno_update_query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_class</span><span class="o">.</span><span class="n">key_id</span> <span class="o">==</span> <span class="n">bindparam</span><span class="p">(</span><span class="s1">&#39;kid&#39;</span><span class="p">))</span>
+            <span class="n">anno_update_query</span> <span class="o">=</span> <span class="n">anno_update_query</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">bindparam</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">))</span>
+
+        <span class="c1"># We only need to insert AnnotationKeys if replace_key_set=True</span>
+        <span class="c1"># Note that in current configuration, we never update AnnotationKeys!</span>
+        <span class="k">if</span> <span class="n">replace_key_set</span><span class="p">:</span>
+            <span class="n">key_insert_query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
+
+        <span class="c1"># If we are replacing the AnnotationKeys (replace_key_set=True), then we assume they will</span>
+        <span class="c1"># all have been handled by *this* reduce thread, and hence be in the cache already</span>
+        <span class="c1"># So we only need key select queries if replace_key_set=False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">key_select_query</span> <span class="o">=</span> <span class="n">select</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>\
+                                <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">bindparam</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">key_group</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">key_select_query</span> <span class="o">=</span> <span class="n">key_select_query</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">group</span> <span class="o">==</span> <span class="n">key_group</span><span class="p">)</span>
+
+        <span class="n">anno_insert_query</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotation_class</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
+
+        <span class="c1"># Check if the AnnotationKey already exists, and gets its id</span>
+        <span class="n">key_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">key_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_cache</span><span class="p">:</span>
+            <span class="n">key_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_cache</span><span class="p">[</span><span class="n">key_name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">key_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">key_name</span><span class="p">,</span> <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="n">key_group</span><span class="p">}</span> <span class="k">if</span> <span class="n">key_group</span> <span class="k">else</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">key_name</span><span class="p">}</span>
+
+            <span class="c1"># If we are replacing the AnnotationKeys (replace_key_set=True), then we assume they will</span>
+            <span class="c1"># all have been handled by *this* reduce thread, and hence be in the cache already</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">replace_key_set</span><span class="p">:</span>
+                <span class="n">key_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">key_select_query</span><span class="p">,</span> <span class="n">key_args</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+            <span class="c1"># Key not in cache but exists in DB; add to cache</span>
+            <span class="k">if</span> <span class="n">key_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">key_id</span>                   <span class="o">=</span> <span class="n">key_id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">key_cache</span><span class="p">[</span><span class="n">key_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">key_id</span>
+
+            <span class="c1"># Key not in cache or DB; add to both if create_new_keyset = True</span>
+            <span class="k">elif</span> <span class="n">replace_key_set</span><span class="p">:</span>
+                <span class="n">key_id</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">key_insert_query</span><span class="p">,</span> <span class="n">key_args</span><span class="p">)</span><span class="o">.</span><span class="n">inserted_primary_key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">key_cache</span><span class="p">[</span><span class="n">key_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">key_id</span>
+
+        <span class="c1"># If AnnotationKey does not exist and create_new_keyset = False, skip</span>
+        <span class="k">if</span> <span class="n">key_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="c1"># Updates the Annotation, assuming one might already exist, if try_update = True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">clear</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">anno_update_query</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;cid&#39;</span><span class="p">:</span> <span class="n">cid</span><span class="p">,</span> <span class="s1">&#39;kid&#39;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+
+            <span class="c1"># If Annotation does not exist, insert</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">clear</span> <span class="ow">or</span> <span class="n">res</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">anno_insert_query</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;candidate_id&#39;</span><span class="p">:</span> <span class="n">cid</span><span class="p">,</span> <span class="s1">&#39;key_id&#39;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span></div></div>
+
+
+<div class="viewcode-block" id="load_matrix"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.load_matrix">[docs]</a><span class="k">def</span> <span class="nf">load_matrix</span><span class="p">(</span><span class="n">matrix_class</span><span class="p">,</span> <span class="n">annotation_key_class</span><span class="p">,</span> <span class="n">annotation_class</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span>
+    <span class="n">split</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cids_query</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key_group</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">key_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zero_one</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">load_as_array</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">coerce_int</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the annotations corresponding to a split of candidates with N members</span>
+<span class="sd">    and an AnnotationKey group with M distinct keys as an N x M CSR sparse matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cid_query</span> <span class="o">=</span> <span class="n">cids_query</span> <span class="ow">or</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>\
+                                     <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">split</span> <span class="o">==</span> <span class="n">split</span><span class="p">)</span>
+    <span class="n">cid_query</span> <span class="o">=</span> <span class="n">cid_query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="n">keys_query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="n">keys_query</span> <span class="o">=</span> <span class="n">keys_query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">group</span> <span class="o">==</span> <span class="n">key_group</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">keys_query</span> <span class="o">=</span> <span class="n">keys_query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">key_names</span><span class="p">)))</span>
+    <span class="n">keys_query</span> <span class="o">=</span> <span class="n">keys_query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">annotation_key_class</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="c1"># First, we query to construct the row index map</span>
+    <span class="n">cid_to_row</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">row_to_cid</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">cid</span><span class="p">,</span> <span class="ow">in</span> <span class="n">cid_query</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">cid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cid_to_row</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cid_to_row</span><span class="p">)</span>
+
+            <span class="c1"># Create both mappings</span>
+            <span class="n">cid_to_row</span><span class="p">[</span><span class="n">cid</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="n">row_to_cid</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>   <span class="o">=</span> <span class="n">cid</span>
+
+    <span class="c1"># Second, we query to construct the column index map</span>
+    <span class="n">kid_to_col</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">col_to_kid</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">kid</span><span class="p">,</span> <span class="ow">in</span> <span class="n">keys_query</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">kid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kid_to_col</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kid_to_col</span><span class="p">)</span>
+
+            <span class="c1"># Create both mappings</span>
+            <span class="n">kid_to_col</span><span class="p">[</span><span class="n">kid</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="n">col_to_kid</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>   <span class="o">=</span> <span class="n">kid</span>
+
+    <span class="c1"># Create sparse matrix in COO format for incremental construction</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Rely on the core for fast iteration</span>
+    <span class="n">annot_select_query</span> <span class="o">=</span> <span class="n">annotation_class</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+
+    <span class="c1"># Iteratively construct row index and output sparse matrix</span>
+    <span class="c1"># Cycles through the entire table to load the data.</span>
+    <span class="c1"># Perfornamce may slow down based on table size; however, negligible since</span>
+    <span class="c1"># it takes 8min to go throuh 245M rows (pretty fast).</span>
+    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">annot_select_query</span><span class="p">):</span>
+        <span class="c1"># NOTE: The order of return seems to be switched in Python 3???</span>
+        <span class="c1"># Either way, make sure the order is set here explicitly!</span>
+        <span class="n">cid</span><span class="p">,</span> <span class="n">kid</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">candidate_id</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">key_id</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">if</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">cid_to_row</span> <span class="ow">and</span> <span class="n">kid</span> <span class="ow">in</span> <span class="n">kid_to_col</span><span class="p">:</span>
+
+            <span class="c1"># Optionally restricts val range to {0,1}, mapping -1 -&gt; 0</span>
+            <span class="k">if</span> <span class="n">zero_one</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cid_to_row</span><span class="p">[</span><span class="n">cid</span><span class="p">])</span>
+            <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kid_to_col</span><span class="p">[</span><span class="n">kid</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">coerce_int</span><span class="p">:</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">columns</span><span class="p">)),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cid_to_row</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">kid_to_col</span><span class="p">)))</span>
+
+    <span class="c1"># Return as an AnnotationMatrix</span>
+    <span class="n">Xr</span> <span class="o">=</span> <span class="n">matrix_class</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">candidate_index</span><span class="o">=</span><span class="n">cid_to_row</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">row_to_cid</span><span class="p">,</span>
+            <span class="n">annotation_key_cls</span><span class="o">=</span><span class="n">annotation_key_class</span><span class="p">,</span> <span class="n">key_index</span><span class="o">=</span><span class="n">kid_to_col</span><span class="p">,</span>
+            <span class="n">col_index</span><span class="o">=</span><span class="n">col_to_kid</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">Xr</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span> <span class="k">if</span> <span class="n">load_as_array</span> <span class="k">else</span> <span class="n">Xr</span></div>
+
+
+<span class="k">def</span> <span class="nf">load_label_matrix</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">load_matrix</span><span class="p">(</span><span class="n">csr_LabelMatrix</span><span class="p">,</span> <span class="n">LabelKey</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">load_feature_matrix</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">load_matrix</span><span class="p">(</span><span class="n">csr_AnnotationMatrix</span><span class="p">,</span> <span class="n">FeatureKey</span><span class="p">,</span> <span class="n">Feature</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">load_gold_labels</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">annotator_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">load_matrix</span><span class="p">(</span><span class="n">csr_LabelMatrix</span><span class="p">,</span> <span class="n">GoldLabelKey</span><span class="p">,</span> <span class="n">GoldLabel</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">key_names</span><span class="o">=</span><span class="p">[</span><span class="n">annotator_name</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LabelAnnotator"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.LabelAnnotator">[docs]</a><span class="k">class</span> <span class="nc">LabelAnnotator</span><span class="p">(</span><span class="n">Annotator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply labeling functions to the candidates, generating Label annotations</span>
+
+<span class="sd">    :param lfs: A _list_ of labeling functions (LFs)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lfs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_generator</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">lfs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span> <span class="p">:</span> <span class="p">[(</span><span class="n">lf</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">lf</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">lf</span> <span class="ow">in</span> <span class="n">lfs</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">label_generator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span> <span class="p">:</span> <span class="n">label_generator</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Must provide lfs or label_generator kwarg.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Convert lfs to a generator function</span>
+        <span class="c1"># In particular, catch verbose values and convert to integer ones</span>
+        <span class="k">def</span> <span class="nf">f_gen</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">lf_key</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+                <span class="c1"># Note: We assume if the LF output is an int, it is already</span>
+                <span class="c1"># mapped correctly</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                    <span class="k">yield</span> <span class="n">lf_key</span><span class="p">,</span> <span class="n">label</span>
+                <span class="c1"># None is a protected LF output value corresponding to 0,</span>
+                <span class="c1"># representing LF abstaining</span>
+                <span class="k">elif</span> <span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">lf_key</span><span class="p">,</span> <span class="mi">0</span>
+                <span class="k">elif</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="k">yield</span> <span class="n">lf_key</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="c1"># Note: Would be nice to not special-case here, but for</span>
+                    <span class="c1"># consistency we leave binary LF range as {-1,0,1}</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+                        <span class="k">yield</span> <span class="n">lf_key</span><span class="p">,</span> <span class="n">val</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                        Unable to parse label with value </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">                        for candidate with values </span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">LabelAnnotator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">Label</span><span class="p">,</span> <span class="n">LabelKey</span><span class="p">,</span> <span class="n">f_gen</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">load_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">load_label_matrix</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FeatureAnnotator"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.FeatureAnnotator">[docs]</a><span class="k">class</span> <span class="nc">FeatureAnnotator</span><span class="p">(</span><span class="n">Annotator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply feature generators to the candidates, generating Feature annotations&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">get_span_feats</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FeatureAnnotator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">Feature</span><span class="p">,</span> <span class="n">FeatureKey</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">load_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">load_feature_matrix</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">coerce_int</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="save_marginals"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.save_marginals">[docs]</a><span class="k">def</span> <span class="nf">save_marginals</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">marginals</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Save marginal probabilities for a set of Candidates to db.</span>
+
+<span class="sd">    :param X: Either an M x N csr_AnnotationMatrix-class matrix, where M</span>
+<span class="sd">        is number of candidates, N number of LFs/features; OR a list of</span>
+<span class="sd">        arbitrary objects with candidate ids accessible via a .id attrib</span>
+<span class="sd">    :param marginals: A dense M x K matrix of marginal probabilities, where</span>
+<span class="sd">        K is the cardinality of the candidates, OR a M-dim list/array if K=2.</span>
+<span class="sd">    :param training: If True, these are training marginals / labels; else they</span>
+<span class="sd">        are saved as end model predictions.</span>
+
+<span class="sd">    Note: The marginals for k=0 are not stored, only for k = 1,...,K</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Make sure that we are working with a numpy array</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">marginals</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">marginals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">marginals</span><span class="p">)</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">marginals</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Handle binary input as M x 1-dim array; assume elements represent</span>
+    <span class="c1"># poksitive (k=1) class values</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">marginals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="mi">1</span><span class="o">-</span><span class="n">marginals</span><span class="p">,</span> <span class="n">marginals</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># Only add values for classes k=1,...,K</span>
+    <span class="n">marginal_tuples</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">marginals</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">marginal_tuples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">marginals</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]))</span>
+
+    <span class="c1"># NOTE: This will delete all existing marginals of type `training`</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Marginal</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Marginal</span><span class="o">.</span><span class="n">training</span> <span class="o">==</span> <span class="n">training</span><span class="p">)</span><span class="o">.</span>\
+        <span class="n">delete</span><span class="p">(</span><span class="n">synchronize_session</span><span class="o">=</span><span class="s1">&#39;fetch&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Prepare bulk INSERT query</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">Marginal</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">insert</span><span class="p">()</span>
+
+    <span class="c1"># Check whether X is an AnnotationMatrix or not</span>
+    <span class="n">anno_matrix</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">csr_AnnotationMatrix</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">anno_matrix</span><span class="p">:</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="c1"># Prepare values</span>
+    <span class="n">insert_vals</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">marginal_tuples</span><span class="p">:</span>
+        <span class="n">cid</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">get_candidate</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">id</span> <span class="k">if</span> <span class="n">anno_matrix</span> <span class="k">else</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">insert_vals</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;candidate_id&#39;</span><span class="p">:</span> <span class="n">cid</span><span class="p">,</span>
+            <span class="s1">&#39;training&#39;</span><span class="p">:</span> <span class="n">training</span><span class="p">,</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+            <span class="c1"># We cast p in case its a numpy type, which psycopg2 does not handle</span>
+            <span class="s1">&#39;probability&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="p">})</span>
+
+    <span class="c1"># Execute update</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">insert_vals</span><span class="p">)</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved </span><span class="si">%s</span><span class="s2"> marginals&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">marginals</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="load_marginals"><a class="viewcode-back" href="../../annotations.html#snorkel.annotations.load_marginals">[docs]</a><span class="k">def</span> <span class="nf">load_marginals</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cids_query</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load the marginal probs. for a given split of Candidates&quot;&quot;&quot;</span>
+    <span class="c1"># For candidate ids subquery</span>
+    <span class="n">cids_query</span> <span class="o">=</span> <span class="n">cids_query</span> <span class="ow">or</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">split</span> <span class="o">==</span> <span class="n">split</span><span class="p">)</span>
+    <span class="c1"># Ensure ordering by CID</span>
+    <span class="n">cids_query</span> <span class="o">=</span> <span class="n">cids_query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Candidate</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="n">cids_sub_query</span> <span class="o">=</span> <span class="n">cids_query</span><span class="o">.</span><span class="n">subquery</span><span class="p">(</span><span class="s1">&#39;cids&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Load marginal tuples from db</span>
+    <span class="n">marginal_tuples</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Marginal</span><span class="o">.</span><span class="n">candidate_id</span><span class="p">,</span> <span class="n">Marginal</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">Marginal</span><span class="o">.</span><span class="n">probability</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Marginal</span><span class="o">.</span><span class="n">candidate_id</span> <span class="o">==</span> <span class="n">cids_sub_query</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Marginal</span><span class="o">.</span><span class="n">training</span> <span class="o">==</span> <span class="n">training</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="c1"># If an AnnotationMatrix or list of candidates X is provided, we make sure</span>
+    <span class="c1"># that the returned marginals are collated with X.</span>
+    <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># For now, handle feature matrix vs. list of objects with try / except</span>
+        <span class="c1"># Handle AnnotationMatrix</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cardinality</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">get_candidate</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cardinality</span>
+            <span class="n">marginals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cardinality</span><span class="p">))</span>
+            <span class="n">cid_map</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">candidate_index</span>
+
+        <span class="c1"># Handle list of Candidates</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">cardinality</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cardinality</span>
+            <span class="n">marginals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">cardinality</span><span class="p">))</span>
+            <span class="n">cid_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">x</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X</span><span class="p">)])</span>
+
+    <span class="c1"># Otherwise if X is not provided, we sort by candidate id, using the</span>
+    <span class="c1"># cids_query from above</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cardinality</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Candidate</span><span class="p">)</span> \
+            <span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">marginal_tuples</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">cardinality</span>
+        <span class="n">marginals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">cids_query</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="n">cardinality</span><span class="p">))</span>
+        <span class="n">cid_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">cid</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">cid</span><span class="p">,)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cids_query</span><span class="o">.</span><span class="n">all</span><span class="p">())])</span>
+
+    <span class="c1"># Assemble the marginals matrix according to the candidate index of X</span>
+    <span class="k">for</span> <span class="n">cid</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">marginal_tuples</span><span class="p">:</span>
+        <span class="n">marginals</span><span class="p">[</span><span class="n">cid_map</span><span class="p">[</span><span class="n">cid</span><span class="p">],</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+
+    <span class="c1"># Add first column if k &gt; 2, else ravel</span>
+    <span class="k">if</span> <span class="n">cardinality</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">row_sums</span> <span class="o">=</span> <span class="n">marginals</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">marginals</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">marginals</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">row_sums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">marginals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">marginals</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">marginals</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Snorkel 0.6.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Alex Ratner, Stephen Bach, Henry Ehrenberg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

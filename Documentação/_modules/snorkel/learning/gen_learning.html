@@ -1,0 +1,992 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>snorkel.learning.gen_learning &#8212; Snorkel 0.6.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Snorkel 0.6.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for snorkel.learning.gen_learning</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">builtins</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">future.utils</span> <span class="k">import</span> <span class="n">iteritems</span>
+
+<span class="kn">from</span> <span class="nn">.classifier</span> <span class="k">import</span> <span class="n">Classifier</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="k">import</span> <span class="n">jit</span>
+<span class="kn">import</span> <span class="nn">numbskull</span>
+<span class="kn">from</span> <span class="nn">numbskull</span> <span class="k">import</span> <span class="n">NumbSkull</span>
+<span class="kn">from</span> <span class="nn">numbskull.inference</span> <span class="k">import</span> <span class="n">FACTORS</span>
+<span class="kn">from</span> <span class="nn">numbskull.numbskulltypes</span> <span class="k">import</span> <span class="n">Weight</span><span class="p">,</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">Factor</span><span class="p">,</span> <span class="n">FactorToVar</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sparse</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">DataFrame</span>
+<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="k">import</span> <span class="n">StrictVersion</span>
+<span class="kn">from</span> <span class="nn">six.moves.cPickle</span> <span class="k">import</span> <span class="n">dump</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">DEP_SIMILAR</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">DEP_FIXING</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">DEP_REINFORCING</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">DEP_EXCLUSIVE</span> <span class="o">=</span> <span class="mi">3</span>
+
+
+<div class="viewcode-block" id="GenerativeModel"><a class="viewcode-back" href="../../../learning.html#snorkel.learning.gen_learning.GenerativeModel">[docs]</a><span class="k">class</span> <span class="nc">GenerativeModel</span><span class="p">(</span><span class="n">Classifier</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A generative model for data programming for binary classification.</span>
+
+<span class="sd">    Supports dependencies among labeling functions.</span>
+
+<span class="sd">    :param class_prior: whether to include class label prior factors</span>
+<span class="sd">    :param lf_prior: whether to include labeling function prior factors</span>
+<span class="sd">    :param lf_propensity: whether to include labeling function propensity</span>
+<span class="sd">        factors</span>
+<span class="sd">    :param lf_class_propensity: whether to include class-specific labeling</span>
+<span class="sd">        function propensity factors</span>
+<span class="sd">    :param seed: seed for initializing state of Numbskull variables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_prior</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lf_prior</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lf_propensity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">lf_class_propensity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">271828</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cardinality</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">numbskull_version</span> <span class="o">=</span> <span class="n">numbskull</span><span class="o">.</span><span class="n">__version__</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">numbskull_version</span> <span class="o">=</span> <span class="s2">&quot;0.0&quot;</span>
+        <span class="n">numbskull_require</span> <span class="o">=</span> <span class="s2">&quot;0.1&quot;</span>
+
+        <span class="k">if</span> <span class="n">StrictVersion</span><span class="p">(</span><span class="n">numbskull_version</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">StrictVersion</span><span class="p">(</span><span class="n">numbskull_require</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Snorkel requires Numbskull version </span><span class="si">%s</span><span class="s2">, but version </span><span class="si">%s</span><span class="s2"> is installed.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">numbskull_require</span><span class="p">,</span> <span class="n">numbskull_version</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_prior</span> <span class="o">=</span> <span class="n">class_prior</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lf_prior</span> <span class="o">=</span> <span class="n">lf_prior</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lf_propensity</span> <span class="o">=</span> <span class="n">lf_propensity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lf_class_propensity</span> <span class="o">=</span> <span class="n">lf_class_propensity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">=</span> <span class="n">cardinality</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">set_numba_seeds</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+    <span class="c1"># These names of factor types are for the convenience of several methods</span>
+    <span class="c1"># that perform the same operations over multiple types, but this class&#39;s</span>
+    <span class="c1"># behavior is not fully specified here. Other methods, such as marginals(),</span>
+    <span class="c1"># as well as maps defined within methods, require manual adjustments to</span>
+    <span class="c1"># implement changes.</span>
+    <span class="c1">#</span>
+    <span class="c1"># These names are also used by other related classes, such as</span>
+    <span class="c1"># GenerativeModelParameters</span>
+    <span class="n">optional_names</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;lf_prior&#39;</span><span class="p">,</span> <span class="s1">&#39;lf_propensity&#39;</span><span class="p">,</span> <span class="s1">&#39;lf_class_propensity&#39;</span><span class="p">)</span>
+    <span class="n">dep_names</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;dep_similar&#39;</span><span class="p">,</span> <span class="s1">&#39;dep_fixing&#39;</span><span class="p">,</span> <span class="s1">&#39;dep_reinforcing&#39;</span><span class="p">,</span> <span class="s1">&#39;dep_exclusive&#39;</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="GenerativeModel.train"><a class="viewcode-back" href="../../../learning.html#snorkel.learning.gen_learning.GenerativeModel.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">deps</span><span class="o">=</span><span class="p">(),</span> <span class="n">LF_acc_prior_weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">LF_acc_prior_weight_default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_prior_weight</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">init_deps</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">init_class_prior</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">decay</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">reg_param</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">reg_type</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+        <span class="n">burn_in</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cardinality</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">candidate_ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threads</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fits the parameters of the model to a data set. By default, learns a</span>
+<span class="sd">        conditionally independent model. Additional unary dependencies can be</span>
+<span class="sd">        set to be included in the constructor. Additional pairwise and</span>
+<span class="sd">        higher-order dependencies can be included as an argument.</span>
+
+<span class="sd">        Results are stored as a member named weights, instance of</span>
+<span class="sd">        snorkel.learning.gen_learning.GenerativeModelWeights.</span>
+
+<span class="sd">        :param L: M x N csr_AnnotationMatrix-type label matrix, where there are </span>
+<span class="sd">            M candidates labeled by N labeling functions (LFs)</span>
+<span class="sd">        :param deps: collection of dependencies to include in the model, each </span>
+<span class="sd">                     element is a tuple of the form </span>
+<span class="sd">                     (LF 1 index, LF 2 index, dependency type),</span>
+<span class="sd">                     see snorkel.learning.constants</span>
+<span class="sd">        :param LF_acc_prior_weights: An N-element list of prior weights for the</span>
+<span class="sd">            LF accuracies (log scale)</span>
+<span class="sd">        :param LF_acc_prior_weight_default: Default prior for the weight of each </span>
+<span class="sd">            LF accuracy; if LF_acc_prior_weights is unset, each LF will have </span>
+<span class="sd">            this accuracy prior weight (log scale)</span>
+<span class="sd">        :param labels: Optional ground truth labels</span>
+<span class="sd">        :param label_prior_weight: The prior probability that the ground truth </span>
+<span class="sd">            labels (if provided) are correct (log scale)</span>
+<span class="sd">        :param init_deps: initial weight for additional dependencies, except</span>
+<span class="sd">                          class prior (log scale)</span>
+<span class="sd">        :param init_class_prior: initial class prior (in log scale), note only</span>
+<span class="sd">                                 used if class_prior=True in constructor</span>
+<span class="sd">        :param epochs: number of training epochs</span>
+<span class="sd">        :param step_size: gradient step size, default is 1 / L.shape[0]</span>
+<span class="sd">        :param decay: multiplicative decay of step size,</span>
+<span class="sd">                      step_size_(t+1) = step_size_(t) * decay</span>
+<span class="sd">        :param reg_param: regularization strength</span>
+<span class="sd">        :param reg_type: 1 = L1 regularization, 2 = L2 regularization</span>
+<span class="sd">        :param verbose: whether to write debugging info to stdout</span>
+<span class="sd">        :param truncation: number of iterations between truncation step for L1</span>
+<span class="sd">                           regularization</span>
+<span class="sd">        :param burn_in: number of burn-in samples to take before beginning</span>
+<span class="sd">                        learning</span>
+<span class="sd">        :param cardinality: number of possible classes; by default is inferred</span>
+<span class="sd">            from the label matrix L</span>
+<span class="sd">        :param timer: stopwatch for profiling, must implement start() and end()</span>
+<span class="sd">        :param candidate_ranges: Optionally, a list of M sets of integer values,</span>
+<span class="sd">            representing the possible categorical values that each of the M</span>
+<span class="sd">            candidates can take. If a label is outside of this range throws an</span>
+<span class="sd">            error. If None, then each candidate can take any value from 0 to</span>
+<span class="sd">            cardinality.</span>
+<span class="sd">        :param threads: the number of threads to use for sampling. Default is 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">step_size</span> <span class="o">=</span> <span class="n">step_size</span> <span class="ow">or</span> <span class="mf">0.0001</span>
+
+        <span class="c1"># Check to make sure matrix is int-valued</span>
+        <span class="n">element_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># Note: Other simpler forms of this check often don&#39;t work; still not</span>
+        <span class="c1"># sure why...</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Label matrix must have int-type elements, </span>
+<span class="s2">                but elements have type </span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="n">element_type</span><span class="p">)</span>
+
+        <span class="c1"># Automatically infer cardinality</span>
+        <span class="c1"># Binary: Values in {-1, 0, 1} [Default]</span>
+        <span class="c1"># Categorical: Values in {0, 1, ..., K}</span>
+        <span class="k">if</span> <span class="n">cardinality</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">=</span> <span class="n">cardinality</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If candidate_ranges is provided, use this to determine cardinality</span>
+            <span class="k">if</span> <span class="n">candidate_ranges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">cardinality</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="n">candidate_ranges</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># This is just an annoying hack for LIL sparse matrices...</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">lmax</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                    <span class="n">lmax</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">tocoo</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">lmax</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">cardinality</span> <span class="o">=</span> <span class="n">lmax</span>
+                <span class="k">elif</span> <span class="n">lmax</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">cardinality</span> <span class="o">=</span> <span class="mi">2</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;L.max() == </span><span class="si">%s</span><span class="s2">, cannot infer cardinality.&quot;</span> <span class="o">%</span> <span class="n">lmax</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inferred cardinality: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">cardinality</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">=</span> <span class="n">cardinality</span>
+
+        <span class="c1"># Priors for LFs default to fixed prior value</span>
+        <span class="c1"># NOTE: Setting default != 0.5 creates a (fixed) factor which increases</span>
+        <span class="c1"># runtime (by ~0.5x that of a non-fixed factor)...</span>
+        <span class="k">if</span> <span class="n">LF_acc_prior_weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">LF_acc_prior_weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">LF_acc_prior_weight_default</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">LF_acc_prior_weights</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">copy</span><span class="p">(</span><span class="n">LF_acc_prior_weights</span><span class="p">))</span>
+
+        <span class="c1"># LF weights are un-fixed</span>
+        <span class="n">is_fixed</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+        <span class="c1"># If supervised labels are provided, add them as a fixed LF with prior</span>
+        <span class="c1"># Note: For large L this column stack operation could be very</span>
+        <span class="c1"># inefficient, can consider refactoring...</span>
+        <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">L</span><span class="p">,</span> <span class="n">labels</span><span class="p">])</span>
+            <span class="n">is_fixed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">LF_acc_prior_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_prior_weight</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Reduce overhead of tracking indices by converting L to a CSR sparse matrix.</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># If candidate_ranges is provided, remap the values of L using</span>
+        <span class="c1"># candidate_ranges. This &quot;scoped categorical&quot; approach allows learning</span>
+        <span class="c1"># and inference to be efficient even with very large cardinality, as</span>
+        <span class="c1"># we only sample relevant values for each candidate. Also set</span>
+        <span class="c1"># per-candidate cardinalities according to candidate_ranges if not None,</span>
+        <span class="c1"># else as constant value.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cardinalities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">candidate_ranges</span> <span class="o">=</span> <span class="n">candidate_ranges</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_ranges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">L</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinalities</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_remap_scoped_categoricals</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">candidate_ranges</span><span class="p">)</span>
+
+        <span class="c1"># Shuffle the data points, cardinalities, and candidate_ranges</span>
+        <span class="n">idxs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)))</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">idxs</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="k">if</span> <span class="n">candidate_ranges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cardinalities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinalities</span><span class="p">[</span><span class="n">idxs</span><span class="p">]</span>
+            <span class="n">c_ranges_reshuffled</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idxs</span><span class="p">:</span>
+                <span class="n">c_ranges_reshuffled</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">candidate_ranges</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">candidate_ranges</span> <span class="o">=</span> <span class="n">c_ranges_reshuffled</span>
+
+        <span class="c1"># Compile factor graph</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process_dependency_graph</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">deps</span><span class="p">)</span>
+        <span class="n">weight</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">domain_mask</span><span class="p">,</span> <span class="n">n_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile</span><span class="p">(</span>
+            <span class="n">L</span><span class="p">,</span> <span class="n">init_deps</span><span class="p">,</span> <span class="n">init_class_prior</span><span class="p">,</span> <span class="n">LF_acc_prior_weights</span><span class="p">,</span> <span class="n">is_fixed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinalities</span><span class="p">)</span>
+        <span class="n">fg</span> <span class="o">=</span> <span class="n">NumbSkull</span><span class="p">(</span>
+            <span class="n">n_inference_epoch</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">n_learning_epoch</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> 
+            <span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span>
+            <span class="n">decay</span><span class="o">=</span><span class="n">decay</span><span class="p">,</span>
+            <span class="n">reg_param</span><span class="o">=</span><span class="n">reg_param</span><span class="p">,</span>
+            <span class="n">regularization</span><span class="o">=</span><span class="n">reg_type</span><span class="p">,</span>
+            <span class="n">truncation</span><span class="o">=</span><span class="n">truncation</span><span class="p">,</span>
+            <span class="n">quiet</span><span class="o">=</span><span class="p">(</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">),</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> 
+            <span class="n">learn_non_evidence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">burn_in</span><span class="o">=</span><span class="n">burn_in</span><span class="p">,</span>
+            <span class="n">nthreads</span><span class="o">=</span><span class="n">threads</span>
+        <span class="p">)</span>
+        <span class="n">fg</span><span class="o">.</span><span class="n">loadFactorGraph</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">domain_mask</span><span class="p">,</span> <span class="n">n_edges</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">timer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">fg</span><span class="o">.</span><span class="n">learning</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">timer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">timer</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process_learned_weights</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">LF_acc_prior_weights</span><span class="p">,</span> <span class="n">is_fixed</span><span class="p">)</span>
+
+        <span class="c1"># Store info from factor graph</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidate_ranges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cardinality_for_stats</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cardinalities</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cardinality_for_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">learned_weights</span> <span class="o">=</span> <span class="n">fg</span><span class="o">.</span><span class="n">factorGraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">weight_value</span>
+        <span class="n">weight</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">domain_mask</span><span class="p">,</span> <span class="n">n_edges</span> <span class="o">=</span>\
+            <span class="bp">self</span><span class="o">.</span><span class="n">_compile</span><span class="p">(</span><span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">L</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">init_deps</span><span class="p">,</span>
+                <span class="n">init_class_prior</span><span class="p">,</span> <span class="n">LF_acc_prior_weights</span><span class="p">,</span> <span class="n">is_fixed</span><span class="p">,</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cardinality_for_stats</span><span class="p">])</span>
+
+        <span class="n">variable</span><span class="p">[</span><span class="s2">&quot;isEvidence&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">weight</span><span class="p">[</span><span class="s2">&quot;isFixed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">weight</span><span class="p">[</span><span class="s2">&quot;initialValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fg</span><span class="o">.</span><span class="n">factorGraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">weight_value</span>
+
+        <span class="n">fg</span><span class="o">.</span><span class="n">factorGraphs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">fg</span><span class="o">.</span><span class="n">loadFactorGraph</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">domain_mask</span><span class="p">,</span> <span class="n">n_edges</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fg</span> <span class="o">=</span> <span class="n">fg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nlf</span> <span class="o">=</span> <span class="n">n</span></div>
+
+    <span class="k">def</span> <span class="nf">_remap_scoped_categoricals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L_in</span><span class="p">,</span> <span class="n">candidate_ranges</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remap the values of each individual candidate so that they have dense</span>
+<span class="sd">        support, returning the remapped label matrix, cardinalities, and</span>
+<span class="sd">        inverse mapping.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="n">L_in</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">cardinalities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">mappings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">c_range</span> <span class="o">=</span> <span class="n">candidate_ranges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="c1"># Confirm that the candidate range has only unique values</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_range</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">c_range</span><span class="p">))</span>
+            <span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_range</span><span class="p">)</span>
+
+            <span class="c1"># Create the inverse mapping</span>
+            <span class="n">mappings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">([(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">c_range</span><span class="p">)]))</span>
+
+            <span class="c1"># Re-map the values of L[i, :]</span>
+            <span class="c1"># Assumes L is csr_sparse format at this point</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">c_range</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Value </span><span class="si">{0}</span><span class="s2"> is not in supplied range </span>
+<span class="s2">                        for candidate at index </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">c_range</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">cardinalities</span><span class="p">,</span> <span class="n">mappings</span>
+
+<div class="viewcode-block" id="GenerativeModel.learned_lf_stats"><a class="viewcode-back" href="../../../learning.html#snorkel.learning.gen_learning.GenerativeModel.learned_lf_stats">[docs]</a>    <span class="k">def</span> <span class="nf">learned_lf_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Provides a summary of what the model has learned about the labeling</span>
+<span class="sd">        functions. For each labeling function, estimates of the following</span>
+<span class="sd">        are provided:</span>
+
+<span class="sd">            Abstain</span>
+<span class="sd">            Accuracy</span>
+<span class="sd">            Coverage</span>
+
+<span class="sd">            [Following are only available for binary tasks]</span>
+<span class="sd">            True  Positive (TP)</span>
+<span class="sd">            False Positive (FP)</span>
+<span class="sd">            True  Negative (TN)</span>
+<span class="sd">            False Negative (FN)</span>
+
+<span class="sd">        For scoped categoricals, the information provided is for the maximum</span>
+<span class="sd">        observed cardinality of any single data point.</span>
+
+<span class="sd">        WARNING: This uses Gibbs sampling to estimate these values. This will</span>
+<span class="sd">                 tend to mix poorly when there are many very accurate labeling</span>
+<span class="sd">                 functions. In this case, this function will assume that the</span>
+<span class="sd">                 classes are approximately balanced.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Must fit model with train() before computing diagnostics.&quot;</span><span class="p">)</span>
+
+        <span class="n">burnin</span> <span class="o">=</span> <span class="mi">500</span>
+        <span class="n">trials</span> <span class="o">=</span> <span class="mi">5000</span>
+        <span class="n">cardinality</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality_for_stats</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nlf</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">,</span> <span class="n">cardinality</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">true_label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cardinality</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlf</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">factorGraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">var_value</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">true_label</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">factorGraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inference</span><span class="p">(</span><span class="n">burnin</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">factorGraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inference</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">factorGraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">var_value</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlf</span><span class="p">):</span>
+                    <span class="n">lf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">factorGraphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">var_value</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                    <span class="n">count</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lf</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">count</span> <span class="o">/=</span> <span class="n">cardinality</span> <span class="o">*</span> <span class="n">trials</span>
+
+        <span class="c1"># Compute summary stats to return to user</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlf</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cardinality</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">tp</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">fp</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">tn</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+                <span class="n">coverage</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+                <span class="n">stats</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;Precision&quot;</span><span class="p">:</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">),</span>
+                    <span class="s2">&quot;Recall&quot;</span><span class="p">:</span> <span class="n">tp</span> <span class="o">/</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+                    <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">tn</span><span class="p">)</span> <span class="o">/</span> <span class="n">coverage</span><span class="p">,</span>
+                    <span class="s2">&quot;Coverage&quot;</span><span class="p">:</span> <span class="n">coverage</span>
+                    <span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">correct</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cardinality</span><span class="p">)])</span>
+                <span class="n">coverage</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">([</span><span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cardinality</span><span class="p">)])</span>
+                <span class="n">stats</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">coverage</span><span class="p">,</span>
+                    <span class="s2">&quot;Coverage&quot;</span><span class="p">:</span> <span class="n">coverage</span>
+                <span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GenerativeModel.marginals"><a class="viewcode-back" href="../../../learning.html#snorkel.learning.gen_learning.GenerativeModel.marginals">[docs]</a>    <span class="k">def</span> <span class="nf">marginals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">candidate_ranges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given an M x N label matrix, returns marginal probabilities for each</span>
+<span class="sd">        candidate, depending on classification setting:</span>
+
+<span class="sd">            - Binary: Returns M-dim array representing the marginal probability</span>
+<span class="sd">                of each candidate being True</span>
+
+<span class="sd">            - Categorical (cardinality = K): Returns M x K dense matrix</span>
+<span class="sd">                representing the marginal probabilities of each candidate being</span>
+<span class="sd">                each class.</span>
+
+<span class="sd">            - Scoped Categorical (cardinality = K, cardinality_ranges not None):</span>
+<span class="sd">                Returns an M x K *sparse* matrix of marginals.</span>
+
+<span class="sd">        In the categorical setting, the K values (columns in the marginals</span>
+<span class="sd">        matrix) correspond to indices of the Candidate values defined.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Must fit model with train() before computing </span>
+<span class="s2">                marginal probabilities.&quot;&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Binary classification setting</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">marginals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">logp_true</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">class_prior</span>
+                <span class="n">logp_false</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">class_prior</span>
+
+                <span class="n">l_i</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tocoo</span><span class="p">()</span>
+
+                <span class="k">for</span> <span class="n">l_index1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l_i</span><span class="o">.</span><span class="n">nnz</span><span class="p">):</span>
+                    <span class="n">data_j</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">l_i</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">l_index1</span><span class="p">],</span> <span class="n">l_i</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">l_index1</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">data_j</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">logp_true</span>  <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="n">logp_false</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="n">logp_true</span>  <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_class_propensity</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="n">logp_false</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_class_propensity</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">data_j</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="n">logp_true</span>  <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="n">logp_false</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="n">logp_true</span>  <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_class_propensity</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="n">logp_false</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_class_propensity</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Illegal value at </span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">: </span><span class="si">%d</span><span class="s2">.</span>
+<span class="s2">                            Must be in {-1, 0, 1}.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">data_j</span><span class="p">))</span>
+
+                    <span class="k">for</span> <span class="n">l_index2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l_i</span><span class="o">.</span><span class="n">nnz</span><span class="p">):</span>
+                        <span class="n">data_k</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">l_i</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">l_index2</span><span class="p">],</span> <span class="n">l_i</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">l_index2</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">k</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">data_j</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">data_k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                                <span class="n">logp_true</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">dep_fixing</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+                            <span class="k">elif</span> <span class="n">data_j</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">data_k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                <span class="n">logp_false</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">dep_fixing</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+
+                            <span class="k">if</span> <span class="n">data_j</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">data_k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                                <span class="n">logp_true</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">dep_reinforcing</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+                            <span class="k">elif</span> <span class="n">data_j</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">data_k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                <span class="n">logp_false</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">dep_reinforcing</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+
+                <span class="n">marginals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logp_false</span> <span class="o">-</span> <span class="n">logp_true</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">marginals</span>
+
+        <span class="c1"># Categorical setting</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">all_marginals</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Handle the scoped categorical case, otherwise get cardinalities</span>
+            <span class="c1"># from self.cardinality</span>
+            <span class="k">if</span> <span class="n">candidate_ranges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">L</span><span class="p">,</span> <span class="n">cardinalities</span><span class="p">,</span> <span class="n">mappings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_remap_scoped_categoricals</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> 
+                    <span class="n">candidate_ranges</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cardinalities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+            <span class="c1"># Get the marginal (posterior) probability for each candidate</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+                <span class="n">cardinality</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">marginals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">cardinality</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                <span class="c1"># NB: class priors not currently available for categoricals</span>
+                <span class="n">l_i</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tocoo</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">l_index1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l_i</span><span class="o">.</span><span class="n">nnz</span><span class="p">):</span>
+                    <span class="n">data_j</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">l_i</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">l_index1</span><span class="p">],</span> <span class="n">l_i</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">l_index1</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">data_j</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">data_j</span> <span class="o">&lt;=</span> <span class="n">cardinality</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                                <span class="sd">&quot;&quot;&quot;Illegal value at %d, %d: %d. Must be in 0 to </span>
+<span class="sd">                                %d.&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">data_j</span><span class="p">,</span> <span class="n">cardinality</span><span class="p">))</span>
+                        <span class="c1"># NB: LF class propensity not currently available</span>
+                        <span class="c1"># for categoricals</span>
+                        <span class="n">marginals</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">data_j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">+=</span> \
+                            <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                            
+                <span class="c1"># NB: fixing and reinforcing not available for categoricals</span>
+                <span class="c1"># Get softmax</span>
+                <span class="n">exps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">marginals</span><span class="p">)</span>
+                <span class="n">marginals</span> <span class="o">=</span> <span class="n">exps</span> <span class="o">/</span> <span class="n">exps</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="n">all_marginals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">marginals</span><span class="p">)</span>
+
+            <span class="c1"># If candidate_ranges not None, remap back to original values and</span>
+            <span class="c1"># return as sparse matrix</span>
+            <span class="k">if</span> <span class="n">candidate_ranges</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">M</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">marginals</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_marginals</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">marginals</span><span class="p">):</span>
+                        <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">mappings</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">all_marginals</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">M</span></div>
+
+    <span class="k">def</span> <span class="nf">_process_dependency_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">deps</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processes an iterable of triples that specify labeling function dependencies.</span>
+
+<span class="sd">        The first two elements of the triple are the labeling functions to be modeled as dependent. The labeling</span>
+<span class="sd">        functions are specified using their column indices in `L`. The third element is the type of dependency.</span>
+<span class="sd">        Options are :const:`DEP_SIMILAR`, :const:`DEP_FIXING`, :const:`DEP_REINFORCING`, and :const:`DEP_EXCLUSIVE`.</span>
+
+<span class="sd">        The results are :class:`scipy.sparse.csr_matrix` objects that represent directed adjacency matrices. They are</span>
+<span class="sd">        set as various GenerativeModel members, two for each type of dependency, e.g., `dep_similar` and `dep_similar_T`</span>
+<span class="sd">        (its transpose for efficient inverse lookups).</span>
+
+<span class="sd">        :param deps: iterable of tuples of the form (lf_1, lf_2, type)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dep_name_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">DEP_SIMILAR</span><span class="p">:</span> <span class="s1">&#39;dep_similar&#39;</span><span class="p">,</span>
+            <span class="n">DEP_FIXING</span><span class="p">:</span> <span class="s1">&#39;dep_fixing&#39;</span><span class="p">,</span>
+            <span class="n">DEP_REINFORCING</span><span class="p">:</span> <span class="s1">&#39;dep_reinforcing&#39;</span><span class="p">,</span>
+            <span class="n">DEP_EXCLUSIVE</span><span class="p">:</span> <span class="s1">&#39;dep_exclusive&#39;</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">dep_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">dep_names</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep_name</span><span class="p">,</span> <span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">((</span><span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+
+        <span class="k">for</span> <span class="n">lf1</span><span class="p">,</span> <span class="n">lf2</span><span class="p">,</span> <span class="n">dep_type</span> <span class="ow">in</span> <span class="n">deps</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lf1</span> <span class="o">==</span> <span class="n">lf2</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid dependency. Labeling function cannot depend on itself.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">dep_type</span> <span class="ow">in</span> <span class="n">dep_name_map</span><span class="p">:</span>
+                <span class="n">dep_mat</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep_name_map</span><span class="p">[</span><span class="n">dep_type</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized dependency type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dep_type</span><span class="p">))</span>
+
+            <span class="n">dep_mat</span><span class="p">[</span><span class="n">lf1</span><span class="p">,</span> <span class="n">lf2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">dep_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">dep_names</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep_name</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep_name</span><span class="p">)</span><span class="o">.</span><span class="n">tocoo</span><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_compile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">init_deps</span><span class="p">,</span> <span class="n">init_class_prior</span><span class="p">,</span> <span class="n">LF_acc_prior_weights</span><span class="p">,</span> <span class="n">is_fixed</span><span class="p">,</span> <span class="n">cardinalities</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compiles a generative model based on L and the current labeling function</span>
+<span class="sd">        dependencies.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="n">n_weights</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_prior</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasPrior</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">LF_acc_prior_weights</span><span class="p">]</span>
+        <span class="n">nPrior</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hasPrior</span><span class="p">)</span>
+        <span class="n">nUnFixed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="ow">not</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">is_fixed</span><span class="p">])</span>
+
+        <span class="n">n_weights</span> <span class="o">+=</span> <span class="n">nPrior</span>
+        <span class="n">n_weights</span> <span class="o">+=</span> <span class="n">nUnFixed</span>
+        <span class="k">for</span> <span class="n">optional_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">optional_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optional_name</span><span class="p">):</span>
+                <span class="n">n_weights</span> <span class="o">+=</span> <span class="n">n</span>
+        <span class="k">for</span> <span class="n">dep_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">dep_names</span><span class="p">:</span>
+            <span class="n">n_weights</span> <span class="o">+=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep_name</span><span class="p">)</span><span class="o">.</span><span class="n">getnnz</span><span class="p">()</span>
+
+        <span class="n">n_vars</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">n_factors</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">n_weights</span>
+
+        <span class="n">n_edges</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_prior</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">n_edges</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">nPrior</span> <span class="o">+</span> <span class="n">nUnFixed</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lf_prior</span><span class="p">:</span>
+            <span class="n">n_edges</span> <span class="o">+=</span> <span class="n">n</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lf_propensity</span><span class="p">:</span>
+            <span class="n">n_edges</span> <span class="o">+=</span> <span class="n">n</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lf_class_propensity</span><span class="p">:</span>
+            <span class="n">n_edges</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="n">n_edges</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep_similar</span><span class="o">.</span><span class="n">getnnz</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep_fixing</span><span class="o">.</span><span class="n">getnnz</span><span class="p">()</span> <span class="o">+</span> \
+                   <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep_reinforcing</span><span class="o">.</span><span class="n">getnnz</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep_exclusive</span><span class="o">.</span><span class="n">getnnz</span><span class="p">()</span>
+        <span class="n">n_edges</span> <span class="o">*=</span> <span class="n">m</span>
+
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_weights</span><span class="p">,</span> <span class="n">Weight</span><span class="p">)</span>
+        <span class="n">variable</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_vars</span><span class="p">,</span> <span class="n">Variable</span><span class="p">)</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_factors</span><span class="p">,</span> <span class="n">Factor</span><span class="p">)</span>
+        <span class="n">ftv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_edges</span><span class="p">,</span> <span class="n">FactorToVar</span><span class="p">)</span>
+        <span class="n">domain_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_vars</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Compiles weight matrix</span>
+        <span class="c1">#</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_prior</span><span class="p">:</span>
+            <span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;isFixed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;initialValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">init_class_prior</span><span class="p">)</span>
+            <span class="n">w_off</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">w_off</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="c1"># Prior on LF acc</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasPrior</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">weight</span><span class="p">[</span><span class="n">w_off</span><span class="p">][</span><span class="s1">&#39;isFixed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">weight</span><span class="p">[</span><span class="n">w_off</span><span class="p">][</span><span class="s1">&#39;initialValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LF_acc_prior_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">w_off</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># Learnable acc for LF</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">is_fixed</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="n">weight</span><span class="p">[</span><span class="n">w_off</span><span class="p">][</span><span class="s1">&#39;isFixed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+                <span class="c1"># Note: Because we&#39;re not doing exact gradient descent, don&#39;t</span>
+                <span class="c1"># need to add any random noise to initial values here</span>
+                <span class="c1"># Setting to 0 = setting to prior value</span>
+                <span class="n">weight</span><span class="p">[</span><span class="n">w_off</span><span class="p">][</span><span class="s1">&#39;initialValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">w_off</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w_off</span><span class="p">,</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">weight</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;isFixed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">weight</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;initialValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">init_deps</span><span class="p">)</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Compiles variable matrix</span>
+        <span class="c1">#</span>
+        <span class="c1"># Internal representation:</span>
+        <span class="c1">#   True Class:         0 to (cardinality - 1) are the classes</span>
+        <span class="c1">#   Labeling functions: 0 to (cardinality - 1) are the classes</span>
+        <span class="c1">#                       cardinality is abstain</span>
+        <span class="c1"># Candidates (variables)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">variable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;isEvidence&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">variable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;initialValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">variable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;dataType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">variable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;cardinality&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c1"># LF label variables -- initial loop to set all variables</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
+                <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;isEvidence&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;dataType&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;cardinality&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                
+                <span class="c1"># Default to abstain</span>
+                <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;initialValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c1"># LF labels -- now set the non-zero labels</span>
+        <span class="n">L_coo</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">tocoo</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">L_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L_coo</span><span class="o">.</span><span class="n">nnz</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">L_coo</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">L_index</span><span class="p">],</span> <span class="n">L_coo</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="n">L_index</span><span class="p">],</span> <span class="n">L_coo</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">L_index</span><span class="p">]</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
+
+            <span class="c1"># Note: Here we need to use the overall cardinality to handle, since</span>
+            <span class="c1"># with candidate_ranges not None and self.cardinality &gt; 2, some</span>
+            <span class="c1"># candidates could have cardinality == 2...</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;initialValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;initialValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+                <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;initialValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid labeling function output in cell (</span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">): </span><span class="si">%d</span><span class="s2">. &quot;</span>
+                                     <span class="s2">&quot;Valid values are 1, 0, and -1. &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;initialValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">data</span> <span class="o">&lt;=</span> <span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">variable</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s2">&quot;initialValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid labeling function output in cell (</span><span class="si">%d</span><span class="s2">, </span><span class="si">%d</span><span class="s2">): </span><span class="si">%d</span><span class="s2">. &quot;</span>
+                                     <span class="s2">&quot;Valid values are 0 to </span><span class="si">%d</span><span class="s2">. &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinalities</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># Compiles factor and ftv matrices</span>
+        <span class="c1">#</span>
+        <span class="c1"># Class prior</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_prior</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Class Prior not implemented for categorical classes.&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+                <span class="n">factor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;factorFunction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FACTORS</span><span class="p">[</span><span class="s2">&quot;DP_GEN_CLASS_PRIOR&quot;</span><span class="p">]</span>
+                <span class="n">factor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;weightId&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">factor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;featureValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">factor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;arity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">factor</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;ftv_offset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+
+                <span class="n">ftv</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;vid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+
+            <span class="n">f_off</span> <span class="o">=</span> <span class="n">m</span>
+            <span class="n">ftv_off</span> <span class="o">=</span> <span class="n">m</span>
+            <span class="n">w_off</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f_off</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">ftv_off</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">w_off</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Factors over labeling function outputs</span>
+        <span class="n">nfactors_for_lf</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hasPrior</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="ow">not</span> <span class="n">is_fixed</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">f_off</span><span class="p">,</span> <span class="n">ftv_off</span><span class="p">,</span> <span class="n">w_off</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile_output_factors</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">f_off</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">ftv_off</span><span class="p">,</span> <span class="n">w_off</span><span class="p">,</span> <span class="s2">&quot;DP_GEN_LF_ACCURACY&quot;</span><span class="p">,</span>
+                                                             <span class="p">(</span><span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">),</span> <span class="n">nfactors_for_lf</span><span class="p">)</span>
+
+        <span class="n">optional_name_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;lf_prior&#39;</span><span class="p">:</span>
+                <span class="p">(</span><span class="s1">&#39;DP_GEN_LF_PRIOR&#39;</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">,)),</span>
+            <span class="s1">&#39;lf_propensity&#39;</span><span class="p">:</span>
+                <span class="p">(</span><span class="s1">&#39;DP_GEN_LF_PROPENSITY&#39;</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">,)),</span>
+            <span class="s1">&#39;lf_class_propensity&#39;</span><span class="p">:</span>
+                <span class="p">(</span><span class="s1">&#39;DP_GEN_LF_CLASS_PROPENSITY&#39;</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)),</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">optional_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">optional_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optional_name</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">optional_name</span> <span class="o">!=</span> <span class="s1">&#39;lf_propensity&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">optional_name</span> <span class="o">+</span> <span class="s2">&quot; not implemented for categorical classes.&quot;</span><span class="p">)</span>
+                <span class="n">f_off</span><span class="p">,</span> <span class="n">ftv_off</span><span class="p">,</span> <span class="n">w_off</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile_output_factors</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">f_off</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">ftv_off</span><span class="p">,</span> <span class="n">w_off</span><span class="p">,</span>
+                                                                     <span class="n">optional_name_map</span><span class="p">[</span><span class="n">optional_name</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                                                     <span class="n">optional_name_map</span><span class="p">[</span><span class="n">optional_name</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Factors for labeling function dependencies</span>
+        <span class="n">dep_name_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;dep_similar&#39;</span><span class="p">:</span>
+                <span class="p">(</span><span class="s1">&#39;DP_GEN_DEP_SIMILAR&#39;</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="p">)),</span>
+            <span class="s1">&#39;dep_fixing&#39;</span><span class="p">:</span>
+                <span class="p">(</span><span class="s1">&#39;DP_GEN_DEP_FIXING&#39;</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="p">)),</span>
+            <span class="s1">&#39;dep_reinforcing&#39;</span><span class="p">:</span>
+                <span class="p">(</span><span class="s1">&#39;DP_GEN_DEP_REINFORCING&#39;</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="p">)),</span>
+            <span class="s1">&#39;dep_exclusive&#39;</span><span class="p">:</span>
+                <span class="p">(</span><span class="s1">&#39;DP_GEN_DEP_EXCLUSIVE&#39;</span><span class="p">,</span> <span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span>
+                    <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="p">))</span>
+        <span class="p">}</span>
+
+        <span class="n">CATEGORICAL_DEPS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dep_similar&#39;</span><span class="p">,</span> <span class="s1">&#39;dep_exclusive&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">dep_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">dep_names</span><span class="p">:</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mat</span><span class="o">.</span><span class="n">nnz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dep_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CATEGORICAL_DEPS</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                        <span class="n">dep_name</span> <span class="o">+</span> <span class="s2">&quot; not implemented for categorical classes.&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+                    <span class="n">f_off</span><span class="p">,</span> <span class="n">ftv_off</span><span class="p">,</span> <span class="n">w_off</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile_dep_factors</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> 
+                        <span class="n">f_off</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">ftv_off</span><span class="p">,</span> <span class="n">w_off</span><span class="p">,</span> <span class="n">mat</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">mat</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                        <span class="n">dep_name_map</span><span class="p">[</span><span class="n">dep_name</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dep_name_map</span><span class="p">[</span><span class="n">dep_name</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">weight</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">domain_mask</span><span class="p">,</span> <span class="n">n_edges</span>
+
+    <span class="k">def</span> <span class="nf">_compile_output_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">factors_offset</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> 
+        <span class="n">ftv_offset</span><span class="p">,</span> <span class="n">weight_offset</span><span class="p">,</span> <span class="n">factor_name</span><span class="p">,</span> <span class="n">vid_funcs</span><span class="p">,</span>
+        <span class="n">nfactors_for_lf</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compiles factors over the outputs of labeling functions, i.e., for which</span>
+<span class="sd">        there is one weight per labeling function and one factor per labeling </span>
+<span class="sd">        function-candidate pair.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="k">if</span> <span class="n">nfactors_for_lf</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">nfactors_for_lf</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+        <span class="n">factors_index</span> <span class="o">=</span> <span class="n">factors_offset</span>
+        <span class="n">ftv_index</span> <span class="o">=</span> <span class="n">ftv_offset</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">w_off</span> <span class="o">=</span> <span class="n">weight_offset</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nfactors_for_lf</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span>
+                    <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;factorFunction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FACTORS</span><span class="p">[</span><span class="n">factor_name</span><span class="p">]</span>
+                    <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;weightId&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_off</span>
+                    <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;featureValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;arity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vid_funcs</span><span class="p">)</span>
+                    <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;ftv_offset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ftv_index</span>
+
+                    <span class="n">factors_index</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">w_off</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                    <span class="k">for</span> <span class="n">vid_func</span> <span class="ow">in</span> <span class="n">vid_funcs</span><span class="p">:</span>
+                        <span class="n">ftv</span><span class="p">[</span><span class="n">ftv_index</span><span class="p">][</span><span class="s2">&quot;vid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vid_func</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+                        <span class="n">ftv_index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">factors_index</span><span class="p">,</span> <span class="n">ftv_index</span><span class="p">,</span> <span class="n">w_off</span>
+
+    <span class="k">def</span> <span class="nf">_compile_dep_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">factors</span><span class="p">,</span> <span class="n">factors_offset</span><span class="p">,</span> <span class="n">ftv</span><span class="p">,</span> <span class="n">ftv_offset</span><span class="p">,</span> <span class="n">weight_offset</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">factor_name</span><span class="p">,</span> <span class="n">vid_funcs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compiles factors for dependencies between pairs of labeling functions (possibly also depending on the latent</span>
+<span class="sd">        class label).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="n">factors_index</span> <span class="o">=</span> <span class="n">factors_offset</span> <span class="o">+</span> <span class="n">i</span>
+            <span class="n">ftv_index</span> <span class="o">=</span> <span class="n">ftv_offset</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">vid_funcs</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span>
+
+            <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;factorFunction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FACTORS</span><span class="p">[</span><span class="n">factor_name</span><span class="p">]</span>
+            <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;weightId&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight_offset</span>
+            <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;featureValue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;arity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vid_funcs</span><span class="p">)</span>
+            <span class="n">factors</span><span class="p">[</span><span class="n">factors_index</span><span class="p">][</span><span class="s2">&quot;ftv_offset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ftv_index</span>
+
+            <span class="k">for</span> <span class="n">i_var</span><span class="p">,</span> <span class="n">vid_func</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vid_funcs</span><span class="p">):</span>
+                <span class="n">ftv</span><span class="p">[</span><span class="n">ftv_index</span> <span class="o">+</span> <span class="n">i_var</span><span class="p">][</span><span class="s2">&quot;vid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vid_func</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">factors_offset</span> <span class="o">+</span> <span class="n">m</span><span class="p">,</span> <span class="n">ftv_offset</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">vid_funcs</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span><span class="p">,</span> <span class="n">weight_offset</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_process_learned_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">LF_acc_prior_weights</span><span class="p">,</span> <span class="n">is_fixed</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="n">w</span> <span class="o">=</span> <span class="n">fg</span><span class="o">.</span><span class="n">getFactorGraph</span><span class="p">()</span><span class="o">.</span><span class="n">getWeights</span><span class="p">()</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">GenerativeModelWeights</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_prior</span><span class="p">:</span>
+            <span class="n">weights</span><span class="o">.</span><span class="n">class_prior</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">w_off</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">w_off</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">weights</span><span class="o">.</span><span class="n">lf_accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="c1"># Prior on LF acc</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasPrior</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">weights</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">w</span><span class="p">[</span><span class="n">w_off</span><span class="p">]</span>
+                <span class="n">w_off</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># Learnable acc for LF</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">is_fixed</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                <span class="n">weights</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">w</span><span class="p">[</span><span class="n">w_off</span><span class="p">]</span>
+                <span class="n">w_off</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">optional_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">optional_names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optional_name</span><span class="p">):</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">optional_name</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">w_off</span><span class="p">:</span><span class="n">w_off</span> <span class="o">+</span> <span class="n">n</span><span class="p">]))</span>
+                <span class="n">w_off</span> <span class="o">+=</span> <span class="n">n</span>
+
+        <span class="k">for</span> <span class="n">dep_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep_names</span><span class="p">:</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep_name</span><span class="p">)</span>
+            <span class="n">weight_mat</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="n">w_off</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">weight_mat</span><span class="p">[</span><span class="n">mat</span><span class="o">.</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">mat</span><span class="o">.</span><span class="n">col</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">w_off</span><span class="p">]</span>
+                <span class="n">w_off</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">dep_name</span><span class="p">,</span> <span class="n">weight_mat</span><span class="o">.</span><span class="n">tocsr</span><span class="p">(</span><span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span>
+
+<div class="viewcode-block" id="GenerativeModel.save"><a class="viewcode-back" href="../../../learning.html#snorkel.learning.gen_learning.GenerativeModel.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save current model.&quot;&quot;&quot;</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="n">model_name</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">save_dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_dir</span><span class="p">)</span>
+        
+        <span class="c1"># Save generative model weights</span>
+        <span class="n">save_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.weights.pkl&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_name</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># Save other model hyperparameters needed to rebuild model</span>
+        <span class="n">save_path2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.hps.pkl&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_name</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_path2</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">dump</span><span class="p">({</span>
+                <span class="s1">&#39;cardinality&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span><span class="p">,</span>
+                <span class="s1">&#39;cardinality_for_stats&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardinality_for_stats</span>
+            <span class="p">},</span> <span class="n">f</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">] Model saved as &lt;</span><span class="si">{1}</span><span class="s2">&gt;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="GenerativeModel.load"><a class="viewcode-back" href="../../../learning.html#snorkel.learning.gen_learning.GenerativeModel.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_dir</span><span class="o">=</span><span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load model.&quot;&quot;&quot;</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="n">model_name</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">save_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.weights.pkl&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_name</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">save_path2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">.hps.pkl&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_name</span><span class="p">))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_path2</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">hps</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">(</span><span class="n">hps</span><span class="p">):</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{0}</span><span class="s2">] Model &lt;</span><span class="si">{1}</span><span class="s2">&gt; loaded.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">model_name</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="GenerativeModelWeights"><a class="viewcode-back" href="../../../learning.html#snorkel.learning.gen_learning.GenerativeModelWeights">[docs]</a><span class="k">class</span> <span class="nc">GenerativeModelWeights</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_prior</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lf_accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">optional_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">optional_names</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optional_name</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">dep_name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">dep_names</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dep_name</span><span class="p">,</span> <span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+
+<div class="viewcode-block" id="GenerativeModelWeights.is_sign_sparsistent"><a class="viewcode-back" href="../../../learning.html#snorkel.learning.gen_learning.GenerativeModelWeights.is_sign_sparsistent">[docs]</a>    <span class="k">def</span> <span class="nf">is_sign_sparsistent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">n</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Dimension mismatch. </span><span class="si">%d</span><span class="s2"> versus </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">n</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weight_is_sign_sparsitent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">class_prior</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">class_prior</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weight_is_sign_sparsitent</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">other</span><span class="o">.</span><span class="n">lf_accuracy</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">threshold</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">optional_names</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weight_is_sign_sparsitent</span><span class="p">(</span>
+                        <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">name</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span> <span class="n">threshold</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">GenerativeModel</span><span class="o">.</span><span class="n">dep_names</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weight_is_sign_sparsitent</span><span class="p">(</span>
+                            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">name</span><span class="p">)[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="n">threshold</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+    <span class="k">def</span> <span class="nf">_weight_is_sign_sparsitent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">threshold</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">w2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">w1</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="ow">and</span> <span class="n">w2</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">w1</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">threshold</span> <span class="ow">and</span> <span class="n">w2</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">set_numba_seeds</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">Snorkel 0.6.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Alex Ratner, Stephen Bach, Henry Ehrenberg.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>
