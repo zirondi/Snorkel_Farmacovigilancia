@@ -5,7 +5,6 @@ import os
 #shutil: getFiles
 from shutil import copy
 
-import unidecode
 
 #Paths dos folders
 inPath = '/home/lzirondi/datasets/AlexandreMartins/'
