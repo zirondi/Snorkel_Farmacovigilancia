@@ -1,4 +1,3 @@
-
 Event	a amilase pancreática do sangue aumenta
 Event	a erupção varicelliforme de kaposi
 Event	a síndrome de guillain-barré
