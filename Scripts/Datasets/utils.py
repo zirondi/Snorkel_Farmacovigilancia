@@ -98,7 +98,7 @@ def toSubsDicio():
         s = s.splitlines()
 
         for i in range(0, bagunça.get(d) - 1 ):
-            txt.write(unidecode.unidecode(s[i].lower()) + '\n')
+            #txt.write(unidecode.unidecode(s[i].lower()) + '\n')
         
     txt.close()
 
