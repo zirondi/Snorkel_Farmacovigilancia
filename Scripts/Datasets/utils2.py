@@ -53,7 +53,7 @@ def toSubsDicio():
     diciosSubstancia = [whiteList[2], whiteList[3], whiteList[5], whiteList[6]]
     limiteDicios = {whiteList[2]:6701, whiteList[3]:1778, whiteList[5]:5904, whiteList[6]:815}
 
-    txt = open(outPath + '/' + '/Dicionario_de_Substancias.txt', 'w', encoding='UTF-8')
+    
 
     finalSet = set()
 
@@ -62,7 +62,6 @@ def toSubsDicio():
             f = open(outCopyPath + '/' + d, 'r', encoding='UTF-16le')
         else:
             f = open(outCopyPath + '/' + d, 'r', encoding='UTF-8')
-        
         s = f.read()
         f.close()
 
@@ -76,18 +75,69 @@ def toSubsDicio():
         
     finalList = sorted(finalSet)
 
-    #print(finalList)
+    txt = open(outPath + '/' + '/Dicionario_de_Substancias.txt', 'w', encoding='UTF-8')
     for line in finalList[:-1]:
-        txt.write(line + '\n')
-
-        
+        txt.write(line + '\n')     
     txt.close()
 
 
+def toEventosDicio():
+    
+    
+
+    finalSet = set()
+    
+
+    f = open(outCopyPath + '/' + whiteList[0], 'r', encoding='UTF-8')
+    s = f.read()
+    f.close()
+    
+    s = s.splitlines()
+
+    for line in s:
+        finalSet.add(line.lower())
+
+    
+    f = open(outCopyPath + '/' + whiteList[1], 'r', encoding='UTF-8')
+    s = f.read()
+    f.close()
+
+    s = s.replace('Event	', '')
+    s = s.splitlines()
+
+    for i in range (0, 11561):
+         finalSet.add(s[i].lower())
+
+    finalSet.add('sono')
+
+    finalList = sorted(finalSet)
+
+    txt = open(outPath + '/Dicionario_de_Eventos.txt', 'w', encoding='UTF-8')
+    for line in finalList:
+        txt.write(line + '\n')
+    txt.close()
+
+def subsToList():
+
+    f = open(outPath + '/Dicionario_de_Substancias.txt', 'r', encoding='UTF-8')
+    s = f.read()
+    f.close()
+    s = s.splitlines()
+
+    return s
+
+def eventosToList():
+    f = open(outPath + '/Dicionario_de_Eventos.txt', 'r', encoding='UTF-8')
+    s = f.read()
+    f.close()
+    s = s.splitlines()
+
+    return s
+
 
 def doIt():
-    pass
+    getFiles()
+    toSubsDicio()
+    toEventosDicio()
 
-getFiles()
-toSubsDicio()
 
