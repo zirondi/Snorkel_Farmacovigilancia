@@ -3,6 +3,8 @@ import os
 #shutil: getFiles
 from shutil import copy
 
+from nltk.corpus import stopwords
+
 #Paths dos folders
 inPath = '/home/lzirondi/Github/AlexandreMartins'
 outCopyPath = '/home/lzirondi/Github/snorkel/Scripts/Datasets/toBeProcessed'
@@ -73,6 +75,8 @@ def toSubsDicio():
         for i in range(0, limiteDicios[d]):
             finalSet.add(s[i].lower())
         
+    stop_words = set(stopwords.words("portuguese"))
+    finalSet.difference_update(stop_words)    
     finalList = sorted(finalSet)
 
     txt = open(outPath + '/' + '/Dicionario_de_Substancias.txt', 'w', encoding='UTF-8')
@@ -110,6 +114,8 @@ def toEventosDicio():
 
     finalSet.add('sono')
 
+    stop_words = set(stopwords.words("portuguese"))
+    finalSet.difference_update(stop_words) 
     finalList = sorted(finalSet)
 
     txt = open(outPath + '/Dicionario_de_Eventos.txt', 'w', encoding='UTF-8')
@@ -141,3 +147,4 @@ def doIt():
     toEventosDicio()
 
 
+toEventosDicio()
