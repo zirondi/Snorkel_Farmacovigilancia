@@ -185,6 +185,7 @@ class Util:
             for line in nomes.get(name):
                 aux2 = line.split('\t')[0]            
                 f.write(aux2 + '\n')
+            print('Dicionário LIWC de %s gerado com sucesso.' % name)
     
 
     #Retornando o caminho do Corpus
