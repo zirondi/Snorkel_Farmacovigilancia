@@ -37,6 +37,7 @@ class Util:
             os.mkdir(self.outPath)
         
         for r, d, f in os.walk(self.inPath, topdown=True):
+            d = d
             for files in f:
                 if files in self.whiteList:
                     copy(os.path.join(r, files), self.outCopyPath)
