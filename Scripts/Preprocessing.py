@@ -8,12 +8,13 @@ from nltk.corpus import stopwords
 class Util:
     
 
-    def __init__(self, inPath, outPath, command):
+    def __init__(self, inPath, outPath, LIWCpath, command):
 
         
         self.inPath = inPath
         self.outCopyPath = outPath + '/toBeProcessed'
         self.outPath = outPath + '/Processed'
+        self.LIWCpath = LIWCpath
 
         if(command == True):
             #Ordem dos nomes importa aqui.
@@ -22,6 +23,7 @@ class Util:
             self.toTSV()
             self.toSubsDicio()
             self.toEventosDicio()
+            self.LIWKdicios()
 
 
     #Copiando os arquivos que estão na whitelist, de inPath para outPath
@@ -148,6 +150,40 @@ class Util:
         s = s.splitlines()
 
         return s
+    
+    def LIWKdicios(self):
+        f = open(self.LIWCpath + 'LIWC2015_pt.dic', 'r')
+        s = f.readlines()
+        f.close()
+        
+        #Verbos 20, Causas 52
+        causes = set()
+        verbs = set()
+        causes_and_verbs = set()
+
+
+        for i in range(0, len(s)):
+            aux = False
+            if('\t20\t' in s[i]):
+                verbs.add(s[i])
+                if('\t52\t' in s[i]):
+                    causes.add(s[i])
+                    causes_and_verbs.add(s[i])
+                    aux = True
+
+            if(aux):
+                causes.add(s[i])
+
+        causes = sorted(causes)
+        verbs = sorted(verbs)
+        causes_and_verbs = sorted(causes_and_verbs)        
+
+        nomes = {'Causas':causes, 'Verbos':verbs, 'Causas & Verbos':causes_and_verbs}
+        for name in nomes:
+            f = open(self.LIWCpath + '/Dicts/' + name, 'w')
+            for line in nomes.get(name):
+                aux2 = line.split('\t')[0]            
+                f.write(aux2 + '\n')
     
 
     #Retornando o caminho do Corpus
