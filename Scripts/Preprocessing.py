@@ -153,7 +153,7 @@ class Util:
         return s
     
     def LIWKdicios(self):
-        f = open(self.LIWCpath + 'LIWC2015_pt.dic', 'r')
+        f = open(self.LIWCpath + 'LIWC2015_pt.dic', 'r', encoding='UTF-8')
         s = f.readlines()
         f.close()
         
@@ -181,7 +181,7 @@ class Util:
 
         nomes = {'Causas':causes, 'Verbos':verbs, 'Causas & Verbos':causes_and_verbs}
         for name in nomes:
-            f = open(self.LIWCpath + '/Dicts/' + name, 'w')
+            f = open(self.LIWCpath + '/Dicts/' + name, 'w', encoding='UTF-8')
             for line in nomes.get(name):
                 aux2 = line.split('\t')[0]            
                 f.write(aux2 + '\n')
