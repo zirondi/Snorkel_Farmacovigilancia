@@ -2,3 +2,4 @@ __pycache__/
 .ipynb_checkpoints/
 LIWC2015_pt.dic
 snorkel.db
+LIWC2015_pt_no_desc.dic
