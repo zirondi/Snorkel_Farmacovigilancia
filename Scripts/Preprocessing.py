@@ -8,13 +8,14 @@ from nltk.corpus import stopwords
 class Util:
     
 
-    def __init__(self, inPath, outPath, LIWCpath, command):
+    #def __init__(self, inPath, outPath, LIWCpath, command):
+    def __init__(self, inPath, outPath, command):
 
         
         self.inPath = inPath
         self.outCopyPath = outPath + '/toBeProcessed'
         self.outPath = outPath + '/Processed'
-        self.LIWCpath = LIWCpath
+        #self.LIWCpath = LIWCpath
 
         if(command == True):
             #Ordem dos nomes importa aqui.
@@ -23,7 +24,7 @@ class Util:
             self.toTSV()
             self.toSubsDicio()
             self.toEventosDicio()
-            self.LIWKdicios()
+            #self.LIWKdicios()
 
 
     #Copiando os arquivos que estão na whitelist, de inPath para outPath
