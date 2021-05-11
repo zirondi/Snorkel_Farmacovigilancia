@@ -1,194 +1,211 @@
-#os: getFiles, toEventsDicio
+# os: _get_files, toEventsDicio
 import os
-#shutil: getFiles
+
+# shutil: _get_files
 from shutil import copy
-#nltk.corpus: toSubsDicio, toEventosDicio
+
+# nltk.corpus: _to_drugs_dict, _to_events_dict
 from nltk.corpus import stopwords
 
+
 class Util:
-    
+    def __init__(self, input_path, output_path, command=True):
 
-    #def __init__(self, inPath, outPath, LIWCpath, command):
-    def __init__(self, inPath, outPath, command):
+        self.divisor = os.path.sep
+        self.input_path = input_path
+        self.output_copy_path = output_path + f"{self.divisor}toBeProcessed"
+        self.output_path = output_path + f"{self.divisor}Processed"
 
-        
-        self.inPath = inPath
-        self.outCopyPath = outPath + '/toBeProcessed'
-        self.outPath = outPath + '/Processed'
-        #self.LIWCpath = LIWCpath
+        if command == True:
+            # List order matters
+            self.white_list = [
+                "Eventos.txt",
+                "EventosAdversos-gazette.txt",
+                "Remédios-br-gazette.txt",
+                "Substâncias-br-gazette.txt",
+                "Tweets Anotados.txt",
+                "Remédios2-br-gazette.txt",
+                "Substâncias2-br-gazette.txt",
+            ]
+            self._get_files()
+            self._to_tsv()
+            self._to_drugs_dict()
+            self._to_events_dict()
 
-        if(command == True):
-            #Ordem dos nomes importa aqui.
-            self.whiteList = ['Eventos.txt', 'EventosAdversos-gazette.txt', 'Remédios-br-gazette.txt', 'Substâncias-br-gazette.txt', 'Tweets Anotados.txt', 'Remédios2-br-gazette.txt', 'Substâncias2-br-gazette.txt']
-            self.getFiles()
-            self.toTSV()
-            self.toSubsDicio()
-            self.toEventosDicio()
-            #self.LIWKdicios()
+    # Copying files listed in whitelist, from input_path to output_path
+    def _get_files(self):
 
+        if not os.path.exists(self.output_copy_path):
+            os.mkdir(self.output_copy_path)
 
-    #Copiando os arquivos que estão na whitelist, de inPath para outPath
-    def getFiles(self):
-        #r=root, d=directory, f=file
+        if not os.path.exists(self.output_path):
+            os.mkdir(self.output_path)
 
-        if not os.path.exists(self.outCopyPath):
-            os.mkdir(self.outCopyPath)
-        
-        if not os.path.exists(self.outPath):
-            os.mkdir(self.outPath)
-        
-        for r, d, f in os.walk(self.inPath, topdown=True):
-            d = d
+        for r, _, f in os.walk(self.input_path, topdown=True):
             for files in f:
-                if files in self.whiteList:
-                    copy(os.path.join(r, files), self.outCopyPath)
-                    print('Arquivo %s copiado com sucesso.' % files)
+                if files in self.white_list:
+                    copy(os.path.join(r, files), self.output_copy_path)
+                    print("File %s was successfully copied" % files)
 
+    # Creating the .tsv from 'Tweets Anotatos.txt'
+    def _to_tsv(self):
+        txt = open(
+            self.output_copy_path + self.divisor + self.white_list[4],
+            "r",
+            encoding="UTF-8",
+        )
+        tsv = open(
+            self.output_path + self.divisor + self.white_list[4].replace("txt", "tsv"),
+            "w",
+            encoding="UTF-8",
+        )
 
-    #Criando o TSV do Tweets Anotados.txt
-    def toTSV(self):
-        txt = open(self.outCopyPath + '/' + self.whiteList[4], 'r', encoding='UTF-8')
-        tsv = open(self.outPath + '/' + self.whiteList[4].replace('txt', 'tsv'), 'w', encoding='UTF-8')
-        
-        tsv.write("Índice" + '\t' + "Tweet" + '\n')
+        tsv.write("Index" + "\t" + "Tweet" + "\n")
         i = 0
 
         for line in txt:
-            
-            tsv.write(str(i) + '\t' + line.lower().replace('\n', '').replace(' ', '', 1) + '\n')
+            tsv.write(
+                str(i)
+                + "\t"
+                + line.lower().replace("\n", "").replace(" ", "", 1)
+                + "\n"
+            )
             i += 1
 
         tsv.close()
         txt.close()
-        print('Tsv do Corpus criado com sucesso.')
+        print(".tsv Corpus created successfully.")
 
-    #Gerando o .txt do dicionário de substâncias
-    def toSubsDicio(self):
-        
-        diciosSubstancia = [self.whiteList[2], self.whiteList[3], self.whiteList[5], self.whiteList[6]]
-        limiteDicios = {self.whiteList[2]:6701, self.whiteList[3]:1778, self.whiteList[5]:5904, self.whiteList[6]:815}
+    # Creating the .txt drugs dictionary
+    def _to_drugs_dict(self):
 
-        finalSet = set()
+        drug_dictionary = [
+            self.white_list[2],
+            self.white_list[3],
+            self.white_list[5],
+            self.white_list[6],
+        ]
+        dict_limiters = {
+            self.white_list[2]: 6701,
+            self.white_list[3]: 1778,
+            self.white_list[5]: 5904,
+            self.white_list[6]: 815,
+        }
 
-        for d in diciosSubstancia:
-            if(d==self.whiteList[5]):
-                f = open(self.outCopyPath + '/' + d, 'r', encoding='UTF-16le')
+        final_set = set()
+
+        for d in drug_dictionary:
+            if d == self.white_list[5]:
+                f = open(
+                    self.output_copy_path + self.divisor + d, "r", encoding="UTF-16le"
+                )
             else:
-                f = open(self.outCopyPath + '/' + d, 'r', encoding='UTF-8')
+                f = open(
+                    self.output_copy_path + self.divisor + d, "r", encoding="UTF-8"
+                )
             s = f.read()
             f.close()
 
-            s = s.replace('DRUG\t', '')
-            s = s.replace('\t', ' ')
-            s = s.splitlines()            
+            s = s.replace("DRUG\t", "")
+            s = s.replace("\t", " ")
+            s = s.splitlines()
 
-            for i in range(0, limiteDicios[d]):
-                finalSet.add(s[i].lower())
-            
+            for i in range(0, dict_limiters[d]):
+                final_set.add(s[i].lower())
+
         stop_words = set(stopwords.words("portuguese"))
-        finalSet.difference_update(stop_words)    
-        finalList = sorted(finalSet)
+        final_set.difference_update(stop_words)
+        final_list = sorted(final_set)
 
-        txt = open(self.outPath + '/Dicionario_de_Substancias.txt', 'w', encoding='UTF-8')
+        txt = open(
+            self.output_path + self.divisor + "Dicionario_de_Substancias.txt",
+            "w",
+            encoding="UTF-8",
+        )
 
-        for line in finalList[:-1]:
-            txt.write(line + '\n')     
+        for line in final_list[:-1]:
+            txt.write(line + "\n")
         txt.close()
-        print('Dicionário de Substâncias gerado com sucesso.')
+        print(".txt Drugs Dictionary created successfully.")
 
-    #Gerando o .txt do dicionário de substâncias
-    def toEventosDicio(self):        
+    # Creating the .txt events dictionary
+    def _to_events_dict(self):
 
-        finalSet = set()        
+        final_set = set()
 
-        f = open(self.outCopyPath + '/' + self.whiteList[0], 'r', encoding='UTF-8')
+        f = open(
+            self.output_copy_path + self.divisor + self.white_list[0],
+            "r",
+            encoding="UTF-8",
+        )
         s = f.read()
         f.close()
-        
+
         s = s.splitlines()
 
         for line in s:
-            finalSet.add(line.lower())
+            final_set.add(line.lower())
 
-        
-        f = open(self.outCopyPath + '/' + self.whiteList[1], 'r', encoding='UTF-8')
+        f = open(
+            self.output_copy_path + self.divisor + self.white_list[1],
+            "r",
+            encoding="UTF-8",
+        )
         s = f.read()
         f.close()
 
-        s = s.replace('Event	', '')
+        s = s.replace("Event	", "")
         s = s.splitlines()
 
-        for i in range (0, 11561):
-            finalSet.add(s[i].lower())
+        for i in range(0, 11561):
+            final_set.add(s[i].lower())
 
-        finalSet.add('sono')
+        final_set.add("sono")
 
         stop_words = set(stopwords.words("portuguese"))
-        finalSet.difference_update(stop_words) 
-        finalList = sorted(finalSet)
+        final_set.difference_update(stop_words)
+        final_list = sorted(final_set)
 
-        txt = open(self.outPath + '/Dicionario_de_Eventos.txt', 'w', encoding='UTF-8')
-        
-        for line in finalList:
-            txt.write(line + '\n')
+        txt = open(
+            self.output_path + self.divisor + "Dicionario_de_Eventos.txt",
+            "w",
+            encoding="UTF-8",
+        )
+
+        for line in final_list:
+            txt.write(line + "\n")
         txt.close()
-        print('Dicionário de Eventos gerado com sucesso.')
+        print(".txt Events Dictionary created successfully.")
 
+    # Returns the dictonaries as List()
+    def drugs_to_list(self):
 
-    #Retornando os dicionarios como Lista
-    def subsToList(self):
-
-        f = open(self.outPath + '/Dicionario_de_Substancias.txt', 'r', encoding='UTF-8')
+        f = open(
+            self.output_path + self.divisor + "Dicionario_de_Substancias.txt",
+            "r",
+            encoding="UTF-8",
+        )
         s = f.read()
         f.close()
         s = s.splitlines()
 
         return s
 
-    def eventosToList(self):
-        f = open(self.outPath + '/Dicionario_de_Eventos.txt', 'r', encoding='UTF-8')
+    def events_to_list(self):
+        f = open(
+            self.output_path + self.divisor + "Dicionario_de_Eventos.txt",
+            "r",
+            encoding="UTF-8",
+        )
         s = f.read()
         f.close()
         s = s.splitlines()
 
         return s
-    
-    def LIWKdicios(self):
-        f = open(self.LIWCpath + 'LIWC2015_pt.dic', 'r', encoding='UTF-8')
-        s = f.readlines()
-        f.close()
-        
-        #Verbos 20, Causas 52
-        causes = set()
-        verbs = set()
-        causes_and_verbs = set()
 
+    # Returnes the .tsv Corpus path
+    def get_tsv_path(self):
+        return (
+            self.output_path + self.divisor + self.white_list[4].replace("txt", "tsv")
+        )
 
-        for i in range(0, len(s)):
-            aux = False
-            if('\t20\t' in s[i]):
-                verbs.add(s[i])
-                if('\t52\t' in s[i]):
-                    causes.add(s[i])
-                    causes_and_verbs.add(s[i])
-                    aux = True
-
-            if(aux):
-                causes.add(s[i])
-
-        causes = sorted(causes)
-        verbs = sorted(verbs)
-        causes_and_verbs = sorted(causes_and_verbs)        
-
-        nomes = {'Causas':causes, 'Verbos':verbs, 'Causas & Verbos':causes_and_verbs}
-        for name in nomes:
-            f = open(self.LIWCpath + '/Dicts/' + name, 'w', encoding='UTF-8')
-            for line in nomes.get(name):
-                aux2 = line.split('\t')[0]            
-                f.write(aux2 + '\n')
-            print('Dicionário LIWC de %s gerado com sucesso.' % name)
-    
-
-    #Retornando o caminho do Corpus
-    def getTsvPath(self):
-        return self.outPath + '/' + self.whiteList[4].replace('txt', 'tsv')
