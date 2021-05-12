@@ -13,8 +13,8 @@ class Util:
 
         self.divisor = os.path.sep
         self.input_path = input_path
-        self.output_copy_path = output_path + f"{self.divisor}toBeProcessed"
-        self.output_path = output_path + f"{self.divisor}Processed"
+        self.output_copy_path = output_path + f"{self.divisor}toBeProcessed{self.divisor}"
+        self.output_path = output_path + f"{self.divisor}Processed{self.divisor}"
 
         if command == True:
             # List order matters
@@ -36,10 +36,10 @@ class Util:
     def _get_files(self):
 
         if not os.path.exists(self.output_copy_path):
-            os.mkdir(self.output_copy_path)
+            os.makedirs(self.output_copy_path)
 
         if not os.path.exists(self.output_path):
-            os.mkdir(self.output_path)
+            os.makedirs(self.output_path)
 
         for r, _, f in os.walk(self.input_path, topdown=True):
             for files in f:
