@@ -1,627 +1,627 @@
-Candidate	Drug	Drug_Char_Start	Drug_Char_end	Drug_Word_Index	Event	Event_Char_Start	Event_Char_end	Event_Word_Index	Is_inverted	LABEL
-só em pensar que tenho q dormir p acordar e estudar metabolismo de glicose e metabolismo de glicídio já me dá uma depressão .	glicose	67	73	13	depressão	114	122	22	0	-1
-pra completar minhas alegrias tô com enxaqueca e não tem ibuprofeno em casa .	ibuprofeno	57	66	10	enxaqueca	37	45	6	1	-1
-queria injetar lidocaina na veia e ficar toda dopada e não sentir essa dor irritante .	lidocaina	15	23	2	dor	71	73	13	0	-1
-cheguei em casa já tomando paracetamol pq a cefaleia tensional pegou pesado hoje .	paracetamol	27	37	5	cefaleia tensional	44	61	61	0	-1
-estudar dor de garganta tenho que comprar nimesulida enfim esse é meu dia de hj .	nimesulida	42	51	7	dor de garganta	8	22	9301	1	-1
-nimesulida é forte o suficiente pra me deixar com dor de estômago talvez se eu ainda não tenha comido nada desde o almoço .	nimesulida	0	9	0	dor	50	52	9	0	-1
-uva passa tem gosto de morte por overdose de glicose .	glicose	45	51	9	morte	23	27	5	1	-1
-que calor tô jogando dipirona no ar pra ver se abaixa a temperatura .	dipirona	21	28	4	calor	4	8	1	1	-1
-eu fico com uma dor de cabeça quando faço umectação com óleo de rícino .	óleo de rícino	56	69	8778	dor de cabeça	16	28	8778	1	-1
-cara que raiva vou ter que voltar a tomar a vacina da alergia .	vacina	44	49	10	alergia	54	60	12	0	-1
-cara que raiva vou ter que voltar a tomar a vacina da alergia .	vacina	44	49	10	raiva	9	13	2	1	-1
-tomei ibuprofeno e dipirona agora tomara q passe a dor .	dipirona	19	26	3	dor	51	53	9	0	-1
-tomei ibuprofeno e dipirona agora tomara q passe a dor .	ibuprofeno	6	15	1	dor	51	53	9	0	-1
-aí eu tô tomando lítio e me sentindo numa música do nirvana porque sou dessas ainda tô bem sofrida e tô tendo muito enjôo .	lítio	17	21	4	enjôo	116	120	23	0	-1
-não deveria ter acordado mas estava quase asfixiando de tanta alergia acordei pra colocar morfina na garganta e nariz .	morfina	90	96	14	alergia	62	68	10	1	-1
-oxalato de escitalopram já tá perdendo a graça frio calor viajadas inexplicáveis vou da fim em vc antes de vc dar fim em mim kak .	escitalopram	11	22	2	calor	52	56	9	0	-1
-dor não carai kkkkk aguento nem tomar vacina vou caçar furar umbigo .	vacina	38	43	7	dor	0	2	0	1	-1
-tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	dipirona	89	96	17	alergia	131	137	26	0	-1
-romulomendonca resumindo após o final de um jogo com drinking game é coma alcoólica e muita glicose tudopelosplayoffsnfl .	glicose	92	98	16	coma	69	72	12	1	-1
-tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	dipirona	89	96	17	dor	9	11	2	1	-1
-c. mellocollela fer minha linda tomar um banho e tomar dipirona e não se cubra com coberta q logo a febre passa ta te amo fica bem .	dipirona	55	62	10	febre	100	104	20	0	-1
-tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	dipirona	89	96	17	dor	48	50	10	1	-1
-diabetes é uma doença caracterizada pela elevação da glicose no sangue hiperglicemia https goo gl	glicose	53	59	8	hiperglicemia	71	83	11	0	-1
-tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	paracetamol	72	82	15	alergia	131	137	26	0	-1
-diabetes é uma doença caracterizada pela elevação da glicose no sangue hiperglicemia https goo gl	glicose	53	59	8	diabetes	0	7	0	1	-1
-tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	paracetamol	72	82	15	dor	9	11	2	1	-1
-mebendazol sintomas insônia coceira anal tratado na psiquiatria com clonazepan jornalnacional showdavidapic twitter com i1doqlote0 .	mebendazol	0	9	0	insônia	20	26	2	0	-1
-tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	paracetamol	72	82	15	dor	48	50	10	1	-1
-a enxaqueca era falta de dopamina dorme com a tv ligada dorme .	dopamina	25	32	5	enxaqueca	2	10	1	1	-1
-filho controlar minha ansiedade cê não quer né sem açúcar cafeína e tabaco eu morro louca .	cafeína	58	64	10	ansiedade	22	30	3	1	-1
-e se eu tiver alergia a dipirona huheyeheue .	dipirona	24	31	6	alergia	14	20	4	1	-1
-ontem eu quase me matei tomei cafeína demais e acordei com uma puta dor de cabeça achando que ia morrer .	cafeína	30	36	6	dor de cabeça	68	80	11236	0	-1
-mjoaomarks fun essa da testosterona foi de morte henriquefig7 .	testosterona	23	34	4	morte	43	47	7	0	-1
-tomei tramadol na veia pra enxaqueca ainda tô lesada que bomba .	tramadol	6	13	1	enxaqueca	27	35	5	0	-1
-serotonina dopamina ocitocina amor felicidade ansiedade e depressão segundadetremurasdv psicologiaporamor .	dopamina	11	18	1	ansiedade	46	54	5	0	-1
-serotonina dopamina ocitocina amor felicidade ansiedade e depressão segundadetremurasdv psicologiaporamor .	dopamina	11	18	1	depressão	58	66	7	0	-1
-ata kkk tenho problemas com dor tb nimesulida	nimesulida	35	44	7	dor	28	30	5	1	-1
-to com mt dor de garganta e nimesulida não adianta mais .	nimesulida	28	37	7	dor de garganta	10	24	12762	1	-1
-vou passar mal hj com ctz de azia e meu combo de omeprazol acabouuuu .	omeprazol	49	57	12	azia	29	32	7	1	-1
-quem fica se oferecendo não tem valor nessa vida e pra quem diz que a carne é fraca se liga se o problema é fraqueza pecado não é vitamina .	vitamina	130	137	28	fraqueza	108	115	24	1	-1
-plms traz uns omeprazol e um cha q eu nao to aguentando de dor mais .	omeprazol	14	22	3	dor	59	61	13	0	-1
-é impossível que 3 dias de nimesulida não tenham resolvido minha dor de garganta .	nimesulida	27	36	6	dor de garganta	65	79	8346	0	-1
-ela tava doente o comprimido entrou na mente dipirona desceu quente dor de cabeça bebê .	dipirona	45	52	8	dor de cabeça	68	80	8478	0	-1
-melhorei da febre graças a deus estou a base de vitamina	vitamina	48	55	10	febre	12	16	2	1	-1
-acho que minha testosterona tá alta demais eu só penso em transar q raiva .	testosterona	15	26	3	raiva	68	72	13	0	-1
-dor de cabeça há quase 3 dias já tomei paracetamol e ibuprofeno	paracetamol	39	49	9	dor de cabeça	0	12	8190	1	-1
-dor de cabeça há quase 3 dias já tomei paracetamol e ibuprofeno	ibuprofeno	53	62	11	dor de cabeça	0	12	8190	1	-1
-fiquei mais de 2 anos tomando vacina pra alergia e talvez vou terq voltar a tomar .	vacina	30	35	6	alergia	41	47	8	0	-1
-por isso os ce não provocam doença por si mantem a dependência da nicotina .	nicotina	66	73	13	dependência	51	61	11	1	-1
-descobri que tenho alergia à azitromicina tô coçando há 7 dias .	azitromicina	29	40	5	alergia	19	25	3	1	-1
-tem coisa melhor que está com dor d no estômago tomar uma ranitidina e sarar como diz um amigo tem hora que mijar é melhor que dá uma .	ranitidina	58	67	12	dor	30	32	6	1	-1
-bicarbonato de sódio tbm é um ótimo aliado para azia	bicarbonato de sódio	0	19	7390	azia	48	51	9	0	-1
-já tomei clonazepam diazepam e agora lorazepam que é o que faz o corpo ficar leve da uma sensação boa e depois vem a depressão .	lorazepam	37	45	6	depressão	117	125	24	0	-1
-já tomei clonazepam diazepam e agora lorazepam que é o que faz o corpo ficar leve da uma sensação boa e depois vem a depressão .	clonazepam	9	18	2	depressão	117	125	24	0	-1
-já tomei clonazepam diazepam e agora lorazepam que é o que faz o corpo ficar leve da uma sensação boa e depois vem a depressão .	diazepam	20	27	3	depressão	117	125	24	0	-1
-eu tlg do vicio da cafeina que da dor de cabeça se ficar sem mas e cafe cafe .	cafeina	19	25	5	dor de cabeça	34	46	12642	0	-1
-bem melhor remédio né kkkkkkkk eu tomo omeprazol e nunca mais senti dor no estômago .	omeprazol	39	47	7	dor	68	70	12	0	-1
-maym não mas vai aliviar a dor e o incômodo até vc ir no médico o que passa a infecção é antibiótico qdo eu tive tomei cefalexina .	cefalexina	119	128	26	dor	27	29	6	1	-1
-iniciando mais uma tentativa de eliminar a cafeína da minha vida e já estou sendo consumido por uma dor de cabeça .	cafeína	43	49	7	dor de cabeça	100	112	9681	0	-1
-maym não mas vai aliviar a dor e o incômodo até vc ir no médico o que passa a infecção é antibiótico qdo eu tive tomei cefalexina .	cefalexina	119	128	26	infecção	78	85	19	1	-1
-tipo entrar em coma alcóolico ir parar no hospital pra tomar glicose ou algo do tipo .	glicose	61	67	11	coma	15	18	3	1	-1
-é então o efeito da prednisona é melhor depois que a alergia acontece .	prednisona	20	29	5	alergia	53	59	11	0	-1
-to tomando remédio pra dor muscular e apesar de ter cafeína me deixou o dia todo com sono .	cafeína	52	58	10	dor muscular	23	34	34	1	-1
-essa vacina acabou cmg não dormi a noite toda e acordei com febre e a cabeça explodindo .	vacina	5	10	1	febre	60	64	12	0	-1
-to tomando remédio pra dor muscular e apesar de ter cafeína me deixou o dia todo com sono .	cafeína	52	58	10	sono	85	88	17	0	-1
-uma dipirona aqui e lembrei q eu colocava na agenda q tinha alergia à dipirona so p n tomar pq ruim demais .	dipirona	70	77	14	alergia	60	66	12	1	-1
-q eu quero ser teu enjôo palpitação um aperto no peito músculos em tensão um no na garganta descontrole tremor fluoxetina pânico e pavor .	fluoxetina	111	120	20	aperto no peito	39	53	11693	1	-1
-uma dipirona aqui e lembrei q eu colocava na agenda q tinha alergia à dipirona so p n tomar pq ruim demais .	dipirona	4	11	1	alergia	60	66	12	0	-1
-q eu quero ser teu enjôo palpitação um aperto no peito músculos em tensão um no na garganta descontrole tremor fluoxetina pânico e pavor .	fluoxetina	111	120	20	tremor	104	109	19	1	-1
-fowztasia saymon600 eu tomo fluoxetina e alprazolam é sentença de morte beber álcool .	fluoxetina	28	37	4	morte	66	70	10	0	-1
-q eu quero ser teu enjôo palpitação um aperto no peito músculos em tensão um no na garganta descontrole tremor fluoxetina pânico e pavor .	fluoxetina	111	120	20	enjôo	19	23	5	1	-1
-fowztasia saymon600 eu tomo fluoxetina e alprazolam é sentença de morte beber álcool .	alprazolam	41	50	6	morte	66	70	10	0	-1
-q eu quero ser teu enjôo palpitação um aperto no peito músculos em tensão um no na garganta descontrole tremor fluoxetina pânico e pavor .	fluoxetina	111	120	20	palpitação	25	34	6	1	-1
-fowztasia saymon600 eu tomo fluoxetina e alprazolam é sentença de morte beber álcool .	álcool	78	83	12	morte	66	70	10	1	-1
-minha trindade diária café azia e omeprazol nessa sequência .	omeprazol	34	42	6	azia	27	30	4	1	-1
-fui elogiar o nimesulida aqui mais cedo e agora essa merda não tá mais fazendo efeito to morrendo de dor nunca mais elogio nada .	nimesulida	14	23	3	dor	101	103	19	0	-1
-ok primeiro sinal alarmante de efeito psicológico da testosterona era pra eu estar muito muito triste mas eu estou triste com muita raiva .	testosterona	53	64	8	raiva	132	136	22	0	-1
-kit ressaca dedo na guela bicarbonato com limão e água omeprazol e morte boa tarde .	omeprazol	55	63	10	morte	67	71	12	0	-1
-estúpida penicilina por que me tuviste que causar alergia .	penicilina	9	18	1	alergia	50	56	8	0	-1
-kit ressaca dedo na guela bicarbonato com limão e água omeprazol e morte boa tarde .	bicarbonato	26	36	5	morte	67	71	12	0	-1
-tomar fluoxetina nóis toma mas é cada raiva que nóis passa .	fluoxetina	6	15	1	raiva	38	42	7	0	-1
-vcs sabiam que omeprazol da depressão pq eu não .	omeprazol	15	23	3	depressão	28	36	5	0	-1
-se resolve melhor a enxaqueca com substâncias que contraiam estes vasos dilatados tipo ergotamina mas se é alérgica a eles .	ergotamina	87	96	13	enxaqueca	20	28	4	1	-1
-eu tô quase me chapando de ibuprofeno porque na boa não aguento mais essa dor .	ibuprofeno	27	36	6	dor	74	76	14	0	-1
-eu tomei vacina de tétano e febre	vacina	9	14	2	febre	28	32	6	0	-1
-dor de cabeça da porra acho que é falta de cafeina .	cafeina	43	49	10	dor de cabeça	0	12	8179	1	-1
-qnd bate a ansiedade da vontade de tomar uma cartela de propranolol todinha p ficar calminha .	propranolol	56	66	11	ansiedade	11	19	3	1	-1
-eu simplesmente to perdendo a cabeça será que ansiedade da efedrina .	efedrina	59	66	10	ansiedade	46	54	8	1	-1
-a sorte te vi ingerir 33 mm de morfina prestei atenção na última gota depois meus cílios se tocaram .	mm	25	26	6	gota	65	68	13	0	-1
-a sorte te vi ingerir 33 mm de morfina prestei atenção na última gota depois meus cílios se tocaram .	morfina	31	37	8	gota	65	68	13	0	-1
-essa dor no joelho so vai passar com ibuprofeno .	ibuprofeno	37	46	8	dor	5	7	1	1	-1
-acordei com dor de garganta já tomei um anti inflamatório vitamina c e pastilha ficar doente agora não .	vitamina c	58	67	67	dor de garganta	12	26	6780	1	-1
-acordei com dor de garganta já tomei um anti inflamatório vitamina c e pastilha ficar doente agora não .	anti	40	43	8	dor de garganta	12	26	6780	1	-1
-toda vez que eu penso em parar de tomar topiramato pq não tenho mais dor de cabeça eu fico com dor de cabeça .	topiramato	40	49	9	dor de cabeça	95	107	14167	0	-1
-toda vez que eu penso em parar de tomar topiramato pq não tenho mais dor de cabeça eu fico com dor de cabeça .	topiramato	40	49	9	dor de cabeça	69	81	14167	0	-1
-76 jp14sglo achega de omeprazol a soluçâo para gastrite azia e refluxo .	omeprazol	22	30	4	azia	56	59	9	0	-1
-76 jp14sglo achega de omeprazol a soluçâo para gastrite azia e refluxo .	omeprazol	22	30	4	gastrite	47	54	8	0	-1
-e mó engraçado ter dor de cabeça porque está com falta de cafeína eisisks .	cafeína	58	64	12	dor de cabeça	19	31	8356	1	-1
-acho que 90 dos meus surtos de raiva pós testosterona foram por que ela é um inferno na terra puta merda .	testosterona	41	52	9	raiva	31	35	7	1	-1
-tamanha azia que to enfiando um supositorio de formato de caixa de omeprazol pelo meu cu pra chegar mais rapido na bariga .	omeprazol	67	75	12	azia	8	11	1	1	-1
-fiz o teste de alergia alergia gravíssima a uma série de coisas tenho q tomar 9 doses de vacina .	vacina	89	94	18	alergia	23	29	5	1	-1
-fiz o teste de alergia alergia gravíssima a uma série de coisas tenho q tomar 9 doses de vacina .	vacina	89	94	18	alergia	15	21	4	1	-1
-tô mal tô c dor e to na bad por tanto estou indo dormir pós tomar meu amor nimesulida .	nimesulida	75	84	18	dor	12	14	4	1	-1
-quero deixar registrado q já prevejo minha dependência pela nicotina q triste .	nicotina	60	67	9	dependência	43	53	7	1	-1
-exame de sangue vacina de febre	vacina	16	21	3	febre	26	30	5	0	-1
-manejo escalonado de medicamentos para hemorragia obstétrica oxitocina	oxitocina	61	69	7	hemorragia	39	48	5	1	-1
-4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	soro	103	106	24	dor de garganta	60	74	6448	1	-1
-4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	soro	103	106	24	dor	131	133	30	0	-1
-4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	anador	30	35	6	dor de garganta	60	74	6448	0	-1
-4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	anador	30	35	6	dor	131	133	30	0	-1
-4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	carbamazepina	11	23	3	dor de garganta	60	74	6448	0	-1
-4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	carbamazepina	11	23	3	dor	131	133	30	0	-1
-a ansiedade o sertralina tem resolvido mas de resto estou desse jeito também https twitter com aka fernandes status 811518830719668225 .	sertralina	14	23	3	ansiedade	2	10	1	1	-1
-é pq eu tenho muito desses tremores causados pela ansiedade sabe aí a cafeína piora mais ainda junto com os outros sintomas .	cafeína	70	76	13	ansiedade	50	58	9	1	-1
-é pq eu tenho muito desses tremores causados pela ansiedade sabe aí a cafeína piora mais ainda junto com os outros sintomas .	cafeína	70	76	13	tremores	27	34	6	1	-1
-não anador eu não sei eu tenho problema de estômago e sempre tenho dor buscopan e hidroxido de alumínio .	buscopan	71	78	14	dor	67	69	13	1	-1
-não anador eu não sei eu tenho problema de estômago e sempre tenho dor buscopan e hidroxido de alumínio .	anador	4	9	1	dor	67	69	13	0	-1
-não anador eu não sei eu tenho problema de estômago e sempre tenho dor buscopan e hidroxido de alumínio .	hidroxido	82	90	16	dor	67	69	13	1	-1
-to com tanta dor de estômago já tomei omeprazol e rinitidinéa mas nada faz parar .	omeprazol	38	46	8	dor	13	15	3	1	-1
-agora tenho alergia ate paracetamol .	paracetamol	24	34	4	alergia	12	18	2	1	-1
-que doída essa vacina da febre amarela .	vacina	15	20	3	febre	25	29	5	0	-1
-quando eu começar a testosterona vou ter que ficar trancado em casa 24 7 se já tô o estresse agressividade e impaciência agora imagina .	testosterona	20	31	4	agressividade	93	105	19	0	-1
-quando eu começar a testosterona vou ter que ficar trancado em casa 24 7 se já tô o estresse agressividade e impaciência agora imagina .	testosterona	20	31	4	estresse	84	91	18	0	-1
-não tomei o omeprazol hoje adivinhem qm tá aqui morrendo de dor .	omeprazol	12	20	3	dor	60	62	11	0	-1
-bom ridícula essa dependência de dopamina fácil de números e likes	dopamina	33	40	5	dependência	18	28	3	1	-1
-preciso dormir tomei uma caixa de leite condensado minha glicose ta mt alta agora to hiperativa e com raiva e isso não é bom .	leite	34	38	6	raiva	102	106	18	0	-1
-preciso dormir tomei uma caixa de leite condensado minha glicose ta mt alta agora to hiperativa e com raiva e isso não é bom .	glicose	57	63	9	raiva	102	106	18	0	-1
-vida resumida em ansiedade gastrite omeprazol .	omeprazol	36	44	5	gastrite	27	34	4	1	-1
-vida resumida em ansiedade gastrite omeprazol .	omeprazol	36	44	5	ansiedade	17	25	3	1	-1
-indo dormir com dor de cabeça pra variar vivendo nesse hospício só com uma dose de bromazepam p acalmar .	bromazepam	83	92	16	dor de cabeça	16	28	33	1	-1
-tu já me viu desmarcar por dor de estômago vou me encher de omeprazol teu estômago vai aguentar .	omeprazol	60	68	13	dor	27	29	6	1	-1
-alguém sabe onde consegue morfina barata pra eu curar a ansiedade pro super bowl .	morfina	26	32	4	ansiedade	56	64	10	0	-1
-alguém sabe onde consegue morfina barata pra eu curar a ansiedade pro super bowl .	pro	66	68	11	ansiedade	56	64	10	1	-1
-fui tomar vacina d alergia ai aproveitei e levei meu cartão pra ver qual eu tinha q tomar acabei tomando anti tetânica .	anti	105	108	20	alergia	19	25	4	1	-1
-fui tomar vacina d alergia ai aproveitei e levei meu cartão pra ver qual eu tinha q tomar acabei tomando anti tetânica .	vacina	10	15	2	alergia	19	25	4	0	-1
-o medo de ficar doente antes de viajar é tão grande que senti uma dor de garganta hoje e já tomei anti inflamatório e vitamina	anti	98	101	21	medo	2	5	1	1	-1
-o medo de ficar doente antes de viajar é tão grande que senti uma dor de garganta hoje e já tomei anti inflamatório e vitamina	anti	98	101	21	dor de garganta	66	80	11019	1	-1
-o medo de ficar doente antes de viajar é tão grande que senti uma dor de garganta hoje e já tomei anti inflamatório e vitamina	vitamina	118	125	24	medo	2	5	1	1	-1
-o medo de ficar doente antes de viajar é tão grande que senti uma dor de garganta hoje e já tomei anti inflamatório e vitamina	vitamina	118	125	24	dor de garganta	66	80	11019	1	-1
-tudo me irrita gruda pinica eh a fome que passa a pressão baixa a nicotina que mata e nem o beck acalma .	nicotina	66	73	14	fome	33	36	7	1	-1
-c. o melhor é que minha febre nao abaixa kkkkkk tomo ibuprofeno e melhora as dores mas a febre ta aqui .	ibuprofeno	53	62	11	febre	89	93	18	0	-1
-c. o melhor é que minha febre nao abaixa kkkkkk tomo ibuprofeno e melhora as dores mas a febre ta aqui .	ibuprofeno	53	62	11	febre	24	28	6	1	-1
-toma nimesulida e um remédio bom pra parar a dor .	nimesulida	5	14	1	dor	45	47	9	0	-1
-só vim aqui compartilhar que tenho alergia a morfina então agora vocês já podem sentir pena de mim xau .	morfina	45	51	8	alergia	35	41	6	1	-1
-quando a pessoa sabe que cê tem alergia a dipirona	dipirona	42	49	9	alergia	32	38	7	1	-1
-se as pessoas soubessem o efeito da nicotina e do álcool ainda que temporário e o quanto alivia a dor não julgariam tanto .	álcool	50	55	10	dor	98	100	19	0	-1
-se as pessoas soubessem o efeito da nicotina e do álcool ainda que temporário e o quanto alivia a dor não julgariam tanto .	nicotina	36	43	7	dor	98	100	19	0	-1
-alergia a milho acho particularmente um lixo fora à dipirona mas ja acho um favor .	dipirona	52	59	9	alergia	0	6	0	1	-1
-hj eu tomo oxalato d escitalopram carbonato de lítio p depressão e a olanzapina p dormir .	lítio	47	51	8	depressão	55	63	10	0	-1
-hj eu tomo oxalato d escitalopram carbonato de lítio p depressão e a olanzapina p dormir .	olanzapina	69	78	13	depressão	55	63	10	1	-1
-hj eu tomo oxalato d escitalopram carbonato de lítio p depressão e a olanzapina p dormir .	carbonato	34	42	6	depressão	55	63	10	0	-1
-hj eu tomo oxalato d escitalopram carbonato de lítio p depressão e a olanzapina p dormir .	escitalopram	21	32	5	depressão	55	63	10	0	-1
-princesa até entrou em depressão depois de tomar vacina .	vacina	49	54	8	depressão	23	31	4	1	-1
-nicotina é uma merda cria dependência .	nicotina	0	7	0	dependência	26	36	5	0	-1
-tomei à tarde omeprazol mas mesmo assim estou c azia mas não quero perder nada .	omeprazol	14	22	3	azia	48	51	9	0	-1
-estou a tremer com a cafeína e ansiedade se falecer fiquem já a saber a causa da morte inorgânica .	cafeína	21	27	5	ansiedade	31	39	7	0	-1
-estou a tremer com a cafeína e ansiedade se falecer fiquem já a saber a causa da morte inorgânica .	cafeína	21	27	5	morte	81	85	17	0	-1
-melhor comprar carvão ativado é bem mais barato pigmentação melhor e não corre risco de alergia	carvão ativado	15	28	28	alergia	88	94	15	0	-1
-todo dia eu tomo 2 3 dipirona de tanta dor de cabeça que eu sinto .	dipirona	21	28	6	dor de cabeça	39	51	12919	0	-1
-mano nem o omeprazol tá dando jeito na minha dor de estômago mais .	omeprazol	11	19	3	dor	45	47	9	0	-1
-comi 2 x calabresa e 1l de coca já tô morrendo de dor e meu omeprazol acabou .	omeprazol	60	68	15	dor	50	52	12	1	-1
-vo comprar nimesulida diz que é bom pra acabar com a dor pic twitter com spavpln2xo .	nimesulida	11	20	2	dor	53	55	11	0	-1
-pior parte da ressaca é ter alergia a dipirona	dipirona	38	45	8	alergia	28	34	6	1	-1
-minha vó me deu ibuprofeno espero que passe a dor né .	ibuprofeno	16	25	4	dor	46	48	9	0	-1
-alimentos ricos em antioxidantes zinco e vitamina a ajudam na redução da acne melhorando o aspecto da pele pic twitter com onbpbqatxd .	vitamina a	41	50	50	acne	73	76	12	0	-1
-alimentos ricos em antioxidantes zinco e vitamina a ajudam na redução da acne melhorando o aspecto da pele pic twitter com onbpbqatxd .	zinco	33	37	4	acne	73	76	12	0	-1
-adverte nicotina é droga e causa dependência mas a gente deixa vender de boa .	nicotina	8	15	1	dependência	33	43	6	0	-1
-holdtigirl se bem que óleo de ricino cheira a morte de vdd .	óleo	22	25	4	morte	46	50	9	0	-1
-você é morfina para minha dor para minha queda	morfina	7	13	2	dor	26	28	5	0	-1
-daniloarock cloridrato de hidroxizina é pra alergia mas da um efeito de sedativo menino parado louquíssima .	cloridrato	12	21	1	alergia	44	50	6	0	-1
-daniloarock cloridrato de hidroxizina é pra alergia mas da um efeito de sedativo menino parado louquíssima .	hidroxizina	26	36	3	alergia	44	50	6	0	-1
-eu preciso de um remédio e só tem paracetamol agora eu penso morro de alergia ou morro de dor .	paracetamol	34	44	8	alergia	70	76	14	0	-1
-eu preciso de um remédio e só tem paracetamol agora eu penso morro de alergia ou morro de dor .	paracetamol	34	44	8	dor	90	92	18	0	-1
-mineralogia nome usado comercialmente para o silicato natural hidratado de cálcio e magnésio de estrutura fibrosa imune ao calor .	cálcio	75	80	10	calor	123	127	18	0	-1
-q calor é esse deus to morrendo na academia ainda tomei cafeína suor é lixo .	cafeína	56	62	11	suor	64	67	12	0	-1
-q calor é esse deus to morrendo na academia ainda tomei cafeína suor é lixo .	cafeína	56	62	11	calor	2	6	1	1	-1
-nimesulida e é pra dor de garganta escrevi errado kkk .	nimesulida	0	9	0	dor de garganta	19	33	10823	0	-1
-ter alergia a penicilina me fodeu na vida .	penicilina	14	23	3	alergia	4	10	1	1	-1
-pra quem sofre de enxaqueca como eu cloridrato de naratriptana santo remédio .	cloridrato	36	45	7	enxaqueca	18	26	4	1	-1
-pra quem sofre de enxaqueca como eu cloridrato de naratriptana santo remédio .	naratriptana	50	61	9	enxaqueca	18	26	4	1	-1
-jujubaluca e vai doer ainda mais viu porém toma nimesulida esse acaba com a dor .	nimesulida	48	57	9	dor	76	78	14	0	-1
-21 anos e uma vida resumida em gastrite omeprazol refluxo omeprazol e ansiedade .	omeprazol	58	66	10	ansiedade	70	78	12	0	-1
-21 anos e uma vida resumida em gastrite omeprazol refluxo omeprazol e ansiedade .	omeprazol	58	66	10	gastrite	31	38	7	1	-1
-21 anos e uma vida resumida em gastrite omeprazol refluxo omeprazol e ansiedade .	omeprazol	40	48	8	ansiedade	70	78	12	0	-1
-21 anos e uma vida resumida em gastrite omeprazol refluxo omeprazol e ansiedade .	omeprazol	40	48	8	gastrite	31	38	7	1	-1
-nessa hr percebemos que mesmo sem a nicotina adqurimos dor e sofrimento na vida pic twitter com zxhtruh6x2 .	nicotina	36	43	7	dor	55	57	9	0	-1
-se eu fizer uma vitamina agora meu pai vai acordar e vai ficar bem fodido de raiva .	vitamina	16	23	4	raiva	77	81	16	0	-1
-amanhã vou la comprar minha fluoxetina pra segurar essa ansiedade .	fluoxetina	28	37	5	ansiedade	56	64	9	0	-1
-relaxa tira ansiedade vai toma fluoxetina que relaxagente doida .	fluoxetina	31	40	5	ansiedade	12	20	2	1	-1
-meu omeprazol acabou e eu não fui buscar ja to até sentindo dor de estômago .	omeprazol	4	12	1	dor	60	62	12	0	-1
-não sei se vocês já sentiram várias sensações ao mesmo tempo q liberam oxitocina e adrenalina mas eu to sentindo tdas tipo paixão ansiedade .	oxitocina	71	79	13	ansiedade	130	138	23	0	-1
-to sentindo dor de cabeça desde quinta e não há ibuprofeno que resolva eu não aguento mais .	ibuprofeno	48	57	10	dor de cabeça	12	24	6310	1	-1
-deitada no sofá esperando omeprazol fazer efeito e essa dor de estômago aliviar .	omeprazol	26	34	4	dor	56	58	9	0	-1
-vou tomar um omeprazol e ir dormir eu não to aguentando de dor .	omeprazol	13	21	3	dor	59	61	12	0	-1
-12h e dois omeprazol depois e a azia permanece queimando até minha alma .	omeprazol	11	19	3	azia	32	35	7	0	-1
-até que um dia resolvi parar de tomar remédios e a dor parou procurei as bulas e no domperidona tinha lactose monoidratada .	domperidona	84	94	18	dor	51	53	11	1	-1
-aquele momento em q vc tá tão desesperado de dor q toma um corticóide um anador e um nimesulida misericórdia quero dormir .	nimesulida	85	94	18	dor	45	47	9	1	-1
-aquele momento em q vc tá tão desesperado de dor q toma um corticóide um anador e um nimesulida misericórdia quero dormir .	anador	73	78	15	dor	45	47	9	1	-1
-era apenas uma dor de cabeça dizia ele buscopan na veia voltarem 2 captopril uma hora depois losartana e mais http fb me 4wqdxcsyy .	losartana	93	101	17	dor de cabeça	15	27	6350	1	-1
-era apenas uma dor de cabeça dizia ele buscopan na veia voltarem 2 captopril uma hora depois losartana e mais http fb me 4wqdxcsyy .	buscopan	39	46	8	dor de cabeça	15	27	6350	1	-1
-era apenas uma dor de cabeça dizia ele buscopan na veia voltarem 2 captopril uma hora depois losartana e mais http fb me 4wqdxcsyy .	captopril	67	75	13	dor de cabeça	15	27	6350	1	-1
-bom dia pra quem tem alergia a dipirona que nem eu .	dipirona	31	38	7	alergia	21	27	5	1	-1
-já tomei uma cartela de dipirona e mais uns comprimidos de ibuprofeno e não passa esaa dor .	ibuprofeno	59	68	11	dor	87	89	16	0	-1
-já tomei uma cartela de dipirona e mais uns comprimidos de ibuprofeno e não passa esaa dor .	dipirona	24	31	5	dor	87	89	16	0	-1
-eu tomei ele substituindo o lítio pq o lítio me deu espinha 15 kg a mais e enjoo sempre daí troquei pra esse q cai o cabelo .	lítio	39	43	8	enjoo	75	79	17	0	-1
-eu tomei ele substituindo o lítio pq o lítio me deu espinha 15 kg a mais e enjoo sempre daí troquei pra esse q cai o cabelo .	lítio	28	32	5	enjoo	75	79	17	0	-1
-sofro de depressão tomo cloridrato de bupropiona sem sucesso porfavor qual o princípio ativo de remédio	cloridrato	24	33	4	depressão	9	17	2	1	-1
-sofro de depressão tomo cloridrato de bupropiona sem sucesso porfavor qual o princípio ativo de remédio	bupropiona	38	47	6	depressão	9	17	2	1	-1
-oloco a sertralina me fez um benzão da porra deu uma amenizada massa na ansiedade pânico .	sertralina	8	17	2	ansiedade	72	80	14	0	-1
-oloco a sertralina me fez um benzão da porra deu uma amenizada massa na ansiedade pânico .	sertralina	8	17	2	massa	63	67	12	0	-1
-pesquisa mostra as complicações da diabetes millitus intolerância à glicose e disfunção renal https goo gl cekyyl .	glicose	68	74	9	diabetes	35	42	5	1	-1
-pesquisa mostra as complicações da diabetes millitus intolerância à glicose e disfunção renal https goo gl cekyyl .	glicose	68	74	9	disfunção renal	78	92	92	0	-1
-toma omeprazol toda vez q sentir dor	omeprazol	5	13	1	dor	33	35	6	0	-1
-bastante ah e coloca uma faixa molhada com álcool q a febre baixa bb .	álcool	43	48	8	febre	54	58	11	0	-1
-bastante ah e coloca uma faixa molhada com álcool q a febre baixa bb .	álcool	43	48	8	faixa	25	29	5	1	-1
-vc sabe q deus existe qdo temenxaqueca nível maxelevado q antes só passava com tramadol na veia e agora passaemcasacom doril enxaqueca .	doril	119	123	20	enxaqueca	125	133	21	0	-1
-vc sabe q deus existe qdo temenxaqueca nível maxelevado q antes só passava com tramadol na veia e agora passaemcasacom doril enxaqueca .	tramadol	79	86	14	enxaqueca	125	133	21	0	-1
-vc tem em casa nimesulida dorflex resolvem também mas dor mais fraca .	nimesulida	15	24	4	dor	54	56	9	0	-1
-vc tem em casa nimesulida dorflex resolvem também mas dor mais fraca .	dorflex	26	32	5	dor	54	56	9	0	-1
-a que ponto eu cheguei pra esquecer que tenho alergia a paracetamol e tomar um .	paracetamol	56	66	11	alergia	46	52	9	1	-1
-cafeína dá enxaqueca ai	cafeína	0	6	0	enxaqueca	11	19	2	0	-1
-chegando em casa vou ter que tomar remédio pra dor e até um omeprazol pq to mal do bucho podem anotar ai desse ano	omeprazol	60	68	13	dor	47	49	9	1	-1
-só queria estar com a minha vacina de alergia em dia .	vacina	28	33	6	alergia	38	44	8	0	-1
-no treino se não tiver dor pra mim não serve smarth adrenalina dopamina serotonina .	dopamina	63	70	12	dor	23	25	5	1	-1
-tive que me render a nimesulida porque sei que se eu ficar com dor de garganta até amanhã vou acordar com febre .	nimesulida	21	30	5	febre	106	110	21	0	-1
-tive que me render a nimesulida porque sei que se eu ficar com dor de garganta até amanhã vou acordar com febre .	nimesulida	21	30	5	dor de garganta	63	77	12667	0	-1
-é tudo culpa da minha alergia a dipirona gente e ainda junta com mapa astral	dipirona	32	39	7	alergia	22	28	5	1	-1
-e o pior é que sinto calor em situações assim alguém me dá morfina plmdds .	morfina	59	65	13	calor	21	25	6	1	-1
-minha dor de cabeça falta de cafeína .	cafeína	29	35	6	dor de cabeça	6	18	10417	1	-1
-glicose tou com preguiça nenhum sinal de hemorragia interna deve ser sarcoidose .	glicose	0	6	0	sarcoidose	69	78	11	0	-1
-glicose tou com preguiça nenhum sinal de hemorragia interna deve ser sarcoidose .	glicose	0	6	0	hemorragia	41	50	7	0	-1
-prometazina 12h de sono não sei se é dia ou noite obrigada alergia .	prometazina	0	10	0	alergia	59	65	12	0	-1
-prometazina 12h de sono não sei se é dia ou noite obrigada alergia .	prometazina	0	10	0	sono	19	22	3	0	-1
-quero um open bar de omeprazol pra lidar com essa dor de estômago .	omeprazol	21	29	5	dor	50	52	10	0	-1
-está com calor jogue dipirona no ar que a temperatura pode baixar rs .	dipirona	21	28	4	com calor	5	13	13	1	-1
-a pessoa ja tem ansiedade braba insonia e loba de efedrina só ideia ruim .	efedrina	50	57	10	ansiedade	16	24	4	1	-1
-q seja o dor ou pra dormir só sei q é ranitidina .	ranitidina	38	47	11	dor	9	11	3	1	-1
-ainda tô no efeito do tramadol im de hoje a tarde nada de dor .	tramadol	22	29	5	dor	58	60	13	0	-1
-ah mas omeprazol faz mal me da outra coisa que pare essa azia e diminua os sintomas da gastrite que eu paro de tomar .	omeprazol	7	15	2	azia	57	60	12	0	-1
-ah mas omeprazol faz mal me da outra coisa que pare essa azia e diminua os sintomas da gastrite que eu paro de tomar .	omeprazol	7	15	2	gastrite	87	94	18	0	-1
-essa vacina pode causar dor no corpo de cabeça e dor localizada nesse aviso aí eu já desenvolvi todos os sintomas .	vacina	5	10	1	dor	24	26	4	0	-1
-essa vacina pode causar dor no corpo de cabeça e dor localizada nesse aviso aí eu já desenvolvi todos os sintomas .	vacina	5	10	1	dor	49	51	10	0	-1
-esse tempinho tá bom pra quem tá de cálcio fora isso mas no meu caso prefiro o calor .	cálcio	36	41	8	calor	79	83	17	0	-1
-minha glicose tá la em cima tontura n passa .	glicose	6	12	1	tontura	28	34	6	0	-1
-dor colocar bicarbonato de sódio em uma afta .	bicarbonato de sódio	12	31	8165	dor	0	2	0	1	-1
-os dois braço travado d dor por causa dessas maldita vacina q agonia .	vacina	53	58	10	dor	24	26	5	1	-1
-o sibutramina ajuda muitas pessoas acima do peso principalmente pois controla a ansiedade acesse o site fimpro http fimpro com br sibutramina .	sibutramina	2	12	1	ansiedade	80	88	12	0	-1
-o sibutramina ajuda muitas pessoas acima do peso principalmente pois controla a ansiedade acesse o site fimpro http fimpro com br sibutramina .	sibutramina	130	140	21	ansiedade	80	88	12	1	-1
-2 omeprazol e parece que a dor aumentou mim leva senhor .	omeprazol	2	10	1	dor	27	29	6	0	-1
-já tomei ranitidina ficar sentindo dor é horrível .	ranitidina	9	18	2	dor	35	37	5	0	-1
-ai que raiva dessa garganta que não desinflama nimesulida seu lindo me cure logo por obséquio .	nimesulida	47	56	8	raiva	7	11	2	1	-1
-com dilma com temer gelo ou limão a comparação haiti alemanha só faz sentido pra quem tá em coma alcoólico glicose na veia desse povo .	glicose	107	113	20	coma	92	95	18	1	-1
-pensa em alguém que transpira muito desde que iniciei com sertralina eu tenho esse suor excessivo é um saco mas antes isso que surtar .	sertralina	58	67	10	suor	83	86	14	0	-1
-depressão ansiedade homofobia omeprazol .	omeprazol	30	38	3	ansiedade	10	18	1	1	-1
-depressão ansiedade homofobia omeprazol .	omeprazol	30	38	3	depressão	0	8	0	1	-1
-tomou vacina da raiva que o governo da de graça ai ele teve alergia e quase morreu eu chorei dms .	vacina	6	11	1	raiva	16	20	3	0	-1
-tomou vacina da raiva que o governo da de graça ai ele teve alergia e quase morreu eu chorei dms .	vacina	6	11	1	alergia	60	66	13	0	-1
-coma caqui é antioxidante contém betacaroteno e vitaminas a c e e ferro fósforo cálcio magnésio e zinco pic twitter com 2ugfymrbfo .	vitaminas	48	56	7	coma	0	3	0	1	-1
-coma caqui é antioxidante contém betacaroteno e vitaminas a c e e ferro fósforo cálcio magnésio e zinco pic twitter com 2ugfymrbfo .	ferro	66	70	12	coma	0	3	0	1	-1
-coma caqui é antioxidante contém betacaroteno e vitaminas a c e e ferro fósforo cálcio magnésio e zinco pic twitter com 2ugfymrbfo .	zinco	98	102	17	coma	0	3	0	1	-1
-coma caqui é antioxidante contém betacaroteno e vitaminas a c e e ferro fósforo cálcio magnésio e zinco pic twitter com 2ugfymrbfo .	cálcio	80	85	14	coma	0	3	0	1	-1
-queria tomar uma injeção de meloxicam pra aliviar essa dor nas costas e dormir 12h seguidas .	meloxicam	28	36	5	dor nas costas	55	68	11871	0	-1
-nimesulida ser de febre	nimesulida	0	9	0	febre	18	22	3	0	-1
-haha desculpa não fui porque o ônibus já estava parado e a sophia estava enjoadinha por causa do calor e da vacina .	vacina	108	113	21	calor	97	101	18	1	-1
-vejo muita gente reclamando de dor no estômago por causa da sertralina e o médico falou que posso sentir dor mas até agora nada .	sertralina	60	69	11	dor	31	33	5	1	-1
-vejo muita gente reclamando de dor no estômago por causa da sertralina e o médico falou que posso sentir dor mas até agora nada .	sertralina	60	69	11	dor	105	107	19	0	-1
-eu tenho muita dor no estômago constumo tomar ranitidina e olha o efeito é rápido .	ranitidina	46	55	8	dor	15	17	3	1	-1
-eu tô sozinha em casa e tô morrendo de dor de garganta e de cabeça minha mãe falou pra eu tomar ibuprofeno .	ibuprofeno	96	105	21	dor de garganta	39	53	6279	1	-1
-eu diria que muito mais pois ao contrário da penicilina eu não tenho alergia ao twitter https twitter com pefabiodemelo status 687788805361954817 .	penicilina	45	54	9	alergia	69	75	13	0	-1
-quando to com dor de garganta sempre tomo nimesulida ajuda muito .	nimesulida	42	51	8	dor de garganta	14	28	11742	1	-1
-eu tô tomando suco de couve e omeprazol pra dor de estômago e tá resolvendo agora a falta de apetite .	omeprazol	30	38	7	dor	44	46	9	0	-1
-onde comprou lindo nossa o minoxidil tá agravando demais minha acne .	minoxidil	27	35	5	acne	63	66	10	0	-1
-se não tiver alergia toma ibuprofeno .	ibuprofeno	26	35	5	alergia	13	19	3	1	-1
-pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	omeprazol	12	20	1	dor	71	73	8	0	-1
-pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	domperidona	44	54	4	dor	71	73	8	0	-1
-pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	pantoprazol	0	10	0	dor	71	73	8	0	-1
-pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	nimesulida	33	42	3	dor	71	73	8	0	-1
-pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	bromoprida	22	31	2	dor	71	73	8	0	-1
-eu tô passando muito mal e não sei se é cafeína ou ansiedade .	cafeína	40	46	10	ansiedade	51	59	12	0	-1
-a dor de ver o vidrinho de fluoxetina vazio .	fluoxetina	27	36	7	dor	2	4	1	1	-1
-pra pânico com depressão em geral os psiquiatras usam de início o escitalopram com um amigo e comigo	escitalopram	66	77	12	depressão	15	23	3	1	-1
-um pouco tenho ansiedade então avisa logo pra comprar a fluoxetina .	fluoxetina	56	65	10	ansiedade	15	23	3	1	-1
-meu suor fede a cafeína cara .	cafeína	16	22	4	suor	4	7	1	1	-1
-tenho alergia a remédio e o único q eu poderia tomar é o paracetamol mas faz mal tanto q é proibido em países de primeiro mundo .	paracetamol	57	67	13	alergia	6	12	1	1	-1
-a morte por excesso de cafeína existe beber http fb me 2pl1l43un .	cafeína	23	29	5	morte	2	6	1	1	-1
-após a morte sua energia é libertada e sua matéria volta ao planeta em forma de carbono água cálcio etc. após morte de 3 beb	cálcio	93	98	18	morte	110	114	21	0	-1
-após a morte sua energia é libertada e sua matéria volta ao planeta em forma de carbono água cálcio etc. após morte de 3 beb	cálcio	93	98	18	morte	7	11	2	1	-1
-cá estou com não sei o quê em minha coluna só sei que estou sentindo uma intensa dor e aparentemente nem 600 mg de ibuprofeno tá servindo .	ibuprofeno	115	124	24	dor	81	83	17	1	-1
-efeito colateral do meu querido zolpidem alucinação .	zolpidem	32	39	5	alucinação	41	50	6	0	-1
-passei óleo de rícino no cabelo e que horror coça tanto assim msm ou deu alergia em mim .	óleo de rícino	7	20	11379	alergia	73	79	15	0	-1
-meninas q estão com alergia a remédio e acharam q ibuprofeno n entrava na alergia e se foderam .	ibuprofeno	50	59	10	alergia	74	80	14	0	-1
-meninas q estão com alergia a remédio e acharam q ibuprofeno n entrava na alergia e se foderam .	ibuprofeno	50	59	10	alergia	20	26	4	1	-1
-disfunção erétil disfunçãoerétil sildenafila http pt slideshare	sildenafila	33	43	3	disfunção erétil	0	15	15	1	-1
-eu ando com tanta azia que vou começar a substituir o sal por bicarbonato de sódio na comida .	sal	54	56	11	azia	18	21	4	1	-1
-eu ando com tanta azia que vou começar a substituir o sal por bicarbonato de sódio na comida .	bicarbonato de sódio	62	81	8742	azia	18	21	4	1	-1
-tão fácil conseguir receita de fluoxetina alimenta meu vício e controla minha ansiedade adoro .	fluoxetina	31	40	5	ansiedade	78	86	12	0	-1
-ainda bem que já tomei meu pantoprazol porque é capaz de eu desenvolver uma úlcera de tanta raiva .	pantoprazol	27	37	6	úlcera	76	81	14	0	-1
-ainda bem que já tomei meu pantoprazol porque é capaz de eu desenvolver uma úlcera de tanta raiva .	pantoprazol	27	37	6	raiva	92	96	17	0	-1
-a causa da minha morte provavelmente vai ser a mistura de remédio que eu faço agora u tomei omeprazol e advil e nem percebi .	advil	104	108	20	morte	17	21	4	1	-1
-a causa da minha morte provavelmente vai ser a mistura de remédio que eu faço agora u tomei omeprazol e advil e nem percebi .	omeprazol	92	100	18	morte	17	21	4	1	-1
-a joccastanheira postou um snap sobre tpm que define a minha vida amiga coma chocolate e libere oxitocina bjus .	oxitocina	96	104	17	coma	72	75	13	1	-1
-yuckarol eu tava meio assim no início de janeiro e pro enjoo domperidona resolvia mas ja saí da fase e to tomando antidepressivo .	domperidona	61	71	12	enjoo	55	59	11	1	-1
-yuckarol eu tava meio assim no início de janeiro e pro enjoo domperidona resolvia mas ja saí da fase e to tomando antidepressivo .	pro	51	53	10	enjoo	55	59	11	0	-1
-cadê meu lansoprazol pelo amor de deus eu tô chorando com essa dor miserenta .	lansoprazol	9	19	2	chorando	45	52	9	0	-1
-cadê meu lansoprazol pelo amor de deus eu tô chorando com essa dor miserenta .	lansoprazol	9	19	2	dor	63	65	12	0	-1
-topiramato não está funcionando mais e voltei a ter dor de cabeça durou só um mês .	topiramato	0	9	0	dor de cabeça	52	64	13305	0	-1
-muita dor de estômago pode ser nervoso ansiedade mas de td os remédios pro estômago pantoprazol é o melhor msm .	pantoprazol	84	94	15	dor	6	8	1	1	-1
-muita dor de estômago pode ser nervoso ansiedade mas de td os remédios pro estômago pantoprazol é o melhor msm .	pantoprazol	84	94	15	ansiedade	39	47	7	1	-1
-muita dor de estômago pode ser nervoso ansiedade mas de td os remédios pro estômago pantoprazol é o melhor msm .	pro	71	73	13	dor	6	8	1	1	-1
-muita dor de estômago pode ser nervoso ansiedade mas de td os remédios pro estômago pantoprazol é o melhor msm .	pro	71	73	13	ansiedade	39	47	7	1	-1
-tô tacando lidocaína e não passa essa dor .	lidocaína	11	19	2	dor	38	40	7	0	-1
-to com uma azia do demonio e não acho meu omeprazol sos .	omeprazol	42	50	10	azia	11	14	3	1	-1
-mupirocina vai acabar com a coceira e com inchaço .	mupirocina	0	9	0	inchaço	42	48	8	0	-1
-pitoco tomo vacina contra a raiva e deu alergia agora ta tudo cheio de bolinha no rosto coitado .	vacina	12	17	2	raiva	28	32	5	0	-1
-pitoco tomo vacina contra a raiva e deu alergia agora ta tudo cheio de bolinha no rosto coitado .	vacina	12	17	2	alergia	40	46	8	0	-1
-tenho que tomar ibuprofeno ou pareceramol pra dor de cabeça help .	ibuprofeno	16	25	3	dor de cabeça	46	58	12581	0	-1
-levei minha dog pra tomar a vacina de raiva e quase morro derretido com esse calor pic twitter com ru5i0fp4pt .	vacina	28	33	6	calor	77	81	15	0	-1
-levei minha dog pra tomar a vacina de raiva e quase morro derretido com esse calor pic twitter com ru5i0fp4pt .	vacina	28	33	6	raiva	38	42	8	0	-1
-vou tomar remédio pra dor de cabeça assim que eu levantar vai dar tonteira sono e falta de vitamina	vitamina	91	98	18	dor de cabeça	22	34	14241	1	-1
-vou tomar remédio pra dor de cabeça assim que eu levantar vai dar tonteira sono e falta de vitamina	vitamina	91	98	18	sono	75	78	14	1	-1
-a gente nesse bar bebendo até passar o calor depois indo pro pronto socorro tomar glicose na veia pic twitter com yr24ml2ofb .	glicose	82	88	15	calor	39	43	8	1	-1
-a gente nesse bar bebendo até passar o calor depois indo pro pronto socorro tomar glicose na veia pic twitter com yr24ml2ofb .	pro	57	59	11	calor	39	43	8	1	-1
-tomei remedio lambedor e vitamina c quero ver se essa dor de garganta n passa hj .	vitamina c	25	34	34	dor de garganta	54	68	13197	0	-1
-vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	pantoprazol	46	56	8	dor de cabeça	58	70	13498	0	-1
-vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	pantoprazol	46	56	8	insônia	74	80	13	0	-1
-vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	sonrisal	32	39	5	dor de cabeça	58	70	13498	0	-1
-vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	sonrisal	32	39	5	insônia	74	80	13	0	-1
-vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	neosaldina	18	27	3	dor de cabeça	58	70	13498	0	-1
-vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	neosaldina	18	27	3	insônia	74	80	13	0	-1
-esse nimesulida é aquele normal que toma pra dor no dente muito obrigada pela consulta ksjsksksks .	nimesulida	5	14	1	dor	45	47	8	0	-1
-tem nimesulida aí ou algum outro anti inflamatório é bom tomar e dipirona ou paracetamol caso a febre fique muito alta .	anti	33	36	6	febre	96	100	17	0	-1
-tem nimesulida aí ou algum outro anti inflamatório é bom tomar e dipirona ou paracetamol caso a febre fique muito alta .	nimesulida	4	13	1	febre	96	100	17	0	-1
-tem nimesulida aí ou algum outro anti inflamatório é bom tomar e dipirona ou paracetamol caso a febre fique muito alta .	dipirona	65	72	12	febre	96	100	17	0	-1
-tem nimesulida aí ou algum outro anti inflamatório é bom tomar e dipirona ou paracetamol caso a febre fique muito alta .	paracetamol	77	87	14	febre	96	100	17	0	-1
-já não basta eu set alérgica a dipirona amoxilina e a picada de formiga agr eu to com alergia a mais alguma coisa que n sei oq é .	dipirona	31	38	7	alergia	86	92	18	0	-1
-to ferrada de alergia mt ferrada ainda tive q entrar na vacina hoje e aumentar os medicamentos .	vacina	56	61	11	alergia	14	20	3	1	-1
-relevem estou sentindo um pouco de dor cloridrato de ranitidina não está fazendo efeito .	ranitidina	53	62	9	dor	35	37	6	1	-1
-relevem estou sentindo um pouco de dor cloridrato de ranitidina não está fazendo efeito .	cloridrato	39	48	7	dor	35	37	6	1	-1
-n acho a merda de um saquinho de bicarbonato de sódio pra salvar dessa azia .	bicarbonato de sódio	33	52	9922	azia	71	74	14	0	-1
-gente eu tomei um remedio aqui pra dor de cabeça paracetamol de 500g e ja to meia zuada kdjfklsdjflksdjflkdsfds .	paracetamol	49	59	10	dor de cabeça	35	47	14027	1	-1
-nadjiasantiago pq pantoprazol cê toma não é quando tá com dor é em jejum e tal mas o efeito dele é mais forte .	pantoprazol	18	28	2	dor	58	60	10	0	-1
-mano uma cena que vi no teu insta a cafeína reduz a depressão .	cafeína	36	42	9	depressão	52	60	12	0	-1
-espero que eu acorde de manhã e isso seja alucinação do zolpidem .	zolpidem	56	63	11	alucinação	42	51	9	1	-1
-eu comi um pastel que atacou o meu refluxo e agora que bateu a dor eu percebi que acabou o meu omeprazol .	omeprazol	95	103	21	dor	63	65	14	1	-1
-eu já fiz tratamento com topiramato agora com pamelor e mesmo assim a dor incomoda demais como você trata .	pamelor	46	52	8	dor	70	72	13	0	-1
-eu já fiz tratamento com topiramato agora com pamelor e mesmo assim a dor incomoda demais como você trata .	topiramato	25	34	5	dor	70	72	13	0	-1
-meu remédio pra enxaqueca tem cafeína é só tomar ele e adeus conseguir dormir ou sossegar .	cafeína	30	36	5	enxaqueca	16	24	3	1	-1
-meu deus eu vou ter q tomar meio litro de morfina pra curar a ansiedade q eu to pro jogo gothunder .	pro	80	82	18	ansiedade	62	70	14	1	-1
-meu deus eu vou ter q tomar meio litro de morfina pra curar a ansiedade q eu to pro jogo gothunder .	morfina	42	48	10	ansiedade	62	70	14	0	-1
-minha mãe estava a três dias seguidos tomando paracetamol pensando que era o remédio de azia hahahahahahahahahaha .	paracetamol	46	56	8	azia	88	91	15	0	-1
-nao aguento essa tosse essa dor de garganta nao quero entrar na nimesulida .	nimesulida	64	73	12	tosse	17	21	3	1	-1
-nao aguento essa tosse essa dor de garganta nao quero entrar na nimesulida .	nimesulida	64	73	12	dor de garganta	28	42	10643	1	-1
-otorrino frisa que vacina não é a cura para a alergia mas afirma que o paciente poderá passar a ter uma qualidade de vida muito melhor .	vacina	19	24	3	alergia	46	52	10	0	-1
-biaaraujo1mulher eu tomo tenoxicam e faz milagre vê se tu tem alergia se não compra que ajuda muito basta 1 por dia é pra cólica msm .	tenoxicam	25	33	3	alergia	62	68	11	0	-1
-pra quem duvidava que eu não chegaria aos 21 por causa da cachaça glicose ou de um coma alcoólico tamo ai não fata nem uma hora haushau .	glicose	66	72	13	coma	83	86	17	0	-1
-um calor desse e a veterinária acha que eu vou sair e cansar meu bb pra ir em comemoração se ainda fosse vacina ou coisa pro meu bb .	vacina	105	110	22	calor	3	7	1	1	-1
-um calor desse e a veterinária acha que eu vou sair e cansar meu bb pra ir em comemoração se ainda fosse vacina ou coisa pro meu bb .	pro	121	123	25	calor	3	7	1	1	-1
-como eu precisava de um café agora essa dor de cabeça tá com cara de que só vai passar com cafeína .	cafeína	91	97	20	dor de cabeça	40	52	7794	1	-1
-se eu tomo fluoxetina eu morro de tontura se eu não tomo morro de ansiedade o que fazer .	fluoxetina	11	20	3	tontura	34	40	7	0	-1
-se eu tomo fluoxetina eu morro de tontura se eu não tomo morro de ansiedade o que fazer .	fluoxetina	11	20	3	ansiedade	66	74	14	0	-1
-uma bobagem lelê interação medicamentosa entre sibutramina e analgésicos fortes pois ela tinha muita dor por causa de um braço .	sibutramina	47	57	6	dor	101	103	14	0	-1
-esse cloridrato de ranitidina é bom pra quando vc ja ta com dor o panto e o omeprazol sao mais pra prevenir .	omeprazol	76	84	17	dor	60	62	12	1	-1
-esse cloridrato de ranitidina é bom pra quando vc ja ta com dor o panto e o omeprazol sao mais pra prevenir .	cloridrato	5	14	1	dor	60	62	12	0	-1
-esse cloridrato de ranitidina é bom pra quando vc ja ta com dor o panto e o omeprazol sao mais pra prevenir .	ranitidina	19	28	3	dor	60	62	12	0	-1
-não podia estar melhor amigdalite infecciosa que me obrigou a levar uma injeção de penicilina e 38 8 graus de febre .	penicilina	83	92	14	amigdalite	23	32	4	1	-1
-não podia estar melhor amigdalite infecciosa que me obrigou a levar uma injeção de penicilina e 38 8 graus de febre .	penicilina	83	92	14	febre	110	114	20	0	-1
-amo usar óleo de ricino mas odeio a dor de cabeça que tenho toda vez que uso como lidar .	óleo	9	12	2	dor de cabeça	36	48	7117	0	-1
-já que eu falei sobre depressão esta música às vezes funciona melhor do que fluoxetina https youtu be d8z vn67sru http fb me 7udn9qbut .	fluoxetina	76	85	14	depressão	22	30	5	1	-1
-pro pecado eu desabrigo a minha dor viro mendigo do meu destino .	pro	0	2	0	dor	32	34	6	0	-1
-efeitos colaterais de medicamentos estresse uso de álcool tabaco ou cafeína .	álcool	51	56	7	estresse	35	42	4	1	-1
-efeitos colaterais de medicamentos estresse uso de álcool tabaco ou cafeína .	cafeína	68	74	10	estresse	35	42	4	1	-1
-tô com uma queimação da morte que só deus sabe o tanto que eu quero um omeprazol .	omeprazol	71	79	16	morte	24	28	5	1	-1
-c difenidramina ajudam um pouco a desinchar e corta a dor mas c disse q n tem .	difenidramina	2	14	1	dor	54	56	10	0	-1
-vou começar a fazer tratamento pra alergia hoje vacina toda semana agora .	vacina	48	53	8	alergia	35	41	6	1	-1
-cê acredita que ponstan não faz cócegas na dor só me deixa grogue aqui só ibuprofeno salva .	ibuprofeno	74	83	15	dor	43	45	8	1	-1
-cê acredita que ponstan não faz cócegas na dor só me deixa grogue aqui só ibuprofeno salva .	ponstan	16	22	3	dor	43	45	8	0	-1
-acordei sem dor de garganta pela primeira vez em uma semana amém nimesulida .	nimesulida	65	74	12	dor de garganta	12	26	6807	1	-1
-blog fisiobrasil d adeus ao inchaço e controle a glicose com esta http www blogfisiobrasil com br 2016 05 de adeus ao inchaco e controle glicose html spref tw .	glicose	137	143	25	inchaço	28	34	5	1	-1
-blog fisiobrasil d adeus ao inchaço e controle a glicose com esta http www blogfisiobrasil com br 2016 05 de adeus ao inchaco e controle glicose html spref tw .	glicose	49	55	9	inchaço	28	34	5	1	-1
-já tomasse naproxeno é uma maravilha pra dor muscular .	naproxeno	11	19	2	dor muscular	41	52	52	0	-1
-quem inventou nimesulida achei q eu ia morrer de dor .	nimesulida	14	23	2	dor	49	51	9	0	-1
-estou com uma dor no estomago do caralho acabou meu omeprazol t	omeprazol	52	60	10	dor	14	16	3	1	-1
-ela sofre de uma doença psicotica por conta da morfina metafetaminas e outras coisas que ingere e também depressão https twitter com caganissopt status 758602139916705793 .	morfina	47	53	9	depressão	105	113	18	0	-1
-muito boa essa dor de cabeça devido à falta de cafeína nessa manhã .	cafeína	47	53	10	dor de cabeça	15	27	10570	1	-1
-sabiam que a laranja é uma excelente opção contra o cansaço e a fraqueza porque é rica em vitamina c e em açúcar http fb me d3d461sf .	vitamina c	90	99	99	cansaço	52	58	10	1	-1
-sabiam que a laranja é uma excelente opção contra o cansaço e a fraqueza porque é rica em vitamina c e em açúcar http fb me d3d461sf .	vitamina c	90	99	99	fraqueza	64	71	13	1	-1
-t. estou me autodiagnosticando com febre interna já que minhas articulações doem e tô sentindo um frio horroroso tomei paracetamol vamo ver .	paracetamol	119	129	19	febre	35	39	5	1	-1
-onde eu trabalho é tudo de zinco pensa num calor quando esquenta no da pra encosta em nada .	zinco	27	31	6	calor	43	47	9	0	-1
-ah anti inflamatório é bom se vc não conseguiu passar no médico nimesulida é vendido sem receita já ajuda um pouco na dor .	nimesulida	64	73	12	dor	118	120	22	0	-1
-ah anti inflamatório é bom se vc não conseguiu passar no médico nimesulida é vendido sem receita já ajuda um pouco na dor .	anti	3	6	1	dor	118	120	22	0	-1
-hahahahahah não vai messsssssssmo se entope de omeprazol aí e fica chorando de dor .	omeprazol	47	55	7	chorando	67	74	11	0	-1
-hahahahahah não vai messsssssssmo se entope de omeprazol aí e fica chorando de dor .	omeprazol	47	55	7	dor	79	81	13	0	-1
-preciso de um remédio pra dor que seja mais forte que ibuprofeno e não precise de receita quem puder ajudar vou amar pra sempre .	ibuprofeno	54	63	11	dor	26	28	5	1	-1
-eu tinha 15 anos quando minha endocrinologista me passou sibutramina tenho 23 e depressão ate hoje ela garantiu pra minha .	sibutramina	57	67	9	depressão	80	88	13	0	-1
-o paracetamol foi pela cólica na verdade só que eu pensei que fosse ajudar a dor no siso diminuir mas fez nem cócegas .	paracetamol	2	12	1	dor	77	79	15	0	-1
-nimesulida pra melhorar dor nas costas mas não mudou nada .	nimesulida	0	9	0	dor nas costas	24	37	10833	0	-1
-a morfina acelera a morte ouça programa da bbc sobre esses e outros mitos em relação a medicamentos para http fb me 5gioke3ni .	morfina	2	8	1	morte	20	24	4	0	-1
-na boa tomar nimesulida pra dor de garganta e tomar água é a mesma coisa pra mim não adianta porra nenhuma .	nimesulida	13	22	3	dor de garganta	28	42	10607	0	-1
-minha mãe sabe que eu tenho alergia a dipirona e ela comprou dipirona pra eu tomar minha mãe quer me matar .	dipirona	61	68	12	alergia	28	34	6	1	-1
-minha mãe sabe que eu tenho alergia a dipirona e ela comprou dipirona pra eu tomar minha mãe quer me matar .	dipirona	38	45	8	alergia	28	34	6	1	-1
-tomei um paracetamol aqui me deu um calor .	paracetamol	9	19	2	calor	36	40	7	0	-1
-mulher foi medir a minha glicose e acho q a agulha do aparelho ainda tá no meu dedo q dor .	glicose	25	31	5	dor	86	88	19	0	-1
-nunca tomem chá de sene da uma dor de barriga .	sene	19	22	4	dor	31	33	7	0	-1
-o que eu acho que tem chances de acontecer dor de cabeça por conta do aumento súbito de glicose não tive uma dor de cabeça nesses 9 dias .	glicose	88	94	18	dor de cabeça	109	121	11068	0	-1
-o que eu acho que tem chances de acontecer dor de cabeça por conta do aumento súbito de glicose não tive uma dor de cabeça nesses 9 dias .	glicose	88	94	18	dor de cabeça	43	55	11068	1	-1
-o alprostadil é um potente vasodilatador para tratamentos de disfunção erétil ativo comprovado http fb me 8javmfwre .	alprostadil	2	12	1	disfunção erétil	61	76	76	0	-1
-eu vou comprar 12 injeções de morfina e deixar aqui em casa pra quando a cólica aparecer eu injetar em mim e dormir o sono dos justos em paz .	morfina	30	36	6	sono	118	121	24	0	-1
-pra quem tava esses dias com o cérebro nadando em dopamina e com ansiedade logo insônia é assustador mesmo .	dopamina	50	57	10	insônia	80	86	15	0	-1
-pra quem tava esses dias com o cérebro nadando em dopamina e com ansiedade logo insônia é assustador mesmo .	dopamina	50	57	10	ansiedade	65	73	13	0	-1
-mano porque no calor eu sinto muito mais vontade de nicotina .	nicotina	52	59	10	calor	15	19	3	1	-1
-dê adeus ao inchaço e controle a glicose	glicose	33	39	7	inchaço	12	18	3	1	-1
-o cheiro é psicoativo suor que derrama sua pele excita dopamina http fb me tllg39jd .	dopamina	55	62	10	suor	22	25	4	1	-1
-minha médica disse que essa porra é tão forte que eu teria que tratar com uma vacina manipulada pro meu tipo de alergia .	vacina	78	83	16	alergia	112	118	22	0	-1
-minha médica disse que essa porra é tão forte que eu teria que tratar com uma vacina manipulada pro meu tipo de alergia .	pro	96	98	18	alergia	112	118	22	0	-1
-53 sou viciada em cafeína no nível de sentir dor de cabeça se não tomar ao menos uma xícara de café .	cafeína	18	24	4	dor de cabeça	45	57	6476	0	-1
-antes de vcs reclamarem que algo dói experimentem passar bicarbonato de sódio na afta quanto estiverem com afta óbvio kkkkk q morte lenta .	bicarbonato de sódio	57	76	7191	morte	126	130	21	0	-1
-diabetes http centraldiabetes org de adeus ao inchaco e controle glicose com esta simples receita resultados rapidos .	glicose	65	71	10	diabetes	0	7	0	1	-1
-quer cálcio não beba leite coma jabuticaba e cenoura .	cálcio	5	10	1	coma	27	30	5	0	-1
-quer cálcio não beba leite coma jabuticaba e cenoura .	leite	21	25	4	coma	27	30	5	0	-1
-vou ir na minha vó tomar morfina não aguento mais essa dor .	morfina	25	31	6	dor	55	57	11	0	-1
-to queimando em febre e não sei cadê a caralha da dipirona .	dipirona	50	57	11	febre	16	20	3	1	-1
-minha dores de cabeças são sempre tensionais por causa da minha ansiedade mas sinto que a cafeína fez aumentar .	cafeína	90	96	16	ansiedade	64	72	11	1	-1
-fnhani para enjôo metoclopramida	metoclopramida	18	31	3	enjôo	12	16	2	1	-1
-que remédio vocês tomam pra dor de garganta sem ser nimesulida .	nimesulida	52	61	10	dor de garganta	28	42	13843	1	-1
-gente omeprazol serve pra enjoo .	omeprazol	6	14	1	enjoo	26	30	4	0	-1
-minha glicose é tão baixa que se eu fico umas 3h sem comer é dor de cabeça e tontura .	glicose	6	12	1	tontura	77	83	18	0	-1
-minha glicose é tão baixa que se eu fico umas 3h sem comer é dor de cabeça e tontura .	glicose	6	12	1	dor de cabeça	61	73	10427	0	-1
-namorar deve ser bom mas já tomaram ibuprofeno quando tavam com dor muito bom .	ibuprofeno	36	45	7	dor	64	66	11	0	-1
-tanta dor que me obriguei tomar morfina e espero não acordar cheia de alergia amanhã .	morfina	32	38	6	alergia	70	76	13	0	-1
-tanta dor que me obriguei tomar morfina e espero não acordar cheia de alergia amanhã .	morfina	32	38	6	dor	6	8	1	1	-1
-eu to chorando de dor tomei dois omeprazol e to esperando passar porque ainda tenho uma madruga pela frente .	omeprazol	33	41	7	chorando	6	13	2	1	-1
-eu to chorando de dor tomei dois omeprazol e to esperando passar porque ainda tenho uma madruga pela frente .	omeprazol	33	41	7	dor	18	20	4	1	-1
-acordei com uma dor que não tem dimensão falta de cálcio purinha pq a beldade aqui não toma leite né .	cálcio	50	55	10	dor	16	18	3	1	-1
-acordei com uma dor que não tem dimensão falta de cálcio purinha pq a beldade aqui não toma leite né .	leite	92	96	18	dor	16	18	3	1	-1
-não sei do que mais tenho raiva se é da glicose anal da america em a seleção ou do thankyouuu da loren veranomtv2016 fifth harmony .	glicose	40	46	10	raiva	26	30	6	1	-1
-eu li e li q dependendo do antiinflamatório pode intervir no efeito paracetamol tb tanto q me dá ansiedade .	paracetamol	68	78	12	ansiedade	97	105	18	0	-1
-vou é tomar meu omeprazol é fazer outra coisa pq a internet só piora a minha azia .	omeprazol	16	24	4	azia	77	80	16	0	-1
-era uma vez ontem tava com azia e tomei hidróxido de magnésio este medicamento funciona também como laxante tomei muito fim .	hidróxido de magnésio	40	60	8564	azia	27	30	6	1	-1
-vocês não estão bem a ver a minha dor por ter estrago umas calças hoje com nitrato de prata .	nitrato de prata	75	90	13614	dor	34	36	8	1	-1
-dia 2 de sertralina até agora não morri só enjôo mesmo .	sertralina	9	18	3	enjôo	43	47	9	0	-1
-não é muito esperto tomar um pantoprazol pra passar a azia e ir tomar vinho e cerveja né .	pantoprazol	29	39	6	azia	54	57	10	0	-1
-é a enxaqueca como resposta por falta da dose diária de cafeína acabo tomando uns 6 copos de café ao longo do dia .	cafeína	56	62	11	enxaqueca	4	12	2	1	-1
-crise de ansiedade que isso tem vacina pra prevenção https twitter com hugogloss status 772964688288182272 .	vacina	32	37	6	ansiedade	9	17	2	1	-1
-dá vacina antropófaga no brasil de crise e depressão via miguelarcanjop	vacina	3	8	1	depressão	43	51	8	0	-1
-criam vacina capaz de eliminar dependência de cocaína http bit ly 2c8hv4e pic twitter com jagrhc4922 .	vacina	6	11	1	dependência	31	41	5	0	-1
-q merda eu tenho alergia a dipirona e tomei remédio q tem .	dipirona	27	34	6	alergia	17	23	4	1	-1
-estou a entrar em depressão por causa de farmacologia preciso de fluoxetina .	fluoxetina	65	74	11	depressão	18	26	4	1	-1
-tomei um nimesulida pra ver se essa dor passa .	nimesulida	9	18	2	dor	36	38	7	0	-1
-o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	cloridrato	2	11	1	depressão	80	88	12	0	-1
-o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	cloridrato	2	11	1	ansiedade	104	112	15	0	-1
-o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	cloridrato	2	11	1	depressão	60	68	10	0	-1
-o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	venlafaxina	16	26	3	depressão	80	88	12	0	-1
-o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	venlafaxina	16	26	3	ansiedade	104	112	15	0	-1
-o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	venlafaxina	16	26	3	depressão	60	68	10	0	-1
-alergia deve ser do paracetamol pq ibuprofeno é vida .	paracetamol	20	30	4	alergia	0	6	0	1	-1
-alergia deve ser do paracetamol pq ibuprofeno é vida .	ibuprofeno	35	44	6	alergia	0	6	0	1	-1
-chegar em casa e encontrar mamãe com febre dor no corpo glicose alta corta meu coração em um nível que meu deus .	glicose	56	62	11	febre	37	41	7	1	-1
-chegar em casa e encontrar mamãe com febre dor no corpo glicose alta corta meu coração em um nível que meu deus .	glicose	56	62	11	dor	43	45	8	1	-1
-a nicotina alivia a dor que eu sinto diariamente .	nicotina	2	9	1	dor	20	22	4	0	-1
-bateu uma vontade mas ao mesmo tempo bateu enjoo ana tá que tá hoje kkkk socorro minha glicose até aumentou pic twitter com itituqimk5 .	glicose	87	93	17	enjoo	43	47	8	1	-1
-ajuda muito é o que os dentistas passam pra dor anti inflamatório acho .	anti	48	51	10	dor	44	46	9	1	-1
-eu tô gemendo de dor de estômago e acabou o omeprazol .	omeprazol	44	52	10	dor	17	19	4	1	-1
-pragas de 2016 amigdalite sorvete de milho verde com canela dermato infecção maldição do foel enxaqueca vacina de hepatite	vacina	104	109	16	enxaqueca	94	102	15	1	-1
-pragas de 2016 amigdalite sorvete de milho verde com canela dermato infecção maldição do foel enxaqueca vacina de hepatite	vacina	104	109	16	infecção	68	75	11	1	-1
-pragas de 2016 amigdalite sorvete de milho verde com canela dermato infecção maldição do foel enxaqueca vacina de hepatite	vacina	104	109	16	amigdalite	15	24	3	1	-1
-pragas de 2016 amigdalite sorvete de milho verde com canela dermato infecção maldição do foel enxaqueca vacina de hepatite	vacina	104	109	16	hepatite	114	121	18	0	-1
-d adeus ao inchaço e controle a glicose com esta simples receita esta é uma ótima receita para emagrecer pois http fb me 2ewau5xer .	glicose	32	38	7	inchaço	11	17	3	1	-1
-b. praticamente 2017 e uma vacina pra ansiedade até hj n inventaram ne .	vacina	27	32	5	ansiedade	38	46	7	0	-1
-daí a glicose vai pro ralo e faz com que teu organismo vivencie uma situação de quase morte seguida de uma baita fraqueza conhecida como .	glicose	6	12	2	morte	86	90	17	0	-1
-daí a glicose vai pro ralo e faz com que teu organismo vivencie uma situação de quase morte seguida de uma baita fraqueza conhecida como .	glicose	6	12	2	fraqueza	113	120	22	0	-1
-daí a glicose vai pro ralo e faz com que teu organismo vivencie uma situação de quase morte seguida de uma baita fraqueza conhecida como .	pro	18	20	4	morte	86	90	17	0	-1
-daí a glicose vai pro ralo e faz com que teu organismo vivencie uma situação de quase morte seguida de uma baita fraqueza conhecida como .	pro	18	20	4	fraqueza	113	120	22	0	-1
-e cigarro não vai aliviar tanto a ansiedade pq tu vai adquirir o estresse por falta de uso da nicotina .	nicotina	94	101	19	estresse	65	72	13	1	-1
-e cigarro não vai aliviar tanto a ansiedade pq tu vai adquirir o estresse por falta de uso da nicotina .	nicotina	94	101	19	ansiedade	34	42	7	1	-1
-glicose todo mundo tem é natural do corpo humano seja alta ou baixa diabetes já é uma doença provocada pelo excesso de açúcar .	glicose	0	6	0	diabetes	68	75	13	0	-1
-tomei paracetamol e a dor passou vamo ver se não vai voltar na correria jf x leopoldina mas eu quero sair sim .	paracetamol	6	16	1	dor	22	24	4	0	-1
-de leve o calor zinco pede complexo da restinga velha	zinco	16	20	4	calor	10	14	3	1	-1
-desculpa toda a ignorancia e toda minha raiva e mal humor durante alguns dias semanas se pa meses estarei sem nicotina .	nicotina	110	117	20	raiva	40	44	7	1	-1
-mainha disse para eu tomar vacina contra raiva mal sabe ela que vou virar o raiva do divertida mente .	vacina contra raiva	27	45	10069	raiva	76	80	15	0	-1
-ser apaixonada por cafeína e ter ansiedade é complicado emmm .	cafeína	19	25	3	ansiedade	33	41	6	0	-1
-toda semana agora tenho q tomar vacina devido a alergia .	vacina	32	37	6	alergia	48	54	9	0	-1
-tô uma maravilha kkk eu li q não pode tomar qualquer remédio q piora e eu tô mto desidratada qria tomar dipirona p febre .	dipirona	104	111	21	febre	115	119	23	0	-1
-tanto remédio estou tomando pra dor que estou chorando de dor no estomago nem omeprazol tá aliviando que caralha .	omeprazol	78	86	14	dor	32	34	5	1	-1
-tanto remédio estou tomando pra dor que estou chorando de dor no estomago nem omeprazol tá aliviando que caralha .	omeprazol	78	86	14	chorando	46	53	8	1	-1
-tanto remédio estou tomando pra dor que estou chorando de dor no estomago nem omeprazol tá aliviando que caralha .	omeprazol	78	86	14	dor	58	60	10	1	-1
-mas o bom mesmo pra enxaqueca é o topiramato ou então depakote er .	topiramato	34	43	8	enxaqueca	20	28	5	1	-1
-mas o bom mesmo pra enxaqueca é o topiramato ou então depakote er .	depakote	54	61	11	enxaqueca	20	28	5	1	-1
-além do metamizol dipirona agora descobri que tbm tenho alergia ao cetoprofeno .	dipirona	18	25	3	alergia	56	62	9	0	-1
-além do metamizol dipirona agora descobri que tbm tenho alergia ao cetoprofeno .	cetoprofeno	67	77	11	alergia	56	62	9	1	-1
-o calor está chegando com tudo ou já chegou em alguns lugares e estamos nos preparando para manter a cafeína http fb me 7mhghispt .	cafeína	101	107	19	calor	2	6	1	1	-1
-estou passando óleo de rícino nos olhos próximos aos cílios e está ajudando contra minha alergia .	óleo de rícino	15	28	8690	alergia	89	95	15	0	-1
-eu tenho alergia à ureia	ureia	19	23	4	alergia	9	15	2	1	-1
-alucinação comigo não combina se à cabeceira ou noutra situação canina há nicotina na algibeira .	nicotina	74	81	12	alucinação	0	9	0	1	-1
-tomei dipirona e agora estou ficando com calor .	dipirona	6	13	1	com calor	37	45	45	0	-1
-dor não cura com penicilina	penicilina	17	26	4	dor	0	2	0	1	-1
-vou ter que tomar uma vacina no aeroporto depressão x2 .	vacina	22	27	5	depressão	42	50	8	0	-1
-3 pantoprazol e essa dor no estomago não passa .	pantoprazol	2	12	1	dor	21	23	4	0	-1
-não tive minha nicotina diária minha ansiedade está lá em cima .	nicotina	15	22	3	ansiedade	37	45	6	0	-1
-nunca imaginei que ela não iria lembrar que sou alérgica à dipirona estamos aqui esperando a minha morte iniciada por edema de glote .	dipirona	59	66	11	edema	118	122	20	0	-1
-nunca imaginei que ela não iria lembrar que sou alérgica à dipirona estamos aqui esperando a minha morte iniciada por edema de glote .	dipirona	59	66	11	morte	99	103	17	0	-1
-ferneteto é alguma coisa de zolpidem mas meu ldjxjxjxjxj ele é mt loco eu fico com mta tontura e n lembro de nd no dia seguinte .	zolpidem	28	35	5	tontura	87	93	17	0	-1
-tava na maior dor de cabeça de abstinência de cafeína .	cafeína	46	52	9	dor de cabeça	14	26	12463	1	-1
-comecei um tratamento com tetraciclina e tomei um dipirona pra dor de cabeça	tetraciclina	26	37	4	dor de cabeça	63	75	14155	0	-1
-comecei um tratamento com tetraciclina e tomei um dipirona pra dor de cabeça	dipirona	50	57	8	dor de cabeça	63	75	14155	0	-1
-calor do caralho e tendo que ir tomar vacina ainda vou ter prova no final do dia esse sou eu amanhã aí vou chegar e não tem medico .	vacina	38	43	8	calor	0	4	0	1	-1
-eu so tenho mais 2 comprimido de omeprazol eu to guardando pra uma dor especial .	omeprazol	33	41	7	dor	67	69	13	0	-1
-sou viciada em nimesulida mas que que eu vou fazer unica coisa q resolve minha dor no pescoço .	nimesulida	15	24	3	dor	79	81	15	0	-1
-mano odeio tomar dipirona quando tô com febre porque tô com frio quando começa a fazer efeito me dá um calor que meu deus .	dipirona	17	24	3	calor	103	107	20	0	-1
-mano odeio tomar dipirona quando tô com febre porque tô com frio quando começa a fazer efeito me dá um calor que meu deus .	dipirona	17	24	3	febre	40	44	7	0	-1
-preciso comprar meu omeprazol logo tô sentindo dor no estômago antes de terminar as refeições .	omeprazol	20	28	3	dor	47	49	7	0	-1
-chá de sene só não pode tomar quando for sair pq dá uma puta dor de barriga .	sene	7	10	2	dor	61	63	14	0	-1
-dor de cabeça precisando de uma glicose .	glicose	32	38	6	dor de cabeça	0	12	8208	1	-1
-a depressão é potencializada por deficiências nutricionais que impedem a fabricação de serotonina noradrenalina dopamina etc lowcarb .	dopamina	112	119	14	depressão	2	10	1	1	-1
-depois da festinha de ontem o q resta dor no estômago e trabalho dalhe omeprazol partiu .	omeprazol	71	79	14	dor	38	40	8	1	-1
-tô na azitromicina já única coisa que resolve aí passou a febre e a garganta deve desinflamar até amanhã .	azitromicina	6	17	2	febre	58	62	11	0	-1
-omeprazol dor estomacal ou buscopam composto desconforto colica abdominal .	omeprazol	0	8	0	desconforto	45	55	6	0	-1
-omeprazol dor estomacal ou buscopam composto desconforto colica abdominal .	omeprazol	0	8	0	dor	10	12	1	0	-1
-o paracetamol é um analgésico antipirético usado em situações de dor ligeira a moderada e febre paracetamol http fb me 8o9170l9p .	paracetamol	2	12	1	febre	90	94	15	0	-1
-o paracetamol é um analgésico antipirético usado em situações de dor ligeira a moderada e febre paracetamol http fb me 8o9170l9p .	paracetamol	2	12	1	dor	65	67	10	0	-1
-o paracetamol é um analgésico antipirético usado em situações de dor ligeira a moderada e febre paracetamol http fb me 8o9170l9p .	paracetamol	96	106	16	febre	90	94	15	1	-1
-o paracetamol é um analgésico antipirético usado em situações de dor ligeira a moderada e febre paracetamol http fb me 8o9170l9p .	paracetamol	96	106	16	dor	65	67	10	1	-1
-aquela dor de cabeça motivada pela abstinência a café fiquei 12 horas sem cafeína e se deus quiser nunca mais passarei tanto tempo sem .	cafeína	74	80	13	dor de cabeça	7	19	7226	1	-1
-pois é estou tomando amoxilina e nimesulida desde sábado à noite garganta cheia de pus e febre que vai e volta .	nimesulida	33	42	6	febre	89	93	16	0	-1
-um dos efeitos colaterais da sibutramina agressividade magina se eu começo a tomar um trem desse .	sibutramina	29	39	5	agressividade	41	53	6	0	-1
-eu tbm odeio minha sorte é que dipirona eu não posso tomar pq eu tenho alergia .	dipirona	31	38	7	alergia	71	77	15	0	-1
-p vacina mais tá muito calor .	vacina	2	7	1	calor	23	27	5	0	-1
-minhas sertralina pra dar um 10 nessas ansiedade .	sertralina	7	16	1	ansiedade	39	47	7	0	-1
-acordar cedo é ruim mas vcs já tiveram caroços na bunda por alergia a cefalexina .	cefalexina	70	79	14	alergia	60	66	12	1	-1
-2 dias sem tomar omeprazol que morte horrível .	omeprazol	17	25	4	morte	31	35	6	0	-1
-uma morte lenta e dolorosa é tomar o último loratadina da cartela .	loratadina	44	53	9	morte	4	8	1	1	-1
-eu sou meio louca eu to nimesulida que faz a dor parar tem que tomar de 12 em 12 horas e se tiver com olho já eu estouro .	nimesulida	24	33	6	dor	45	47	10	0	-1
-minha ansiedade nem com sertralina resolve vsf .	sertralina	24	33	4	ansiedade	6	14	1	1	-1
-help alguém aqui sabe um remédio bom pra azia além de água ou omeprazol tô lascada aqui .	omeprazol	62	70	13	azia	41	44	8	1	-1
-tomei nimesulida e a dor de dente passou em 20 min .	nimesulida	6	15	1	dor de dente	21	32	13174	0	-1
-vou agora não fui tomar remédio pra dor de cabeça e quando fui ler era paracetamol cafeína kkkkkkkkkkkkk .	paracetamol	71	81	15	dor de cabeça	36	48	13627	1	-1
-vou agora não fui tomar remédio pra dor de cabeça e quando fui ler era paracetamol cafeína kkkkkkkkkkkkk .	cafeína	83	89	16	dor de cabeça	36	48	13627	1	-1
-cloridrato de naratriptana pra dor de cabeça forte e insistente enxaqueca .	naratriptana	14	25	2	enxaqueca	64	72	10	0	-1
-cloridrato de naratriptana pra dor de cabeça forte e insistente enxaqueca .	naratriptana	14	25	2	dor de cabeça	31	43	7695	0	-1
-cloridrato de naratriptana pra dor de cabeça forte e insistente enxaqueca .	cloridrato	0	9	0	enxaqueca	64	72	10	0	-1
-cloridrato de naratriptana pra dor de cabeça forte e insistente enxaqueca .	cloridrato	0	9	0	dor de cabeça	31	43	7695	0	-1
-dor desgrama de dor ranitidina	ranitidina	20	29	4	dor	0	2	0	1	-1
-dor desgrama de dor ranitidina	ranitidina	20	29	4	dor	16	18	3	1	-1
-a minha cicatriz de vacina no braço esquerdo é estranha não é aquela depressão bonitinha .	vacina	20	25	4	cicatriz	8	15	2	1	-1
-a minha cicatriz de vacina no braço esquerdo é estranha não é aquela depressão bonitinha .	vacina	20	25	4	depressão	69	77	13	0	-1
-o diabetes tipo 2 é uma doença crônica que afeta a forma como o corpo metaboliza a glicose https www instagram com p bgkjsjdx yz .	glicose	83	89	17	diabetes	2	9	1	1	-1
-pra dormir 1 mg pra ansiedade 0 5 e pra crises fortes de ansiedade 2 mg e escitalopram 10 mg 24 7 .	escitalopram	74	85	17	ansiedade	20	28	5	1	-1
-pra dormir 1 mg pra ansiedade 0 5 e pra crises fortes de ansiedade 2 mg e escitalopram 10 mg 24 7 .	escitalopram	74	85	17	ansiedade	57	65	13	1	-1
-aumenta o colesterol ruim a glicose engorda e faz mal para os ossos mas um copo de coca cola bem gelado nesse calor é muito bom .	glicose	28	34	5	calor	110	114	22	0	-1
-a produção dr glicose leva à morte geraldo 2016 .	glicose	14	20	3	morte	29	33	6	0	-1
-menos mal que minhas crises de abstinência de nicotina se resumem a fome muita e sono de dia pq de noite é crise de ansiedade 48h .	nicotina	46	53	8	sono	81	84	15	0	-1
-menos mal que minhas crises de abstinência de nicotina se resumem a fome muita e sono de dia pq de noite é crise de ansiedade 48h .	nicotina	46	53	8	ansiedade	116	124	24	0	-1
-menos mal que minhas crises de abstinência de nicotina se resumem a fome muita e sono de dia pq de noite é crise de ansiedade 48h .	nicotina	46	53	8	fome	68	71	12	0	-1
-já estão faltando galantamina medicamento que controla demência alzheimer e sertralina para tratamento da depressão .	galantamina	18	28	3	demência	55	62	7	0	-1
-já estão faltando galantamina medicamento que controla demência alzheimer e sertralina para tratamento da depressão .	galantamina	18	28	3	depressão	106	114	14	0	-1
-já estão faltando galantamina medicamento que controla demência alzheimer e sertralina para tratamento da depressão .	sertralina	76	85	10	demência	55	62	7	1	-1
-já estão faltando galantamina medicamento que controla demência alzheimer e sertralina para tratamento da depressão .	sertralina	76	85	10	depressão	106	114	14	0	-1
-ensaiar nesse calor embaixo do zinco não é pra qualquer um .	zinco	31	35	5	calor	14	18	2	1	-1
-esqueço que tenho alergia a dipirona	dipirona	28	35	5	alergia	18	24	3	1	-1
-o bb tem alergia a ptn do leite de vaca e intolerancia a lactose mãe não pode tomar o leite e nem cafeína dar água msm .	leite	26	30	7	alergia	9	15	3	1	-1
-o bb tem alergia a ptn do leite de vaca e intolerancia a lactose mãe não pode tomar o leite e nem cafeína dar água msm .	leite	86	90	19	alergia	9	15	3	1	-1
-o bb tem alergia a ptn do leite de vaca e intolerancia a lactose mãe não pode tomar o leite e nem cafeína dar água msm .	cafeína	98	104	22	alergia	9	15	3	1	-1
-aprender a deixar de lado é melhor pq vc nao sente a dor da gastrite nervosa e economiza omeprazol .	omeprazol	89	97	18	dor	53	55	12	1	-1
-aprender a deixar de lado é melhor pq vc nao sente a dor da gastrite nervosa e economiza omeprazol .	omeprazol	89	97	18	gastrite	60	67	14	1	-1
-eu fui usar aquela hidroquinona pra que me fudi todinho de alergia caralho	hidroquinona	19	30	4	alergia	59	65	11	0	-1
-araujo ingred se me dessem remédio eu n ia tomar tb n tomei nem fluoxetina p ansiedade .	fluoxetina	64	73	14	ansiedade	77	85	16	0	-1
-mas dá lhe paroxetina pra desbloquear toda a minha ansiedade social e me permitir ter coragem de escrever besteiras pra todo mundo ler .	paroxetina	11	20	3	ansiedade	51	59	9	0	-1
-nossa eu fui ali só pra pegar um exame de glicose e to morrendo de calor pqp .	glicose	42	48	10	calor	67	71	15	0	-1
-tô quase crendo que tenho alergia a dipirona .	dipirona	36	43	7	alergia	26	32	5	1	-1
-tomei captopril achando que era pra dor mais er pra pressão agr to começando ver tudo roda mane .	captopril	6	14	1	dor	36	38	6	0	-1
-adivinha quem esqueceu de tomar o omeprazol e está com dor de barriga por conta da ansiedade .	omeprazol	34	42	6	ansiedade	83	91	16	0	-1
-adivinha quem esqueceu de tomar o omeprazol e está com dor de barriga por conta da ansiedade .	omeprazol	34	42	6	dor	55	57	10	0	-1
-já tomei eno e omeprazol mas se gritar dracarys saio colocando fogo em tudo azia que não passa .	omeprazol	15	23	4	azia	76	79	14	0	-1
-comprar uns captopril pra assistir o jogo das meninas mais tarde mata mata sempre dar uma dor no coração .	captopril	12	20	2	dor	90	92	16	0	-1
-louca de dor da vacina tadinha .	vacina	16	21	4	dor	9	11	2	1	-1
-tomo sertralina 100 mg pra ansiedade generalizada e vou começar com lítio pra estabilizar o humor .	sertralina	5	14	1	ansiedade	27	35	5	0	-1
-tomo sertralina 100 mg pra ansiedade generalizada e vou começar com lítio pra estabilizar o humor .	lítio	68	72	11	ansiedade	27	35	5	1	-1
-sim por favor pessoalno um minuto de silêncio vamos respeitar a torcida do grêmio sente a mesna dor q os envolvidos na trajédia https twitter com taddeu status 805165555267371008 .	mesna	90	94	16	dor	96	98	17	0	-1
-o dia todo tomei duas dipirona s e dois paracetamol s to chapada até agora e a dor não passou .	paracetamol	40	50	9	dor	79	81	17	0	-1
-o dia todo tomei duas dipirona s e dois paracetamol s to chapada até agora e a dor não passou .	dipirona	22	29	5	dor	79	81	17	0	-1
-só o que trata minha ansiedade é cantar e paroxetina https twitter com vocenaosabiaq status 747946465645858816 .	paroxetina	42	51	9	ansiedade	21	29	5	1	-1
-tô injetando ibuprofeno na veia quase de tanta dor e não passa .	ibuprofeno	13	22	2	dor	47	49	8	0	-1
-tomo paracetamol a febre baixa e dps de 5h volta com tudo tenho alergia a dipirona .	paracetamol	5	15	1	alergia	64	70	13	0	-1
-tomo paracetamol a febre baixa e dps de 5h volta com tudo tenho alergia a dipirona .	paracetamol	5	15	1	febre	19	23	3	0	-1
-tomo paracetamol a febre baixa e dps de 5h volta com tudo tenho alergia a dipirona .	dipirona	74	81	15	alergia	64	70	13	1	-1
-tomo paracetamol a febre baixa e dps de 5h volta com tudo tenho alergia a dipirona .	dipirona	74	81	15	febre	19	23	3	1	-1
-usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	amato	118	122	17	enxaqueca	38	46	5	1	-1
-usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	amato	118	122	17	enxaqueca	149	157	21	0	-1
-usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	topiramato	124	133	18	enxaqueca	38	46	5	1	-1
-usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	topiramato	124	133	18	enxaqueca	149	157	21	0	-1
-usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	amato	7	11	1	enxaqueca	38	46	5	0	-1
-usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	amato	7	11	1	enxaqueca	149	157	21	0	-1
-usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	topiramato	13	22	2	enxaqueca	38	46	5	0	-1
-usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	topiramato	13	22	2	enxaqueca	149	157	21	0	-1
-me deu tontura do nada to com medo espero q n de nada d no meu exame principalmente glicose alta e anemia ne .	glicose	84	90	18	anemia	99	104	21	0	-1
-me deu tontura do nada to com medo espero q n de nada d no meu exame principalmente glicose alta e anemia ne .	glicose	84	90	18	tontura	7	13	2	1	-1
-me deu tontura do nada to com medo espero q n de nada d no meu exame principalmente glicose alta e anemia ne .	glicose	84	90	18	medo	30	33	7	1	-1
-nossa é horrível mesmo compra um remedinho chamado nimesulida pede o genérico que é mais barato que ajuda muito na dor .	nimesulida	51	60	8	dor	115	117	20	0	-1
-o foda é eu estar com dor de cabeça e não poder tomar remédio porque o remédio tem cafeína e eu tenho labirintite .	cafeína	83	89	18	dor de cabeça	22	34	35	1	-1
-meu pai teve que tomar morfina pra passar a dor da cólica de rins assim parece que as que eu tenho são carinho .	morfina	23	29	5	dor	44	46	9	0	-1
-ironicamente ou não coca é o que eu tomo quando tô passando mal tem açúcar sódio e cafeína corta enjoo e tudo hahaha .	cafeína	83	89	17	enjoo	97	101	19	0	-1
-eu realmente to achando que to crescendo porém eu lembro que essa dor é porque eu não tomo a vitamina que eu deveria moreticketstwtbrazil .	vitamina	93	100	19	dor	66	68	12	1	-1
-a pessoa quando entra em coma alcoólico não fica mt no horpital não é só botar glicose e pa .	glicose	79	85	16	coma	25	28	5	1	-1
-nao tava conseguindo coçar a cabeça de tanta dor muscular tomei um paracetamol e to conseguindo chegar minha mão na cabeça kkkk .	paracetamol	67	77	12	dor muscular	45	56	56	1	-1
-quem usa muito a cafeina ao fim de alguns anos pode ganhar cancro do fígado ou bexiga doença mamária fibrocística cancro do pâncreas .	cafeina	17	23	4	cancro	114	119	20	0	-1
-quem usa muito a cafeina ao fim de alguns anos pode ganhar cancro do fígado ou bexiga doença mamária fibrocística cancro do pâncreas .	cafeina	17	23	4	cancro	59	64	12	0	-1
-hidroquinona ja usei pra clarear manchas de acne no rosto use com cautela .	hidroquinona	0	11	0	acne	44	47	7	0	-1
-toma omeprazol muito bom só queria alguma coisa pra aliviar a ansiedade que tá fofa .	omeprazol	5	13	1	ansiedade	62	70	11	0	-1
-fui levar os gêmeos pra tomar vacina e o calor eatava demais .	vacina	30	35	6	calor	41	45	9	0	-1
-dipirona paracetamol piroxicam e a anestesia e eu ainda sinto dor .	dipirona	0	7	0	dor	62	64	10	0	-1
-dipirona paracetamol piroxicam e a anestesia e eu ainda sinto dor .	piroxicam	21	29	2	dor	62	64	10	0	-1
-dipirona paracetamol piroxicam e a anestesia e eu ainda sinto dor .	paracetamol	9	19	1	dor	62	64	10	0	-1
-poucas coisas são piores do que tomar dipirona no calor .	dipirona	38	45	7	calor	50	54	9	0	-1
-tomei um ranitidina mas a dor não passa .	ranitidina	9	18	2	dor	26	28	5	0	-1
-ta vomitando a cada minuto tipo com muita dor no pâncreas super fraca e molinha glicose ta tipo 430 .	glicose	80	86	15	dor	42	44	8	1	-1
-ta vomitando a cada minuto tipo com muita dor no pâncreas super fraca e molinha glicose ta tipo 430 .	glicose	80	86	15	vomitando	3	11	1	1	-1
-cefalium ibuprofeno ou narimig são os 3 que eu tomo quando fico de ressaca ou enxaqueca .	ibuprofeno	9	18	1	enxaqueca	78	86	15	0	-1
-cefalium ibuprofeno ou narimig são os 3 que eu tomo quando fico de ressaca ou enxaqueca .	cefalium	0	7	0	enxaqueca	78	86	15	0	-1
-nota duloxetina dá mesmo enjôo 2 dia de medicação	duloxetina	5	14	1	enjôo	25	29	4	0	-1
-que foi o q qse me fez passar mal e em casa nimesulida e dipirona caso dê febre eu só tô com dificuldade pra comer .	nimesulida	44	53	12	febre	74	78	17	0	-1
-que foi o q qse me fez passar mal e em casa nimesulida e dipirona caso dê febre eu só tô com dificuldade pra comer .	dipirona	57	64	14	febre	74	78	17	0	-1
-causada pela combinação de oximoforna oxicodona analgésicos diazepam nordiazepam remédio para controlar a ansiedade e álcool pic twitter com tnch6xthxw .	diazepam	60	67	7	ansiedade	106	114	13	0	-1
-causada pela combinação de oximoforna oxicodona analgésicos diazepam nordiazepam remédio para controlar a ansiedade e álcool pic twitter com tnch6xthxw .	álcool	118	123	15	ansiedade	106	114	13	1	-1
-causada pela combinação de oximoforna oxicodona analgésicos diazepam nordiazepam remédio para controlar a ansiedade e álcool pic twitter com tnch6xthxw .	oxicodona	38	46	5	ansiedade	106	114	13	0	-1
-como lidar com a ansiedade para os vestibulares olha eu lido tomando 2 comprimidos de paroxetina toda manhã .	paroxetina	86	95	15	ansiedade	17	25	4	1	-1
-vai sim no gastro e pra não morrer de dor omeprazol ou hidróxido de alumínio antes da refeiçao .	omeprazol	42	50	10	dor	38	40	9	1	-1
-vai sim no gastro e pra não morrer de dor omeprazol ou hidróxido de alumínio antes da refeiçao .	hidróxido de alumínio	55	75	9115	dor	38	40	9	1	-1
+Index	Candidate	Drug	Drug_Char_Start	Drug_Char_end	Drug_Word_Index	Event	Event_Char_Start	Event_Char_end	Event_Word_Index	Is_inverted	LABEL
+0	mupirocina vai acabar com a coceira e com inchaço .	mupirocina	0	9	0	inchaço	42	48	8	0	-1
+1	sou viciada em nimesulida mas que que eu vou fazer unica coisa q resolve minha dor no pescoço .	nimesulida	15	24	3	dor	79	81	15	0	-1
+2	vou ir na minha vó tomar morfina não aguento mais essa dor .	morfina	25	31	6	dor	55	57	11	0	-1
+3	agora tenho alergia ate paracetamol .	paracetamol	24	34	4	alergia	12	18	2	1	-1
+4	dor não cura com penicilina	penicilina	17	26	4	dor	0	2	0	1	-1
+5	to queimando em febre e não sei cadê a caralha da dipirona .	dipirona	50	57	11	febre	16	20	3	1	-1
+6	depressão ansiedade homofobia omeprazol .	omeprazol	30	38	3	depressão	0	8	0	1	-1
+7	acordei com uma dor que não tem dimensão falta de cálcio purinha pq a beldade aqui não toma leite né .	cálcio	50	55	10	dor	16	18	3	1	-1
+8	que remédio vocês tomam pra dor de garganta sem ser nimesulida .	nimesulida	52	61	10	dor de garganta	28	42	41788	1	-1
+9	depressão ansiedade homofobia omeprazol .	omeprazol	30	38	3	ansiedade	10	18	1	1	-1
+10	se não tiver alergia toma ibuprofeno .	ibuprofeno	26	35	5	alergia	13	19	3	1	-1
+11	acordei com uma dor que não tem dimensão falta de cálcio purinha pq a beldade aqui não toma leite né .	leite	92	96	18	dor	16	18	3	1	-1
+12	nunca tomem chá de sene da uma dor de barriga .	sene	19	22	4	dor	31	33	7	0	-1
+13	poucas coisas são piores do que tomar dipirona no calor .	dipirona	38	45	7	calor	50	54	9	0	-1
+14	é pq eu tenho muito desses tremores causados pela ansiedade sabe aí a cafeína piora mais ainda junto com os outros sintomas .	cafeína	70	76	13	ansiedade	50	58	9	1	-1
+15	é pq eu tenho muito desses tremores causados pela ansiedade sabe aí a cafeína piora mais ainda junto com os outros sintomas .	cafeína	70	76	13	tremores	27	34	6	1	-1
+16	eu fui usar aquela hidroquinona pra que me fudi todinho de alergia caralho	hidroquinona	19	30	4	alergia	59	65	11	0	-1
+17	q calor é esse deus to morrendo na academia ainda tomei cafeína suor é lixo .	cafeína	56	62	11	calor	2	6	1	1	-1
+18	q calor é esse deus to morrendo na academia ainda tomei cafeína suor é lixo .	cafeína	56	62	11	suor	64	67	12	0	-1
+19	meu pai teve que tomar morfina pra passar a dor da cólica de rins assim parece que as que eu tenho são carinho .	morfina	23	29	5	dor	44	46	9	0	-1
+20	uma morte lenta e dolorosa é tomar o último loratadina da cartela .	loratadina	44	53	9	morte	4	8	1	1	-1
+21	minha glicose tá la em cima tontura n passa .	glicose	6	12	1	tontura	28	34	6	0	-1
+22	indo dormir com dor de cabeça pra variar vivendo nesse hospício só com uma dose de bromazepam p acalmar .	bromazepam	83	92	16	dor de cabeça	16	28	28241	1	-1
+23	queria injetar lidocaina na veia e ficar toda dopada e não sentir essa dor irritante .	lidocaina	15	23	2	dor	71	73	13	0	-1
+24	ser apaixonada por cafeína e ter ansiedade é complicado emmm .	cafeína	19	25	3	ansiedade	33	41	6	0	-1
+25	uma dipirona aqui e lembrei q eu colocava na agenda q tinha alergia à dipirona so p n tomar pq ruim demais .	dipirona	4	11	1	alergia	60	66	12	0	-1
+26	uma dipirona aqui e lembrei q eu colocava na agenda q tinha alergia à dipirona so p n tomar pq ruim demais .	dipirona	70	77	14	alergia	60	66	12	1	-1
+27	tem nimesulida aí ou algum outro anti inflamatório é bom tomar e dipirona ou paracetamol caso a febre fique muito alta .	nimesulida	4	13	1	febre	96	100	17	0	-1
+28	tem nimesulida aí ou algum outro anti inflamatório é bom tomar e dipirona ou paracetamol caso a febre fique muito alta .	paracetamol	77	87	14	febre	96	100	17	0	-1
+29	tem nimesulida aí ou algum outro anti inflamatório é bom tomar e dipirona ou paracetamol caso a febre fique muito alta .	anti	33	36	6	febre	96	100	17	0	-1
+30	tem nimesulida aí ou algum outro anti inflamatório é bom tomar e dipirona ou paracetamol caso a febre fique muito alta .	dipirona	65	72	12	febre	96	100	17	0	-1
+31	até que um dia resolvi parar de tomar remédios e a dor parou procurei as bulas e no domperidona tinha lactose monoidratada .	domperidona	84	94	18	dor	51	53	11	1	-1
+32	ajuda muito é o que os dentistas passam pra dor anti inflamatório acho .	anti	48	51	10	dor	44	46	9	1	-1
+33	o bb tem alergia a ptn do leite de vaca e intolerancia a lactose mãe não pode tomar o leite e nem cafeína dar água msm .	leite	26	30	7	alergia	9	15	3	1	-1
+34	causada pela combinação de oximoforna oxicodona analgésicos diazepam nordiazepam remédio para controlar a ansiedade e álcool pic twitter com tnch6xthxw .	álcool	118	123	15	ansiedade	106	114	13	1	-1
+35	o bb tem alergia a ptn do leite de vaca e intolerancia a lactose mãe não pode tomar o leite e nem cafeína dar água msm .	cafeína	98	104	22	alergia	9	15	3	1	-1
+36	causada pela combinação de oximoforna oxicodona analgésicos diazepam nordiazepam remédio para controlar a ansiedade e álcool pic twitter com tnch6xthxw .	oxicodona	38	46	5	ansiedade	106	114	13	0	-1
+37	o bb tem alergia a ptn do leite de vaca e intolerancia a lactose mãe não pode tomar o leite e nem cafeína dar água msm .	leite	86	90	19	alergia	9	15	3	1	-1
+38	causada pela combinação de oximoforna oxicodona analgésicos diazepam nordiazepam remédio para controlar a ansiedade e álcool pic twitter com tnch6xthxw .	diazepam	60	67	7	ansiedade	106	114	13	0	-1
+39	meu remédio pra enxaqueca tem cafeína é só tomar ele e adeus conseguir dormir ou sossegar .	cafeína	30	36	5	enxaqueca	16	24	3	1	-1
+40	comi 2 x calabresa e 1l de coca já tô morrendo de dor e meu omeprazol acabou .	omeprazol	60	68	15	dor	50	52	12	1	-1
+41	e cigarro não vai aliviar tanto a ansiedade pq tu vai adquirir o estresse por falta de uso da nicotina .	nicotina	94	101	19	estresse	65	72	13	1	-1
+42	pra quem tava esses dias com o cérebro nadando em dopamina e com ansiedade logo insônia é assustador mesmo .	dopamina	50	57	10	ansiedade	65	73	13	0	-1
+43	eu tbm odeio minha sorte é que dipirona eu não posso tomar pq eu tenho alergia .	dipirona	31	38	7	alergia	71	77	15	0	-1
+44	e cigarro não vai aliviar tanto a ansiedade pq tu vai adquirir o estresse por falta de uso da nicotina .	nicotina	94	101	19	ansiedade	34	42	7	1	-1
+45	não podia estar melhor amigdalite infecciosa que me obrigou a levar uma injeção de penicilina e 38 8 graus de febre .	penicilina	83	92	14	amigdalite	23	32	4	1	-1
+46	pra quem tava esses dias com o cérebro nadando em dopamina e com ansiedade logo insônia é assustador mesmo .	dopamina	50	57	10	insônia	80	86	15	0	-1
+47	a nicotina alivia a dor que eu sinto diariamente .	nicotina	2	9	1	dor	20	22	4	0	-1
+48	não podia estar melhor amigdalite infecciosa que me obrigou a levar uma injeção de penicilina e 38 8 graus de febre .	penicilina	83	92	14	febre	110	114	20	0	-1
+49	que calor tô jogando dipirona no ar pra ver se abaixa a temperatura .	dipirona	21	28	4	calor	4	8	1	1	-1
+50	pesquisa mostra as complicações da diabetes millitus intolerância à glicose e disfunção renal https goo gl cekyyl .	glicose	68	74	9	diabetes	35	42	5	1	-1
+51	pesquisa mostra as complicações da diabetes millitus intolerância à glicose e disfunção renal https goo gl cekyyl .	glicose	68	74	9	disfunção renal	78	92	92	0	-1
+52	já que eu falei sobre depressão esta música às vezes funciona melhor do que fluoxetina https youtu be d8z vn67sru http fb me 7udn9qbut .	fluoxetina	76	85	14	depressão	22	30	5	1	-1
+53	sofro de depressão tomo cloridrato de bupropiona sem sucesso porfavor qual o princípio ativo de remédio	bupropiona	38	47	6	depressão	9	17	2	1	-1
+54	nimesulida pra melhorar dor nas costas mas não mudou nada .	nimesulida	0	9	0	dor nas costas	24	37	38778	0	-1
+55	sofro de depressão tomo cloridrato de bupropiona sem sucesso porfavor qual o princípio ativo de remédio	cloridrato	24	33	4	depressão	9	17	2	1	-1
+56	queria tomar uma injeção de meloxicam pra aliviar essa dor nas costas e dormir 12h seguidas .	meloxicam	28	36	5	dor nas costas	55	68	39816	0	-1
+57	tomei captopril achando que era pra dor mais er pra pressão agr to começando ver tudo roda mane .	captopril	6	14	1	dor	36	38	6	0	-1
+58	nossa eu fui ali só pra pegar um exame de glicose e to morrendo de calor pqp .	glicose	42	48	10	calor	67	71	15	0	-1
+59	esse tempinho tá bom pra quem tá de cálcio fora isso mas no meu caso prefiro o calor .	cálcio	36	41	8	calor	79	83	17	0	-1
+60	fui elogiar o nimesulida aqui mais cedo e agora essa merda não tá mais fazendo efeito to morrendo de dor nunca mais elogio nada .	nimesulida	14	23	3	dor	101	103	19	0	-1
+61	iniciando mais uma tentativa de eliminar a cafeína da minha vida e já estou sendo consumido por uma dor de cabeça .	cafeína	43	49	7	dor de cabeça	100	112	37626	0	-1
+62	daniloarock cloridrato de hidroxizina é pra alergia mas da um efeito de sedativo menino parado louquíssima .	cloridrato	12	21	1	alergia	44	50	6	0	-1
+63	daniloarock cloridrato de hidroxizina é pra alergia mas da um efeito de sedativo menino parado louquíssima .	hidroxizina	26	36	3	alergia	44	50	6	0	-1
+64	toma nimesulida e um remédio bom pra parar a dor .	nimesulida	5	14	1	dor	45	47	9	0	-1
+65	a causa da minha morte provavelmente vai ser a mistura de remédio que eu faço agora u tomei omeprazol e advil e nem percebi .	advil	104	108	20	morte	17	21	4	1	-1
+66	a causa da minha morte provavelmente vai ser a mistura de remédio que eu faço agora u tomei omeprazol e advil e nem percebi .	omeprazol	92	100	18	morte	17	21	4	1	-1
+67	q seja o dor ou pra dormir só sei q é ranitidina .	ranitidina	38	47	11	dor	9	11	3	1	-1
+68	de leve o calor zinco pede complexo da restinga velha	zinco	16	20	4	calor	10	14	3	1	-1
+69	comecei um tratamento com tetraciclina e tomei um dipirona pra dor de cabeça	dipirona	50	57	8	dor de cabeça	63	75	42100	0	-1
+70	comecei um tratamento com tetraciclina e tomei um dipirona pra dor de cabeça	tetraciclina	26	37	4	dor de cabeça	63	75	42100	0	-1
+71	tamanha azia que to enfiando um supositorio de formato de caixa de omeprazol pelo meu cu pra chegar mais rapido na bariga .	omeprazol	67	75	12	azia	8	11	1	1	-1
+72	diabetes http centraldiabetes org de adeus ao inchaco e controle glicose com esta simples receita resultados rapidos .	glicose	65	71	10	diabetes	0	7	0	1	-1
+73	o alprostadil é um potente vasodilatador para tratamentos de disfunção erétil ativo comprovado http fb me 8javmfwre .	alprostadil	2	12	1	disfunção erétil	61	76	76	0	-1
+74	chá de sene só não pode tomar quando for sair pq dá uma puta dor de barriga .	sene	7	10	2	dor	61	63	14	0	-1
+75	toda vez que eu penso em parar de tomar topiramato pq não tenho mais dor de cabeça eu fico com dor de cabeça .	topiramato	40	49	9	dor de cabeça	69	81	42112	0	-1
+76	toda vez que eu penso em parar de tomar topiramato pq não tenho mais dor de cabeça eu fico com dor de cabeça .	topiramato	40	49	9	dor de cabeça	95	107	42112	0	-1
+77	eu tô gemendo de dor de estômago e acabou o omeprazol .	omeprazol	44	52	10	dor	17	19	4	1	-1
+78	essa vacina acabou cmg não dormi a noite toda e acordei com febre e a cabeça explodindo .	vacina	5	10	1	febre	60	64	12	0	-1
+79	eu tomei ele substituindo o lítio pq o lítio me deu espinha 15 kg a mais e enjoo sempre daí troquei pra esse q cai o cabelo .	lítio	39	43	8	enjoo	75	79	17	0	-1
+80	eu tomei ele substituindo o lítio pq o lítio me deu espinha 15 kg a mais e enjoo sempre daí troquei pra esse q cai o cabelo .	lítio	28	32	5	enjoo	75	79	17	0	-1
+81	tomei um paracetamol aqui me deu um calor .	paracetamol	9	19	2	calor	36	40	7	0	-1
+82	desculpa toda a ignorancia e toda minha raiva e mal humor durante alguns dias semanas se pa meses estarei sem nicotina .	nicotina	110	117	20	raiva	40	44	7	1	-1
+83	o que eu acho que tem chances de acontecer dor de cabeça por conta do aumento súbito de glicose não tive uma dor de cabeça nesses 9 dias .	glicose	88	94	18	dor de cabeça	109	121	39013	0	-1
+84	o que eu acho que tem chances de acontecer dor de cabeça por conta do aumento súbito de glicose não tive uma dor de cabeça nesses 9 dias .	glicose	88	94	18	dor de cabeça	43	55	39013	1	-1
+85	53 sou viciada em cafeína no nível de sentir dor de cabeça se não tomar ao menos uma xícara de café .	cafeína	18	24	4	dor de cabeça	45	57	28647	0	-1
+86	louca de dor da vacina tadinha .	vacina	16	21	4	dor	9	11	2	1	-1
+87	toma omeprazol muito bom só queria alguma coisa pra aliviar a ansiedade que tá fofa .	omeprazol	5	13	1	ansiedade	62	70	11	0	-1
+88	o foda é eu estar com dor de cabeça e não poder tomar remédio porque o remédio tem cafeína e eu tenho labirintite .	cafeína	83	89	18	dor de cabeça	22	34	27983	1	-1
+89	tomei um ranitidina mas a dor não passa .	ranitidina	9	18	2	dor	26	28	5	0	-1
+90	um dos efeitos colaterais da sibutramina agressividade magina se eu começo a tomar um trem desse .	sibutramina	29	39	5	agressividade	41	53	6	0	-1
+91	q merda eu tenho alergia a dipirona e tomei remédio q tem .	dipirona	27	34	6	alergia	17	23	4	1	-1
+92	uma bobagem lelê interação medicamentosa entre sibutramina e analgésicos fortes pois ela tinha muita dor por causa de um braço .	sibutramina	47	57	6	dor	101	103	14	0	-1
+93	dia 2 de sertralina até agora não morri só enjôo mesmo .	sertralina	9	18	3	enjôo	43	47	9	0	-1
+94	não é muito esperto tomar um pantoprazol pra passar a azia e ir tomar vinho e cerveja né .	pantoprazol	29	39	6	azia	54	57	10	0	-1
+95	o paracetamol é um analgésico antipirético usado em situações de dor ligeira a moderada e febre paracetamol http fb me 8o9170l9p .	paracetamol	2	12	1	dor	65	67	10	0	-1
+96	o paracetamol é um analgésico antipirético usado em situações de dor ligeira a moderada e febre paracetamol http fb me 8o9170l9p .	paracetamol	2	12	1	febre	90	94	15	0	-1
+97	o paracetamol é um analgésico antipirético usado em situações de dor ligeira a moderada e febre paracetamol http fb me 8o9170l9p .	paracetamol	96	106	16	dor	65	67	10	1	-1
+98	só o que trata minha ansiedade é cantar e paroxetina https twitter com vocenaosabiaq status 747946465645858816 .	paroxetina	42	51	9	ansiedade	21	29	5	1	-1
+99	o paracetamol é um analgésico antipirético usado em situações de dor ligeira a moderada e febre paracetamol http fb me 8o9170l9p .	paracetamol	96	106	16	febre	90	94	15	1	-1
+100	q eu quero ser teu enjôo palpitação um aperto no peito músculos em tensão um no na garganta descontrole tremor fluoxetina pânico e pavor .	fluoxetina	111	120	20	enjôo	19	23	5	1	-1
+101	ah anti inflamatório é bom se vc não conseguiu passar no médico nimesulida é vendido sem receita já ajuda um pouco na dor .	nimesulida	64	73	12	dor	118	120	22	0	-1
+102	q eu quero ser teu enjôo palpitação um aperto no peito músculos em tensão um no na garganta descontrole tremor fluoxetina pânico e pavor .	fluoxetina	111	120	20	palpitação	25	34	6	1	-1
+103	ah anti inflamatório é bom se vc não conseguiu passar no médico nimesulida é vendido sem receita já ajuda um pouco na dor .	anti	3	6	1	dor	118	120	22	0	-1
+104	q eu quero ser teu enjôo palpitação um aperto no peito músculos em tensão um no na garganta descontrole tremor fluoxetina pânico e pavor .	fluoxetina	111	120	20	aperto no peito	39	53	39638	1	-1
+105	só vim aqui compartilhar que tenho alergia a morfina então agora vocês já podem sentir pena de mim xau .	morfina	45	51	8	alergia	35	41	6	1	-1
+106	q eu quero ser teu enjôo palpitação um aperto no peito músculos em tensão um no na garganta descontrole tremor fluoxetina pânico e pavor .	fluoxetina	111	120	20	tremor	104	109	19	1	-1
+107	chegando em casa vou ter que tomar remédio pra dor e até um omeprazol pq to mal do bucho podem anotar ai desse ano	omeprazol	60	68	13	dor	47	49	9	1	-1
+108	não sei se vocês já sentiram várias sensações ao mesmo tempo q liberam oxitocina e adrenalina mas eu to sentindo tdas tipo paixão ansiedade .	oxitocina	71	79	13	ansiedade	130	138	23	0	-1
+109	tomei paracetamol e a dor passou vamo ver se não vai voltar na correria jf x leopoldina mas eu quero sair sim .	paracetamol	6	16	1	dor	22	24	4	0	-1
+110	ainda bem que já tomei meu pantoprazol porque é capaz de eu desenvolver uma úlcera de tanta raiva .	pantoprazol	27	37	6	raiva	92	96	17	0	-1
+111	pitoco tomo vacina contra a raiva e deu alergia agora ta tudo cheio de bolinha no rosto coitado .	vacina	12	17	2	raiva	28	32	5	0	-1
+112	ainda bem que já tomei meu pantoprazol porque é capaz de eu desenvolver uma úlcera de tanta raiva .	pantoprazol	27	37	6	úlcera	76	81	14	0	-1
+113	pitoco tomo vacina contra a raiva e deu alergia agora ta tudo cheio de bolinha no rosto coitado .	vacina	12	17	2	alergia	40	46	8	0	-1
+114	esqueço que tenho alergia a dipirona	dipirona	28	35	5	alergia	18	24	3	1	-1
+115	d adeus ao inchaço e controle a glicose com esta simples receita esta é uma ótima receita para emagrecer pois http fb me 2ewau5xer .	glicose	32	38	7	inchaço	11	17	3	1	-1
+116	tomar fluoxetina nóis toma mas é cada raiva que nóis passa .	fluoxetina	6	15	1	raiva	38	42	7	0	-1
+117	passei óleo de rícino no cabelo e que horror coça tanto assim msm ou deu alergia em mim .	óleo de rícino	7	20	39324	alergia	73	79	15	0	-1
+118	estou passando óleo de rícino nos olhos próximos aos cílios e está ajudando contra minha alergia .	óleo de rícino	15	28	36635	alergia	89	95	15	0	-1
+119	cheguei em casa já tomando paracetamol pq a cefaleia tensional pegou pesado hoje .	paracetamol	27	37	5	cefaleia tensional	44	61	61	0	-1
+120	nimesulida ser de febre	nimesulida	0	9	0	febre	18	22	3	0	-1
+121	c. o melhor é que minha febre nao abaixa kkkkkk tomo ibuprofeno e melhora as dores mas a febre ta aqui .	ibuprofeno	53	62	11	febre	24	28	6	1	-1
+122	dê adeus ao inchaço e controle a glicose	glicose	33	39	7	inchaço	12	18	3	1	-1
+123	c. o melhor é que minha febre nao abaixa kkkkkk tomo ibuprofeno e melhora as dores mas a febre ta aqui .	ibuprofeno	53	62	11	febre	89	93	18	0	-1
+124	mjoaomarks fun essa da testosterona foi de morte henriquefig7 .	testosterona	23	34	4	morte	43	47	7	0	-1
+125	disfunção erétil disfunçãoerétil sildenafila http pt slideshare	sildenafila	33	43	3	disfunção erétil	0	15	15	1	-1
+126	já não basta eu set alérgica a dipirona amoxilina e a picada de formiga agr eu to com alergia a mais alguma coisa que n sei oq é .	dipirona	31	38	7	alergia	86	92	18	0	-1
+127	bom dia pra quem tem alergia a dipirona que nem eu .	dipirona	31	38	7	alergia	21	27	5	1	-1
+128	a enxaqueca era falta de dopamina dorme com a tv ligada dorme .	dopamina	25	32	5	enxaqueca	2	10	1	1	-1
+129	pois é estou tomando amoxilina e nimesulida desde sábado à noite garganta cheia de pus e febre que vai e volta .	nimesulida	33	42	6	febre	89	93	16	0	-1
+130	um calor desse e a veterinária acha que eu vou sair e cansar meu bb pra ir em comemoração se ainda fosse vacina ou coisa pro meu bb .	pro	121	123	25	calor	3	7	1	1	-1
+131	ah mas omeprazol faz mal me da outra coisa que pare essa azia e diminua os sintomas da gastrite que eu paro de tomar .	omeprazol	7	15	2	azia	57	60	12	0	-1
+132	um calor desse e a veterinária acha que eu vou sair e cansar meu bb pra ir em comemoração se ainda fosse vacina ou coisa pro meu bb .	vacina	105	110	22	calor	3	7	1	1	-1
+133	ah mas omeprazol faz mal me da outra coisa que pare essa azia e diminua os sintomas da gastrite que eu paro de tomar .	omeprazol	7	15	2	gastrite	87	94	18	0	-1
+134	ta vomitando a cada minuto tipo com muita dor no pâncreas super fraca e molinha glicose ta tipo 430 .	glicose	80	86	15	vomitando	3	11	1	1	-1
+135	mano nem o omeprazol tá dando jeito na minha dor de estômago mais .	omeprazol	11	19	3	dor	45	47	9	0	-1
+136	ta vomitando a cada minuto tipo com muita dor no pâncreas super fraca e molinha glicose ta tipo 430 .	glicose	80	86	15	dor	42	44	8	1	-1
+137	eu tinha 15 anos quando minha endocrinologista me passou sibutramina tenho 23 e depressão ate hoje ela garantiu pra minha .	sibutramina	57	67	9	depressão	80	88	13	0	-1
+138	quando eu começar a testosterona vou ter que ficar trancado em casa 24 7 se já tô o estresse agressividade e impaciência agora imagina .	testosterona	20	31	4	agressividade	93	105	19	0	-1
+139	é tudo culpa da minha alergia a dipirona gente e ainda junta com mapa astral	dipirona	32	39	7	alergia	22	28	5	1	-1
+140	quando eu começar a testosterona vou ter que ficar trancado em casa 24 7 se já tô o estresse agressividade e impaciência agora imagina .	testosterona	20	31	4	estresse	84	91	18	0	-1
+141	alucinação comigo não combina se à cabeceira ou noutra situação canina há nicotina na algibeira .	nicotina	74	81	12	alucinação	0	9	0	1	-1
+142	eu tô tomando suco de couve e omeprazol pra dor de estômago e tá resolvendo agora a falta de apetite .	omeprazol	30	38	7	dor	44	46	9	0	-1
+143	alimentos ricos em antioxidantes zinco e vitamina a ajudam na redução da acne melhorando o aspecto da pele pic twitter com onbpbqatxd .	vitamina a	41	50	50	acne	73	76	12	0	-1
+144	após a morte sua energia é libertada e sua matéria volta ao planeta em forma de carbono água cálcio etc. após morte de 3 beb	cálcio	93	98	18	morte	110	114	21	0	-1
+145	alimentos ricos em antioxidantes zinco e vitamina a ajudam na redução da acne melhorando o aspecto da pele pic twitter com onbpbqatxd .	zinco	33	37	4	acne	73	76	12	0	-1
+146	após a morte sua energia é libertada e sua matéria volta ao planeta em forma de carbono água cálcio etc. após morte de 3 beb	cálcio	93	98	18	morte	7	11	2	1	-1
+147	acho que 90 dos meus surtos de raiva pós testosterona foram por que ela é um inferno na terra puta merda .	testosterona	41	52	9	raiva	31	35	7	1	-1
+148	por isso os ce não provocam doença por si mantem a dependência da nicotina .	nicotina	66	73	13	dependência	51	61	11	1	-1
+149	levei minha dog pra tomar a vacina de raiva e quase morro derretido com esse calor pic twitter com ru5i0fp4pt .	vacina	28	33	6	calor	77	81	15	0	-1
+150	vou agora não fui tomar remédio pra dor de cabeça e quando fui ler era paracetamol cafeína kkkkkkkkkkkkk .	paracetamol	71	81	15	dor de cabeça	36	48	41572	1	-1
+151	levei minha dog pra tomar a vacina de raiva e quase morro derretido com esse calor pic twitter com ru5i0fp4pt .	vacina	28	33	6	raiva	38	42	8	0	-1
+152	vou agora não fui tomar remédio pra dor de cabeça e quando fui ler era paracetamol cafeína kkkkkkkkkkkkk .	cafeína	83	89	16	dor de cabeça	36	48	41572	1	-1
+153	nunca imaginei que ela não iria lembrar que sou alérgica à dipirona estamos aqui esperando a minha morte iniciada por edema de glote .	dipirona	59	66	11	edema	118	122	20	0	-1
+154	preciso de um remédio pra dor que seja mais forte que ibuprofeno e não precise de receita quem puder ajudar vou amar pra sempre .	ibuprofeno	54	63	11	dor	26	28	5	1	-1
+155	nunca imaginei que ela não iria lembrar que sou alérgica à dipirona estamos aqui esperando a minha morte iniciada por edema de glote .	dipirona	59	66	11	morte	99	103	17	0	-1
+156	toda semana agora tenho q tomar vacina devido a alergia .	vacina	32	37	6	alergia	48	54	9	0	-1
+157	eu tomei vacina de tétano e febre	vacina	9	14	2	febre	28	32	6	0	-1
+158	quero um open bar de omeprazol pra lidar com essa dor de estômago .	omeprazol	21	29	5	dor	50	52	10	0	-1
+159	amanhã vou la comprar minha fluoxetina pra segurar essa ansiedade .	fluoxetina	28	37	5	ansiedade	56	64	9	0	-1
+160	melhorei da febre graças a deus estou a base de vitamina	vitamina	48	55	10	febre	12	16	2	1	-1
+161	acordar cedo é ruim mas vcs já tiveram caroços na bunda por alergia a cefalexina .	cefalexina	70	79	14	alergia	60	66	12	1	-1
+162	eu li e li q dependendo do antiinflamatório pode intervir no efeito paracetamol tb tanto q me dá ansiedade .	paracetamol	68	78	12	ansiedade	97	105	18	0	-1
+163	omeprazol dor estomacal ou buscopam composto desconforto colica abdominal .	omeprazol	0	8	0	dor	10	12	1	0	-1
+164	omeprazol dor estomacal ou buscopam composto desconforto colica abdominal .	omeprazol	0	8	0	desconforto	45	55	6	0	-1
+165	alguém sabe onde consegue morfina barata pra eu curar a ansiedade pro super bowl .	pro	66	68	11	ansiedade	56	64	10	1	-1
+166	alguém sabe onde consegue morfina barata pra eu curar a ansiedade pro super bowl .	morfina	26	32	4	ansiedade	56	64	10	0	-1
+167	estúpida penicilina por que me tuviste que causar alergia .	penicilina	9	18	1	alergia	50	56	8	0	-1
+168	tão fácil conseguir receita de fluoxetina alimenta meu vício e controla minha ansiedade adoro .	fluoxetina	31	40	5	ansiedade	78	86	12	0	-1
+169	aumenta o colesterol ruim a glicose engorda e faz mal para os ossos mas um copo de coca cola bem gelado nesse calor é muito bom .	glicose	28	34	5	calor	110	114	22	0	-1
+170	eu sou meio louca eu to nimesulida que faz a dor parar tem que tomar de 12 em 12 horas e se tiver com olho já eu estouro .	nimesulida	24	33	6	dor	45	47	10	0	-1
+171	glicose tou com preguiça nenhum sinal de hemorragia interna deve ser sarcoidose .	glicose	0	6	0	hemorragia	41	50	7	0	-1
+172	glicose tou com preguiça nenhum sinal de hemorragia interna deve ser sarcoidose .	glicose	0	6	0	sarcoidose	69	78	11	0	-1
+173	fui tomar vacina d alergia ai aproveitei e levei meu cartão pra ver qual eu tinha q tomar acabei tomando anti tetânica .	vacina	10	15	2	alergia	19	25	4	0	-1
+174	fui tomar vacina d alergia ai aproveitei e levei meu cartão pra ver qual eu tinha q tomar acabei tomando anti tetânica .	anti	105	108	20	alergia	19	25	4	1	-1
+175	aprender a deixar de lado é melhor pq vc nao sente a dor da gastrite nervosa e economiza omeprazol .	omeprazol	89	97	18	dor	53	55	12	1	-1
+176	aprender a deixar de lado é melhor pq vc nao sente a dor da gastrite nervosa e economiza omeprazol .	omeprazol	89	97	18	gastrite	60	67	14	1	-1
+177	ainda tô no efeito do tramadol im de hoje a tarde nada de dor .	tramadol	22	29	5	dor	58	60	13	0	-1
+178	nimesulida é forte o suficiente pra me deixar com dor de estômago talvez se eu ainda não tenha comido nada desde o almoço .	nimesulida	0	9	0	dor	50	52	9	0	-1
+179	essa vacina pode causar dor no corpo de cabeça e dor localizada nesse aviso aí eu já desenvolvi todos os sintomas .	vacina	5	10	1	dor	24	26	4	0	-1
+180	essa vacina pode causar dor no corpo de cabeça e dor localizada nesse aviso aí eu já desenvolvi todos os sintomas .	vacina	5	10	1	dor	49	51	10	0	-1
+181	minha dor de cabeça falta de cafeína .	cafeína	29	35	6	dor de cabeça	6	18	38362	1	-1
+182	vou ter que tomar uma vacina no aeroporto depressão x2 .	vacina	22	27	5	depressão	42	50	8	0	-1
+183	mas o bom mesmo pra enxaqueca é o topiramato ou então depakote er .	depakote	54	61	11	enxaqueca	20	28	5	1	-1
+184	mas o bom mesmo pra enxaqueca é o topiramato ou então depakote er .	topiramato	34	43	8	enxaqueca	20	28	5	1	-1
+185	está com calor jogue dipirona no ar que a temperatura pode baixar rs .	dipirona	21	28	4	com calor	5	13	13	1	-1
+186	muita dor de estômago pode ser nervoso ansiedade mas de td os remédios pro estômago pantoprazol é o melhor msm .	pro	71	73	13	dor	6	8	1	1	-1
+187	muita dor de estômago pode ser nervoso ansiedade mas de td os remédios pro estômago pantoprazol é o melhor msm .	pro	71	73	13	ansiedade	39	47	7	1	-1
+188	muita dor de estômago pode ser nervoso ansiedade mas de td os remédios pro estômago pantoprazol é o melhor msm .	pantoprazol	84	94	15	dor	6	8	1	1	-1
+189	muita dor de estômago pode ser nervoso ansiedade mas de td os remédios pro estômago pantoprazol é o melhor msm .	pantoprazol	84	94	15	ansiedade	39	47	7	1	-1
+190	eu fico com uma dor de cabeça quando faço umectação com óleo de rícino .	óleo de rícino	56	69	36723	dor de cabeça	16	28	36723	1	-1
+191	eu vou comprar 12 injeções de morfina e deixar aqui em casa pra quando a cólica aparecer eu injetar em mim e dormir o sono dos justos em paz .	morfina	30	36	6	sono	118	121	24	0	-1
+192	bem melhor remédio né kkkkkkkk eu tomo omeprazol e nunca mais senti dor no estômago .	omeprazol	39	47	7	dor	68	70	12	0	-1
+193	e se eu tiver alergia a dipirona huheyeheue .	dipirona	24	31	6	alergia	14	20	4	1	-1
+194	tô na azitromicina já única coisa que resolve aí passou a febre e a garganta deve desinflamar até amanhã .	azitromicina	6	17	2	febre	58	62	11	0	-1
+195	vocês não estão bem a ver a minha dor por ter estrago umas calças hoje com nitrato de prata .	nitrato de prata	75	90	41559	dor	34	36	8	1	-1
+196	minha glicose é tão baixa que se eu fico umas 3h sem comer é dor de cabeça e tontura .	glicose	6	12	1	dor de cabeça	61	73	38372	0	-1
+197	minha glicose é tão baixa que se eu fico umas 3h sem comer é dor de cabeça e tontura .	glicose	6	12	1	tontura	77	83	18	0	-1
+198	dor de cabeça precisando de uma glicose .	glicose	32	38	6	dor de cabeça	0	12	36153	1	-1
+199	depois da festinha de ontem o q resta dor no estômago e trabalho dalhe omeprazol partiu .	omeprazol	71	79	14	dor	38	40	8	1	-1
+200	se eu tomo fluoxetina eu morro de tontura se eu não tomo morro de ansiedade o que fazer .	fluoxetina	11	20	3	tontura	34	40	7	0	-1
+201	se eu tomo fluoxetina eu morro de tontura se eu não tomo morro de ansiedade o que fazer .	fluoxetina	11	20	3	ansiedade	66	74	14	0	-1
+202	a morte por excesso de cafeína existe beber http fb me 2pl1l43un .	cafeína	23	29	5	morte	2	6	1	1	-1
+203	nao aguento essa tosse essa dor de garganta nao quero entrar na nimesulida .	nimesulida	64	73	12	dor de garganta	28	42	38588	1	-1
+204	nao aguento essa tosse essa dor de garganta nao quero entrar na nimesulida .	nimesulida	64	73	12	tosse	17	21	3	1	-1
+205	acho que minha testosterona tá alta demais eu só penso em transar q raiva .	testosterona	15	26	3	raiva	68	72	13	0	-1
+206	como eu precisava de um café agora essa dor de cabeça tá com cara de que só vai passar com cafeína .	cafeína	91	97	20	dor de cabeça	40	52	35739	1	-1
+207	to sentindo dor de cabeça desde quinta e não há ibuprofeno que resolva eu não aguento mais .	ibuprofeno	48	57	10	dor de cabeça	12	24	28568	1	-1
+208	nota duloxetina dá mesmo enjôo 2 dia de medicação	duloxetina	5	14	1	enjôo	25	29	4	0	-1
+209	não tomei o omeprazol hoje adivinhem qm tá aqui morrendo de dor .	omeprazol	12	20	3	dor	60	62	11	0	-1
+210	esse cloridrato de ranitidina é bom pra quando vc ja ta com dor o panto e o omeprazol sao mais pra prevenir .	ranitidina	19	28	3	dor	60	62	12	0	-1
+211	esse cloridrato de ranitidina é bom pra quando vc ja ta com dor o panto e o omeprazol sao mais pra prevenir .	omeprazol	76	84	17	dor	60	62	12	1	-1
+212	esse cloridrato de ranitidina é bom pra quando vc ja ta com dor o panto e o omeprazol sao mais pra prevenir .	cloridrato	5	14	1	dor	60	62	12	0	-1
+213	meu suor fede a cafeína cara .	cafeína	16	22	4	suor	4	7	1	1	-1
+214	pro pecado eu desabrigo a minha dor viro mendigo do meu destino .	pro	0	2	0	dor	32	34	6	0	-1
+215	chegar em casa e encontrar mamãe com febre dor no corpo glicose alta corta meu coração em um nível que meu deus .	glicose	56	62	11	febre	37	41	7	1	-1
+216	chegar em casa e encontrar mamãe com febre dor no corpo glicose alta corta meu coração em um nível que meu deus .	glicose	56	62	11	dor	43	45	8	1	-1
+217	tomei à tarde omeprazol mas mesmo assim estou c azia mas não quero perder nada .	omeprazol	14	22	3	azia	48	51	9	0	-1
+218	e mó engraçado ter dor de cabeça porque está com falta de cafeína eisisks .	cafeína	58	64	12	dor de cabeça	19	31	36301	1	-1
+219	fiquei mais de 2 anos tomando vacina pra alergia e talvez vou terq voltar a tomar .	vacina	30	35	6	alergia	41	47	8	0	-1
+220	se resolve melhor a enxaqueca com substâncias que contraiam estes vasos dilatados tipo ergotamina mas se é alérgica a eles .	ergotamina	87	96	13	enxaqueca	20	28	4	1	-1
+221	tomei dipirona e agora estou ficando com calor .	dipirona	6	13	1	com calor	37	45	45	0	-1
+222	2 omeprazol e parece que a dor aumentou mim leva senhor .	omeprazol	2	10	1	dor	27	29	6	0	-1
+223	vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	neosaldina	18	27	3	dor de cabeça	58	70	41443	0	-1
+224	vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	neosaldina	18	27	3	insônia	74	80	13	0	-1
+225	vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	pantoprazol	46	56	8	dor de cabeça	58	70	41443	0	-1
+226	vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	pantoprazol	46	56	8	insônia	74	80	13	0	-1
+227	vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	sonrisal	32	39	5	dor de cabeça	58	70	41443	0	-1
+228	vamos atualizar 2 neosaldina um sonrisal e um pantoprazol dor de cabeça e insônia .	sonrisal	32	39	5	insônia	74	80	13	0	-1
+229	tanta dor que me obriguei tomar morfina e espero não acordar cheia de alergia amanhã .	morfina	32	38	6	alergia	70	76	13	0	-1
+230	tanta dor que me obriguei tomar morfina e espero não acordar cheia de alergia amanhã .	morfina	32	38	6	dor	6	8	1	1	-1
+231	minha vó me deu ibuprofeno espero que passe a dor né .	ibuprofeno	16	25	4	dor	46	48	9	0	-1
+232	minha médica disse que essa porra é tão forte que eu teria que tratar com uma vacina manipulada pro meu tipo de alergia .	vacina	78	83	16	alergia	112	118	22	0	-1
+233	minha médica disse que essa porra é tão forte que eu teria que tratar com uma vacina manipulada pro meu tipo de alergia .	pro	96	98	18	alergia	112	118	22	0	-1
+234	jujubaluca e vai doer ainda mais viu porém toma nimesulida esse acaba com a dor .	nimesulida	48	57	9	dor	76	78	14	0	-1
+235	pensa em alguém que transpira muito desde que iniciei com sertralina eu tenho esse suor excessivo é um saco mas antes isso que surtar .	sertralina	58	67	10	suor	83	86	14	0	-1
+236	coma caqui é antioxidante contém betacaroteno e vitaminas a c e e ferro fósforo cálcio magnésio e zinco pic twitter com 2ugfymrbfo .	zinco	98	102	17	coma	0	3	0	1	-1
+237	coma caqui é antioxidante contém betacaroteno e vitaminas a c e e ferro fósforo cálcio magnésio e zinco pic twitter com 2ugfymrbfo .	cálcio	80	85	14	coma	0	3	0	1	-1
+238	coma caqui é antioxidante contém betacaroteno e vitaminas a c e e ferro fósforo cálcio magnésio e zinco pic twitter com 2ugfymrbfo .	ferro	66	70	12	coma	0	3	0	1	-1
+239	coma caqui é antioxidante contém betacaroteno e vitaminas a c e e ferro fósforo cálcio magnésio e zinco pic twitter com 2ugfymrbfo .	vitaminas	48	56	7	coma	0	3	0	1	-1
+240	que doída essa vacina da febre amarela .	vacina	15	20	3	febre	25	29	5	0	-1
+241	dor de cabeça da porra acho que é falta de cafeina .	cafeina	43	49	10	dor de cabeça	0	12	36124	1	-1
+242	minhas sertralina pra dar um 10 nessas ansiedade .	sertralina	7	16	1	ansiedade	39	47	7	0	-1
+243	pra pânico com depressão em geral os psiquiatras usam de início o escitalopram com um amigo e comigo	escitalopram	66	77	12	depressão	15	23	3	1	-1
+244	76 jp14sglo achega de omeprazol a soluçâo para gastrite azia e refluxo .	omeprazol	22	30	4	azia	56	59	9	0	-1
+245	76 jp14sglo achega de omeprazol a soluçâo para gastrite azia e refluxo .	omeprazol	22	30	4	gastrite	47	54	8	0	-1
+246	espero que eu acorde de manhã e isso seja alucinação do zolpidem .	zolpidem	56	63	11	alucinação	42	51	9	1	-1
+247	eu já fiz tratamento com topiramato agora com pamelor e mesmo assim a dor incomoda demais como você trata .	topiramato	25	34	5	dor	70	72	13	0	-1
+248	eu já fiz tratamento com topiramato agora com pamelor e mesmo assim a dor incomoda demais como você trata .	pamelor	46	52	8	dor	70	72	13	0	-1
+249	pragas de 2016 amigdalite sorvete de milho verde com canela dermato infecção maldição do foel enxaqueca vacina de hepatite	vacina	104	109	16	enxaqueca	94	102	15	1	-1
+250	pragas de 2016 amigdalite sorvete de milho verde com canela dermato infecção maldição do foel enxaqueca vacina de hepatite	vacina	104	109	16	infecção	68	75	11	1	-1
+251	pragas de 2016 amigdalite sorvete de milho verde com canela dermato infecção maldição do foel enxaqueca vacina de hepatite	vacina	104	109	16	amigdalite	15	24	3	1	-1
+252	pragas de 2016 amigdalite sorvete de milho verde com canela dermato infecção maldição do foel enxaqueca vacina de hepatite	vacina	104	109	16	hepatite	114	121	18	0	-1
+253	estou com uma dor no estomago do caralho acabou meu omeprazol t	omeprazol	52	60	10	dor	14	16	3	1	-1
+254	t. estou me autodiagnosticando com febre interna já que minhas articulações doem e tô sentindo um frio horroroso tomei paracetamol vamo ver .	paracetamol	119	129	19	febre	35	39	5	1	-1
+255	dor desgrama de dor ranitidina	ranitidina	20	29	4	dor	0	2	0	1	-1
+256	dor desgrama de dor ranitidina	ranitidina	20	29	4	dor	16	18	3	1	-1
+257	a minha cicatriz de vacina no braço esquerdo é estranha não é aquela depressão bonitinha .	vacina	20	25	4	cicatriz	8	15	2	1	-1
+258	a minha cicatriz de vacina no braço esquerdo é estranha não é aquela depressão bonitinha .	vacina	20	25	4	depressão	69	77	13	0	-1
+259	dá vacina antropófaga no brasil de crise e depressão via miguelarcanjop	vacina	3	8	1	depressão	43	51	8	0	-1
+260	tô uma maravilha kkk eu li q não pode tomar qualquer remédio q piora e eu tô mto desidratada qria tomar dipirona p febre .	dipirona	104	111	21	febre	115	119	23	0	-1
+261	fowztasia saymon600 eu tomo fluoxetina e alprazolam é sentença de morte beber álcool .	alprazolam	41	50	6	morte	66	70	10	0	-1
+262	fowztasia saymon600 eu tomo fluoxetina e alprazolam é sentença de morte beber álcool .	álcool	78	83	12	morte	66	70	10	1	-1
+263	fowztasia saymon600 eu tomo fluoxetina e alprazolam é sentença de morte beber álcool .	fluoxetina	28	37	4	morte	66	70	10	0	-1
+264	tenho que tomar ibuprofeno ou pareceramol pra dor de cabeça help .	ibuprofeno	16	25	3	dor de cabeça	46	58	40526	0	-1
+265	vou tomar remédio pra dor de cabeça assim que eu levantar vai dar tonteira sono e falta de vitamina	vitamina	91	98	18	dor de cabeça	22	34	42186	1	-1
+266	vou tomar remédio pra dor de cabeça assim que eu levantar vai dar tonteira sono e falta de vitamina	vitamina	91	98	18	sono	75	78	14	1	-1
+267	ensaiar nesse calor embaixo do zinco não é pra qualquer um .	zinco	31	35	5	calor	14	18	2	1	-1
+268	o calor está chegando com tudo ou já chegou em alguns lugares e estamos nos preparando para manter a cafeína http fb me 7mhghispt .	cafeína	101	107	19	calor	2	6	1	1	-1
+269	descobri que tenho alergia à azitromicina tô coçando há 7 dias .	azitromicina	29	40	5	alergia	19	25	3	1	-1
+270	filho controlar minha ansiedade cê não quer né sem açúcar cafeína e tabaco eu morro louca .	cafeína	58	64	10	ansiedade	22	30	3	1	-1
+271	aí eu tô tomando lítio e me sentindo numa música do nirvana porque sou dessas ainda tô bem sofrida e tô tendo muito enjôo .	lítio	17	21	4	enjôo	116	120	23	0	-1
+272	já tomei clonazepam diazepam e agora lorazepam que é o que faz o corpo ficar leve da uma sensação boa e depois vem a depressão .	lorazepam	37	45	6	depressão	117	125	24	0	-1
+273	já tomei clonazepam diazepam e agora lorazepam que é o que faz o corpo ficar leve da uma sensação boa e depois vem a depressão .	clonazepam	9	18	2	depressão	117	125	24	0	-1
+274	já tomei clonazepam diazepam e agora lorazepam que é o que faz o corpo ficar leve da uma sensação boa e depois vem a depressão .	diazepam	20	27	3	depressão	117	125	24	0	-1
+275	preciso comprar meu omeprazol logo tô sentindo dor no estômago antes de terminar as refeições .	omeprazol	20	28	3	dor	47	49	7	0	-1
+276	to tomando remédio pra dor muscular e apesar de ter cafeína me deixou o dia todo com sono .	cafeína	52	58	10	dor muscular	23	34	34	1	-1
+277	to tomando remédio pra dor muscular e apesar de ter cafeína me deixou o dia todo com sono .	cafeína	52	58	10	sono	85	88	17	0	-1
+278	já tomei ranitidina ficar sentindo dor é horrível .	ranitidina	9	18	2	dor	35	37	5	0	-1
+279	não anador eu não sei eu tenho problema de estômago e sempre tenho dor buscopan e hidroxido de alumínio .	hidroxido	82	90	16	dor	67	69	13	1	-1
+280	não anador eu não sei eu tenho problema de estômago e sempre tenho dor buscopan e hidroxido de alumínio .	buscopan	71	78	14	dor	67	69	13	1	-1
+281	não anador eu não sei eu tenho problema de estômago e sempre tenho dor buscopan e hidroxido de alumínio .	anador	4	9	1	dor	67	69	13	0	-1
+282	holdtigirl se bem que óleo de ricino cheira a morte de vdd .	óleo	22	25	4	morte	46	50	9	0	-1
+283	eu so tenho mais 2 comprimido de omeprazol eu to guardando pra uma dor especial .	omeprazol	33	41	7	dor	67	69	13	0	-1
+284	namorar deve ser bom mas já tomaram ibuprofeno quando tavam com dor muito bom .	ibuprofeno	36	45	7	dor	64	66	11	0	-1
+285	n acho a merda de um saquinho de bicarbonato de sódio pra salvar dessa azia .	bicarbonato de sódio	33	52	37867	azia	71	74	14	0	-1
+286	era uma vez ontem tava com azia e tomei hidróxido de magnésio este medicamento funciona também como laxante tomei muito fim .	hidróxido de magnésio	40	60	36509	azia	27	30	6	1	-1
+287	aquele momento em q vc tá tão desesperado de dor q toma um corticóide um anador e um nimesulida misericórdia quero dormir .	nimesulida	85	94	18	dor	45	47	9	1	-1
+288	aquele momento em q vc tá tão desesperado de dor q toma um corticóide um anador e um nimesulida misericórdia quero dormir .	anador	73	78	15	dor	45	47	9	1	-1
+289	tomei tramadol na veia pra enxaqueca ainda tô lesada que bomba .	tramadol	6	13	1	enxaqueca	27	35	5	0	-1
+290	essa dor no joelho so vai passar com ibuprofeno .	ibuprofeno	37	46	8	dor	5	7	1	1	-1
+291	diabetes é uma doença caracterizada pela elevação da glicose no sangue hiperglicemia https goo gl	glicose	53	59	8	hiperglicemia	71	83	11	0	-1
+292	diabetes é uma doença caracterizada pela elevação da glicose no sangue hiperglicemia https goo gl	glicose	53	59	8	diabetes	0	7	0	1	-1
+293	tomei nimesulida e a dor de dente passou em 20 min .	nimesulida	6	15	1	dor de dente	21	32	41119	0	-1
+294	ata kkk tenho problemas com dor tb nimesulida	nimesulida	35	44	7	dor	28	30	5	1	-1
+295	romulomendonca resumindo após o final de um jogo com drinking game é coma alcoólica e muita glicose tudopelosplayoffsnfl .	glicose	92	98	16	coma	69	72	12	1	-1
+296	c difenidramina ajudam um pouco a desinchar e corta a dor mas c disse q n tem .	difenidramina	2	14	1	dor	54	56	10	0	-1
+297	quero deixar registrado q já prevejo minha dependência pela nicotina q triste .	nicotina	60	67	9	dependência	43	53	7	1	-1
+298	já tomasse naproxeno é uma maravilha pra dor muscular .	naproxeno	11	19	2	dor muscular	41	52	52	0	-1
+299	princesa até entrou em depressão depois de tomar vacina .	vacina	49	54	8	depressão	23	31	4	1	-1
+300	toma omeprazol toda vez q sentir dor	omeprazol	5	13	1	dor	33	35	6	0	-1
+301	vou passar mal hj com ctz de azia e meu combo de omeprazol acabouuuu .	omeprazol	49	57	12	azia	29	32	7	1	-1
+302	blog fisiobrasil d adeus ao inchaço e controle a glicose com esta http www blogfisiobrasil com br 2016 05 de adeus ao inchaco e controle glicose html spref tw .	glicose	137	143	25	inchaço	28	34	5	1	-1
+303	blog fisiobrasil d adeus ao inchaço e controle a glicose com esta http www blogfisiobrasil com br 2016 05 de adeus ao inchaco e controle glicose html spref tw .	glicose	49	55	9	inchaço	28	34	5	1	-1
+304	a morfina acelera a morte ouça programa da bbc sobre esses e outros mitos em relação a medicamentos para http fb me 5gioke3ni .	morfina	2	8	1	morte	20	24	4	0	-1
+305	plms traz uns omeprazol e um cha q eu nao to aguentando de dor mais .	omeprazol	14	22	3	dor	59	61	13	0	-1
+306	4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	soro	103	106	24	dor de garganta	60	74	34437	1	-1
+307	4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	soro	103	106	24	dor	131	133	30	0	-1
+308	4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	anador	30	35	6	dor de garganta	60	74	34437	0	-1
+309	4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	anador	30	35	6	dor	131	133	30	0	-1
+310	4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	carbamazepina	11	23	3	dor de garganta	60	74	34437	0	-1
+311	4 doses de carbamazepina 3 de anador 4 de um remédio ai pra dor de garganta e o médico me da 500 ml de soro e me libera auahsu que dor .	carbamazepina	11	23	3	dor	131	133	30	0	-1
+312	já tomei eno e omeprazol mas se gritar dracarys saio colocando fogo em tudo azia que não passa .	omeprazol	15	23	4	azia	76	79	14	0	-1
+313	dor colocar bicarbonato de sódio em uma afta .	bicarbonato de sódio	12	31	36110	dor	0	2	0	1	-1
+314	pra quem sofre de enxaqueca como eu cloridrato de naratriptana santo remédio .	naratriptana	50	61	9	enxaqueca	18	26	4	1	-1
+315	pra quem sofre de enxaqueca como eu cloridrato de naratriptana santo remédio .	cloridrato	36	45	7	enxaqueca	18	26	4	1	-1
+316	minha dores de cabeças são sempre tensionais por causa da minha ansiedade mas sinto que a cafeína fez aumentar .	cafeína	90	96	16	ansiedade	64	72	11	1	-1
+317	maym não mas vai aliviar a dor e o incômodo até vc ir no médico o que passa a infecção é antibiótico qdo eu tive tomei cefalexina .	cefalexina	119	128	26	dor	27	29	6	1	-1
+318	maym não mas vai aliviar a dor e o incômodo até vc ir no médico o que passa a infecção é antibiótico qdo eu tive tomei cefalexina .	cefalexina	119	128	26	infecção	78	85	19	1	-1
+319	eu preciso de um remédio e só tem paracetamol agora eu penso morro de alergia ou morro de dor .	paracetamol	34	44	8	dor	90	92	18	0	-1
+320	eu preciso de um remédio e só tem paracetamol agora eu penso morro de alergia ou morro de dor .	paracetamol	34	44	8	alergia	70	76	14	0	-1
+321	eu tenho muita dor no estômago constumo tomar ranitidina e olha o efeito é rápido .	ranitidina	46	55	8	dor	15	17	3	1	-1
+322	eu simplesmente to perdendo a cabeça será que ansiedade da efedrina .	efedrina	59	66	10	ansiedade	46	54	8	1	-1
+323	hidroquinona ja usei pra clarear manchas de acne no rosto use com cautela .	hidroquinona	0	11	0	acne	44	47	7	0	-1
+324	tenho alergia a remédio e o único q eu poderia tomar é o paracetamol mas faz mal tanto q é proibido em países de primeiro mundo .	paracetamol	57	67	13	alergia	6	12	1	1	-1
+325	é a enxaqueca como resposta por falta da dose diária de cafeína acabo tomando uns 6 copos de café ao longo do dia .	cafeína	56	62	11	enxaqueca	4	12	2	1	-1
+326	fui levar os gêmeos pra tomar vacina e o calor eatava demais .	vacina	30	35	6	calor	41	45	9	0	-1
+327	onde comprou lindo nossa o minoxidil tá agravando demais minha acne .	minoxidil	27	35	5	acne	63	66	10	0	-1
+328	como lidar com a ansiedade para os vestibulares olha eu lido tomando 2 comprimidos de paroxetina toda manhã .	paroxetina	86	95	15	ansiedade	17	25	4	1	-1
+329	dipirona paracetamol piroxicam e a anestesia e eu ainda sinto dor .	dipirona	0	7	0	dor	62	64	10	0	-1
+330	dipirona paracetamol piroxicam e a anestesia e eu ainda sinto dor .	piroxicam	21	29	2	dor	62	64	10	0	-1
+331	dipirona paracetamol piroxicam e a anestesia e eu ainda sinto dor .	paracetamol	9	19	1	dor	62	64	10	0	-1
+332	tudo me irrita gruda pinica eh a fome que passa a pressão baixa a nicotina que mata e nem o beck acalma .	nicotina	66	73	14	fome	33	36	7	1	-1
+333	2 dias sem tomar omeprazol que morte horrível .	omeprazol	17	25	4	morte	31	35	6	0	-1
+334	tive que me render a nimesulida porque sei que se eu ficar com dor de garganta até amanhã vou acordar com febre .	nimesulida	21	30	5	febre	106	110	21	0	-1
+335	tive que me render a nimesulida porque sei que se eu ficar com dor de garganta até amanhã vou acordar com febre .	nimesulida	21	30	5	dor de garganta	63	77	40612	0	-1
+336	efeito colateral do meu querido zolpidem alucinação .	zolpidem	32	39	5	alucinação	41	50	6	0	-1
+337	meninas q estão com alergia a remédio e acharam q ibuprofeno n entrava na alergia e se foderam .	ibuprofeno	50	59	10	alergia	74	80	14	0	-1
+338	meninas q estão com alergia a remédio e acharam q ibuprofeno n entrava na alergia e se foderam .	ibuprofeno	50	59	10	alergia	20	26	4	1	-1
+339	tô tacando lidocaína e não passa essa dor .	lidocaína	11	19	2	dor	38	40	7	0	-1
+340	vo comprar nimesulida diz que é bom pra acabar com a dor pic twitter com spavpln2xo .	nimesulida	11	20	2	dor	53	55	11	0	-1
+341	na boa tomar nimesulida pra dor de garganta e tomar água é a mesma coisa pra mim não adianta porra nenhuma .	nimesulida	13	22	3	dor de garganta	28	42	38552	0	-1
+342	estou a tremer com a cafeína e ansiedade se falecer fiquem já a saber a causa da morte inorgânica .	cafeína	21	27	5	ansiedade	31	39	7	0	-1
+343	estou a tremer com a cafeína e ansiedade se falecer fiquem já a saber a causa da morte inorgânica .	cafeína	21	27	5	morte	81	85	17	0	-1
+344	o medo de ficar doente antes de viajar é tão grande que senti uma dor de garganta hoje e já tomei anti inflamatório e vitamina	vitamina	118	125	24	dor de garganta	66	80	38964	1	-1
+345	o medo de ficar doente antes de viajar é tão grande que senti uma dor de garganta hoje e já tomei anti inflamatório e vitamina	vitamina	118	125	24	medo	2	5	1	1	-1
+346	o medo de ficar doente antes de viajar é tão grande que senti uma dor de garganta hoje e já tomei anti inflamatório e vitamina	anti	98	101	21	dor de garganta	66	80	38964	1	-1
+347	o medo de ficar doente antes de viajar é tão grande que senti uma dor de garganta hoje e já tomei anti inflamatório e vitamina	anti	98	101	21	medo	2	5	1	1	-1
+348	bom ridícula essa dependência de dopamina fácil de números e likes	dopamina	33	40	5	dependência	18	28	3	1	-1
+349	cloridrato de naratriptana pra dor de cabeça forte e insistente enxaqueca .	naratriptana	14	25	2	dor de cabeça	31	43	35640	0	-1
+350	cloridrato de naratriptana pra dor de cabeça forte e insistente enxaqueca .	naratriptana	14	25	2	enxaqueca	64	72	10	0	-1
+351	cloridrato de naratriptana pra dor de cabeça forte e insistente enxaqueca .	cloridrato	0	9	0	dor de cabeça	31	43	35640	0	-1
+352	cloridrato de naratriptana pra dor de cabeça forte e insistente enxaqueca .	cloridrato	0	9	0	enxaqueca	64	72	10	0	-1
+353	cafeína dá enxaqueca ai	cafeína	0	6	0	enxaqueca	11	19	2	0	-1
+354	daí a glicose vai pro ralo e faz com que teu organismo vivencie uma situação de quase morte seguida de uma baita fraqueza conhecida como .	pro	18	20	4	morte	86	90	17	0	-1
+355	daí a glicose vai pro ralo e faz com que teu organismo vivencie uma situação de quase morte seguida de uma baita fraqueza conhecida como .	pro	18	20	4	fraqueza	113	120	22	0	-1
+356	daí a glicose vai pro ralo e faz com que teu organismo vivencie uma situação de quase morte seguida de uma baita fraqueza conhecida como .	glicose	6	12	2	morte	86	90	17	0	-1
+357	daí a glicose vai pro ralo e faz com que teu organismo vivencie uma situação de quase morte seguida de uma baita fraqueza conhecida como .	glicose	6	12	2	fraqueza	113	120	22	0	-1
+358	vcs sabiam que omeprazol da depressão pq eu não .	omeprazol	15	23	3	depressão	28	36	5	0	-1
+359	mano porque no calor eu sinto muito mais vontade de nicotina .	nicotina	52	59	10	calor	15	19	3	1	-1
+360	bateu uma vontade mas ao mesmo tempo bateu enjoo ana tá que tá hoje kkkk socorro minha glicose até aumentou pic twitter com itituqimk5 .	glicose	87	93	17	enjoo	43	47	8	1	-1
+361	pra completar minhas alegrias tô com enxaqueca e não tem ibuprofeno em casa .	ibuprofeno	57	66	10	enxaqueca	37	45	6	1	-1
+362	tomou vacina da raiva que o governo da de graça ai ele teve alergia e quase morreu eu chorei dms .	vacina	6	11	1	alergia	60	66	13	0	-1
+363	tomou vacina da raiva que o governo da de graça ai ele teve alergia e quase morreu eu chorei dms .	vacina	6	11	1	raiva	16	20	3	0	-1
+364	bicarbonato de sódio tbm é um ótimo aliado para azia	bicarbonato de sódio	0	19	35335	azia	48	51	9	0	-1
+365	ela tava doente o comprimido entrou na mente dipirona desceu quente dor de cabeça bebê .	dipirona	45	52	8	dor de cabeça	68	80	36423	0	-1
+366	quem usa muito a cafeina ao fim de alguns anos pode ganhar cancro do fígado ou bexiga doença mamária fibrocística cancro do pâncreas .	cafeina	17	23	4	cancro	59	64	12	0	-1
+367	quem usa muito a cafeina ao fim de alguns anos pode ganhar cancro do fígado ou bexiga doença mamária fibrocística cancro do pâncreas .	cafeina	17	23	4	cancro	114	119	20	0	-1
+368	tipo entrar em coma alcóolico ir parar no hospital pra tomar glicose ou algo do tipo .	glicose	61	67	11	coma	15	18	3	1	-1
+369	p vacina mais tá muito calor .	vacina	2	7	1	calor	23	27	5	0	-1
+370	nao tava conseguindo coçar a cabeça de tanta dor muscular tomei um paracetamol e to conseguindo chegar minha mão na cabeça kkkk .	paracetamol	67	77	12	dor muscular	45	56	56	1	-1
+371	acordei com dor de garganta já tomei um anti inflamatório vitamina c e pastilha ficar doente agora não .	anti	40	43	8	dor de garganta	12	26	34725	1	-1
+372	acordei com dor de garganta já tomei um anti inflamatório vitamina c e pastilha ficar doente agora não .	vitamina c	58	67	67	dor de garganta	12	26	34725	1	-1
+373	c. mellocollela fer minha linda tomar um banho e tomar dipirona e não se cubra com coberta q logo a febre passa ta te amo fica bem .	dipirona	55	62	10	febre	100	104	20	0	-1
+374	acordei sem dor de garganta pela primeira vez em uma semana amém nimesulida .	nimesulida	65	74	12	dor de garganta	12	26	34752	1	-1
+375	minha trindade diária café azia e omeprazol nessa sequência .	omeprazol	34	42	6	azia	27	30	4	1	-1
+376	tu já me viu desmarcar por dor de estômago vou me encher de omeprazol teu estômago vai aguentar .	omeprazol	60	68	13	dor	27	29	6	1	-1
+377	serotonina dopamina ocitocina amor felicidade ansiedade e depressão segundadetremurasdv psicologiaporamor .	dopamina	11	18	1	ansiedade	46	54	5	0	-1
+378	serotonina dopamina ocitocina amor felicidade ansiedade e depressão segundadetremurasdv psicologiaporamor .	dopamina	11	18	1	depressão	58	66	7	0	-1
+379	a que ponto eu cheguei pra esquecer que tenho alergia a paracetamol e tomar um .	paracetamol	56	66	11	alergia	46	52	9	1	-1
+380	pra dormir 1 mg pra ansiedade 0 5 e pra crises fortes de ansiedade 2 mg e escitalopram 10 mg 24 7 .	escitalopram	74	85	17	ansiedade	20	28	5	1	-1
+381	pra dormir 1 mg pra ansiedade 0 5 e pra crises fortes de ansiedade 2 mg e escitalopram 10 mg 24 7 .	escitalopram	74	85	17	ansiedade	57	65	13	1	-1
+382	a joccastanheira postou um snap sobre tpm que define a minha vida amiga coma chocolate e libere oxitocina bjus .	oxitocina	96	104	17	coma	72	75	13	1	-1
+383	tanto remédio estou tomando pra dor que estou chorando de dor no estomago nem omeprazol tá aliviando que caralha .	omeprazol	78	86	14	chorando	46	53	8	1	-1
+384	tanto remédio estou tomando pra dor que estou chorando de dor no estomago nem omeprazol tá aliviando que caralha .	omeprazol	78	86	14	dor	58	60	10	1	-1
+385	tanto remédio estou tomando pra dor que estou chorando de dor no estomago nem omeprazol tá aliviando que caralha .	omeprazol	78	86	14	dor	32	34	5	1	-1
+386	além do metamizol dipirona agora descobri que tbm tenho alergia ao cetoprofeno .	dipirona	18	25	3	alergia	56	62	9	0	-1
+387	além do metamizol dipirona agora descobri que tbm tenho alergia ao cetoprofeno .	cetoprofeno	67	77	11	alergia	56	62	9	1	-1
+388	tem coisa melhor que está com dor d no estômago tomar uma ranitidina e sarar como diz um amigo tem hora que mijar é melhor que dá uma .	ranitidina	58	67	12	dor	30	32	6	1	-1
+389	eu ando com tanta azia que vou começar a substituir o sal por bicarbonato de sódio na comida .	bicarbonato de sódio	62	81	36687	azia	18	21	4	1	-1
+390	eu ando com tanta azia que vou começar a substituir o sal por bicarbonato de sódio na comida .	sal	54	56	11	azia	18	21	4	1	-1
+391	mainha disse para eu tomar vacina contra raiva mal sabe ela que vou virar o raiva do divertida mente .	vacina contra raiva	27	45	38014	raiva	76	80	15	0	-1
+392	exame de sangue vacina de febre	vacina	16	21	3	febre	26	30	5	0	-1
+393	nicotina é uma merda cria dependência .	nicotina	0	7	0	dependência	26	36	5	0	-1
+394	antes de vcs reclamarem que algo dói experimentem passar bicarbonato de sódio na afta quanto estiverem com afta óbvio kkkkk q morte lenta .	bicarbonato de sódio	57	76	35136	morte	126	130	21	0	-1
+395	melhor comprar carvão ativado é bem mais barato pigmentação melhor e não corre risco de alergia	carvão ativado	15	28	28	alergia	88	94	15	0	-1
+396	tava na maior dor de cabeça de abstinência de cafeína .	cafeína	46	52	9	dor de cabeça	14	26	40408	1	-1
+397	to ferrada de alergia mt ferrada ainda tive q entrar na vacina hoje e aumentar os medicamentos .	vacina	56	61	11	alergia	14	20	3	1	-1
+398	os dois braço travado d dor por causa dessas maldita vacina q agonia .	vacina	53	58	10	dor	24	26	5	1	-1
+399	ter alergia a penicilina me fodeu na vida .	penicilina	14	23	3	alergia	4	10	1	1	-1
+400	com dilma com temer gelo ou limão a comparação haiti alemanha só faz sentido pra quem tá em coma alcoólico glicose na veia desse povo .	glicose	107	113	20	coma	92	95	18	1	-1
+401	adverte nicotina é droga e causa dependência mas a gente deixa vender de boa .	nicotina	8	15	1	dependência	33	43	6	0	-1
+402	eu tô quase me chapando de ibuprofeno porque na boa não aguento mais essa dor .	ibuprofeno	27	36	6	dor	74	76	14	0	-1
+403	nossa é horrível mesmo compra um remedinho chamado nimesulida pede o genérico que é mais barato que ajuda muito na dor .	nimesulida	51	60	8	dor	115	117	20	0	-1
+404	ontem eu quase me matei tomei cafeína demais e acordei com uma puta dor de cabeça achando que ia morrer .	cafeína	30	36	6	dor de cabeça	68	80	39181	0	-1
+405	mineralogia nome usado comercialmente para o silicato natural hidratado de cálcio e magnésio de estrutura fibrosa imune ao calor .	cálcio	75	80	10	calor	123	127	18	0	-1
+406	eu realmente to achando que to crescendo porém eu lembro que essa dor é porque eu não tomo a vitamina que eu deveria moreticketstwtbrazil .	vitamina	93	100	19	dor	66	68	12	1	-1
+407	eu tô passando muito mal e não sei se é cafeína ou ansiedade .	cafeína	40	46	10	ansiedade	51	59	12	0	-1
+408	eu tô sozinha em casa e tô morrendo de dor de garganta e de cabeça minha mãe falou pra eu tomar ibuprofeno .	ibuprofeno	96	105	21	dor de garganta	39	53	28352	1	-1
+409	meu deus eu vou ter q tomar meio litro de morfina pra curar a ansiedade q eu to pro jogo gothunder .	morfina	42	48	10	ansiedade	62	70	14	0	-1
+410	meu deus eu vou ter q tomar meio litro de morfina pra curar a ansiedade q eu to pro jogo gothunder .	pro	80	82	18	ansiedade	62	70	14	1	-1
+411	oxalato de escitalopram já tá perdendo a graça frio calor viajadas inexplicáveis vou da fim em vc antes de vc dar fim em mim kak .	escitalopram	11	22	2	calor	52	56	9	0	-1
+412	help alguém aqui sabe um remédio bom pra azia além de água ou omeprazol tô lascada aqui .	omeprazol	62	70	13	azia	41	44	8	1	-1
+413	é então o efeito da prednisona é melhor depois que a alergia acontece .	prednisona	20	29	5	alergia	53	59	11	0	-1
+414	cefalium ibuprofeno ou narimig são os 3 que eu tomo quando fico de ressaca ou enxaqueca .	cefalium	0	7	0	enxaqueca	78	86	15	0	-1
+415	cefalium ibuprofeno ou narimig são os 3 que eu tomo quando fico de ressaca ou enxaqueca .	ibuprofeno	9	18	1	enxaqueca	78	86	15	0	-1
+416	estou a entrar em depressão por causa de farmacologia preciso de fluoxetina .	fluoxetina	65	74	11	depressão	18	26	4	1	-1
+417	onde eu trabalho é tudo de zinco pensa num calor quando esquenta no da pra encosta em nada .	zinco	27	31	6	calor	43	47	9	0	-1
+418	ok primeiro sinal alarmante de efeito psicológico da testosterona era pra eu estar muito muito triste mas eu estou triste com muita raiva .	testosterona	53	64	8	raiva	132	136	22	0	-1
+419	vc sabe q deus existe qdo temenxaqueca nível maxelevado q antes só passava com tramadol na veia e agora passaemcasacom doril enxaqueca .	tramadol	79	86	14	enxaqueca	125	133	21	0	-1
+420	vc sabe q deus existe qdo temenxaqueca nível maxelevado q antes só passava com tramadol na veia e agora passaemcasacom doril enxaqueca .	doril	119	123	20	enxaqueca	125	133	21	0	-1
+421	hahahahahah não vai messsssssssmo se entope de omeprazol aí e fica chorando de dor .	omeprazol	47	55	7	chorando	67	74	11	0	-1
+422	hahahahahah não vai messsssssssmo se entope de omeprazol aí e fica chorando de dor .	omeprazol	47	55	7	dor	79	81	13	0	-1
+423	mebendazol sintomas insônia coceira anal tratado na psiquiatria com clonazepan jornalnacional showdavidapic twitter com i1doqlote0 .	mebendazol	0	9	0	insônia	20	26	2	0	-1
+424	alergia a milho acho particularmente um lixo fora à dipirona mas ja acho um favor .	dipirona	52	59	9	alergia	0	6	0	1	-1
+425	já tomei uma cartela de dipirona e mais uns comprimidos de ibuprofeno e não passa esaa dor .	dipirona	24	31	5	dor	87	89	16	0	-1
+426	já tomei uma cartela de dipirona e mais uns comprimidos de ibuprofeno e não passa esaa dor .	ibuprofeno	59	68	11	dor	87	89	16	0	-1
+427	cá estou com não sei o quê em minha coluna só sei que estou sentindo uma intensa dor e aparentemente nem 600 mg de ibuprofeno tá servindo .	ibuprofeno	115	124	24	dor	81	83	17	1	-1
+428	dor de cabeça há quase 3 dias já tomei paracetamol e ibuprofeno	paracetamol	39	49	9	dor de cabeça	0	12	36135	1	-1
+429	dor de cabeça há quase 3 dias já tomei paracetamol e ibuprofeno	ibuprofeno	53	62	11	dor de cabeça	0	12	36135	1	-1
+430	muito boa essa dor de cabeça devido à falta de cafeína nessa manhã .	cafeína	47	53	10	dor de cabeça	15	27	38515	1	-1
+431	to com uma azia do demonio e não acho meu omeprazol sos .	omeprazol	42	50	10	azia	11	14	3	1	-1
+432	no treino se não tiver dor pra mim não serve smarth adrenalina dopamina serotonina .	dopamina	63	70	12	dor	23	25	5	1	-1
+433	tomei remedio lambedor e vitamina c quero ver se essa dor de garganta n passa hj .	vitamina c	25	34	34	dor de garganta	54	68	41142	0	-1
+434	é impossível que 3 dias de nimesulida não tenham resolvido minha dor de garganta .	nimesulida	27	36	6	dor de garganta	65	79	36291	0	-1
+435	tomo paracetamol a febre baixa e dps de 5h volta com tudo tenho alergia a dipirona .	dipirona	74	81	15	alergia	64	70	13	1	-1
+436	tomo paracetamol a febre baixa e dps de 5h volta com tudo tenho alergia a dipirona .	dipirona	74	81	15	febre	19	23	3	1	-1
+437	tomo paracetamol a febre baixa e dps de 5h volta com tudo tenho alergia a dipirona .	paracetamol	5	15	1	alergia	64	70	13	0	-1
+438	tomo paracetamol a febre baixa e dps de 5h volta com tudo tenho alergia a dipirona .	paracetamol	5	15	1	febre	19	23	3	0	-1
+439	a depressão é potencializada por deficiências nutricionais que impedem a fabricação de serotonina noradrenalina dopamina etc lowcarb .	dopamina	112	119	14	depressão	2	10	1	1	-1
+440	a ansiedade o sertralina tem resolvido mas de resto estou desse jeito também https twitter com aka fernandes status 811518830719668225 .	sertralina	14	23	3	ansiedade	2	10	1	1	-1
+441	nadjiasantiago pq pantoprazol cê toma não é quando tá com dor é em jejum e tal mas o efeito dele é mais forte .	pantoprazol	18	28	2	dor	58	60	10	0	-1
+442	não tive minha nicotina diária minha ansiedade está lá em cima .	nicotina	15	22	3	ansiedade	37	45	6	0	-1
+443	se eu fizer uma vitamina agora meu pai vai acordar e vai ficar bem fodido de raiva .	vitamina	16	23	4	raiva	77	81	16	0	-1
+444	ferneteto é alguma coisa de zolpidem mas meu ldjxjxjxjxj ele é mt loco eu fico com mta tontura e n lembro de nd no dia seguinte .	zolpidem	28	35	5	tontura	87	93	17	0	-1
+445	mano odeio tomar dipirona quando tô com febre porque tô com frio quando começa a fazer efeito me dá um calor que meu deus .	dipirona	17	24	3	calor	103	107	20	0	-1
+446	mano odeio tomar dipirona quando tô com febre porque tô com frio quando começa a fazer efeito me dá um calor que meu deus .	dipirona	17	24	3	febre	40	44	7	0	-1
+447	haha desculpa não fui porque o ônibus já estava parado e a sophia estava enjoadinha por causa do calor e da vacina .	vacina	108	113	21	calor	97	101	18	1	-1
+448	vou tomar um omeprazol e ir dormir eu não to aguentando de dor .	omeprazol	13	21	3	dor	59	61	12	0	-1
+449	mano uma cena que vi no teu insta a cafeína reduz a depressão .	cafeína	36	42	9	depressão	52	60	12	0	-1
+450	amo usar óleo de ricino mas odeio a dor de cabeça que tenho toda vez que uso como lidar .	óleo	9	12	2	dor de cabeça	36	48	35062	0	-1
+451	eu diria que muito mais pois ao contrário da penicilina eu não tenho alergia ao twitter https twitter com pefabiodemelo status 687788805361954817 .	penicilina	45	54	9	alergia	69	75	13	0	-1
+452	eu comi um pastel que atacou o meu refluxo e agora que bateu a dor eu percebi que acabou o meu omeprazol .	omeprazol	95	103	21	dor	63	65	14	1	-1
+453	tô com uma queimação da morte que só deus sabe o tanto que eu quero um omeprazol .	omeprazol	71	79	16	morte	24	28	5	1	-1
+454	pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	bromoprida	22	31	2	dor	71	73	8	0	-1
+455	pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	omeprazol	12	20	1	dor	71	73	8	0	-1
+456	pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	domperidona	44	54	4	dor	71	73	8	0	-1
+457	pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	pantoprazol	0	10	0	dor	71	73	8	0	-1
+458	pantoprazol omeprazol bromoprida nimesulida domperidona e remédios pra dor .	nimesulida	33	42	3	dor	71	73	8	0	-1
+459	b. praticamente 2017 e uma vacina pra ansiedade até hj n inventaram ne .	vacina	27	32	5	ansiedade	38	46	7	0	-1
+460	tô mal tô c dor e to na bad por tanto estou indo dormir pós tomar meu amor nimesulida .	nimesulida	75	84	18	dor	12	14	4	1	-1
+461	to com mt dor de garganta e nimesulida não adianta mais .	nimesulida	28	37	7	dor de garganta	10	24	40707	1	-1
+462	oloco a sertralina me fez um benzão da porra deu uma amenizada massa na ansiedade pânico .	sertralina	8	17	2	massa	63	67	12	0	-1
+463	oloco a sertralina me fez um benzão da porra deu uma amenizada massa na ansiedade pânico .	sertralina	8	17	2	ansiedade	72	80	14	0	-1
+464	dor não carai kkkkk aguento nem tomar vacina vou caçar furar umbigo .	vacina	38	43	7	dor	0	2	0	1	-1
+465	já estão faltando galantamina medicamento que controla demência alzheimer e sertralina para tratamento da depressão .	galantamina	18	28	3	depressão	106	114	14	0	-1
+466	já estão faltando galantamina medicamento que controla demência alzheimer e sertralina para tratamento da depressão .	galantamina	18	28	3	demência	55	62	7	0	-1
+467	já estão faltando galantamina medicamento que controla demência alzheimer e sertralina para tratamento da depressão .	sertralina	76	85	10	depressão	106	114	14	0	-1
+468	já estão faltando galantamina medicamento que controla demência alzheimer e sertralina para tratamento da depressão .	sertralina	76	85	10	demência	55	62	7	1	-1
+469	minha mãe sabe que eu tenho alergia a dipirona e ela comprou dipirona pra eu tomar minha mãe quer me matar .	dipirona	38	45	8	alergia	28	34	6	1	-1
+470	minha mãe sabe que eu tenho alergia a dipirona e ela comprou dipirona pra eu tomar minha mãe quer me matar .	dipirona	61	68	12	alergia	28	34	6	1	-1
+471	cara que raiva vou ter que voltar a tomar a vacina da alergia .	vacina	44	49	10	raiva	9	13	2	1	-1
+472	cara que raiva vou ter que voltar a tomar a vacina da alergia .	vacina	44	49	10	alergia	54	60	12	0	-1
+473	usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	amato	118	122	17	enxaqueca	149	157	21	0	-1
+474	usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	amato	118	122	17	enxaqueca	38	46	5	1	-1
+475	usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	topiramato	124	133	18	enxaqueca	149	157	21	0	-1
+476	usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	topiramato	124	133	18	enxaqueca	38	46	5	1	-1
+477	usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	amato	7	11	1	enxaqueca	149	157	21	0	-1
+478	usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	amato	7	11	1	enxaqueca	38	46	5	0	-1
+479	usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	topiramato	13	22	2	enxaqueca	149	157	21	0	-1
+480	usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento http www plugbr net usando amato topiramato para prevenir enxaqueca efeitos colaterais e sobre o emagrecimento .	topiramato	13	22	2	enxaqueca	38	46	5	0	-1
+481	você é morfina para minha dor para minha queda	morfina	7	13	2	dor	26	28	5	0	-1
+482	pior parte da ressaca é ter alergia a dipirona	dipirona	38	45	8	alergia	28	34	6	1	-1
+483	a gente nesse bar bebendo até passar o calor depois indo pro pronto socorro tomar glicose na veia pic twitter com yr24ml2ofb .	glicose	82	88	15	calor	39	43	8	1	-1
+484	a gente nesse bar bebendo até passar o calor depois indo pro pronto socorro tomar glicose na veia pic twitter com yr24ml2ofb .	pro	57	59	11	calor	39	43	8	1	-1
+485	biaaraujo1mulher eu tomo tenoxicam e faz milagre vê se tu tem alergia se não compra que ajuda muito basta 1 por dia é pra cólica msm .	tenoxicam	25	33	3	alergia	62	68	11	0	-1
+486	o sibutramina ajuda muitas pessoas acima do peso principalmente pois controla a ansiedade acesse o site fimpro http fimpro com br sibutramina .	sibutramina	2	12	1	ansiedade	80	88	12	0	-1
+487	o sibutramina ajuda muitas pessoas acima do peso principalmente pois controla a ansiedade acesse o site fimpro http fimpro com br sibutramina .	sibutramina	130	140	21	ansiedade	80	88	12	1	-1
+488	to com tanta dor de estômago já tomei omeprazol e rinitidinéa mas nada faz parar .	omeprazol	38	46	8	dor	13	15	3	1	-1
+489	aquela dor de cabeça motivada pela abstinência a café fiquei 12 horas sem cafeína e se deus quiser nunca mais passarei tanto tempo sem .	cafeína	74	80	13	dor de cabeça	7	19	35171	1	-1
+490	gente omeprazol serve pra enjoo .	omeprazol	6	14	1	enjoo	26	30	4	0	-1
+491	pra quem duvidava que eu não chegaria aos 21 por causa da cachaça glicose ou de um coma alcoólico tamo ai não fata nem uma hora haushau .	glicose	66	72	13	coma	83	86	17	0	-1
+492	tomei um nimesulida pra ver se essa dor passa .	nimesulida	9	18	2	dor	36	38	7	0	-1
+493	nessa hr percebemos que mesmo sem a nicotina adqurimos dor e sofrimento na vida pic twitter com zxhtruh6x2 .	nicotina	36	43	7	dor	55	57	9	0	-1
+494	minha mãe estava a três dias seguidos tomando paracetamol pensando que era o remédio de azia hahahahahahahahahaha .	paracetamol	46	56	8	azia	88	91	15	0	-1
+495	vida resumida em ansiedade gastrite omeprazol .	omeprazol	36	44	5	gastrite	27	34	4	1	-1
+496	vida resumida em ansiedade gastrite omeprazol .	omeprazol	36	44	5	ansiedade	17	25	3	1	-1
+497	relaxa tira ansiedade vai toma fluoxetina que relaxagente doida .	fluoxetina	31	40	5	ansiedade	12	20	2	1	-1
+498	criam vacina capaz de eliminar dependência de cocaína http bit ly 2c8hv4e pic twitter com jagrhc4922 .	vacina	6	11	1	dependência	31	41	5	0	-1
+499	só em pensar que tenho q dormir p acordar e estudar metabolismo de glicose e metabolismo de glicídio já me dá uma depressão .	glicose	67	73	13	depressão	114	122	22	0	-1
+500	eu tlg do vicio da cafeina que da dor de cabeça se ficar sem mas e cafe cafe .	cafeina	19	25	5	dor de cabeça	34	46	40587	0	-1
+501	o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	venlafaxina	16	26	3	depressão	80	88	12	0	-1
+502	o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	venlafaxina	16	26	3	ansiedade	104	112	15	0	-1
+503	o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	venlafaxina	16	26	3	depressão	60	68	10	0	-1
+504	o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	cloridrato	2	11	1	depressão	80	88	12	0	-1
+505	o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	cloridrato	2	11	1	ansiedade	104	112	15	0	-1
+506	o cloridrato de venlafaxina é indicado para o tratamento da depressão incluindo depressão associada com ansiedade sabia .	cloridrato	2	11	1	depressão	60	68	10	0	-1
+507	era apenas uma dor de cabeça dizia ele buscopan na veia voltarem 2 captopril uma hora depois losartana e mais http fb me 4wqdxcsyy .	losartana	93	101	17	dor de cabeça	15	27	28582	1	-1
+508	era apenas uma dor de cabeça dizia ele buscopan na veia voltarem 2 captopril uma hora depois losartana e mais http fb me 4wqdxcsyy .	buscopan	39	46	8	dor de cabeça	15	27	28582	1	-1
+509	era apenas uma dor de cabeça dizia ele buscopan na veia voltarem 2 captopril uma hora depois losartana e mais http fb me 4wqdxcsyy .	captopril	67	75	13	dor de cabeça	15	27	28582	1	-1
+510	yuckarol eu tava meio assim no início de janeiro e pro enjoo domperidona resolvia mas ja saí da fase e to tomando antidepressivo .	domperidona	61	71	12	enjoo	55	59	11	1	-1
+511	yuckarol eu tava meio assim no início de janeiro e pro enjoo domperidona resolvia mas ja saí da fase e to tomando antidepressivo .	pro	51	53	10	enjoo	55	59	11	0	-1
+512	vai sim no gastro e pra não morrer de dor omeprazol ou hidróxido de alumínio antes da refeiçao .	omeprazol	42	50	10	dor	38	40	9	1	-1
+513	vai sim no gastro e pra não morrer de dor omeprazol ou hidróxido de alumínio antes da refeiçao .	hidróxido de alumínio	55	75	37060	dor	38	40	9	1	-1
+514	quem inventou nimesulida achei q eu ia morrer de dor .	nimesulida	14	23	2	dor	49	51	9	0	-1
+515	a pessoa ja tem ansiedade braba insonia e loba de efedrina só ideia ruim .	efedrina	50	57	10	ansiedade	16	24	4	1	-1
+516	glicose todo mundo tem é natural do corpo humano seja alta ou baixa diabetes já é uma doença provocada pelo excesso de açúcar .	glicose	0	6	0	diabetes	68	75	13	0	-1
+517	o diabetes tipo 2 é uma doença crônica que afeta a forma como o corpo metaboliza a glicose https www instagram com p bgkjsjdx yz .	glicose	83	89	17	diabetes	2	9	1	1	-1
+518	adivinha quem esqueceu de tomar o omeprazol e está com dor de barriga por conta da ansiedade .	omeprazol	34	42	6	ansiedade	83	91	16	0	-1
+519	adivinha quem esqueceu de tomar o omeprazol e está com dor de barriga por conta da ansiedade .	omeprazol	34	42	6	dor	55	57	10	0	-1
+520	e o pior é que sinto calor em situações assim alguém me dá morfina plmdds .	morfina	59	65	13	calor	21	25	6	1	-1
+521	esse nimesulida é aquele normal que toma pra dor no dente muito obrigada pela consulta ksjsksksks .	nimesulida	5	14	1	dor	45	47	8	0	-1
+522	sim por favor pessoalno um minuto de silêncio vamos respeitar a torcida do grêmio sente a mesna dor q os envolvidos na trajédia https twitter com taddeu status 805165555267371008 .	mesna	90	94	16	dor	96	98	17	0	-1
+523	mas dá lhe paroxetina pra desbloquear toda a minha ansiedade social e me permitir ter coragem de escrever besteiras pra todo mundo ler .	paroxetina	11	20	3	ansiedade	51	59	9	0	-1
+524	comprar uns captopril pra assistir o jogo das meninas mais tarde mata mata sempre dar uma dor no coração .	captopril	12	20	2	dor	90	92	16	0	-1
+525	relevem estou sentindo um pouco de dor cloridrato de ranitidina não está fazendo efeito .	ranitidina	53	62	9	dor	35	37	6	1	-1
+526	relevem estou sentindo um pouco de dor cloridrato de ranitidina não está fazendo efeito .	cloridrato	39	48	7	dor	35	37	6	1	-1
+527	gente eu tomei um remedio aqui pra dor de cabeça paracetamol de 500g e ja to meia zuada kdjfklsdjflksdjflkdsfds .	paracetamol	49	59	10	dor de cabeça	35	47	41972	1	-1
+528	qnd bate a ansiedade da vontade de tomar uma cartela de propranolol todinha p ficar calminha .	propranolol	56	66	11	ansiedade	11	19	3	1	-1
+529	estudar dor de garganta tenho que comprar nimesulida enfim esse é meu dia de hj .	nimesulida	42	51	7	dor de garganta	8	22	37246	1	-1
+530	não deveria ter acordado mas estava quase asfixiando de tanta alergia acordei pra colocar morfina na garganta e nariz .	morfina	90	96	14	alergia	62	68	10	1	-1
+531	mulher foi medir a minha glicose e acho q a agulha do aparelho ainda tá no meu dedo q dor .	glicose	25	31	5	dor	86	88	19	0	-1
+532	tô injetando ibuprofeno na veia quase de tanta dor e não passa .	ibuprofeno	13	22	2	dor	47	49	8	0	-1
+533	eu to chorando de dor tomei dois omeprazol e to esperando passar porque ainda tenho uma madruga pela frente .	omeprazol	33	41	7	dor	18	20	4	1	-1
+534	eu to chorando de dor tomei dois omeprazol e to esperando passar porque ainda tenho uma madruga pela frente .	omeprazol	33	41	7	chorando	6	13	2	1	-1
+535	o cheiro é psicoativo suor que derrama sua pele excita dopamina http fb me tllg39jd .	dopamina	55	62	10	suor	22	25	4	1	-1
+536	quer cálcio não beba leite coma jabuticaba e cenoura .	leite	21	25	4	coma	27	30	5	0	-1
+537	quer cálcio não beba leite coma jabuticaba e cenoura .	cálcio	5	10	1	coma	27	30	5	0	-1
+538	quando to com dor de garganta sempre tomo nimesulida ajuda muito .	nimesulida	42	51	8	dor de garganta	14	28	39687	1	-1
+539	calor do caralho e tendo que ir tomar vacina ainda vou ter prova no final do dia esse sou eu amanhã aí vou chegar e não tem medico .	vacina	38	43	8	calor	0	4	0	1	-1
+540	ironicamente ou não coca é o que eu tomo quando tô passando mal tem açúcar sódio e cafeína corta enjoo e tudo hahaha .	cafeína	83	89	17	enjoo	97	101	19	0	-1
+541	a dor de ver o vidrinho de fluoxetina vazio .	fluoxetina	27	36	7	dor	2	4	1	1	-1
+542	que foi o q qse me fez passar mal e em casa nimesulida e dipirona caso dê febre eu só tô com dificuldade pra comer .	nimesulida	44	53	12	febre	74	78	17	0	-1
+543	que foi o q qse me fez passar mal e em casa nimesulida e dipirona caso dê febre eu só tô com dificuldade pra comer .	dipirona	57	64	14	febre	74	78	17	0	-1
+544	vc tem em casa nimesulida dorflex resolvem também mas dor mais fraca .	dorflex	26	32	5	dor	54	56	9	0	-1
+545	vc tem em casa nimesulida dorflex resolvem também mas dor mais fraca .	nimesulida	15	24	4	dor	54	56	9	0	-1
+546	quando a pessoa sabe que cê tem alergia a dipirona	dipirona	42	49	9	alergia	32	38	7	1	-1
+547	preciso dormir tomei uma caixa de leite condensado minha glicose ta mt alta agora to hiperativa e com raiva e isso não é bom .	glicose	57	63	9	raiva	102	106	18	0	-1
+548	preciso dormir tomei uma caixa de leite condensado minha glicose ta mt alta agora to hiperativa e com raiva e isso não é bom .	leite	34	38	6	raiva	102	106	18	0	-1
+549	o paracetamol foi pela cólica na verdade só que eu pensei que fosse ajudar a dor no siso diminuir mas fez nem cócegas .	paracetamol	2	12	1	dor	77	79	15	0	-1
+550	fiz o teste de alergia alergia gravíssima a uma série de coisas tenho q tomar 9 doses de vacina .	vacina	89	94	18	alergia	15	21	4	1	-1
+551	fiz o teste de alergia alergia gravíssima a uma série de coisas tenho q tomar 9 doses de vacina .	vacina	89	94	18	alergia	23	29	5	1	-1
+552	bastante ah e coloca uma faixa molhada com álcool q a febre baixa bb .	álcool	43	48	8	faixa	25	29	5	1	-1
+553	bastante ah e coloca uma faixa molhada com álcool q a febre baixa bb .	álcool	43	48	8	febre	54	58	11	0	-1
+554	topiramato não está funcionando mais e voltei a ter dor de cabeça durou só um mês .	topiramato	0	9	0	dor de cabeça	52	64	41250	0	-1
+555	araujo ingred se me dessem remédio eu n ia tomar tb n tomei nem fluoxetina p ansiedade .	fluoxetina	64	73	14	ansiedade	77	85	16	0	-1
+556	tô quase crendo que tenho alergia a dipirona .	dipirona	36	43	7	alergia	26	32	5	1	-1
+557	cadê meu lansoprazol pelo amor de deus eu tô chorando com essa dor miserenta .	lansoprazol	9	19	2	chorando	45	52	9	0	-1
+558	cadê meu lansoprazol pelo amor de deus eu tô chorando com essa dor miserenta .	lansoprazol	9	19	2	dor	63	65	12	0	-1
+559	a sorte te vi ingerir 33 mm de morfina prestei atenção na última gota depois meus cílios se tocaram .	mm	25	26	6	gota	65	68	13	0	-1
+560	a sorte te vi ingerir 33 mm de morfina prestei atenção na última gota depois meus cílios se tocaram .	morfina	31	37	8	gota	65	68	13	0	-1
+561	fnhani para enjôo metoclopramida	metoclopramida	18	31	3	enjôo	12	16	2	1	-1
+562	me deu tontura do nada to com medo espero q n de nada d no meu exame principalmente glicose alta e anemia ne .	glicose	84	90	18	anemia	99	104	21	0	-1
+563	me deu tontura do nada to com medo espero q n de nada d no meu exame principalmente glicose alta e anemia ne .	glicose	84	90	18	tontura	7	13	2	1	-1
+564	me deu tontura do nada to com medo espero q n de nada d no meu exame principalmente glicose alta e anemia ne .	glicose	84	90	18	medo	30	33	7	1	-1
+565	nimesulida e é pra dor de garganta escrevi errado kkk .	nimesulida	0	9	0	dor de garganta	19	33	38768	0	-1
+566	alergia deve ser do paracetamol pq ibuprofeno é vida .	ibuprofeno	35	44	6	alergia	0	6	0	1	-1
+567	alergia deve ser do paracetamol pq ibuprofeno é vida .	paracetamol	20	30	4	alergia	0	6	0	1	-1
+568	21 anos e uma vida resumida em gastrite omeprazol refluxo omeprazol e ansiedade .	omeprazol	58	66	10	ansiedade	70	78	12	0	-1
+569	21 anos e uma vida resumida em gastrite omeprazol refluxo omeprazol e ansiedade .	omeprazol	58	66	10	gastrite	31	38	7	1	-1
+570	21 anos e uma vida resumida em gastrite omeprazol refluxo omeprazol e ansiedade .	omeprazol	40	48	8	ansiedade	70	78	12	0	-1
+571	21 anos e uma vida resumida em gastrite omeprazol refluxo omeprazol e ansiedade .	omeprazol	40	48	8	gastrite	31	38	7	1	-1
+572	vou começar a fazer tratamento pra alergia hoje vacina toda semana agora .	vacina	48	53	8	alergia	35	41	6	1	-1
+573	crise de ansiedade que isso tem vacina pra prevenção https twitter com hugogloss status 772964688288182272 .	vacina	32	37	6	ansiedade	9	17	2	1	-1
+574	otorrino frisa que vacina não é a cura para a alergia mas afirma que o paciente poderá passar a ter uma qualidade de vida muito melhor .	vacina	19	24	3	alergia	46	52	10	0	-1
+575	meu omeprazol acabou e eu não fui buscar ja to até sentindo dor de estômago .	omeprazol	4	12	1	dor	60	62	12	0	-1
+576	sabiam que a laranja é uma excelente opção contra o cansaço e a fraqueza porque é rica em vitamina c e em açúcar http fb me d3d461sf .	vitamina c	90	99	99	cansaço	52	58	10	1	-1
+577	sabiam que a laranja é uma excelente opção contra o cansaço e a fraqueza porque é rica em vitamina c e em açúcar http fb me d3d461sf .	vitamina c	90	99	99	fraqueza	64	71	13	1	-1
+578	se as pessoas soubessem o efeito da nicotina e do álcool ainda que temporário e o quanto alivia a dor não julgariam tanto .	álcool	50	55	10	dor	98	100	19	0	-1
+579	se as pessoas soubessem o efeito da nicotina e do álcool ainda que temporário e o quanto alivia a dor não julgariam tanto .	nicotina	36	43	7	dor	98	100	19	0	-1
+580	cê acredita que ponstan não faz cócegas na dor só me deixa grogue aqui só ibuprofeno salva .	ibuprofeno	74	83	15	dor	43	45	8	1	-1
+581	cê acredita que ponstan não faz cócegas na dor só me deixa grogue aqui só ibuprofeno salva .	ponstan	16	22	3	dor	43	45	8	0	-1
+582	minha ansiedade nem com sertralina resolve vsf .	sertralina	24	33	4	ansiedade	6	14	1	1	-1
+583	prometazina 12h de sono não sei se é dia ou noite obrigada alergia .	prometazina	0	10	0	sono	19	22	3	0	-1
+584	prometazina 12h de sono não sei se é dia ou noite obrigada alergia .	prometazina	0	10	0	alergia	59	65	12	0	-1
+585	ela sofre de uma doença psicotica por conta da morfina metafetaminas e outras coisas que ingere e também depressão https twitter com caganissopt status 758602139916705793 .	morfina	47	53	9	depressão	105	113	18	0	-1
+586	todo dia eu tomo 2 3 dipirona de tanta dor de cabeça que eu sinto .	dipirona	21	28	6	dor de cabeça	39	51	40864	0	-1
+587	menos mal que minhas crises de abstinência de nicotina se resumem a fome muita e sono de dia pq de noite é crise de ansiedade 48h .	nicotina	46	53	8	fome	68	71	12	0	-1
+588	menos mal que minhas crises de abstinência de nicotina se resumem a fome muita e sono de dia pq de noite é crise de ansiedade 48h .	nicotina	46	53	8	sono	81	84	15	0	-1
+589	menos mal que minhas crises de abstinência de nicotina se resumem a fome muita e sono de dia pq de noite é crise de ansiedade 48h .	nicotina	46	53	8	ansiedade	116	124	24	0	-1
+590	3 pantoprazol e essa dor no estomago não passa .	pantoprazol	2	12	1	dor	21	23	4	0	-1
+591	manejo escalonado de medicamentos para hemorragia obstétrica oxitocina	oxitocina	61	69	7	hemorragia	39	48	5	1	-1
+592	ai que raiva dessa garganta que não desinflama nimesulida seu lindo me cure logo por obséquio .	nimesulida	47	56	8	raiva	7	11	2	1	-1
+593	kit ressaca dedo na guela bicarbonato com limão e água omeprazol e morte boa tarde .	omeprazol	55	63	10	morte	67	71	12	0	-1
+594	kit ressaca dedo na guela bicarbonato com limão e água omeprazol e morte boa tarde .	bicarbonato	26	36	5	morte	67	71	12	0	-1
+595	tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	dipirona	89	96	17	alergia	131	137	26	0	-1
+596	tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	dipirona	89	96	17	dor	48	50	10	1	-1
+597	tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	dipirona	89	96	17	dor	9	11	2	1	-1
+598	tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	paracetamol	72	82	15	alergia	131	137	26	0	-1
+599	tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	paracetamol	72	82	15	dor	48	50	10	1	-1
+600	tava com dor de madrugada e fui tomar remédio p dor e acabei trocando o paracetamol pelo dipirona e to com a cara inchada ainda da alergia .	paracetamol	72	82	15	dor	9	11	2	1	-1
+601	eu tenho alergia à ureia	ureia	19	23	4	alergia	9	15	2	1	-1
+602	vejo muita gente reclamando de dor no estômago por causa da sertralina e o médico falou que posso sentir dor mas até agora nada .	sertralina	60	69	11	dor	31	33	5	1	-1
+603	vejo muita gente reclamando de dor no estômago por causa da sertralina e o médico falou que posso sentir dor mas até agora nada .	sertralina	60	69	11	dor	105	107	19	0	-1
+604	vou é tomar meu omeprazol é fazer outra coisa pq a internet só piora a minha azia .	omeprazol	16	24	4	azia	77	80	16	0	-1
+605	tomo sertralina 100 mg pra ansiedade generalizada e vou começar com lítio pra estabilizar o humor .	sertralina	5	14	1	ansiedade	27	35	5	0	-1
+606	tomo sertralina 100 mg pra ansiedade generalizada e vou começar com lítio pra estabilizar o humor .	lítio	68	72	11	ansiedade	27	35	5	1	-1
+607	o dia todo tomei duas dipirona s e dois paracetamol s to chapada até agora e a dor não passou .	paracetamol	40	50	9	dor	79	81	17	0	-1
+608	o dia todo tomei duas dipirona s e dois paracetamol s to chapada até agora e a dor não passou .	dipirona	22	29	5	dor	79	81	17	0	-1
+609	a pessoa quando entra em coma alcoólico não fica mt no horpital não é só botar glicose e pa .	glicose	79	85	16	coma	25	28	5	1	-1
+610	não sei do que mais tenho raiva se é da glicose anal da america em a seleção ou do thankyouuu da loren veranomtv2016 fifth harmony .	glicose	40	46	10	raiva	26	30	6	1	-1
+611	deitada no sofá esperando omeprazol fazer efeito e essa dor de estômago aliviar .	omeprazol	26	34	4	dor	56	58	9	0	-1
+612	12h e dois omeprazol depois e a azia permanece queimando até minha alma .	omeprazol	11	19	3	azia	32	35	7	0	-1
+613	um pouco tenho ansiedade então avisa logo pra comprar a fluoxetina .	fluoxetina	56	65	10	ansiedade	15	23	3	1	-1
+614	só queria estar com a minha vacina de alergia em dia .	vacina	28	33	6	alergia	38	44	8	0	-1
+615	efeitos colaterais de medicamentos estresse uso de álcool tabaco ou cafeína .	álcool	51	56	7	estresse	35	42	4	1	-1
+616	efeitos colaterais de medicamentos estresse uso de álcool tabaco ou cafeína .	cafeína	68	74	10	estresse	35	42	4	1	-1
+617	uva passa tem gosto de morte por overdose de glicose .	glicose	45	51	9	morte	23	27	5	1	-1
+618	tomei ibuprofeno e dipirona agora tomara q passe a dor .	dipirona	19	26	3	dor	51	53	9	0	-1
+619	tomei ibuprofeno e dipirona agora tomara q passe a dor .	ibuprofeno	6	15	1	dor	51	53	9	0	-1
+620	quem fica se oferecendo não tem valor nessa vida e pra quem diz que a carne é fraca se liga se o problema é fraqueza pecado não é vitamina .	vitamina	130	137	28	fraqueza	108	115	24	1	-1
+621	a produção dr glicose leva à morte geraldo 2016 .	glicose	14	20	3	morte	29	33	6	0	-1
+622	hj eu tomo oxalato d escitalopram carbonato de lítio p depressão e a olanzapina p dormir .	lítio	47	51	8	depressão	55	63	10	0	-1
+623	hj eu tomo oxalato d escitalopram carbonato de lítio p depressão e a olanzapina p dormir .	olanzapina	69	78	13	depressão	55	63	10	1	-1
+624	hj eu tomo oxalato d escitalopram carbonato de lítio p depressão e a olanzapina p dormir .	carbonato	34	42	6	depressão	55	63	10	0	-1
+625	hj eu tomo oxalato d escitalopram carbonato de lítio p depressão e a olanzapina p dormir .	escitalopram	21	32	5	depressão	55	63	10	0	-1
