@@ -64,13 +64,14 @@ class Util:
         i = 0
 
         for line in txt:
-            tsv.write(
-                str(i)
-                + "\t"
-                + line.lower().replace("\n", "").replace(" ", "", 1)
-                + "\n"
-            )
-            i += 1
+            if 'http' not in text and 'https' not in text and 'pic twitter' not in text:
+                tsv.write(
+                    str(i)
+                    + "\t"
+                    + line.lower().replace("\n", "").replace(" ", "", 1)
+                    + "\n"
+                )
+                i += 1
 
         tsv.close()
         txt.close()
@@ -145,6 +146,8 @@ class Util:
 
         for line in s:
             final_set.add(line.lower())
+        
+        final_set.remove('com calor')
 
         f = open(
             self.output_copy_path + self.divisor + self.white_list[1],
@@ -160,6 +163,11 @@ class Util:
         for i in range(0, 11561):
             final_set.add(s[i].lower())
 
+        to_remove = ['pro', 'anti', 'cloridrato', 'óleo']
+
+        for word in to_remove:
+            final_set.remove(word)
+        
         final_set.add("sono")
 
         stop_words = set(stopwords.words("portuguese"))
