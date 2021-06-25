@@ -147,6 +147,10 @@ class Util:
         for line in s:
             final_set.add(line.lower())
         
+        to_add = ['dor de estomago', 'dor no estomago', 'dor de barriga', 'dor na barriga']
+        for word in to_add:
+            final_set.add(word)
+        
         final_set.remove('com calor')
 
         f = open(
